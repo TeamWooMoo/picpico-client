@@ -12,7 +12,8 @@ function EnterRoomForm() {
   }
 
   function onEnterRoomFormSubmit(event) {
-    event.preventDefault();
+    // event.preventDefault();
+    console.log(event);
     axios
       .get(API.ROOM + roomId)
       .then((res) => {
