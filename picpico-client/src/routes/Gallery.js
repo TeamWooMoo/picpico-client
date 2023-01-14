@@ -1,6 +1,10 @@
-// import GalleryDoneBtn from "../components/Btn/GalleryDoneBtn";
+import GalleryDoneBtn from "../components/Btn/GalleryDoneBtn";
 const Gallery = () => {
-  return <>{/* <GalleryDoneBtn /> */}</>;
+  return (
+    <>
+      <GalleryDoneBtn />
+    </>
+  );
 };
 
 export default Gallery;
