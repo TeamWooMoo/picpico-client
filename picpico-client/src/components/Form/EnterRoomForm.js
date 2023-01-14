@@ -8,7 +8,7 @@ function EnterRoomForm() {
   const navigate = useNavigate();
   const [roomId, setRoomId] = useState("");
   function onRoomInputChange(event) {
-    setRoomId(event.target.value);
+    setRoomId(event);
   }
 
   function onEnterRoomFormSubmit(event) {
