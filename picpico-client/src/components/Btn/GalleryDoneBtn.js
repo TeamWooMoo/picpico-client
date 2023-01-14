@@ -9,12 +9,10 @@ const GalleryDoneBtn = () => {
   function onGalleryDoneBtnClick() {
     dispatch(setGalleryInfo({ value: false }));
     dispatch(setPicBoothInfo({ value: true }));
+
+    window.location.href = "/";
   }
-  return (
-    <Link to={"/"}>
-      <Button onClick={onGalleryDoneBtnClick}>완료다 진짜로</Button>
-    </Link>
-  );
+  return <Button onClick={onGalleryDoneBtnClick}>완료다 진짜로</Button>;
 };
 
 export default GalleryDoneBtn;
