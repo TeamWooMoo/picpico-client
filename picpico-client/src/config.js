@@ -6,4 +6,4 @@ export const API = {
   LOGIN: `${BASE_URL}/login`,
 };
 
-export const CREDENTIAL = { withCredentials: false };
+export const CREDENTIAL = { withCredentials: true };
