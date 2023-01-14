@@ -10,6 +10,7 @@
     "axios": "^1.2.2",
     "dom-to-image": "^2.6.0",
     "file-save": "^0.2.0",
+    "html2canvas": "^1.4.1",
     "react": "^18.2.0",
     "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "^18.2.0",

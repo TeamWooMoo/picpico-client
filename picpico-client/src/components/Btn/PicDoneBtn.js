@@ -2,12 +2,13 @@ import { Button } from "rsuite";
 import { useDispatch } from "react-redux";
 import { setPicBoothInfo, setSelectionInfo } from "../../slice/picpicoInfo";
 
-const PicDoneBtn = () => {
+const PicDoneBtn = ({ controller }) => {
   const dispatch = useDispatch();
 
   function onPicDoneBtnClick() {
     dispatch(setPicBoothInfo({ value: false }));
     dispatch(setSelectionInfo({ value: true }));
+    controller.doneTake();
   }
   return (
     <Button

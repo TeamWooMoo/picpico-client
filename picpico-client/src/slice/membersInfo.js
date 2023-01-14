@@ -8,7 +8,8 @@ const membersInfo = createSlice({
 
   reducers: {
     setMembersInfo(state, action) {
-      state.members = [...state.members, action.payload.value];
+      console.log("setMembersInfo");
+      state.members = action.payload.value;
     },
   },
 });

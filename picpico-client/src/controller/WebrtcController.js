@@ -1,5 +1,8 @@
 import { io } from "socket.io-client";
 import { CREDENTIAL } from "../config";
+import store from "../store";
+import { setMembersInfo } from "../slice/membersInfo";
+import { setPicturesInfo } from "../slice/picturesInfo";
 // import { SelfieSegmentation } from "@mediapipe/selfie_segmentation";
 // import { isClassStaticBlockDeclaration } from "typescript";
 
@@ -185,14 +188,19 @@ const WebrtcController = () => {
     socket.on("offer", onOfferEvent);
     socket.on("answer", onAnswerEvent);
     socket.on("ice", onIceEvent);
-    // socket.on("add_member", onAddMemberEvent);
+    socket.on("add_member", onAddMemberEvent);
     // socket.on('render_member', onRenderMemberEvent);
-    // socket.on("take_pic", onTakePicEvent);
+    socket.on("done_take", onDoneTakeEvent);
   };
 
   const joinRoomEvent = async (roomId) => {
     console.log("[join room] - emit - client");
     socket.emit("join_room", roomId, socket.id);
+  };
+
+  const addMemberEvent = async (roomId, nickname) => {
+    console.log("[add member] - emit - client");
+    socket.emit("add_member", roomId, nickname);
   };
 
   const onWelcomeEvent = async (newSocketId) => {
@@ -230,18 +238,30 @@ const WebrtcController = () => {
       }
     }
   };
+
+  const onDoneTakeEvent = (imgArr) => {
+    store.dispatch(setPicturesInfo({ value: imgArr }));
+  };
+
+  const onAddMemberEvent = (nicknameArr) => {
+    store.dispatch(setMembersInfo({ value: nicknameArr }));
+  };
   return {
     init: async (roomId) => {
       // socket = io(SERVER, socketOptions);
       // await initCall();
+      const nickname = "user";
       socket.on("connect", async () => {
         await initSocket();
         await joinRoomEvent(roomId);
+        await addMemberEvent(roomId, nickname);
       });
     },
     takePic: (imgFile) => {
-      console.log("takePic이란다", imgFile);
-      socket.emit("pic", imgFile);
+      socket.emit("take_pic", imgFile);
+    },
+    doneTake: () => {
+      socket.emit("done_take");
     },
   };
 };
