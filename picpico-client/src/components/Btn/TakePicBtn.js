@@ -1,12 +1,22 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Button } from "rsuite";
-import { useState } from "react";
+import { setTakePic } from "../../slice/takepicInfo";
 
-function TakePicBtn() {
-  const [taked, setTaked] = useState(true);
-  const onTakePic = () => {
-    console.log("take pic");
-    setTaked((current) => !current);
+function TakePicBtn({ controller }) {
+  const dispatch = useDispatch();
+  const picImgArr = useSelector((state) => state.takepicInfo.picImg);
+
+  const onTakePicBtnClick = () => {
+    console.log(picImgArr);
+    dispatch(setTakePic({ value: true }));
   };
+
+  useEffect(() => {
+    controller.takePic(picImgArr[picImgArr.length - 1]);
+    dispatch(setTakePic({ value: false }));
+  }, [picImgArr]);
+
   return (
     <>
       <Button
@@ -15,7 +25,7 @@ function TakePicBtn() {
         color="violet"
         appearance="primary"
         className="violet_btn"
-        onClick={onTakePic}
+        onClick={onTakePicBtnClick}
       >
         사진 찍는 버튼
       </Button>

@@ -8,6 +8,7 @@ import Gallery from "./Gallery";
 import Selection from "./Selection";
 import PicBooth from "./PicBooth";
 const Picpico = () => {
+  const controller = WebrtcController();
   const { id } = useParams();
   const picBoothDone = useSelector(
     (state) => state.picpicoInfo.picBoothDisplay
@@ -15,9 +16,8 @@ const Picpico = () => {
   const selectDone = useSelector((state) => state.picpicoInfo.selectionDisplay);
   const decoDone = useSelector((state) => state.picpicoInfo.decoDisplay);
   const galleryDone = useSelector((state) => state.picpicoInfo.galleryDisplay);
-  const controller = WebrtcController();
+
   useEffect(() => {
-    // const controller = WebrtcController();
     controller.init(id);
   }, []);
 
@@ -25,12 +25,12 @@ const Picpico = () => {
     <>
       {picBoothDone ? (
         <Container>
-          <PicBooth />
+          <PicBooth controller={controller} />
         </Container>
       ) : null}
       {selectDone ? (
         <Container>
-          <Selection />
+          <Selection controller={controller} />
         </Container>
       ) : null}
       {decoDone ? (

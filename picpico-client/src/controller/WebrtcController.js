@@ -7,7 +7,7 @@ const SERVER = "https://picpico-server.site";
 const socketOptions = { withCredentials: CREDENTIAL.withCredentials };
 
 const WebrtcController = () => {
-  let socket;
+  let socket = io(SERVER, socketOptions);
   let myStream;
   const myPeerConnections = {};
   const cameraList = [];
@@ -232,12 +232,16 @@ const WebrtcController = () => {
   };
   return {
     init: async (roomId) => {
-      socket = io(SERVER, socketOptions);
+      // socket = io(SERVER, socketOptions);
       // await initCall();
       socket.on("connect", async () => {
         await initSocket();
         await joinRoomEvent(roomId);
       });
+    },
+    takePic: (imgFile) => {
+      console.log("takePic이란다", imgFile);
+      socket.emit("pic", imgFile);
     },
   };
 };
