@@ -1,6 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.4fe5f0fd.css",
+
     "main.js": "/static/js/main.b3064bbb.js",
     "static/media/sticker_machine.png": "/static/media/sticker_machine.07d50a4710165ad24002.png",
     "index.html": "/index.html",
@@ -12,3 +13,4 @@
     "static/js/main.b3064bbb.js"
   ]
 }
+

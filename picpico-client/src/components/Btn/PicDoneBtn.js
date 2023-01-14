@@ -9,7 +9,18 @@ const PicDoneBtn = () => {
     dispatch(setPicBoothInfo({ value: false }));
     dispatch(setSelectionInfo({ value: true }));
   }
-  return <Button onClick={onPicDoneBtnClick}>사진찍기 완료</Button>;
+  return (
+    <Button
+      block
+      size="sm"
+      color="violet"
+      appearance="primary"
+      className="violet_btn"
+      onClick={onPicDoneBtnClick}
+    >
+      사진찍기 완료
+    </Button>
+  );
 };
 
 export default PicDoneBtn;

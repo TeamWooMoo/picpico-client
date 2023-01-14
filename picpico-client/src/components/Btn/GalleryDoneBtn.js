@@ -12,7 +12,7 @@ const GalleryDoneBtn = () => {
 
     window.location.href = "/";
   }
-  return <Button onClick={onGalleryDoneBtnClick}>완료다 진짜로</Button>;
+  return <Button onClick={onGalleryDoneBtnClick}>픽피코 완료</Button>;
 };
 
 export default GalleryDoneBtn;
