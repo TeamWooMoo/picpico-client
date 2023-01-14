@@ -238,8 +238,8 @@ const WebrtcController = () => {
         await initSocket();
         await joinRoomEvent(roomId);
       });
-      // await initSocket();
     },
+    decoInit: () => {},
   };
 };
 
