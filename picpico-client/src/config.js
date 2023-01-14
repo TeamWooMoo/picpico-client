@@ -1,4 +1,4 @@
-const BASE_URL = "https://jaehyeonkim.shop";
+const BASE_URL = "https://picpico-server.site";
 
 export const API = {
   ROOM: `${BASE_URL}/rooms/`,
