@@ -26,7 +26,7 @@ function EnterRoomForm() {
   return (
     <Form onSubmit={onEnterRoomFormSubmit}>
       <Form.ControlLabel>Enter room Code</Form.ControlLabel>
-      <Input placeholde="room code" onChange={onRoomInputChange} />
+      <Input placeholder="room code" onChange={onRoomInputChange} />
     </Form>
   );
 }
