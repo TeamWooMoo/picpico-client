@@ -1,9 +1,9 @@
-import { io } from "socket.io-client";
-import { CREDENTIAL } from "../config";
+import { io } from 'socket.io-client';
+import { CREDENTIAL } from '../config';
 // import { SelfieSegmentation } from "@mediapipe/selfie_segmentation";
 // import { isClassStaticBlockDeclaration } from "typescript";
 
-const SERVER = "https://picpico-server.site";
+const SERVER = 'https://picpico-server.site';
 const socketOptions = { withCredentials: CREDENTIAL.withCredentials };
 
 const WebrtcController = () => {
@@ -123,53 +123,51 @@ const WebrtcController = () => {
   //     }
   //   };
 
-  const makeConnection = (socketId) => {
+  const makeConnection = socketId => {
     const newConnection = new RTCPeerConnection({
       iceServers: [
         {
           urls: [
-            "stun:stun.l.google.com:19302",
-            "stun:stun1.l.google.com:19302",
-            "stun:stun2.l.google.com:19302",
-            "stun:stun3.l.google.com:19302",
-            "stun:stun4.l.google.com:19302",
+            'stun:stun.l.google.com:19302',
+            'stun:stun1.l.google.com:19302',
+            'stun:stun2.l.google.com:19302',
+            'stun:stun3.l.google.com:19302',
+            'stun:stun4.l.google.com:19302',
           ],
         },
       ],
     });
-    if (socketId !== "") myPeerConnections[socketId] = newConnection;
-    newConnection.addEventListener("icecandidate", handleIce);
-    newConnection.addEventListener("track", handleTrack);
+    if (socketId !== '') myPeerConnections[socketId] = newConnection;
+    newConnection.addEventListener('icecandidate', handleIce);
+    newConnection.addEventListener('track', handleTrack);
 
-    myStream.getTracks().forEach((track) => {
+    myStream.getTracks().forEach(track => {
       newConnection.addTrack(track, myStream);
     });
   };
 
-  const handleIce = (data) => {
+  const handleIce = data => {
     const mySocketId = socket.id;
-    for (const [peerSocketId, connection] of Object.entries(
-      myPeerConnections
-    )) {
+    for (const [peerSocketId, connection] of Object.entries(myPeerConnections)) {
       if (connection === data.target) {
-        console.log("[ice] - emit - client");
-        socket.emit("ice", data.candidate, peerSocketId, mySocketId);
+        console.log('[ice] - emit - client');
+        socket.emit('ice', data.candidate, peerSocketId, mySocketId);
         break;
       }
     }
   };
 
-  const handleTrack = (data) => {
-    if (data.track.kind === "video") {
+  const handleTrack = data => {
+    if (data.track.kind === 'video') {
       // 실제는 두 가지 방법 중 하나로 구현될 듯
       // 1.canvas 여러 개를 겹치거나
       // 2. 하나의 canvas에 다 들어오거나
       // 현재 아래의 경우는 1번에 가깝지만, 겹치는 css는 적용되지 않음.
-      const videoRow = document.getElementById("videoRow");
-      const peerFace = document.createElement("video");
+      const videoRow = document.getElementById('videoRow');
+      const peerFace = document.createElement('video');
       peerFace.autoplay = true;
-      peerFace.className = "col";
-      peerFace.setAttribute("playsinline", "playsinline");
+      peerFace.className = 'col';
+      peerFace.setAttribute('playsinline', 'playsinline');
       peerFace.srcObject = data.streams[0];
       videoRow.appendChild(peerFace);
     }
@@ -181,43 +179,46 @@ const WebrtcController = () => {
   //   };
 
   const initSocket = async () => {
-    socket.on("welcome", onWelcomeEvent);
-    socket.on("offer", onOfferEvent);
-    socket.on("answer", onAnswerEvent);
-    socket.on("ice", onIceEvent);
+    socket.on('welcome', onWelcomeEvent);
+    socket.on('datachannel', onDataChannelEvent);
+    socket.on('offer', onOfferEvent);
+    socket.on('answer', onAnswerEvent);
+    socket.on('ice', onIceEvent);
     // socket.on("add_member", onAddMemberEvent);
     // socket.on('render_member', onRenderMemberEvent);
     // socket.on("take_pic", onTakePicEvent);
   };
 
-  const joinRoomEvent = async (roomId) => {
-    console.log("[join room] - emit - client");
-    socket.emit("join_room", roomId, socket.id);
+  const onDataChannelEvent = async event => {};
+
+  const joinRoomEvent = async roomId => {
+    socket.emit('join_room', roomId, socket.id);
+    console.log('[join room] - emit - client');
   };
 
-  const onWelcomeEvent = async (newSocketId) => {
-    console.log("[welcome] - on - client");
+  const onWelcomeEvent = async newSocketId => {
+    console.log('[welcome] - on - client');
     makeConnection(newSocketId);
     const connection = myPeerConnections[newSocketId];
     const offer = await connection.createOffer();
     await connection.setLocalDescription(offer);
-    socket.emit("offer", offer, newSocketId, socket.id);
-    console.log("[offer] - emit - client");
+    socket.emit('offer', offer, newSocketId, socket.id);
+    console.log('[offer] - emit - client');
   };
 
   const onOfferEvent = async (offer, oldSocketId) => {
-    console.log("[offer] - on - client");
+    console.log('[offer] - on - client');
     makeConnection(oldSocketId);
     const connection = myPeerConnections[oldSocketId];
     connection.setRemoteDescription(offer);
     const answer = await connection.createAnswer();
     await connection.setLocalDescription(answer);
-    socket.emit("answer", answer, oldSocketId, socket.id);
-    console.log("[answer] - emit - client");
+    socket.emit('answer', answer, oldSocketId, socket.id);
+    console.log('[answer] - emit - client');
   };
 
   const onAnswerEvent = (answer, newSocketId) => {
-    console.log("[answer] - on - client");
+    console.log('[answer] - on - client');
     const connection = myPeerConnections[newSocketId];
     connection.setRemoteDescription(answer);
   };
@@ -230,11 +231,12 @@ const WebrtcController = () => {
       }
     }
   };
+
   return {
-    init: async (roomId) => {
+    init: async roomId => {
       socket = io(SERVER, socketOptions);
       // await initCall();
-      socket.on("connect", async () => {
+      socket.on('connect', async () => {
         await initSocket();
         await joinRoomEvent(roomId);
       });
