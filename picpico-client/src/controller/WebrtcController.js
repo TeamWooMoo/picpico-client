@@ -239,7 +239,6 @@ const WebrtcController = () => {
         await joinRoomEvent(roomId);
       });
     },
-    decoInit: () => {},
   };
 };
 
