@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { Form } from "rsuite";
+import { Form, Input } from "rsuite";
 import { API } from "../../config";
 
 function EnterRoomForm() {
@@ -26,7 +26,7 @@ function EnterRoomForm() {
   return (
     <Form onSubmit={onEnterRoomFormSubmit}>
       <Form.ControlLabel>Enter room Code</Form.ControlLabel>
-      <Form.Control onChange={onRoomInputChange} />
+      <Input placeholde="room code" onChange={onRoomInputChange} />
     </Form>
   );
 }
