@@ -1,9 +1,10 @@
 import { io } from "socket.io-client";
+import { CREDENTIAL } from "../config";
 // import { SelfieSegmentation } from "@mediapipe/selfie_segmentation";
 // import { isClassStaticBlockDeclaration } from "typescript";
 
 const SERVER = "https://picpico-server.site";
-const socketOptions = { withCredentials: true };
+const socketOptions = { withCredentials: CREDENTIAL.withCredentials };
 
 const WebrtcController = () => {
   let socket;

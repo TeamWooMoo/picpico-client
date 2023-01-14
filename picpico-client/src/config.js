@@ -4,3 +4,5 @@ export const API = {
   ROOM: `${BASE_URL}/rooms/`,
   LOGIN: `${BASE_URL}/login/`,
 };
+
+export const CREDENTIAL = { withCredentials: true };
