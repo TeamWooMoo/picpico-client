@@ -9,7 +9,7 @@ import { Header } from "rsuite";
 import CanvasList from "../components/List/CanvasList";
 import VideoList from "../components/List/VideoList";
 
-const PicBooth = () => {
+const PicBooth = ({ controller }) => {
   const { id } = useParams();
   return (
     <>
@@ -26,7 +26,7 @@ const PicBooth = () => {
       <div>
         <MuteBtn />
         <CameraBtn />
-        <TakePicBtn />
+        <TakePicBtn controller={controller} />
         <PicDoneBtn />
       </div>
     </>
