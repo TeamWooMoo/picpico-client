@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-// import WebrtcController from "../controller/WebrtcController";
+import WebrtcController from "../controller/WebrtcController";
 import { Container } from "rsuite";
 import Decoration from "./Decoration";
 import Gallery from "./Gallery";
@@ -17,8 +17,8 @@ const Picpico = () => {
   const galleryDone = useSelector((state) => state.picpicoInfo.galleryDisplay);
 
   useEffect(() => {
-    // const controller = WebrtcController();
-    // controller.init(id);
+    const controller = WebrtcController();
+    controller.init(id);
   }, []);
 
   return (
@@ -30,7 +30,6 @@ const Picpico = () => {
       ) : null}
       {selectDone ? (
         <Container>
-          <h3>You are in {id} room</h3>
           <Selection />
         </Container>
       ) : null}
