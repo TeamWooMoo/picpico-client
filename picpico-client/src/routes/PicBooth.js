@@ -6,6 +6,8 @@ import TakePicBtn from "./../components/Btn/TakePicBtn";
 import PicDoneBtn from "../components/Btn/PicDoneBtn";
 import LinkModal from "../components/Modal/LinkModal";
 import { Header } from "rsuite";
+import CanvasList from "../components/List/CanvasList";
+import VideoList from "../components/List/VideoList";
 
 const PicBooth = () => {
   const { id } = useParams();
@@ -15,6 +17,11 @@ const PicBooth = () => {
         <p>이번 방은 {id}번 방 입니다.</p>
         <LinkModal />
       </Header>
+
+      <div>
+        <CanvasList />
+        <VideoList />
+      </div>
 
       <div>
         <MuteBtn />
