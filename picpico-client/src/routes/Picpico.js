@@ -15,9 +15,9 @@ const Picpico = () => {
   const selectDone = useSelector((state) => state.picpicoInfo.selectionDisplay);
   const decoDone = useSelector((state) => state.picpicoInfo.decoDisplay);
   const galleryDone = useSelector((state) => state.picpicoInfo.galleryDisplay);
-
+  const controller = WebrtcController();
   useEffect(() => {
-    const controller = WebrtcController();
+    // const controller = WebrtcController();
     controller.init(id);
   }, []);
 
@@ -35,7 +35,7 @@ const Picpico = () => {
       ) : null}
       {decoDone ? (
         <Container>
-          <Decoration />
+          <Decoration controller={controller} />
         </Container>
       ) : null}
       {galleryDone ? (

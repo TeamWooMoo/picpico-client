@@ -3,7 +3,7 @@ import PictureList from "../components/List/PictureList";
 import ColorList from "../components/List/ColorList";
 import DecoDoneBtn from "../components/Btn/DecoDoneBtn";
 
-const Decoration = () => {
+const Decoration = ({ controller }) => {
   return (
     <>
       <MemberList />
