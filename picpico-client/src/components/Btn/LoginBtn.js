@@ -8,9 +8,12 @@ function LoginBtn() {
   const navigate = useNavigate();
   function onKakaoLogin() {
     axios
-      .get(API.MAIN)
+      .get(API.KAKAOLOGIN)
       .then((res) => {
-        navigate(`/room`);
+        console.log(res);
+        // let jwtToken = res.headers.get("Authorization");
+        // localStorage.setItem("Authorization", jwtToken);
+        // return res.json();
       })
       .catch((err) => {
         alert("로그인에 실패하였습니다.");
