@@ -17,7 +17,7 @@ function TakePicBtn() {
         className="violet_btn"
         onClick={onTakePic}
       >
-        {taked ? "" : ""}
+        사진 찍는 버튼
       </Button>
     </>
   );

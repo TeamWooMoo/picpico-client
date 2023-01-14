@@ -12,7 +12,8 @@ const GalleryDoneBtn = () => {
   }
   return (
     <Link to={"/"}>
-      <Button onClick={onGalleryDoneBtnClick}>완료다 진짜로</Button>
+      {/* 메인 화면으로 넘어가는 버튼 */}
+      <Button onClick={onGalleryDoneBtnClick}>픽피코 완료 </Button>
     </Link>
   );
 };

@@ -1,10 +1,21 @@
+import React from "react";
+import axios from "axios";
+import { API } from "../../config";
+import { useNavigate } from "react-router-dom";
 import { Button } from "rsuite";
 
 function LoginBtn() {
-  const onKakaoLogin = () => {
-    console.log("카카오 로그인 입니당");
-    // Kakao.Auth.login({});
-  };
+  const navigate = useNavigate();
+  function onKakaoLogin() {
+    axios
+      .get(API.MAIN)
+      .then((res) => {
+        navigate(`/room`);
+      })
+      .catch((err) => {
+        alert("로그인에 실패하였습니다.");
+      });
+  }
   return (
     <div style={{ margin: "10px" }}>
       <Button
