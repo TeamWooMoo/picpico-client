@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/static/css/main.4fe5f0fd.css",
-    "main.js": "/static/js/main.f96931c6.js",
+    "main.js": "/static/js/main.ff542b90.js",
     "static/media/camera.png": "/static/media/camera.310d422727ddc226dd53.png",
     "static/media/sticker_machine.png": "/static/media/sticker_machine.07d50a4710165ad24002.png",
     "index.html": "/index.html",
     "main.4fe5f0fd.css.map": "/static/css/main.4fe5f0fd.css.map",
-    "main.f96931c6.js.map": "/static/js/main.f96931c6.js.map"
+    "main.ff542b90.js.map": "/static/js/main.ff542b90.js.map"
   },
   "entrypoints": [
     "static/css/main.4fe5f0fd.css",
-    "static/js/main.f96931c6.js"
+    "static/js/main.ff542b90.js"
   ]
 }

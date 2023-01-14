@@ -7,6 +7,7 @@ import Decoration from "./Decoration";
 import Gallery from "./Gallery";
 import Selection from "./Selection";
 import PicBooth from "./PicBooth";
+
 const Picpico = () => {
   const controller = WebrtcController();
   const { id } = useParams();

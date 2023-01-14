@@ -1,19 +1,16 @@
 import React from "react";
 import axios from "axios";
 import { API } from "../../config";
-import { useNavigate } from "react-router-dom";
 import { Button } from "rsuite";
 
 function LoginBtn() {
-  const navigate = useNavigate();
   function onKakaoLogin() {
     axios
       .get(API.KAKAOLOGIN)
       .then((res) => {
-        console.log(res);
-        // let jwtToken = res.headers.get("Authorization");
-        // localStorage.setItem("Authorization", jwtToken);
-        // return res.json();
+        const rescheck = res;
+        // console.log(rescheck.data.url);
+        window.location.href = rescheck.data.url;
       })
       .catch((err) => {
         alert("로그인에 실패하였습니다.");
