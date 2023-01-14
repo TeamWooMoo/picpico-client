@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-// import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 // import WebrtcController from "../controller/WebrtcController";
 import { Container } from "rsuite";
 import Decoration from "./Decoration";
@@ -9,12 +9,12 @@ import Selection from "./Selection";
 import PicBooth from "./PicBooth";
 const Picpico = () => {
   const { id } = useParams();
-  //   const picBoothDone = useSelector(
-  //     (state) => state.picpicoInfo.picBoothDisplay
-  //   );
-  //   const selectDone = useSelector((state) => state.picpicoInfo.selectionDisplay);
-  //   const decoDone = useSelector((state) => state.picpicoInfo.decoDisplay);
-  //   const galleryDone = useSelector((state) => state.picpicoInfo.galleryDisplay);
+  const picBoothDone = useSelector(
+    (state) => state.picpicoInfo.picBoothDisplay
+  );
+  const selectDone = useSelector((state) => state.picpicoInfo.selectionDisplay);
+  const decoDone = useSelector((state) => state.picpicoInfo.decoDisplay);
+  const galleryDone = useSelector((state) => state.picpicoInfo.galleryDisplay);
 
   useEffect(() => {
     // const controller = WebrtcController();
@@ -23,20 +23,7 @@ const Picpico = () => {
 
   return (
     <>
-      <Container>
-        <PicBooth />
-      </Container>
-      <Container>
-        <Selection />
-      </Container>
-      <Container>
-        <Decoration />
-      </Container>
-      <Container>
-        <Gallery />
-      </Container>
-
-      {/* {picBoothDone ? (
+      {picBoothDone ? (
         <Container>
           <PicBooth />
         </Container>
@@ -56,7 +43,7 @@ const Picpico = () => {
         <Container>
           <Gallery />
         </Container>
-      ) : null} */}
+      ) : null}
     </>
   );
 };
