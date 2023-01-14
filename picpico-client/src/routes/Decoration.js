@@ -1,16 +1,16 @@
-// import MemberList from "../components/List/MemberList";
-// import PictureList from "../components/List/PictureList";
-// import ColorList from "../components/List/ColorList";
-// import DecoDoneBtn from "../components/Btn/DecoDoneBtn";
+import MemberList from "../components/List/MemberList";
+import PictureList from "../components/List/PictureList";
+import ColorList from "../components/List/ColorList";
+import DecoDoneBtn from "../components/Btn/DecoDoneBtn";
 
 const Decoration = () => {
   return (
     <>
-      {/* <MemberList />
+      <MemberList />
       <canvas></canvas>
       <PictureList />
       <ColorList />
-      <DecoDoneBtn /> */}
+      <DecoDoneBtn />
     </>
   );
 };
