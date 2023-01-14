@@ -27,7 +27,7 @@ const PicBooth = ({ controller }) => {
         <MuteBtn />
         <CameraBtn />
         <TakePicBtn controller={controller} />
-        <PicDoneBtn />
+        <PicDoneBtn controller={controller} />
       </div>
     </>
   );
