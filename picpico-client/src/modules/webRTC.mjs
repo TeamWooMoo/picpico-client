@@ -64,8 +64,10 @@ const handleTrack = data => {
     const videoRow = document.getElementById("peerVideos");
     const peerVideo = document.createElement("video");
 
+    console.log(peerVideo);
     // peerVideo.hidden = true;
-    peerVideo.hidden = false;
+    // peerVideo.hidden = false;
+    peerVideo.muted = true;
     peerVideo.autoplay = true;
     peerVideo.className = "col";
     peerVideo.setAttribute("playsinline", "playsinline");
