@@ -10,6 +10,8 @@ export async function initStream() {
   myVideo = document.getElementById("myVideo");
   myCanvas = document.getElementById("myCanvas");
   myVideo.onplaying = async () => {
+    myVideo.hidden = true;
+
     initSegment();
 
     myCanvas.height = myVideo.height;

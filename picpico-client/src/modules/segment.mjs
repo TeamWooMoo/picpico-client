@@ -1,7 +1,9 @@
 import { SelfieSegmentation } from "@mediapipe/selfie_segmentation";
 
+let selfieSegmentation;
+
 export function initSegment() {
-  const selfieSegmentation = new SelfieSegmentation({
+  selfieSegmentation = new SelfieSegmentation({
     locateFile: file => {
       return `https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation/${file}`;
     },
@@ -17,7 +19,7 @@ function onCanvas(results, canvas) {
   ctx.save();
 
   canvas.width = 400;
-  canvas.heigth = 400;
+  canvas.height = 400;
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.drawImage(results.image, 0, 0, canvas.width, canvas.height);
@@ -31,10 +33,11 @@ function onCanvas(results, canvas) {
   ctx.restore();
 }
 
-export async function segment(canvas, selfieSegmentation) {
+export async function segment(videoElement, canvas) {
   selfieSegmentation.onResults(results => {
     onCanvas(results, canvas);
   });
+  await selfieSegmentation.send({ image: videoElement });
 }
 
 function extractAlpha(segImageData) {
