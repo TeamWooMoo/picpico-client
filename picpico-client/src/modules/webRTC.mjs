@@ -65,12 +65,14 @@ const handleTrack = data => {
     const peerVideo = document.createElement("video");
 
     // peerVideo.hidden = true;
+    peerVideo.hidden = false;
     peerVideo.autoplay = true;
     peerVideo.className = "col";
     peerVideo.setAttribute("playsinline", "playsinline");
 
     peerVideo.srcObject = data.streams[0];
     videoRow.appendChild(peerVideo);
+    console.log(">>>>data throughRTC", data.stream[0]);
     console.log(">>>>handing track -> on source to video");
   }
 };
