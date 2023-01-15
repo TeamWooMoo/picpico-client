@@ -13,3 +13,4 @@ function Logo() {
 }
 
 export default Logo;
+// filter="drop-shadow(5px, 5px, 5px, #000)"
