@@ -1,3 +1,7 @@
+import { syncMyPeersReceiver } from "./receiver.mjs";
+import { syncMyPeersSegment } from "./segment.mjs";
+import { syncMyPeersStream } from "./stream.mjs";
+
 let socket;
 let myStream;
 
@@ -15,10 +19,10 @@ const cameraList = [];
  *
  * socketId  :    myPeer
  *            {
- *                connection   :
- *                videoElement :
- *                alphaChannel :
- *                alphaData    :
+ *                connection    :
+ *                videoElement  :
+ *                alphaChannel  :
+ *                alphaReceived :
  *            }
  */
 
@@ -28,14 +32,14 @@ export class myPeer {
   connection;
   videoElement;
   alphaChannel;
-  alphaData;
+  alphaReceived;
 
   constructor(newConnection) {
     this.connection = newConnection;
     this.videoElement = document.createElement("video");
     this.videoElement.hidden = true;
     this.alphaChannel = null;
-    this.alphaData = null;
+    this.alphaReceived = null;
   }
 }
 
@@ -54,17 +58,16 @@ const handleIce = data => {
 
 const handleTrack = data => {
   if (data.track.kind === "video") {
-    // 실제는 두 가지 방법 중 하나로 구현될 듯
-    // 1.canvas 여러 개를 겹치거나
-    // 2. 하나의 canvas에 다 들어오거나
-    // 현재 아래의 경우는 1번에 가깝지만, 겹치는 css는 적용되지 않음.
-    // const videoRow = document.getElementById('videoRow');
-    // const peerFace = document.createElement('video');
-    // peerFace.autoplay = true;
-    // peerFace.className = 'col';
-    // peerFace.setAttribute('playsinline', 'playsinline');
-    // peerFace.srcObject = data.streams[0];
-    // videoRow.appendChild(peerFace);
+    const videoRow = document.getElementById("peerVideos");
+    const peerVideo = document.createElement("video");
+
+    peerVideo.hidden = true;
+    peerVideo.autoplay = true;
+    peerVideo.className = "col";
+    peerVideo.setAttribute("playsinline", "playsinline");
+
+    peerVideo.srcObject = data.streams[0];
+    videoRow.appendChild(peerVideo);
   }
 };
 
@@ -87,6 +90,8 @@ function makeConnection(socketId) {
     const newPeer = new myPeer(newConnection);
     myPeers[socketId] = newPeer;
 
+    syncMyPeers();
+
     newConnection.addEventListener("icecandidate", handleIce);
     newConnection.addEventListener("track", handleTrack);
 
@@ -98,6 +103,12 @@ function makeConnection(socketId) {
   }
 }
 
+function syncMyPeers() {
+  syncMyPeersStream(myPeers);
+  syncMyPeersReceiver(myPeers);
+  syncMyPeersSegment(myPeers);
+}
+
 async function onWelcomeEvent(newSocketId) {
   console.log("[welcome] - on - client");
 
@@ -107,7 +118,7 @@ async function onWelcomeEvent(newSocketId) {
   newPeer.alphaChannel = newAlphaChannel;
 
   newAlphaChannel.addEventListener("message", event => {
-    newPeer.alphaData = new Uint8Array(event.data);
+    newPeer.alphaReceived = new Uint8Array(event.data);
   });
 
   const offer = await newConnection.createOffer();
@@ -117,7 +128,15 @@ async function onWelcomeEvent(newSocketId) {
   console.log("[offer] - emit - client");
 }
 
-function onDataChannelEvent(event) {}
+function onDataChannelEvent(event, socket) {
+  console.log(">>>>>dataChannel received", event.data);
+
+  myPeers[socket.id].alphaChannel = event.channel;
+
+  event.channel.addEventListener("message", event => {
+    myPeers[socket.id].alphaReceived = new Uint8Array(event.data);
+  });
+}
 
 async function onOfferEvent(offer, oldSocketId) {
   console.log("[offer] - on - client");
@@ -151,7 +170,7 @@ function onIceEvent(ice, socketId) {
 export async function initWebRTC(_socket) {
   socket = _socket;
   socket.on("welcome", onWelcomeEvent);
-  socket.on("datachannel", onDataChannelEvent);
+  socket.on("datachannel", (event, socket) => onDataChannelEvent(event, socket));
   socket.on("offer", onOfferEvent);
   socket.on("answer", onAnswerEvent);
   socket.on("ice", onIceEvent);

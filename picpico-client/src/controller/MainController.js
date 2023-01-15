@@ -1,3 +1,4 @@
+import { initPeerCanvas } from "../modules/receiver.mjs";
 import { addMemberEvent, getSocket, joinRoom } from "../modules/sockets.mjs";
 import { initStream } from "../modules/stream.mjs";
 import { initWebRTC } from "../modules/webRTC.mjs";
@@ -12,6 +13,7 @@ const MainController = () => {
       await initWebRTC(socket);
       await addMemberEvent(roomId, nickName);
       await initStream();
+      await initPeerCanvas();
     });
   };
 

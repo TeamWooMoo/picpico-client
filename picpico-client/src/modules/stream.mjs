@@ -5,6 +5,11 @@ let myCanvas;
 let myStream;
 let currentCamera;
 const cameraList = [];
+let myPeers;
+
+export async function syncMyPeersStream(_myPeers) {
+  myPeers = _myPeers;
+}
 
 export async function initStream() {
   myVideo = document.getElementById("myVideo");
@@ -41,7 +46,8 @@ async function getCameras() {
     const devices = await navigator.mediaDevices.enumerateDevices();
     const cameras = devices.filter(device => device.kind === "videoinput");
     const currentCameras = myStream.getVideoTracks()[0];
-    console.log(">>>>currentCamera", currentCameras);
+    // console.log(">>>>currentCamera", currentCameras);
+
     cameras.forEach(camera => {
       cameraList.push(camera.deviceId);
       if (currentCameras.label === camera.label) {

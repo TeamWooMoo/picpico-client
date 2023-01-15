@@ -1,6 +1,7 @@
 import { SelfieSegmentation } from "@mediapipe/selfie_segmentation";
 
 let selfieSegmentation;
+let myPeers;
 
 export function initSegment() {
   selfieSegmentation = new SelfieSegmentation({
@@ -13,8 +14,14 @@ export function initSegment() {
   return selfieSegmentation;
 }
 
+export function syncMyPeersSegment(_myPeers) {
+  myPeers = _myPeers;
+}
+
 function onCanvas(results, canvas) {
   let ctx = canvas.getContext("2d");
+
+  ctx.willReadFrequently = true;
 
   ctx.save();
 
@@ -43,4 +50,8 @@ export async function segment(videoElement, canvas) {
 function extractAlpha(segImageData) {
   const alphaData = segImageData.data.filter((_, i) => (i + 1) % 4 === 0);
   const alphaBuffer = new Uint8Array(alphaData);
+
+  for (const [_, myPeer] of Object.entries(myPeers)) {
+    if (myPeer.alphaChannel.readyState === "open") myPeer.alphaChannel.send(alphaBuffer);
+  }
 }
