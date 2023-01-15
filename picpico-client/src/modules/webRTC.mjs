@@ -130,6 +130,7 @@ async function onWelcomeEvent(newSocketId) {
   newPeer.alphaChannel = newAlphaChannel;
 
   console.log("onWelcome : connection", newConnection);
+  console.log("newAlphaChannel", newAlphaChannel);
   console.log("me : ", socket.id);
 
   newAlphaChannel.addEventListener("message", event => {
