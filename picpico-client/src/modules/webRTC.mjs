@@ -1,6 +1,6 @@
 import { syncMyPeersReceiver } from "./receiver.mjs";
 import { syncMyPeersSegment } from "./segment.mjs";
-import { getMyStream, syncMyPeersStream } from "./stream.mjs";
+import { syncMyPeersStream } from "./stream.mjs";
 
 let socket;
 let myStream;
@@ -95,7 +95,7 @@ function makeConnection(socketId) {
     newConnection.addEventListener("icecandidate", handleIce);
     newConnection.addEventListener("track", handleTrack);
 
-    myStream = getMyStream();
+    // myStream = getMyStream();
 
     myStream.getTracks().forEach(track => {
       newConnection.addTrack(track, myStream);
