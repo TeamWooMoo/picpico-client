@@ -35,8 +35,10 @@ export async function initPeerCanvas() {
 
     if (myPeers) {
       // alphaData 와 videoElem이 모두 null이 아닌 peer들을 그림
+      console.log("mypeer exists");
       for (const [_, myPeer] of Object.entries(myPeers)) {
         if (myPeer.videoElement && myPeer.alphaReceived) {
+          console.log("drawing on");
           ctx.drawImage(myPeer.videoElement, 0, 0, peerCanvas.width, peerCanvas.height);
           const imageData = ctx.getImageData(0, 0, peerCanvas.width, peerCanvas.height);
 
