@@ -51,7 +51,9 @@ function extractAlpha(segImageData) {
   const alphaData = segImageData.data.filter((_, i) => (i + 1) % 4 === 0);
   const alphaBuffer = new Uint8Array(alphaData);
 
-  for (const [_, myPeer] of Object.entries(myPeers)) {
-    if (myPeer.alphaChannel.readyState === "open") myPeer.alphaChannel.send(alphaBuffer);
+  if (myPeers) {
+    for (const [_, myPeer] of Object.entries(myPeers)) {
+      if (myPeer.alphaChannel.readyState === "open") myPeer.alphaChannel.send(alphaBuffer);
+    }
   }
 }

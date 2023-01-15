@@ -104,6 +104,7 @@ function makeConnection(socketId) {
 }
 
 function syncMyPeers() {
+  console.log(">>>>>syncMyPeers Called");
   syncMyPeersStream(myPeers);
   syncMyPeersReceiver(myPeers);
   syncMyPeersSegment(myPeers);
