@@ -17,13 +17,13 @@ function CreateRoomBtn() {
         // navigate(`/room/100`);
       })
       .catch(err => {
-        alert("방 생성에 실패하였습니다,", err);
+        alert("방 생성에 실패하였습니다.", err);
       });
   }
   return (
     <>
       <FlexboxGrid justify="center">
-        <h4 style={{ color: "black", textAlign: "center" }}>PicPiCo 방 입장</h4>
+        <h4 style={{ color: "black", fontWeight: "bold", textAlign: "center" }}>PicPiCo Enter Room</h4>
       </FlexboxGrid>
       <FlexboxGrid justify="center">
         <p style={{ color: "black", textAlign: "center", padding: "10px" }}>

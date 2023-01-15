@@ -1,0 +1,4 @@
+.picBoothDone_Header {
+  display: flex;
+  flex-direction: row-reverse;
+}

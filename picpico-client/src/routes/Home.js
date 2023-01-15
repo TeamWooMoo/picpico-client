@@ -22,7 +22,7 @@ const Home = () => {
 
   return (
     <Container className="default_container">
-      <div className="twocanvas" style={{ position: "relative" }}>
+      {/* <div className="twocanvas" style={{ position: "relative" }}>
         <canvas
           classNAme="onecanvas"
           id="canvas1"
@@ -36,7 +36,7 @@ const Home = () => {
           style={{ position: "absolute", top: "0px", left: "10px" }}
           onClick={onCanvas2Click}
         ></canvas>
-      </div>
+      </div> */}
 
       <Title />
       <Logo />
