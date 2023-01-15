@@ -6,7 +6,7 @@ function EnterRoomBtn() {
   const [formDisplay, setFormDisplay] = useState(false);
   function onEnterRoomBtnClick() {
     console.log("enterRoom");
-    setFormDisplay((prev) => !prev);
+    setFormDisplay(prev => !prev);
   }
   return (
     <>
@@ -19,6 +19,7 @@ function EnterRoomBtn() {
           appearance="primary"
           className="violet_btn"
           onClick={onEnterRoomBtnClick}
+          style={{ color: "black", padding: "10px 70px", margin: "10px" }}
         >
           방 코드 입력 후 입장
         </Button>

@@ -5,7 +5,7 @@ import { setPicImg } from "../../slice/takepicInfo";
 const CanvasList = () => {
   const dispatch = useDispatch();
   const myCanvas = useRef();
-  const takePic = useSelector((state) => state.takepicInfo.takePic);
+  const takePic = useSelector(state => state.takepicInfo.takePic);
   const dataURLtoFile = (dataurl, fileName) => {
     var arr = dataurl.split(","),
       mime = arr[0].match(/:(.*?);/)[1],

@@ -1,0 +1,9 @@
+.default_container {
+  background-color: tomato;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  vertical-align: middle;
+  width: 80%;
+  margin: 0 auto;
+}

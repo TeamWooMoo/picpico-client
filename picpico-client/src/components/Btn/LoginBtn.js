@@ -9,29 +9,29 @@ function LoginBtn() {
   function onKakaoLogin() {
     axios
       .get(API.KAKAOLOGIN)
-      .then((res) => {
+      .then(res => {
         console.log(res);
         // let jwtToken = res.headers.get("Authorization");
         // localStorage.setItem("Authorization", jwtToken);
         // return res.json();
       })
-      .catch((err) => {
+      .catch(err => {
         alert("로그인에 실패하였습니다.");
       });
   }
   return (
-    <div style={{ margin: "10px" }}>
-      <Button
-        block
-        className="yellow_btn"
-        onClick={onKakaoLogin}
-        color="yellow"
-        appearance="primary"
-        style={{ color: "black", padding: "10px 70px" }}
-      >
-        카카오 로그인
-      </Button>
-    </div>
+    // <div style={{ margin: "10px" }}>
+    <Button
+      block
+      className="yellow_btn"
+      onClick={onKakaoLogin}
+      color="yellow"
+      appearance="primary"
+      style={{ color: "black", padding: "10px 70px", margin: "10px" }}
+    >
+      카카오 로그인
+    </Button>
+    // </div>
   );
 }
 
