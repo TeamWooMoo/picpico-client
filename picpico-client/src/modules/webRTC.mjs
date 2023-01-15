@@ -72,6 +72,7 @@ const handleTrack = data => {
 
     peerVideo.srcObject = data.streams[0];
     videoRow.appendChild(peerVideo);
+    peerVideo.play();
     console.log(">>>>data throughRTC", data);
     console.log(">>>>data.streams throughRTC", data.streams[0]);
     console.log(">>>>handing track -> on source to video");
