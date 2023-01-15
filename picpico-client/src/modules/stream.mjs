@@ -41,6 +41,9 @@ export async function initStream() {
   await getMedia();
 }
 
+export async function getMyStream() {
+  return myStream;
+}
 async function getCameras() {
   try {
     const devices = await navigator.mediaDevices.enumerateDevices();
@@ -70,9 +73,7 @@ async function getMedia(deviceId) {
   };
 
   try {
-    let mediaStream = await navigator.mediaDevices.getUserMedia(
-      deviceId ? cameraConstraints : initialConstraints
-    );
+    let mediaStream = await navigator.mediaDevices.getUserMedia(deviceId ? cameraConstraints : initialConstraints);
     myVideo.srcObject = mediaStream;
 
     await myVideo.play();
