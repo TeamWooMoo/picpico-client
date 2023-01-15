@@ -75,7 +75,7 @@ const handleTrack = data => {
   }
 };
 
-function makeConnection(socketId) {
+function makeConnectionWelcome(socketId) {
   const newConnection = new RTCPeerConnection({
     iceServers: [
       {
@@ -100,6 +100,46 @@ function makeConnection(socketId) {
     newConnection.addEventListener("track", handleTrack);
 
     // myStream = getMyStream();
+    const newAlphaChannel = newConnection.createDataChannel("alphaChannel");
+    newPeer.alphaChannel = newAlphaChannel;
+
+    newAlphaChannel.addEventListener("message", event => {
+      newPeer.alphaReceived = new Uint8Array(event.data);
+    });
+
+    myStream.getTracks().forEach(track => {
+      newConnection.addTrack(track, myStream);
+    });
+
+    return newPeer;
+  }
+}
+function makeConnectionOffer(socketId) {
+  const newConnection = new RTCPeerConnection({
+    iceServers: [
+      {
+        urls: [
+          "stun:stun.l.google.com:19302",
+          "stun:stun1.l.google.com:19302",
+          "stun:stun2.l.google.com:19302",
+          "stun:stun3.l.google.com:19302",
+          "stun:stun4.l.google.com:19302",
+        ],
+      },
+    ],
+  });
+
+  if (socketId !== "") {
+    const newPeer = new myPeer(newConnection);
+    myPeers[socketId] = newPeer;
+
+    syncMyPeers();
+
+    newConnection.addEventListener("icecandidate", handleIce);
+    newConnection.addEventListener("track", handleTrack);
+
+    //   newConnection.addEventListener("datachannel", event => onDataChannelEvent(event, oldSocketId));
+    newConnection.addEventListener("datachannel", event => console.log(">>>datachannel", event.channel));
 
     myStream.getTracks().forEach(track => {
       newConnection.addTrack(track, myStream);
@@ -124,7 +164,7 @@ function syncMyPeers() {
 async function onWelcomeEvent(newSocketId) {
   console.log("[welcome] - on - client");
 
-  const newPeer = makeConnection(newSocketId);
+  const newPeer = makeConnectionWelcome(newSocketId);
   const newConnection = newPeer.connection;
   //   const newAlphaChannel = newConnection.createDataChannel("alphaChannel");
   //   newPeer.alphaChannel = newAlphaChannel;
@@ -153,7 +193,7 @@ function onDataChannelEvent(event, oldSocketId) {
 async function onOfferEvent(offer, oldSocketId) {
   console.log("[offer] - on - client");
 
-  const newPeer = makeConnection(oldSocketId);
+  const newPeer = makeConnectionOffer(oldSocketId);
   const newConnection = newPeer.connection;
 
   //   newConnection.addEventListener("datachannel", event => onDataChannelEvent(event, oldSocketId));
@@ -172,12 +212,12 @@ function onAnswerEvent(answer, newSocketId) {
   const connection = myPeers[newSocketId].connection;
   connection.setRemoteDescription(answer);
 
-  const newAlphaChannel = connection.createDataChannel("alphaChannel");
-  myPeers[newSocketId].alphaChannel = newAlphaChannel;
+  //   const newAlphaChannel = connection.createDataChannel("alphaChannel");
+  //   myPeers[newSocketId].alphaChannel = newAlphaChannel;
 
-  newAlphaChannel.addEventListener("message", event => {
-    myPeers[newSocketId].alphaReceived = new Uint8Array(event.data);
-  });
+  //   newAlphaChannel.addEventListener("message", event => {
+  //     myPeers[newSocketId].alphaReceived = new Uint8Array(event.data);
+  //   });
 }
 
 function onIceEvent(ice, socketId) {
