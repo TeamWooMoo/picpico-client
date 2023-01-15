@@ -5,14 +5,14 @@ import { syncMyPeersStream } from "./stream.mjs";
 let socket;
 let myStream;
 
-const FRAME_RATE = 30;
+// const FRAME_RATE = 30;
 
-let videoWidth = 400;
-let videoHeight = 400;
-const myVideo = document.getElementById("myVideo");
-const myCanvas = document.getElementById("myCanvas");
+// let videoWidth = 400;
+// let videoHeight = 400;
+// const myVideo = document.getElementById("myVideo");
+// const myCanvas = document.getElementById("myCanvas");
 
-const cameraList = [];
+// const cameraList = [];
 
 /* myPeers
  *    key    :    value
@@ -129,6 +129,9 @@ async function onWelcomeEvent(newSocketId) {
   const newAlphaChannel = newConnection.createDataChannel("alphaChannel");
   newPeer.alphaChannel = newAlphaChannel;
 
+  console.log("onWelcome : connection", newConnection);
+  console.log("me : ", socket.id);
+
   newAlphaChannel.addEventListener("message", event => {
     newPeer.alphaReceived = new Uint8Array(event.data);
   });
@@ -159,6 +162,9 @@ async function onOfferEvent(offer, oldSocketId) {
   //   newConnection.addEventListener("datachannel", event => onDataChannelEvent(event, oldSocketId));
   //   newConnection.addEventListener("datachannel", event => console.log(">>>datachannel", event.channel));
   newConnection.ondatachannel = event => onDataChannelEvent(event, oldSocketId);
+
+  console.log("onOffer : connection", newConnection);
+  console.log("me :", socket.id);
 
   newConnection.setRemoteDescription(offer);
   const answer = await newConnection.createAnswer();
