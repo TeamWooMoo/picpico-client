@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Container, Header, Content, Footer } from "rsuite";
+import LinkModal from "../components/Modal/LinkModal";
 import Decoration from "./Decoration";
 import Gallery from "./Gallery";
 import Selection from "./Selection";
@@ -25,7 +26,6 @@ const Picpico = () => {
     <>
       {picBoothDone ? (
         <Container className="default_container">
-          <PicBooth controller={controller} />
           <Header className="picBoothDone_Header">
             {/* <p>이번 방은 {id}번 방 입니다.</p> */}
             <LinkModal />

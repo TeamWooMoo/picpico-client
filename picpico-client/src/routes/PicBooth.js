@@ -4,6 +4,7 @@ import TakePicBtn from "./../components/Btn/TakePicBtn";
 import PicDoneBtn from "../components/Btn/PicDoneBtn";
 import CanvasList from "../components/List/CanvasList";
 import VideoList from "../components/List/VideoList";
+import { ButtonGroup } from "rsuite";
 
 const PicBooth = ({ controller }) => {
   return (

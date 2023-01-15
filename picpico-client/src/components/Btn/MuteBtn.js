@@ -1,6 +1,6 @@
 import { useState } from "react";
-import mute from "./../../assets/images/mute.png";
-import mic from "./../../assets/images/mic.png";
+// import mute from "./../../assets/images/mute.png";
+// import mic from "./../../assets/images/mic.png";
 
 function MuteBtn() {
   const [muted, setMuted] = useState(true);
@@ -8,6 +8,7 @@ function MuteBtn() {
     console.log("mute on off");
     setMuted(current => !current);
   };
-  return <>{muted ? <img src={mute} size="10px" onClick={onMuteOnOff} /> : <img src={mic} size="10px" onClick={onMuteOnOff} />}</>;
+  // return <>{muted ? <img src={mute} size="10px" onClick={onMuteOnOff} /> : <img src={mic} size="10px" onClick={onMuteOnOff} />}</>;
+  return <div></div>;
 }
 export default MuteBtn;
