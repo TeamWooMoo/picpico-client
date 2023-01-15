@@ -113,6 +113,9 @@ function makeConnection(socketId) {
       newConnection.addTrack(track, myStream);
     });
 
+    const testVideo = document.createElement("video");
+    testVideo.srcObject = myStream;
+
     return newPeer;
   }
 }
