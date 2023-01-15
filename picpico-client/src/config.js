@@ -1,5 +1,5 @@
-// const BASE_URL = "https://picpico-server.site";
-export const BASE_URL = "https://jaehyeonkim.shop";
+export const BASE_URL = "https://picpico-server.site";
+// export const BASE_URL = "https://jaehyeonkim.shop";
 
 export const API = {
   ROOM: `${BASE_URL}/rooms/`,
