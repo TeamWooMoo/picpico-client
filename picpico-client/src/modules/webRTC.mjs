@@ -156,7 +156,8 @@ async function onOfferEvent(offer, oldSocketId) {
   const newPeer = makeConnection(oldSocketId);
   const newConnection = newPeer.connection;
 
-  newConnection.addEventListener("datachannel", event => onDataChannelEvent(event, oldSocketId));
+  //   newConnection.addEventListener("datachannel", event => onDataChannelEvent(event, oldSocketId));
+  newConnection.addEventListener("datachannel", event => console.log(">>>datachannel", event.channel));
 
   newConnection.setRemoteDescription(offer);
   const answer = await newConnection.createAnswer();
