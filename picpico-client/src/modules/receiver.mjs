@@ -33,16 +33,18 @@ export async function initPeerCanvas() {
 
     ctx.clearRect(0, 0, peerCanvas.width, peerCanvas.height);
 
-    // alphaData 와 videoElem이 모두 null이 아닌 peer들을 그림
-    for (const [_, myPeer] of Object.entries(myPeers)) {
-      if (myPeer.videoElement && myPeer.alphaReceived) {
-        ctx.drawImage(myPeer.videoElement, 0, 0, peerCanvas.width, peerCanvas.height);
-        const imageData = ctx.getImageData(0, 0, peerCanvas.width, peerCanvas.height);
+    if (myPeers) {
+      // alphaData 와 videoElem이 모두 null이 아닌 peer들을 그림
+      for (const [_, myPeer] of Object.entries(myPeers)) {
+        if (myPeer.videoElement && myPeer.alphaReceived) {
+          ctx.drawImage(myPeer.videoElement, 0, 0, peerCanvas.width, peerCanvas.height);
+          const imageData = ctx.getImageData(0, 0, peerCanvas.width, peerCanvas.height);
 
-        addAlpha(imageData, myPeer.alphaReceived);
+          addAlpha(imageData, myPeer.alphaReceived);
 
-        ctx.clearRect(0, 0, peerCanvas.width, peerCanvas.height);
-        ctx.putImageData(imageData, 0, 0);
+          ctx.clearRect(0, 0, peerCanvas.width, peerCanvas.height);
+          ctx.putImageData(imageData, 0, 0);
+        }
       }
     }
 
