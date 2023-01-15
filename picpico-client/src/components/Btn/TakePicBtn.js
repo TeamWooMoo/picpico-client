@@ -1,27 +1,36 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Button } from 'rsuite';
-import { setTakePic } from '../../slice/takepicInfo';
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Button } from "rsuite";
+import { setTakePic } from "../../slice/takepicInfo";
 
-function TakePicBtn({ controller }) {
+function TakePicBtn() {
   const dispatch = useDispatch();
-  const picImgArr = useSelector(state => state.takepicInfo.picImg);
+  // const [count, setCount] = useState(0);
+  // const picImgArr = useSelector(state => state.takepicInfo.picImg);
 
   const onTakePicBtnClick = () => {
-    console.log(picImgArr);
+    // setCount(prev => prev + 1);
     dispatch(setTakePic({ value: true }));
+    // controller.takePic(count.toString(), picImgArr[picImgArr.length - 1]);
   };
 
-  useEffect(() => {
-    if (picImgArr.length > 0) {
-      controller.takePic(picImgArr[picImgArr.length - 1]);
-      dispatch(setTakePic({ value: false }));
-    }
-  }, [picImgArr]);
+  // useEffect(() => {
+  //   // if (picImgArr.length > 0) {
+  //     // controller.takePic(picImgArr[picImgArr.length - 1]);
+  //     dispatch(setTakePic({ value: false }));
+  //   }
+  // }, [picImgArr]);
 
   return (
     <>
-      <Button block size="sm" color="violet" appearance="primary" className="violet_btn" onClick={onTakePicBtnClick}>
+      <Button
+        block
+        size="sm"
+        color="violet"
+        appearance="primary"
+        className="violet_btn"
+        onClick={onTakePicBtnClick}
+      >
         사진 찍는 버튼
       </Button>
     </>

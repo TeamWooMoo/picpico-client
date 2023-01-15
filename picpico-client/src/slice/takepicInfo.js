@@ -4,6 +4,7 @@ const takepicInfo = createSlice({
   name: "takepicInfo",
   initialState: {
     takePic: false,
+    picCount: 0,
     picImg: [],
   },
 
@@ -12,6 +13,10 @@ const takepicInfo = createSlice({
       console.log("setTakePic");
       state.takePic = action.payload.value;
     },
+    setPicCount(state, action) {
+      console.log("setPicCount");
+      state.picCount += 1;
+    },
     setPicImg(state, action) {
       console.log("setPicImg");
       state.picImg = [...state.picImg, action.payload.value];
@@ -19,6 +24,6 @@ const takepicInfo = createSlice({
   },
 });
 
-export let { setTakePic, setPicImg } = takepicInfo.actions;
+export let { setTakePic, setPicCount, setPicImg } = takepicInfo.actions;
 
 export default takepicInfo;

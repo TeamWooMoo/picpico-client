@@ -1,10 +1,10 @@
 import PictureList from "../components/List/PictureList";
 import SelectDoneBtn from "../components/Btn/SelectDoneBtn";
 
-const Selection = () => {
+const Selection = ({ controller }) => {
   return (
     <>
-      <PictureList />
+      <PictureList controller={controller} />
       <SelectDoneBtn />
     </>
   );

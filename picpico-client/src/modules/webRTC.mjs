@@ -1,3 +1,5 @@
+import store from "../store.js";
+import { setVideosInfo } from "../slice/videosInfo.js";
 let socket;
 
 /* myPeers
@@ -22,7 +24,7 @@ export class myPeer {
 
   constructor(newConnection) {
     this.connection = newConnection;
-    this.videoElement = document.createElement('video');
+    this.videoElement = document.createElement("video");
     this.videoElement.hidden = true;
     this.alphaChannel = null;
     this.alphaData = null;
@@ -33,15 +35,15 @@ const handleIce = data => {
   const mySocketId = socket.id;
   for (const [peerSocketId, myPeer] of Object.entries(myPeers)) {
     if (myPeer.connection === data.target) {
-      console.log('[ice] - emit - client');
-      socket.emit('ice', data.candidate, peerSocketId, mySocketId);
+      console.log("[ice] - emit - client");
+      socket.emit("ice", data.candidate, peerSocketId, mySocketId);
       break;
     }
   }
 };
 
 const handleTrack = data => {
-  if (data.track.kind === 'video') {
+  if (data.track.kind === "video") {
     // 실제는 두 가지 방법 중 하나로 구현될 듯
     // 1.canvas 여러 개를 겹치거나
     // 2. 하나의 canvas에 다 들어오거나
@@ -61,50 +63,50 @@ function makeConnection(socketId) {
     iceServers: [
       {
         urls: [
-          'stun:stun.l.google.com:19302',
-          'stun:stun1.l.google.com:19302',
-          'stun:stun2.l.google.com:19302',
-          'stun:stun3.l.google.com:19302',
-          'stun:stun4.l.google.com:19302',
+          "stun:stun.l.google.com:19302",
+          "stun:stun1.l.google.com:19302",
+          "stun:stun2.l.google.com:19302",
+          "stun:stun3.l.google.com:19302",
+          "stun:stun4.l.google.com:19302",
         ],
       },
     ],
   });
 
-  if (socketId !== '') {
+  if (socketId !== "") {
     const newPeer = new myPeer(newConnection);
     myPeers[socketId] = newPeer;
 
-    newConnection.addEventListener('icecandidate', handleIce);
-    newConnection.addEventListener('track', handleTrack);
+    newConnection.addEventListener("icecandidate", handleIce);
+    newConnection.addEventListener("track", handleTrack);
 
     return newPeer;
   }
 }
 
 async function onWelcomeEvent(newSocketId) {
-  console.log('[welcome] - on - client');
+  console.log("[welcome] - on - client");
 
   const newPeer = makeConnection(newSocketId);
   const newConnection = newPeer.connection;
-  const newAlphaChannel = newConnection.createDataChannel('alphaChannel');
+  const newAlphaChannel = newConnection.createDataChannel("alphaChannel");
   newPeer.alphaChannel = newAlphaChannel;
 
-  newAlphaChannel.addEventListener('message', event => {
+  newAlphaChannel.addEventListener("message", event => {
     newPeer.alphaData = new Uint8Array(event.data);
   });
 
   const offer = await newConnection.createOffer();
   newConnection.setLocalDescription(offer);
 
-  socket.emit('offer', offer, newSocketId, socket.id);
-  console.log('[offer] - emit - client');
+  socket.emit("offer", offer, newSocketId, socket.id);
+  console.log("[offer] - emit - client");
 }
 
 function onDataChannelEvent(event) {}
 
 async function onOfferEvent(offer, oldSocketId) {
-  console.log('[offer] - on - client');
+  console.log("[offer] - on - client");
 
   const newPeer = makeConnection(oldSocketId);
   const newConnection = newPeer.connection;
@@ -113,12 +115,12 @@ async function onOfferEvent(offer, oldSocketId) {
   const answer = await newConnection.createAnswer();
   newConnection.setLocalDescription(answer);
 
-  socket.emit('answer', answer, oldSocketId, socket.id);
-  console.log('[answer] - emit - client');
+  socket.emit("answer", answer, oldSocketId, socket.id);
+  console.log("[answer] - emit - client");
 }
 
 function onAnswerEvent(answer, newSocketId) {
-  console.log('[answer] - on - client');
+  console.log("[answer] - on - client");
   const connection = myPeers[newSocketId].connection;
   connection.setRemoteDescription(answer);
 }
@@ -132,11 +134,15 @@ function onIceEvent(ice, socketId) {
   }
 }
 
+function onGoneEvent(goneSocketId) {
+  store.dispatch(setVideosInfo(goneSocketId));
+}
 export async function initWebRTC(_socket) {
   socket = _socket;
-  socket.on('welcome', onWelcomeEvent);
-  socket.on('datachannel', onDataChannelEvent);
-  socket.on('offer', onOfferEvent);
-  socket.on('answer', onAnswerEvent);
-  socket.on('ice', onIceEvent);
+  socket.on("welcome", onWelcomeEvent);
+  socket.on("datachannel", onDataChannelEvent);
+  socket.on("offer", onOfferEvent);
+  socket.on("answer", onAnswerEvent);
+  socket.on("ice", onIceEvent);
+  socket.on("gone", onGoneEvent);
 }

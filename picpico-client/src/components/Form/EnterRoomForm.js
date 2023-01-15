@@ -16,12 +16,14 @@ function EnterRoomForm() {
     console.log(event);
     axios
       .get(API.ROOM + roomId)
-      .then((res) => {
+      .then(res => {
+        console.log("res:", res);
         const roomName = res.data.roomId;
         navigate(`/room/${roomName}`);
       })
-      .catch((error) => {
-        alert("해당 코드의 방이 존재하지 않습니다.");
+      .catch(error => {
+        console.log(error);
+        alert("없는 방 번호 입니다.");
       });
   }
   return (
