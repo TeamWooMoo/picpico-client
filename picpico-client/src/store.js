@@ -3,6 +3,8 @@ import membersInfo from "./slice/membersInfo";
 import picpicoInfo from "./slice/picpicoInfo";
 import takepicInfo from "./slice/takepicInfo";
 import videosInfo from "./slice/videosInfo";
+import drawingInfo from "./slice/drawingInfo";
+import roomInfo from "./slice/roomInfo";
 
 const store = configureStore({
   reducer: {
@@ -10,6 +12,8 @@ const store = configureStore({
     membersInfo: membersInfo.reducer,
     takepicInfo: takepicInfo.reducer,
     videosInfo: videosInfo.reducer,
+    drawingInfo: drawingInfo.reducer,
+    roomInfo: roomInfo.reducer,
   },
 });
 

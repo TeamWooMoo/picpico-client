@@ -10,7 +10,6 @@ import MainController from "../controller/MainController";
 import "../style/style.css";
 
 const Picpico = () => {
-  // const controller = WebrtcController();
   const { id } = useParams();
   const picBoothDone = useSelector(state => state.picpicoInfo.picBoothDisplay);
   const selectDone = useSelector(state => state.picpicoInfo.selectionDisplay);
@@ -24,17 +23,23 @@ const Picpico = () => {
 
   return (
     <>
-      <Container className="default_container">
-        {picBoothDone ? (
+      {picBoothDone ? (
+        <Container className="default_container">
           <PicBooth controller={controller} />
-        ) : selectDone ? (
+        </Container>
+      ) : selectDone ? (
+        <Container className="default_container">
           <Selection controller={controller} />
-        ) : decoDone ? (
+        </Container>
+      ) : decoDone ? (
+        <Container className="default_container">
           <Decoration controller={controller} />
-        ) : galleryDone ? (
+        </Container>
+      ) : galleryDone ? (
+        <Container className="default_container">
           <Gallery />
-        ) : null}
-      </Container>
+        </Container>
+      ) : null}
     </>
   );
 };

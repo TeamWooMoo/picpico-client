@@ -5,8 +5,6 @@ const MainController = () => {
   let socket = getSocket();
 
   const init = async (roomId, nickName) => {
-    // socket = getSocket();
-    console.log("init!!!", socket);
     socket.on("connect", async () => {
       await joinRoom(socket, roomId);
       await initWebRTC(socket);
@@ -20,23 +18,21 @@ const MainController = () => {
       await init(roomId, nickName);
     },
     takePic: (imgIdx, imgUrl) => {
-      console.log("take pic", socket);
       socket.emit("take_pic", imgIdx, imgUrl);
     },
-    doneTake: () => {
-      console.log("done take", socket);
-      socket.emit("done_take");
+    doneTake: roomId => {
+      socket.emit("done_take", roomId);
     },
-    pickPic: picIdx => {
-      console.log("pick pic", socket);
-      socket.emit("pick_pic", picIdx);
+    pickPic: (roomId, picIdx) => {
+      socket.emit("pick_pic", roomId, picIdx);
     },
-    donePick: () => {
-      console.log("donePick", socket);
-      socket.emit("done_pick");
+    donePick: roomId => {
+      socket.emit("done_pick", roomId);
     },
-    strokeCanvas: (offsetX, offsetY) => {
-      socket.emit("stroke_canvas", offsetX, offsetY);
+    strokeCanvas: (roomId, offsetX, offsetY) => {
+      console.log("stroke!!", offsetX, offsetY);
+      console.log("my id", socket.id);
+      socket.emit("stroke_canvas", roomId, offsetX, offsetY);
     },
   };
 };

@@ -11,20 +11,17 @@ const takepicInfo = createSlice({
 
   reducers: {
     setTakePic(state, action) {
-      console.log("setTakePic");
       state.takePic = action.payload.value;
     },
     setPicCount(state, action) {
-      console.log("setPicCount");
       state.picCount += 1;
     },
     setPicImg(state, action) {
-      console.log("setPicImg");
-      state.picImg = [...state.picImg, action.payload.value];
+      // 찍은 애들이 여기에 들어갈거에요
+      state.picImg = action.payload.value;
     },
     setSelected(state, action) {
-      console.log("setPicked");
-      state.selected = action.payload.value;
+      state.selected = [...state.selected, action.payload.value];
     },
   },
 });

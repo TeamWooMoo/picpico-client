@@ -3,7 +3,6 @@ import Logo from "./../components/Logo/Logo";
 import LoginBtn from "../components/Btn/LoginBtn";
 import { Link } from "react-router-dom";
 import { Container } from "rsuite";
-import { useEffect, useRef, useState } from "react";
 import "../style/style.css";
 const Home = () => {
   return (
