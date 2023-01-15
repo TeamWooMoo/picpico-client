@@ -182,7 +182,8 @@ function onIceEvent(ice, socketId) {
 export async function initWebRTC(_socket) {
   socket = _socket;
   socket.on("welcome", onWelcomeEvent);
-  socket.on("datachannel", event => onDataChannelEvent(event, socket));
+  //   socket.on("datachannel", event => onDataChannelEvent(event, socket));
+  socket.on("datachannel", event => console.log(event));
   socket.on("offer", onOfferEvent);
   socket.on("answer", onAnswerEvent);
   socket.on("ice", onIceEvent);

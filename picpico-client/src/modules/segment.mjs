@@ -51,7 +51,7 @@ export async function segment(videoElement, canvas) {
 function extractAlpha(segImageData) {
   const alphaData = segImageData.data.filter((_, i) => (i + 1) % 4 === 0);
   const alphaBuffer = new Uint8Array(alphaData);
-  console.log(">>>>>extracting Alpha", myPeers);
+  //   console.log(">>>>>extracting Alpha", myPeers);
   if (myPeers) {
     for (const [_, myPeer] of Object.entries(myPeers)) {
       console.log(">>>>>extracting Alpha : myPeer", myPeer);
