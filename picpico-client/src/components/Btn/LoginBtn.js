@@ -8,7 +8,7 @@ function LoginBtn() {
     axios
       .get(API.KAKAOLOGIN)
 
-      .then((res) => {
+      .then(res => {
         const rescheck = res;
         window.location.href = rescheck.data.url;
       })
@@ -18,14 +18,7 @@ function LoginBtn() {
   }
   return (
     // <div style={{ margin: "10px" }}>
-    <Button
-      block
-      className="yellow_btn"
-      onClick={onKakaoLogin}
-      color="yellow"
-      appearance="primary"
-      style={{ color: "black", padding: "10px 70px", margin: "10px" }}
-    >
+    <Button block className="yellow_btn" onClick={onKakaoLogin} color="yellow" appearance="primary" style={{ color: "black", padding: "10px 70px" }}>
       카카오 로그인
     </Button>
     // </div>

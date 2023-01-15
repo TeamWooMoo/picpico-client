@@ -1,25 +1,14 @@
 import { useState } from "react";
-import { Button } from "rsuite";
+// import mute from "./../../assets/images/mute.png";
+// import mic from "./../../assets/images/mic.png";
 
 function MuteBtn() {
   const [muted, setMuted] = useState(true);
   const onMuteOnOff = () => {
     console.log("mute on off");
-    setMuted((current) => !current);
+    setMuted(current => !current);
   };
-  return (
-    <>
-      <Button
-        block
-        size="sm"
-        color="violet"
-        appearance="primary"
-        className="violet_btn"
-        onClick={onMuteOnOff}
-      >
-        {muted ? "Mute" : "Unmute"}
-      </Button>
-    </>
-  );
+  // return <>{muted ? <img src={mute} size="10px" onClick={onMuteOnOff} /> : <img src={mic} size="10px" onClick={onMuteOnOff} />}</>;
+  return <div></div>;
 }
 export default MuteBtn;

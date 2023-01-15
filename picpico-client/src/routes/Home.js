@@ -4,6 +4,7 @@ import LoginBtn from "../components/Btn/LoginBtn";
 import { Link } from "react-router-dom";
 import { Container } from "rsuite";
 import "../style/style.css";
+
 const Home = () => {
   return (
     <Container className="default_container">
