@@ -126,12 +126,12 @@ async function onWelcomeEvent(newSocketId) {
 
   const newPeer = makeConnection(newSocketId);
   const newConnection = newPeer.connection;
-  const newAlphaChannel = newConnection.createDataChannel("alphaChannel");
-  newPeer.alphaChannel = newAlphaChannel;
+  //   const newAlphaChannel = newConnection.createDataChannel("alphaChannel");
+  //   newPeer.alphaChannel = newAlphaChannel;
 
-  newAlphaChannel.addEventListener("message", event => {
-    newPeer.alphaReceived = new Uint8Array(event.data);
-  });
+  //   newAlphaChannel.addEventListener("message", event => {
+  //     newPeer.alphaReceived = new Uint8Array(event.data);
+  //   });
 
   const offer = await newConnection.createOffer();
   newConnection.setLocalDescription(offer);
@@ -171,6 +171,13 @@ function onAnswerEvent(answer, newSocketId) {
   console.log("[answer] - on - client");
   const connection = myPeers[newSocketId].connection;
   connection.setRemoteDescription(answer);
+
+  const newAlphaChannel = connection.createDataChannel("alphaChannel");
+  myPeers[newSocketId].alphaChannel = newAlphaChannel;
+
+  newAlphaChannel.addEventListener("message", event => {
+    myPeers[newSocketId].alphaReceived = new Uint8Array(event.data);
+  });
 }
 
 function onIceEvent(ice, socketId) {
