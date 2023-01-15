@@ -140,13 +140,13 @@ async function onWelcomeEvent(newSocketId) {
   console.log("[offer] - emit - client");
 }
 
-function onDataChannelEvent(event, socket) {
+function onDataChannelEvent(event, oldSocketId) {
   console.log(">>>>>dataChannel received", event.data);
 
-  myPeers[socket.id].alphaChannel = event.channel;
+  myPeers[oldSocketId].alphaChannel = event.channel;
 
   event.channel.addEventListener("message", event => {
-    myPeers[socket.id].alphaReceived = new Uint8Array(event.data);
+    myPeers[oldSocketId].alphaReceived = new Uint8Array(event.data);
   });
 }
 
@@ -155,6 +155,8 @@ async function onOfferEvent(offer, oldSocketId) {
 
   const newPeer = makeConnection(oldSocketId);
   const newConnection = newPeer.connection;
+
+  newConnection.addEventListener("datachannel", event => onDataChannelEvent(event, oldSocketId));
 
   newConnection.setRemoteDescription(offer);
   const answer = await newConnection.createAnswer();
@@ -183,7 +185,7 @@ export async function initWebRTC(_socket) {
   socket = _socket;
   socket.on("welcome", onWelcomeEvent);
   //   socket.on("datachannel", event => onDataChannelEvent(event, socket));
-  socket.on("datachannel", event => console.log(event));
+  //   socket.on("datachannel", event => console.log(">>>>dataChannel", event, socket));
   socket.on("offer", onOfferEvent);
   socket.on("answer", onAnswerEvent);
   socket.on("ice", onIceEvent);
