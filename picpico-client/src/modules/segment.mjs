@@ -1,4 +1,5 @@
 import { SelfieSegmentation } from "@mediapipe/selfie_segmentation";
+import { myPeer } from "./webRTC.mjs";
 
 let selfieSegmentation;
 let myPeers;
@@ -50,10 +51,12 @@ export async function segment(videoElement, canvas) {
 function extractAlpha(segImageData) {
   const alphaData = segImageData.data.filter((_, i) => (i + 1) % 4 === 0);
   const alphaBuffer = new Uint8Array(alphaData);
-
-  if (myPeers && myPeers.alphaChannel) {
+  console.log(">>>>>extracting Alpha", myPeers);
+  if (myPeers) {
     for (const [_, myPeer] of Object.entries(myPeers)) {
-      if (myPeer.alphaChannel.readyState === "open") myPeer.alphaChannel.send(alphaBuffer);
+      console.log(">>>>>extracting Alpha : myPeer", myPeer);
+      if (myPeer.alphaChannel && myPeer.alphaChannel.readyState === "open") myPeer.alphaChannel.send(alphaBuffer);
+      console.log(">>>>>extracting Alpha : with alphaChannel ");
     }
   }
 }

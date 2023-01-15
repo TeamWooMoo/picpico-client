@@ -57,8 +57,9 @@ const handleIce = data => {
 };
 
 const handleTrack = data => {
+  console.log(">>>>handling track");
   if (data.track.kind === "video") {
-    console.log(">>>>handing track");
+    console.log(">>>handling track : video !");
 
     const videoRow = document.getElementById("peerVideos");
     const peerVideo = document.createElement("video");
