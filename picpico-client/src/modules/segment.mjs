@@ -55,8 +55,10 @@ function extractAlpha(segImageData) {
   if (myPeers) {
     for (const [_, myPeer] of Object.entries(myPeers)) {
       console.log(">>>>>extracting Alpha : myPeer", myPeer);
-      if (myPeer.alphaChannel && myPeer.alphaChannel.readyState === "open") myPeer.alphaChannel.send(alphaBuffer);
-      console.log(">>>>>extracting Alpha : with alphaChannel ");
+      if (myPeer.alphaChannel && myPeer.alphaChannel.readyState === "open") {
+        myPeer.alphaChannel.send(alphaBuffer);
+        console.log(">>>>>extracting Alpha :sending ! ");
+      }
     }
   }
 }
