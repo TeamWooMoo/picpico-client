@@ -105,6 +105,10 @@ function makeConnection(socketId) {
   }
 }
 
+export function syncStreamRTC(_myStream) {
+  myStream = _myStream;
+}
+
 function syncMyPeers() {
   console.log(">>>>>syncMyPeers Called");
   syncMyPeersStream(myPeers);

@@ -1,4 +1,5 @@
 import { initSegment, segment } from "./segment.mjs";
+import { syncStreamRTC } from "./webRTC.mjs";
 
 let myVideo;
 let myCanvas;
@@ -39,11 +40,12 @@ export async function initStream() {
 
   //   await getDevices();
   await getMedia();
+  await syncStreamRTC();
 }
 
-export async function getMyStream() {
-  return myStream;
-}
+// export function getMyStream() {
+//   return myStream;
+// }
 async function getCameras() {
   try {
     const devices = await navigator.mediaDevices.enumerateDevices();
