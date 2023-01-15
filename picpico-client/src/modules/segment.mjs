@@ -2,63 +2,63 @@ import { SelfieSegmentation } from "@mediapipe/selfie_segmentation";
 import { myPeer } from "./webRTC.mjs";
 
 let selfieSegmentation;
-let myPeers;
+// let myPeers;
 
-export function initSegment() {
-  selfieSegmentation = new SelfieSegmentation({
-    locateFile: file => {
-      return `https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation/${file}`;
-    },
-  });
-  selfieSegmentation.setOptions({ modelSelection: 1 });
+// export function initSegment() {
+//   selfieSegmentation = new SelfieSegmentation({
+//     locateFile: file => {
+//       return `https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation/${file}`;
+//     },
+//   });
+//   selfieSegmentation.setOptions({ modelSelection: 1 });
 
-  //   return selfieSegmentation;
-}
+//   //   return selfieSegmentation;
+// }
 
-export function syncMyPeersSegment(_myPeers) {
-  myPeers = _myPeers;
-}
+// export function syncMyPeersSegment(_myPeers) {
+//   myPeers = _myPeers;
+// }
 
-function onCanvas(results, canvas) {
-  let ctx = canvas.getContext("2d");
+// function onCanvas(results, canvas) {
+//   let ctx = canvas.getContext("2d");
 
-  ctx.willReadFrequently = true;
+//   ctx.willReadFrequently = true;
 
-  ctx.save();
+//   ctx.save();
 
-  canvas.width = 400;
-  canvas.height = 400;
+//   canvas.width = 400;
+//   canvas.height = 400;
 
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.drawImage(results.image, 0, 0, canvas.width, canvas.height);
+//   ctx.clearRect(0, 0, canvas.width, canvas.height);
+//   ctx.drawImage(results.image, 0, 0, canvas.width, canvas.height);
 
-  ctx.globalCompositeOperation = "destination-in";
-  ctx.drawImage(results.segmentationMask, 0, 0, canvas.width, canvas.height);
-  const segImageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+//   ctx.globalCompositeOperation = "destination-in";
+//   ctx.drawImage(results.segmentationMask, 0, 0, canvas.width, canvas.height);
+//   const segImageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
 
-  extractAlpha(segImageData);
+//   extractAlpha(segImageData);
 
-  ctx.restore();
-}
+//   ctx.restore();
+// }
 
-export async function segment(videoElement, canvas) {
-  selfieSegmentation.onResults(results => {
-    onCanvas(results, canvas);
-  });
-  await selfieSegmentation.send({ image: videoElement });
-}
+// export async function segment(videoElement, canvas) {
+//   selfieSegmentation.onResults(results => {
+//     onCanvas(results, canvas);
+//   });
+//   await selfieSegmentation.send({ image: videoElement });
+// }
 
-function extractAlpha(segImageData) {
-  const alphaData = segImageData.data.filter((_, i) => (i + 1) % 4 === 0);
-  const alphaBuffer = new Uint8Array(alphaData);
-  //   console.log(">>>>>extracting Alpha", myPeers);
-  if (myPeers) {
-    for (const [_, myPeer] of Object.entries(myPeers)) {
-      //   console.log(">>>>>extracting Alpha : myPeer", myPeer);
-      if (myPeer.alphaChannel && myPeer.alphaChannel.readyState === "open") {
-        myPeer.alphaChannel.send(alphaBuffer);
-        console.log(">>>>>extracting Alpha :sending ! ");
-      }
-    }
-  }
-}
+// function extractAlpha(segImageData) {
+//   const alphaData = segImageData.data.filter((_, i) => (i + 1) % 4 === 0);
+//   const alphaBuffer = new Uint8Array(alphaData);
+//   //   console.log(">>>>>extracting Alpha", myPeers);
+//   if (myPeers) {
+//     for (const [_, myPeer] of Object.entries(myPeers)) {
+//       //   console.log(">>>>>extracting Alpha : myPeer", myPeer);
+//       if (myPeer.alphaChannel && myPeer.alphaChannel.readyState === "open") {
+//         myPeer.alphaChannel.send(alphaBuffer);
+//         console.log(">>>>>extracting Alpha :sending ! ");
+//       }
+//     }
+//   }
+// }
