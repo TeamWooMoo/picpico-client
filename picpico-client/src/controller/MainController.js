@@ -9,8 +9,8 @@ const MainController = () => {
   const init = async (roomId, nickName) => {
     socket = getSocket();
     socket.on("connect", async () => {
-      await joinRoom(socket, roomId);
       await initStream();
+      await joinRoom(socket, roomId);
       await initWebRTC(socket);
       await addMemberEvent(roomId, nickName);
       await initPeerCanvas();

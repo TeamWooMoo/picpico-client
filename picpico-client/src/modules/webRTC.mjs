@@ -172,13 +172,6 @@ function onAnswerEvent(answer, newSocketId) {
   console.log("[answer] - on - client");
   const connection = myPeers[newSocketId].connection;
   connection.setRemoteDescription(answer);
-
-  //   const newAlphaChannel = connection.createDataChannel("alphaChannel");
-  //   myPeers[newSocketId].alphaChannel = newAlphaChannel;
-
-  //   newAlphaChannel.addEventListener("message", event => {
-  //     myPeers[newSocketId].alphaReceived = new Uint8Array(event.data);
-  //   });
 }
 
 function onIceEvent(ice, socketId) {
