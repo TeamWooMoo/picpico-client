@@ -10,13 +10,13 @@ function CreateRoomBtn() {
     const roomId = uuid();
     axios
       .post(API.ROOM, { roomId: roomId })
-      .then((res) => {
+      .then(res => {
         //    서버가 어떻게 주는지에 따라서 아래는 바뀔 것
         console.log(res);
         navigate(`/room/${res.data.roomId}`);
         // navigate(`/room/100`);
       })
-      .catch((err) => {
+      .catch(err => {
         alert("방 생성에 실패하였습니다,", err);
       });
   }
@@ -27,6 +27,7 @@ function CreateRoomBtn() {
       appearance="primary"
       onClick={onCreateBtnClick}
       className="violet_btn"
+      style={{ color: "black", padding: "10px 70px", margin: "10px" }}
     >
       새로운 방 생성
     </Button>

@@ -1,7 +1,7 @@
 import CreateRoomBtn from "../components/Btn/CreateRoomBtn";
 import EnterRoomBtn from "../components/Btn/EnterRoomBtn";
 import { Container } from "rsuite";
-// import "./Room.css";
+import "../style/style.css";
 
 function Room() {
   return (

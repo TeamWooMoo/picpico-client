@@ -1,4 +1,5 @@
-const BASE_URL = "https://picpico-server.site";
+// const BASE_URL = "https://picpico-server.site";
+export const BASE_URL = "https://jaehyeonkim.shop";
 
 export const API = {
   ROOM: `${BASE_URL}/rooms/`,
@@ -6,4 +7,4 @@ export const API = {
   LOGIN: `${BASE_URL}/login`,
 };
 
-export const CREDENTIAL = { withCredentials: false };
+export const CREDENTIAL = { withCredentials: true };
