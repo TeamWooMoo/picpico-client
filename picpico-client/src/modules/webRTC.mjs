@@ -58,6 +58,8 @@ const handleIce = data => {
 
 const handleTrack = data => {
   if (data.track.kind === "video") {
+    console.log(">>>>handing track");
+
     const videoRow = document.getElementById("peerVideos");
     const peerVideo = document.createElement("video");
 
@@ -68,6 +70,7 @@ const handleTrack = data => {
 
     peerVideo.srcObject = data.streams[0];
     videoRow.appendChild(peerVideo);
+    console.log(">>>>handing track -> on source to video");
   }
 };
 

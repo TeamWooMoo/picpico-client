@@ -85,6 +85,8 @@ async function getMedia(deviceId) {
     myStream = await myCanvas.captureStream();
     await myStream.addTrack(mediaStream.getAudioTracks()[0]);
 
+    console.log("capturing myCanvas to stream");
+
     if (!deviceId) {
       return await getCameras();
     }
