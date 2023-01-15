@@ -17,19 +17,17 @@ function EnterRoomForm() {
     axios
       .get(API.ROOM + roomId)
       .then(res => {
-        console.log("res:", res);
         const roomName = res.data.roomId;
         navigate(`/room/${roomName}`);
       })
       .catch(error => {
-        console.log(error);
-        alert("없는 방 번호 입니다.");
+        alert("해당 코드의 방이 존재하지 않습니다.");
       });
   }
   return (
     <Form onSubmit={onEnterRoomFormSubmit}>
-      <Form.ControlLabel>Enter room Code</Form.ControlLabel>
-      <Input placeholder="room code" onChange={onRoomInputChange} />
+      <Form.ControlLabel style={{ padding: "5px" }}>방 코드를 입력하세요.</Form.ControlLabel>
+      <Input placeholder="Room Code" onChange={onRoomInputChange} style={{ borderRadius: "20px", margin: "5px 0" }} />
     </Form>
   );
 }

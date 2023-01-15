@@ -19,7 +19,7 @@ function EnterRoomBtn() {
           appearance="primary"
           className="violet_btn"
           onClick={onEnterRoomBtnClick}
-          style={{ color: "black", padding: "10px 70px", margin: "10px" }}
+          style={{ color: "black", padding: "10px 70px", borderRadius: "20px", padding: "5px", margin: "5px 0" }}
         >
           방 코드 입력 후 입장
         </Button>
