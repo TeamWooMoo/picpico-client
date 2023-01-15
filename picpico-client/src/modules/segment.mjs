@@ -11,7 +11,7 @@ export function initSegment() {
   });
   selfieSegmentation.setOptions({ modelSelection: 1 });
 
-  return selfieSegmentation;
+  //   return selfieSegmentation;
 }
 
 export function syncMyPeersSegment(_myPeers) {

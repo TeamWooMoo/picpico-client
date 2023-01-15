@@ -9,7 +9,6 @@ let socket;
 
 export function getSocket() {
   const socketOptions = { withCredentials: CREDENTIAL.withCredentials };
-  // const SERVER = 'https://picpico-server.site';
   const SERVER = BASE_URL;
 
   socket = io(SERVER, socketOptions);
