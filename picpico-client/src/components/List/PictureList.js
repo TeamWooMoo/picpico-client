@@ -1,26 +1,25 @@
 import { useSelector } from "react-redux";
 import { useState } from "react";
-const PictureList = () => {
+const PictureList = ({ controller }) => {
   const pictures = useSelector(state => state.takepicInfo.picImg);
-  const [picked, setPicked] = useState([]);
+  const [active, setActive] = useState([]);
 
   const onTestClick = event => {
     const pic = event.target;
-    const idx = pic.dataset.pic;
-    if (!picked.includes(idx)) {
-      setPicked(prev => [...prev, idx]);
-      picked.push(idx);
-      pic.style.border = "5px solid white";
-    } else if (picked && picked.includes(idx)) {
-      pic.style.border = "";
-      setPicked(prev => prev.filter(x => x !== idx));
+    const picId = pic.picId;
+
+    if (active.includes(picId)) {
+      pic.className = "";
+      setActive(prev => prev.filter(x => x !== picId));
+    } else {
+      pic.className = "active_pic";
+      setActive([...active, picId]);
     }
+    controller.pickPic(picId);
   };
 
   const onPicClick = event => {
-    console.log(event, event.target);
-    const picId = event.target.id;
-    const picLi = document.getElementById(`${picId}`);
+    const picLi = event.target;
     picLi.style.border = "5px solid tomato";
   };
 
@@ -28,16 +27,14 @@ const PictureList = () => {
 
   return (
     <ul>
-      {/* <img
-        src={
-          "https://recipe1.ezmember.co.kr/cache/recipe/2018/08/01/eeb4da99110208dc6ea8dced1142cac01.jpg"
-        }
-        data-pic={`pic-${1}`}
+      <img
+        src={"https://recipe1.ezmember.co.kr/cache/recipe/2018/08/01/eeb4da99110208dc6ea8dced1142cac01.jpg"}
+        data-picId={`pic-${1}`}
         alt="soysauce"
         id="soysauce"
         crossOrigin="Anonymous"
         onClick={onTestClick}
-      ></img> */}
+      ></img>
       {pictureLI}
     </ul>
   );

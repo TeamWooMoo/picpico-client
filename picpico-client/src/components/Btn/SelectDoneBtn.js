@@ -2,10 +2,11 @@ import { Button } from "rsuite";
 import { useDispatch } from "react-redux";
 import { setSelectionInfo, setDecoInfo } from "../../slice/picpicoInfo";
 
-const SelectDoneBtn = () => {
+const SelectDoneBtn = ({ controller }) => {
   const dispatch = useDispatch();
 
   function onSelectDoneBtnClick() {
+    controller.donePick();
     dispatch(setSelectionInfo({ value: false }));
     dispatch(setDecoInfo({ value: true }));
   }

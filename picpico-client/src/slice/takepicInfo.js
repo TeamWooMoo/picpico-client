@@ -6,6 +6,7 @@ const takepicInfo = createSlice({
     takePic: false,
     picCount: 0,
     picImg: [],
+    selected: [],
   },
 
   reducers: {
@@ -21,9 +22,13 @@ const takepicInfo = createSlice({
       console.log("setPicImg");
       state.picImg = [...state.picImg, action.payload.value];
     },
+    setSelected(state, action) {
+      console.log("setPicked");
+      state.selected = action.payload.value;
+    },
   },
 });
 
-export let { setTakePic, setPicCount, setPicImg } = takepicInfo.actions;
+export let { setTakePic, setPicCount, setPicImg, setSelected } = takepicInfo.actions;
 
 export default takepicInfo;

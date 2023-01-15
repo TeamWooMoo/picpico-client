@@ -1,6 +1,7 @@
 import { Button } from "rsuite";
 import { useDispatch } from "react-redux";
 import { setPicBoothInfo, setSelectionInfo } from "../../slice/picpicoInfo";
+import { useEffect } from "react";
 
 const PicDoneBtn = ({ controller }) => {
   const dispatch = useDispatch();
@@ -11,14 +12,7 @@ const PicDoneBtn = ({ controller }) => {
     controller.doneTake();
   }
   return (
-    <Button
-      block
-      size="sm"
-      color="violet"
-      appearance="primary"
-      className="violet_btn"
-      onClick={onPicDoneBtnClick}
-    >
+    <Button block size="sm" color="violet" appearance="primary" className="violet_btn" onClick={onPicDoneBtnClick}>
       사진찍기 완료
     </Button>
   );

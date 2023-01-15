@@ -1,14 +1,14 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef, useState } from "react";
 
 const DecoCanvas = ({ controller }) => {
   const [drawing, setDrawing] = useState(false);
   const decoCanvas = useRef();
 
-  const onCanvasDown = event => {
+  const onCanvasDown = () => {
     setDrawing(true);
   };
 
-  const onCanvasUp = event => {
+  const onCanvasUp = () => {
     setDrawing(false);
   };
 
@@ -21,6 +21,7 @@ const DecoCanvas = ({ controller }) => {
     } else {
       decoCtx.lineTo(offsetX, offsetY);
       decoCtx.stroke();
+      controller.strokeCanvas(offsetX, offsetY);
     }
   };
 

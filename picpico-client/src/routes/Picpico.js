@@ -12,12 +12,10 @@ import "../style/style.css";
 const Picpico = () => {
   // const controller = WebrtcController();
   const { id } = useParams();
-  const picBoothDone = useSelector(
-    (state) => state.picpicoInfo.picBoothDisplay
-  );
-  const selectDone = useSelector((state) => state.picpicoInfo.selectionDisplay);
-  const decoDone = useSelector((state) => state.picpicoInfo.decoDisplay);
-  const galleryDone = useSelector((state) => state.picpicoInfo.galleryDisplay);
+  const picBoothDone = useSelector(state => state.picpicoInfo.picBoothDisplay);
+  const selectDone = useSelector(state => state.picpicoInfo.selectionDisplay);
+  const decoDone = useSelector(state => state.picpicoInfo.decoDisplay);
+  const galleryDone = useSelector(state => state.picpicoInfo.galleryDisplay);
   const controller = MainController();
 
   useEffect(() => {
@@ -26,26 +24,17 @@ const Picpico = () => {
 
   return (
     <>
-      {picBoothDone ? (
-        <Container className="default_container">
+      <Container className="default_container">
+        {picBoothDone ? (
           <PicBooth controller={controller} />
-        </Container>
-      ) : null}
-      {selectDone ? (
-        <Container className="default_container">
+        ) : selectDone ? (
           <Selection controller={controller} />
-        </Container>
-      ) : null}
-      {decoDone ? (
-        <Container className="default_container">
+        ) : decoDone ? (
           <Decoration controller={controller} />
-        </Container>
-      ) : null}
-      {galleryDone ? (
-        <Container className="default_container">
+        ) : galleryDone ? (
           <Gallery />
-        </Container>
-      ) : null}
+        ) : null}
+      </Container>
     </>
   );
 };
