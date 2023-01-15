@@ -106,14 +106,15 @@ function makeConnection(socketId) {
 }
 
 export function syncStreamRTC(_myStream) {
+  console.log(">>>>stream sync", _myStream);
   myStream = _myStream;
 }
 
 function syncMyPeers() {
-  console.log(">>>>>syncMyPeers Called");
+  console.log(">>>>>syncMyPeers Called", myPeers);
   syncMyPeersStream(myPeers);
-  syncMyPeersReceiver(myPeers);
   syncMyPeersSegment(myPeers);
+  syncMyPeersReceiver(myPeers);
 }
 
 async function onWelcomeEvent(newSocketId) {

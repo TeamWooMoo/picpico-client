@@ -10,6 +10,7 @@ let myPeers;
 
 export async function syncMyPeersStream(_myPeers) {
   myPeers = _myPeers;
+  console.log(">>>>stream got myPeers", _myPeers);
 }
 
 export async function initStream() {
@@ -40,7 +41,8 @@ export async function initStream() {
 
   //   await getDevices();
   await getMedia();
-  await syncStreamRTC();
+  await syncStreamRTC(myStream);
+  console.log("syncStreamRTC called", myStream);
 }
 
 // export function getMyStream() {
