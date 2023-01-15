@@ -19,7 +19,7 @@ const PicBooth = ({ controller }) => {
       </Header>
 
       <div>
-        <CanvasList />
+        <CanvasList controller={controller} />
         <VideoList />
       </div>
 

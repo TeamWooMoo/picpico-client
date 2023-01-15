@@ -1,6 +1,6 @@
-import { setPicturesInfo } from '../slice/picturesInfo.js';
-import store from '../store.js';
+import { setPicImg } from "../slice/takepicInfo.js";
+import store from "../store.js";
 
 export const onDoneTakeEvent = imgArr => {
-  store.dispatch(setPicturesInfo({ value: imgArr }));
+  store.dispatch(setPicImg({ value: imgArr }));
 };
