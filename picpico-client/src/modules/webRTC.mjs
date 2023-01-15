@@ -77,6 +77,7 @@ const handleTrack = data => {
     peerVideo.play();
     console.log(">>>>data throughRTC", data);
     console.log(">>>>data.streams throughRTC", data.streams[0]);
+    console.log(">>>>peerVideo");
     console.log(">>>>handing track -> on source to video");
   }
 };
@@ -108,6 +109,7 @@ function makeConnection(socketId) {
     // myStream = getMyStream();
 
     myStream.getTracks().forEach(track => {
+      console.log(">>>myStream", myStream);
       newConnection.addTrack(track, myStream);
     });
 
