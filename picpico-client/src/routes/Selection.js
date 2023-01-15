@@ -5,7 +5,7 @@ const Selection = ({ controller }) => {
   return (
     <>
       <PictureList controller={controller} />
-      <SelectDoneBtn />
+      <SelectDoneBtn controller={controller} />
     </>
   );
 };

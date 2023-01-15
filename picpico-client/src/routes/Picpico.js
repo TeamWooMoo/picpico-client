@@ -35,18 +35,15 @@ const Picpico = () => {
           </Content>
           <Footer>Footer</Footer>
         </Container>
-      ) : null}
-      {selectDone ? (
+      ) : selectDone ? (
         <Container className="default_container">
           <Selection controller={controller} />
         </Container>
-      ) : null}
-      {decoDone ? (
+      ) : decoDone ? (
         <Container className="default_container">
           <Decoration controller={controller} />
         </Container>
-      ) : null}
-      {galleryDone ? (
+      ) : galleryDone ? (
         <Container className="default_container">
           <Gallery />
         </Container>

@@ -1,5 +1,5 @@
 import store from "../store.js";
-import { setPicImg } from "../slice/takepicInfo.js";
-export const onResetMemberEvent = imgArr => {
-  store.dispatch(setPicImg({ value: imgArr }));
+import { setMembersInfo } from "../slice/membersInfo.js";
+export const onResetMemberEvent = nicknameArr => {
+  store.dispatch(setMembersInfo({ value: nicknameArr }));
 };

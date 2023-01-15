@@ -2,10 +2,9 @@ import { addMemberEvent, getSocket, joinRoom } from "../modules/sockets.mjs";
 import { initWebRTC } from "../modules/webRTC.mjs";
 
 const MainController = () => {
-  let socket;
+  let socket = getSocket();
 
   const init = async (roomId, nickName) => {
-    socket = getSocket();
     socket.on("connect", async () => {
       await joinRoom(socket, roomId);
       await initWebRTC(socket);
@@ -21,8 +20,19 @@ const MainController = () => {
     takePic: (imgIdx, imgUrl) => {
       socket.emit("take_pic", imgIdx, imgUrl);
     },
-    doneTake: () => {
-      socket.emit("done_take");
+    doneTake: roomId => {
+      socket.emit("done_take", roomId);
+    },
+    pickPic: (roomId, picIdx) => {
+      socket.emit("pick_pic", roomId, picIdx);
+    },
+    donePick: roomId => {
+      socket.emit("done_pick", roomId);
+    },
+    strokeCanvas: (roomId, offsetX, offsetY) => {
+      console.log("stroke!!", offsetX, offsetY);
+      console.log("my id", socket.id);
+      socket.emit("stroke_canvas", roomId, offsetX, offsetY);
     },
   };
 };

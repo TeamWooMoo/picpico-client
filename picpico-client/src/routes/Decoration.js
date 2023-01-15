@@ -9,7 +9,7 @@ const Decoration = ({ controller }) => {
     <>
       <MemberList />
       <DecoCanvas controller={controller} />
-      <PictureList />
+      <PictureList controller={controller} />
       <ColorList />
       <DecoDoneBtn />
     </>

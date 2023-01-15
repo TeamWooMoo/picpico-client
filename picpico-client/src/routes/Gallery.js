@@ -4,17 +4,15 @@ import GalleryDoneBtn from "../components/Btn/GalleryDoneBtn";
 
 const Gallery = () => {
   return (
-    <>
-      <Container>
-        {/* <ImageWrap ref={imgResult}>
+    <Container>
+      {/* <ImageWrap ref={imgResult}>
           <ImageSelected src={images[imageIndex]} alt="background" />
           <Message>{message}</Message>
           <Bible>{bible}</Bible>
         </ImageWrap> */}
-        <PicDownloadBtn />
-        <GalleryDoneBtn />
-      </Container>
-    </>
+      <PicDownloadBtn />
+      <GalleryDoneBtn />
+    </Container>
   );
 };
 
