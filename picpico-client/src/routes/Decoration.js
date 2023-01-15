@@ -2,13 +2,13 @@ import MemberList from "../components/List/MemberList";
 import PictureList from "../components/List/PictureList";
 import ColorList from "../components/List/ColorList";
 import DecoDoneBtn from "../components/Btn/DecoDoneBtn";
-import MainCanvas from "../components/Canvas/MainCanvas";
+import DecoCanvas from "../components/Canvas/DecoCanvas";
 
 const Decoration = ({ controller }) => {
   return (
     <>
       <MemberList />
-      <MainCanvas />
+      <DecoCanvas controller={controller} />
       <PictureList />
       <ColorList />
       <DecoDoneBtn />

@@ -18,13 +18,13 @@ const CanvasList = ({ controller }) => {
   useEffect(() => {
     const ctx = myCanvas.current.getContext("2d");
     /* 아래는 예시입니다. */
-    const img = new Image();
-    img.onload = function () {
-      ctx.drawImage(img, 0, 0);
-    };
-    img.src =
-      "https://cdn.crowdpic.net/list-thumb/thumb_l_FD8184F80AF8D28615C95B97C1AE4D63.jpeg";
-    img.crossOrigin = "Anonymous";
+    // const img = new Image();
+    // img.onload = function () {
+    //   ctx.drawImage(img, 0, 0);
+    // };
+    // img.src =
+    //   "https://cdn.crowdpic.net/list-thumb/thumb_l_FD8184F80AF8D28615C95B97C1AE4D63.jpeg";
+    // img.crossOrigin = "Anonymous";
   });
   return (
     <>
@@ -38,7 +38,7 @@ const CanvasList = ({ controller }) => {
         ></canvas>
         <canvas id="peerCanvas" className="canvas"></canvas>
       </div>
-      {imgArr ? <img src={imgArr[imgArr.length - 1]} alt="plz"></img> : null}
+      {/* {imgArr ? <img src={imgArr[imgArr.length - 1]} alt="plz"></img> : null} */}
     </>
   );
 };
