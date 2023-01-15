@@ -24,18 +24,11 @@ const PictureList = () => {
     picLi.style.border = "5px solid tomato";
   };
 
-  const pictureLI = Object.values(pictures).map((val, index) => (
-    <img
-      alt="img"
-      data-pic={`pic-${index}`}
-      onClick={onPicClick}
-      src={val}
-    ></img>
-  ));
+  const pictureLI = Object.values(pictures).map((val, index) => <img alt="img" data-pic={`pic-${index}`} onClick={onPicClick} src={val}></img>);
 
   return (
     <ul>
-      <img
+      {/* <img
         src={
           "https://recipe1.ezmember.co.kr/cache/recipe/2018/08/01/eeb4da99110208dc6ea8dced1142cac01.jpg"
         }
@@ -44,7 +37,7 @@ const PictureList = () => {
         id="soysauce"
         crossOrigin="Anonymous"
         onClick={onTestClick}
-      ></img>
+      ></img> */}
       {pictureLI}
     </ul>
   );
