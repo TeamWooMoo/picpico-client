@@ -21,36 +21,25 @@ function LinkModal() {
   return (
     <>
       <ButtonToolbar>
-        <Button onClick={handleOpen}>
-          📍 친구들에게 방 링크를 공유해보세요. 📍
+        <Button onClick={handleOpen} style={{ margin: "5px 0" }}>
+          📍 링크 복사 📍
         </Button>
       </ButtonToolbar>
-      <Modal open={open} onClose={handleClose}>
+      <Modal open={open} onClose={handleClose} style={{ justifyContent: "center", textAlign: "center" }}>
         <Modal.Header>
           <Modal.Title>🔜 친구들에게 방 링크를 공유해보세요. </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p style={{ color: "black", margin: "10px", alignItems: "center" }}>
+          <p style={{ color: "black", textAlign: "center" }}>
             해당 링크로 여러명의 친구를 한번에 초대할 수 있습니다.
             <br />
           </p>
           <CopyToClipboard text={url}>
-            <Button
-              block
-              style={{ color: "black" }}
-              appearance="primary"
-              className="link_copy"
-              onClick={onLinkCopy}
-            >
+            <Button block style={{ color: "black" }} appearance="primary" className="link_copy" onClick={onLinkCopy}>
               🔗 링크 생성
             </Button>
           </CopyToClipboard>
-          <Button
-            block
-            style={{ color: "black" }}
-            appearance="primary"
-            className="link_copy"
-          >
+          <Button block style={{ color: "black" }} appearance="primary" className="link_copy">
             📥 카카오톡 전송
           </Button>
         </Modal.Body>
