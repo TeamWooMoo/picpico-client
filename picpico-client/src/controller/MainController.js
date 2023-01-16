@@ -379,16 +379,19 @@ const MainController = () => {
 
   /******************************************************************* */
 
-  function addAlpha(imageData, alphaReceived) {
+  function addAlpha(imageData, alphaReceived, piledAlpha) {
     let tmp;
     let alphaIndex;
     for (let i = 3; i < imageData.data.length; i += 4) {
       tmp = i - 3;
       alphaIndex = tmp / 4;
-      imageData.data[i] = alphaReceived[alphaIndex];
+
+      piledAlpha[alphaIndex] += alphaReceived[alphaIndex];
+
+      imageData.data[i] = piledAlpha[alphaIndex];
     }
 
-    return imageData;
+    return { imageData, piledAlpha };
   }
 
   async function initPeerCanvas() {
@@ -412,18 +415,19 @@ const MainController = () => {
 
       if (myPeers) {
         // alphaData 와 videoElem이 모두 null이 아닌 peer들을 그림
+        const ALPHA_LENGTH = 160000; // hard corded for now
+        let piledAlpha = new Uint8Array(ALPHA_LENGTH);
+
         for (const [_, myPeer] of Object.entries(myPeers)) {
-          // console.log(">>>myPeer on Canvas", myPeer);
           if (myPeer.videoElement && myPeer.alphaReceived) {
-            // console.log("drawing on");
             ctx.drawImage(myPeer.videoElement, 0, 0, peerCanvas.width, peerCanvas.height);
             const imageData = ctx.getImageData(0, 0, peerCanvas.width, peerCanvas.height);
-            console.log(myPeer.videoElement);
 
-            const segImageData = addAlpha(imageData, myPeer.alphaReceived);
+            const result = addAlpha(imageData, myPeer.alphaReceived, piledAlpha);
+            const segImageData = result.imageData;
+            piledAlpha = result.piledAlpha;
 
             ctx.clearRect(0, 0, peerCanvas.width, peerCanvas.height);
-            // ctx.putImageData(imageData, 0, 0);
             ctx.putImageData(segImageData, 0, 0);
           }
         }
