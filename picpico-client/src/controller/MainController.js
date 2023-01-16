@@ -51,29 +51,31 @@ const MainController = () => {
   function extractAlpha(segImageData) {
     const alphaData = segImageData.data.filter((_, i) => (i + 1) % 4 === 0);
     const alphaBuffer = new Uint8Array(alphaData);
-    //   console.log(">>>>>extracting Alpha", myPeers);
+    // console.log(">>>>>extracting Alpha", myPeers);
     if (myPeers) {
       for (const [_, myPeer] of Object.entries(myPeers)) {
         //   console.log(">>>>>extracting Alpha : myPeer", myPeer);
         if (myPeer.alphaChannel && myPeer.alphaChannel.readyState === "open") {
           // myPeer.alphaChannel.send(alphaBuffer);
+          let buffer = alphaBuffer;
 
-          const alphaSend = (dataChannel, buffer, chunkSize) => {
+          const alphaSend = (dataChannel, chunkSize) => {
             while (buffer.byteLength) {
               if (dataChannel.bufferedAmount > dataChannel.bufferedAmountLowThreshold) {
                 dataChannel.onbufferedamountlow = () => {
                   dataChannel.onbufferedamountlow = null;
-                  alphaSend();
+                  alphaSend(dataChannel, chunkSize);
                 };
                 return;
               }
+
               const chunk = buffer.slice(0, chunkSize);
               buffer = buffer.slice(chunkSize, buffer.byteLength);
               dataChannel.send(chunk);
             }
           };
 
-          alphaSend(myPeer.alphaChannel, alphaBuffer, 1024 * 1024 * 16);
+          alphaSend(myPeer.alphaChannel, 1024 * 1024 * 16);
 
           // console.log(">>>>>extracting Alpha :sending ! ");
         }
