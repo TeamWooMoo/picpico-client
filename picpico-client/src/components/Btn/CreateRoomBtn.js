@@ -28,25 +28,24 @@ function CreateRoomBtn() {
   return (
     <>
       <FlexboxGrid justify="center">
-        <h4 style={{ color: "black", fontWeight: "bold", textAlign: "center" }}>PicPiCo Enter Room</h4>
+        <h4 style={{ width: "250px", color: "black", fontWeight: "bold", textAlign: "center" }}>PicPiCo Enter Room</h4>
       </FlexboxGrid>
       <FlexboxGrid justify="center">
-        <p style={{ color: "black", textAlign: "center", padding: "10px" }}>
+        <p style={{ color: "black", textAlign: "center", padding: "20px" }}>
           1. 새로운 방을 생성하세요.
           <br />
           2. 이미 방이 생성되어있다면 코드를 입력 후 입장하세요.
         </p>
       </FlexboxGrid>
-      <Button
-        block
-        color="violet"
-        appearance="primary"
-        onClick={onCreateBtnClick}
-        className="violet_btn"
-        style={{ color: "black", padding: "10px 70px", borderRadius: "20px", padding: "5px", margin: "5px 0" }}
-      >
-        새로운 방 생성
-      </Button>
+      <FlexboxGrid className="room_btn">
+        <Button
+          className="btn-shadow"
+          style={{ width: "250px", color: "black", borderRadius: "6px", padding: "10px 70px", lineHeight: "15px", margin: "5px 0" }}
+          onClick={onCreateBtnClick}
+        >
+          새로운 방 생성
+        </Button>
+      </FlexboxGrid>
     </>
   );
 }

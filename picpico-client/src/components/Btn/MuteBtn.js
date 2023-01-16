@@ -1,6 +1,6 @@
 import { useState } from "react";
-// import mute from "./../../assets/images/mute.png";
-// import mic from "./../../assets/images/mic.png";
+import { IoVolumeMedium } from "react-icons/io5";
+import { IoVolumeMute } from "react-icons/io5";
 
 function MuteBtn() {
   const [muted, setMuted] = useState(true);
@@ -8,7 +8,14 @@ function MuteBtn() {
     console.log("mute on off");
     setMuted(current => !current);
   };
-  // return <>{muted ? <img src={mute} size="10px" onClick={onMuteOnOff} /> : <img src={mic} size="10px" onClick={onMuteOnOff} />}</>;
-  return <div></div>;
+  return (
+    <>
+      {muted ? (
+        <IoVolumeMedium className="drop-shadow" color="white" size="40" padding="5px 0" onClick={onMuteOnOff}></IoVolumeMedium>
+      ) : (
+        <IoVolumeMute className="drop-shadow" color="white" size="40" padding="5px 0" onClick={onMuteOnOff}></IoVolumeMute>
+      )}
+    </>
+  );
 }
 export default MuteBtn;

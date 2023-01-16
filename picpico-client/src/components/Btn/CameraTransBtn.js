@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { IoCameraReverse } from "react-icons/io5";
+import { IoCameraReverseSharp } from "react-icons/io5";
 
 const CameraTransBtn = () => {
   const [cameraTrans, setCameraTrans] = useState(false);
@@ -10,9 +10,9 @@ const CameraTransBtn = () => {
   return (
     <>
       {cameraTrans ? (
-        <IoCameraReverse size="40" color="white" onClick={onCameraTransform} />
+        <IoCameraReverseSharp color="white" size="40" padding="5px 0" onClick={onCameraTransform}></IoCameraReverseSharp>
       ) : (
-        <IoCameraReverse size="40" color="white" onClick={onCameraTransform} />
+        <IoCameraReverseSharp color="white" size="40" padding="5px 0" onClick={onCameraTransform}></IoCameraReverseSharp>
       )}
     </>
   );

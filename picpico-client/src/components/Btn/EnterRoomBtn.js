@@ -1,4 +1,4 @@
-import { Button } from "rsuite";
+import { Button, FlexboxGrid } from "rsuite";
 import { useState } from "react";
 import EnterRoomForm from "../Form/EnterRoomForm";
 
@@ -13,16 +13,15 @@ function EnterRoomBtn() {
       {formDisplay ? (
         <EnterRoomForm />
       ) : (
-        <Button
-          block
-          color="violet"
-          appearance="primary"
-          className="violet_btn"
-          onClick={onEnterRoomBtnClick}
-          style={{ color: "black", padding: "10px 70px", borderRadius: "20px", padding: "5px", margin: "5px 0" }}
-        >
-          방 코드 입력 후 입장
-        </Button>
+        <FlexboxGrid className="room_btn">
+          <Button
+            className="btn-shadow"
+            style={{ width: "250px", color: "black", padding: "10px 70px", borderRadius: "6px", lineHeight: "15px", margin: "5px 0" }}
+            onClick={onEnterRoomBtnClick}
+          >
+            방 코드 입력 후 입장
+          </Button>
+        </FlexboxGrid>
       )}
     </>
   );

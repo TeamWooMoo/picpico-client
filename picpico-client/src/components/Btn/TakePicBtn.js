@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Button } from "rsuite";
+import { IoRadioButtonOnOutline } from "react-icons/io5";
 import { setTakePic } from "../../slice/takepicInfo";
 
 function TakePicBtn() {
@@ -23,16 +23,7 @@ function TakePicBtn() {
 
   return (
     <>
-      <Button
-        block
-        size="sm"
-        color="violet"
-        appearance="primary"
-        className="violet_btn"
-        onClick={onTakePicBtnClick}
-      >
-        사진 찍는 버튼
-      </Button>
+      <IoRadioButtonOnOutline color="red" size="40" padding="5px 0" onClick={onTakePicBtnClick}></IoRadioButtonOnOutline>
     </>
   );
 }

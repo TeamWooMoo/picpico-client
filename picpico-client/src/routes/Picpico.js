@@ -8,7 +8,17 @@ import Gallery from "./Gallery";
 import Selection from "./Selection";
 import PicBooth from "./PicBooth";
 import MainController from "../controller/MainController";
+import MuteBtn from "./../components/Btn/MuteBtn";
+import PicDoneBtn from "../components/Btn/PicDoneBtn";
+import TakePicBtn from "./../components/Btn/TakePicBtn";
+import CameraTransBtn from "./../components/Btn/CameraTransBtn";
+import SelectDoneBtn from "../components/Btn/SelectDoneBtn";
+import DecoDoneBtn from "../components/Btn/DecoDoneBtn";
+import PicDownloadBtn from "../components/Btn/PicDownloadBtn";
+import GalleryDoneBtn from "../components/Btn/GalleryDoneBtn";
+import Message from "./../components/Message";
 import "../style/style.css";
+import "./Picpico.css";
 
 const Picpico = () => {
   const { id } = useParams();
@@ -26,26 +36,51 @@ const Picpico = () => {
     <>
       {picBoothDone ? (
         <Container className="default_container">
-          <Header className="picBoothDone_Header">
-            {/* <p>이번 방은 {id}번 방 입니다.</p> */}
+          <Header className="picbooth_header">
             <LinkModal />
+            <PicDoneBtn controller={controller} />
           </Header>
           <Content>
             <PicBooth controller={controller} />
           </Content>
-          <Footer>Footer</Footer>
+          <Footer className="picbooth_footer">
+            <MuteBtn />
+            <TakePicBtn controller={controller} />
+            <CameraTransBtn />
+          </Footer>
         </Container>
       ) : selectDone ? (
         <Container className="default_container">
-          <Selection controller={controller} />
+          <Header className="selection_header">
+            <Message />
+          </Header>
+          <Content>
+            <Selection controller={controller} />
+          </Content>
+          <Footer className="selection_footer">
+            <SelectDoneBtn />
+          </Footer>
         </Container>
       ) : decoDone ? (
         <Container className="default_container">
-          <Decoration controller={controller} />
+          <Header className="deco_header"></Header>
+          <Content>
+            <Decoration controller={controller} />
+          </Content>
+          <Footer className="deco_footer">
+            <DecoDoneBtn />
+          </Footer>
         </Container>
       ) : galleryDone ? (
         <Container className="default_container">
-          <Gallery />
+          <Header className="gallery_header"></Header>
+          <Content>
+            <Gallery />
+          </Content>
+          <Footer className="gallery_footer">
+            <PicDownloadBtn />
+            <GalleryDoneBtn />
+          </Footer>
         </Container>
       ) : null}
     </>
