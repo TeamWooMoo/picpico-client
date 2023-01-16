@@ -1,7 +1,3 @@
-// import { initPeerCanvas } from "../modules/receiver.mjs";
-// import { addMemberEvent, getSocket, joinRoom } from "../modules/sockets.mjs";
-// import { initStream } from "../modules/stream.mjs";
-// import { initWebRTC } from "../modules/webRTC.mjs";
 import { CREDENTIAL } from "../config.js";
 import { BASE_URL } from "../config.js";
 import { io } from "socket.io-client";
