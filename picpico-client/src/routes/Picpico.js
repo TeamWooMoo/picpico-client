@@ -19,6 +19,8 @@ import GalleryDoneBtn from "../components/Btn/GalleryDoneBtn";
 import Message from "./../components/Message";
 import "../style/style.css";
 import "./Picpico.css";
+import store from "../store";
+import { setErrorInfo } from "../slice/errorInfo";
 
 const Picpico = () => {
   const { id } = useParams();
@@ -36,6 +38,7 @@ const Picpico = () => {
   useEffect(() => {
     if (error !== "") {
       alert(error);
+      // store.dispatch(setErrorInfo(""))
     }
   }, [error]);
 

@@ -8,10 +8,9 @@ const SelectDoneBtn = ({ controller }) => {
   const roomId = useSelector(state => state.roomInfo.room);
 
   function onSelectDoneBtnClick() {
-    socket.emit("done_pick", roomId);
-    socket.emit("next_step", "selection", socket.id);
     // dispatch(setSelectionInfo({ value: false }));
     // dispatch(setDecoInfo({ value: true }));
+    socket.emit("done_pick", roomId, socket.id);
   }
   return (
     <Button className="btn-shadow" style={{ lineHeight: "15px", margin: "5px 0" }} onClick={onSelectDoneBtnClick}>

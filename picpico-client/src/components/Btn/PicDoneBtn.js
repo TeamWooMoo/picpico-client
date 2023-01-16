@@ -5,15 +5,14 @@ import { socket } from "../../modules/sockets.mjs";
 import { useEffect } from "react";
 
 const PicDoneBtn = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const roomId = useSelector(state => state.roomInfo.room);
 
   function onPicDoneBtnClick() {
     // dispatch(setPicBoothInfo({ value: false }));
     // dispatch(setSelectionInfo({ value: true }));
-    console.log("나 다 찍었어");
-    socket.emit("done_take", roomId);
-    socket.emit("next_step", "picBooth", socket.id);
+    console.log("done_take emit");
+    socket.emit("done_take", roomId, socket.id);
   }
   useEffect(() => {
     return () => {

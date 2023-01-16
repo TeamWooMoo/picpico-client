@@ -4,6 +4,7 @@ const membersInfo = createSlice({
   name: "membersInfo",
   initialState: {
     members: [],
+    king: false,
   },
 
   reducers: {
@@ -11,9 +12,12 @@ const membersInfo = createSlice({
       console.log("setMembersInfo");
       state.members = action.payload.value;
     },
+    setKingInfo(state, action) {
+      state.members = action.payload.value;
+    },
   },
 });
 
-export let { setMembersInfo } = membersInfo.actions;
+export let { setMembersInfo, setKingInfo } = membersInfo.actions;
 
 export default membersInfo;

@@ -5,16 +5,19 @@ import { Button, FlexboxGrid } from "rsuite";
 import { API } from "../../config";
 import { useDispatch } from "react-redux";
 import { setRoomInfo } from "../../slice/roomInfo";
+import { socket } from "../../modules/sockets.mjs";
+import { setKingInfo } from "../../slice/membersInfo";
 
 function CreateRoomBtn() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   function onCreateBtnClick() {
     const roomId = uuid();
-
+    dispatch(setKingInfo({ value: true }));
     dispatch(setRoomInfo({ value: roomId }));
     axios
-      .post(API.ROOM, { roomId: roomId, nickname: "king" })
+      .post(API.ROOM, { roomId: roomId, nickname: "king", socketId: socket.id })
       .then(res => {
         //    서버가 어떻게 주는지에 따라서 아래는 바뀔 것
         console.log(res);

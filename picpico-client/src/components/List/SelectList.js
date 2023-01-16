@@ -3,7 +3,7 @@ import { useState } from "react";
 import { socket } from "../../modules/sockets.mjs";
 import { List } from "rsuite";
 
-const PictureList = ({ controller }) => {
+const SelectList = ({ controller }) => {
   const [active, setActive] = useState([]);
   const roomId = useSelector(state => state.roomInfo.room);
 
@@ -55,4 +55,4 @@ const PictureList = ({ controller }) => {
     </List>
   );
 };
-export default PictureList;
+export default SelectList;
