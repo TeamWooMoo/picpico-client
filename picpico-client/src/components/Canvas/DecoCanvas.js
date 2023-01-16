@@ -18,6 +18,10 @@ const DecoCanvas = () => {
     socket.emit("mouse_down", socket.id, offsetX, offsetY);
   };
 
+  const onCanvasUp = () => {
+    setDrawing(false);
+  };
+
   const onCanvasMove = ({ nativeEvent }) => {
     const { offsetX, offsetY } = nativeEvent;
     const decoCtx = decoMyCanvas.current.getContext("2d");
@@ -60,6 +64,7 @@ const DecoCanvas = () => {
         style={{ position: "absolute", top: "0px", left: "0px", border: "2px solid white" }}
         onMouseDown={onCanvasDown}
         onMouseMove={onCanvasMove}
+        onMouseUp={onCanvasUp}
       ></canvas>
     </div>
   );
