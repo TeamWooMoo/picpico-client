@@ -62,7 +62,7 @@ const MainController = () => {
           const dataChannel = myPeer.alphaChannel;
 
           const alphaSend = () => {
-            while (buffer.byteLength) {
+            while (buffer && buffer.byteLength) {
               if (dataChannel.bufferedAmount > dataChannel.bufferedAmountLowThreshold) {
                 dataChannel.onbufferedamountlow = () => {
                   dataChannel.onbufferedamountlow = null;
@@ -77,7 +77,10 @@ const MainController = () => {
             }
           };
 
-          if (buffer) alphaSend();
+          if (buffer) {
+            console.log(buffer);
+            alphaSend();
+          }
 
           // console.log(">>>>>extracting Alpha :sending ! ");
         }
