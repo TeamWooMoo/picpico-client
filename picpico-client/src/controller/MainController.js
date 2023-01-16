@@ -1,42 +1,47 @@
-import { addMemberEvent, getSocket, joinRoom } from "../modules/sockets.mjs";
+import { addMemberEvent, joinRoom } from "../modules/sockets.mjs";
 import { initWebRTC } from "../modules/webRTC.mjs";
-import { socket } from "../modules/sockets.mjs";
-const MainController = () => {
-  // let socket = getSocket();
+import { initStream } from "../modules/stream.mjs";
+import { initPeerCanvas } from "../modules/receiver.mjs";
 
+export let myVideo;
+export let myCanvas;
+export let myStream;
+export let selfieSegmentation;
+export let currentCamera;
+export const cameraList = [];
+/******************************************************************* */
+
+export const myPeers = {};
+
+export class myPeer {
+  connection;
+  videoElement;
+  alphaChannel;
+  alphaReceived;
+
+  constructor(newConnection) {
+    this.connection = newConnection;
+    this.videoElement = document.createElement("video");
+    this.videoElement.hidden = true;
+    this.alphaChannel = null;
+    this.alphaReceived = null;
+  }
+}
+
+/******************************************************************* */
+const MainController = () => {
   const init = async (roomId, nickName) => {
+    await initStream();
     await joinRoom(roomId);
     await initWebRTC();
     await addMemberEvent(roomId, nickName);
-    // socket.on("connect", async () => {
-    //   console.log("connect socket on");
-    //   // await joinRoom(roomId);
-    //   // await initWebRTC();
-    //   // await addMemberEvent(roomId, nickName);
-    // });
+    await initPeerCanvas();
   };
 
   return {
     init: async roomId => {
       const nickName = "user";
       await init(roomId, nickName);
-    },
-    takePic: (imgIdx, imgUrl) => {
-      socket.emit("take_pic", imgIdx, imgUrl);
-    },
-    doneTake: roomId => {
-      socket.emit("done_take", roomId);
-    },
-    pickPic: (roomId, picIdx) => {
-      socket.emit("pick_pic", roomId, picIdx);
-    },
-    donePick: roomId => {
-      socket.emit("done_pick", roomId);
-    },
-    strokeCanvas: (roomId, offsetX, offsetY) => {
-      console.log("stroke!!", offsetX, offsetY);
-      console.log("my id", socket.id);
-      socket.emit("stroke_canvas", roomId, offsetX, offsetY);
     },
   };
 };
