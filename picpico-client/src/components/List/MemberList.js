@@ -1,5 +1,4 @@
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
 
 const MemberList = () => {
   const members = useSelector(state => state.membersInfo.members);

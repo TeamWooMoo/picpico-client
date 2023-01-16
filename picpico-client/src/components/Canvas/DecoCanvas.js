@@ -14,14 +14,8 @@ const DecoCanvas = () => {
 
   const onCanvasDown = ({ nativeEvent }) => {
     setDrawing(true);
-    console.log(nativeEvent);
     const { offsetX, offsetY } = nativeEvent;
     socket.emit("mouse_down", socket.id, offsetX, offsetY);
-  };
-
-  const onCanvasUp = ({ nativeEvent }) => {
-    setDrawing(false);
-    // socket.emit("mouse_up", socket.id);
   };
 
   const onCanvasMove = ({ nativeEvent }) => {
@@ -34,26 +28,18 @@ const DecoCanvas = () => {
       decoCtx.strokeStyle = "black";
       decoCtx.lineTo(offsetX, offsetY);
       decoCtx.stroke();
-      console.log("그리는 애만 나와야 해");
       socket.emit("stroke_canvas", roomId, offsetX, offsetY, "white", socket.id);
-      // controller.strokeCanvas(roomId, offsetX, offsetY);
     }
   };
 
   useEffect(() => {
     if (strokeArr.length > 0) {
-      console.log("듣는 애만 나와야 해");
-      // 현재 그릴 애들
       const [newX, newY, newColor, newSocketId] = strokeArr[strokeArr.length - 1];
-      console.log(newSocketId, strokeHistory);
       if (strokeHistory.hasOwnProperty(newSocketId)) {
-        console.log("좋겠다.");
-        const XY = strokeHistory[newSocketId];
-        console.log(XY);
-        // const { x: oldX, y: oldY } = strokeHistory[newSocketId];
+        const { x: oldX, y: oldY } = strokeHistory[newSocketId];
         const decoCtx = decoPeerCanvas.current.getContext("2d");
         decoCtx.beginPath();
-        decoCtx.moveTo(XY.x, XY.y);
+        decoCtx.moveTo(oldX, oldY);
 
         decoCtx.lineTo(newX, newY);
         decoCtx.strokeStyle = newColor;
@@ -74,7 +60,6 @@ const DecoCanvas = () => {
         style={{ position: "absolute", top: "0px", left: "0px", border: "2px solid white" }}
         onMouseDown={onCanvasDown}
         onMouseMove={onCanvasMove}
-        onMouseUp={onCanvasUp}
       ></canvas>
     </div>
   );

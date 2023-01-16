@@ -9,9 +9,7 @@ import { useEffect } from "react";
 
 const PicBooth = ({ controller }) => {
   useEffect(() => {
-    return () => {
-      console.log("picbooth bye~");
-    };
+    return () => {};
   }, []);
   return (
     <>

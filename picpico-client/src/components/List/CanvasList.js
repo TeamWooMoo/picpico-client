@@ -10,21 +10,12 @@ const CanvasList = ({ controller }) => {
   const takePic = useSelector(state => state.takepicInfo.takePic);
   const imgArr = useSelector(state => state.takepicInfo.picImg);
 
-  // if (takePic === true) {
-  //   // setCount(prev => prev + 1);
-  //   // dispatch(setTakePic({ value: false }));
-  //   // dispatch(setPicCount());
-  //   // const url = myCanvas.current.toDataURL();
-  //   // // controller.takePic(count.toString(), url);
-  //   // socket.
-  // }
   useEffect(() => {
     if (takePic === true) {
       setCount(prev => prev + 1);
       dispatch(setTakePic({ value: false }));
       dispatch(setPicCount());
       const url = myCanvas.current.toDataURL();
-      // controller.takePic(count.toString(), url);
       socket.emit("take_pic", count.toString(), url);
     }
     return () => {

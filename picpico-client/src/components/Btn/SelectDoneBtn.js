@@ -8,7 +8,6 @@ const SelectDoneBtn = ({ controller }) => {
   const roomId = useSelector(state => state.roomInfo.room);
 
   function onSelectDoneBtnClick() {
-    // controller.donePick(roomId);
     socket.emit("done_pick", roomId);
     dispatch(setSelectionInfo({ value: false }));
     dispatch(setDecoInfo({ value: true }));
