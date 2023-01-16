@@ -240,6 +240,7 @@ const NewController = () => {
       peerVideo.srcObject = data.streams[0];
 
       peerVideo.onplaying = async () => {
+        console.log(">>>>>>peerVideo on Playing !");
         initComposite(peerVideo);
       };
 
