@@ -21,13 +21,14 @@ const drawingInfo = createSlice({
     addStrokeHistory(state, action) {
       const [socketId, receivedX, receivedY] = action.payload.value;
       state.strokeHistory[socketId] = { x: receivedX, y: receivedY };
+      console.log(state.strokeHistory);
     },
-    deleteStrokeHistory(state, action) {
-      delete state.strokeHistory[action.payload.value];
-    },
+    // deleteStrokeHistory(state, action) {
+    //   delete state.strokeHistory[action.payload.value];
+    // },
   },
 });
 
-export let { setStrokeInfo, addStrokeHistory, deleteStrokeHistory } = drawingInfo.actions;
+export let { setStrokeInfo, addStrokeHistory } = drawingInfo.actions;
 
 export default drawingInfo;

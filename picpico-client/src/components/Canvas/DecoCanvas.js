@@ -11,13 +11,14 @@ const DecoCanvas = () => {
 
   const onCanvasDown = ({ nativeEvent }) => {
     setDrawing(true);
+    console.log(nativeEvent);
     const { offsetX, offsetY } = nativeEvent;
     socket.emit("mouse_down", socket.id, offsetX, offsetY);
   };
 
   const onCanvasUp = ({ nativeEvent }) => {
     setDrawing(false);
-    socket.emit("mouse_up", socket.id);
+    // socket.emit("mouse_up", socket.id);
   };
 
   const onCanvasMove = ({ nativeEvent }) => {
@@ -41,16 +42,22 @@ const DecoCanvas = () => {
       console.log("듣는 애만 나와야 해");
       // 현재 그릴 애들
       const [newX, newY, newColor, newSocketId] = strokeArr[strokeArr.length - 1];
-      const { x: oldX, y: oldY } = strokeHistory[newSocketId];
-      const decoCtx = decoPeerCanvas.current.getContext("2d");
-      decoCtx.beginPath();
-      decoCtx.moveTo(oldX, oldY);
+      console.log(newSocketId, strokeHistory);
+      if (strokeHistory.hasOwnProperty(newSocketId)) {
+        console.log("좋겠다.");
+        const XY = strokeHistory[newSocketId];
+        console.log(XY);
+        // const { x: oldX, y: oldY } = strokeHistory[newSocketId];
+        const decoCtx = decoPeerCanvas.current.getContext("2d");
+        decoCtx.beginPath();
+        decoCtx.moveTo(XY.x, XY.y);
 
-      decoCtx.lineTo(newX, newY);
-      decoCtx.strokeStyle = newColor;
-      decoCtx.stroke();
+        decoCtx.lineTo(newX, newY);
+        decoCtx.strokeStyle = newColor;
+        decoCtx.stroke();
+      }
     }
-  }, [strokeArr]);
+  }, [strokeArr, strokeHistory]);
 
   return (
     <div style={{ position: "relative" }}>
