@@ -6,14 +6,19 @@ import { setMembersInfo } from "../slice/membersInfo.js";
 import { setPicturesInfo } from "../slice/picturesInfo.js";
 import store from "../store.js";
 
+/******************************************************************* */
+
 const MainController = () => {
   let socket;
   let myVideo;
   let myCanvas;
   let myStream;
   let selfieSegmentation;
-  const cameraList = [];
   let currentCamera;
+  const cameraList = [];
+
+  /******************************************************************* */
+
   const myPeers = {};
 
   class myPeer {
@@ -31,12 +36,31 @@ const MainController = () => {
     }
   }
 
+  /******************************************************************* */
+
   function getSocket() {
     const socketOptions = { withCredentials: CREDENTIAL.withCredentials };
     const SERVER = BASE_URL;
 
     socket = io(SERVER, socketOptions);
     return socket;
+  }
+
+  /******************************************************************* */
+
+  function extractAlpha(segImageData) {
+    const alphaData = segImageData.data.filter((_, i) => (i + 1) % 4 === 0);
+    const alphaBuffer = new Uint8Array(alphaData);
+    //   console.log(">>>>>extracting Alpha", myPeers);
+    if (myPeers) {
+      for (const [_, myPeer] of Object.entries(myPeers)) {
+        //   console.log(">>>>>extracting Alpha : myPeer", myPeer);
+        if (myPeer.alphaChannel && myPeer.alphaChannel.readyState === "open") {
+          myPeer.alphaChannel.send(alphaBuffer);
+          // console.log(">>>>>extracting Alpha :sending ! ");
+        }
+      }
+    }
   }
 
   function onCanvas(results, canvas) {
@@ -61,27 +85,14 @@ const MainController = () => {
     ctx.restore();
   }
 
-  function extractAlpha(segImageData) {
-    const alphaData = segImageData.data.filter((_, i) => (i + 1) % 4 === 0);
-    const alphaBuffer = new Uint8Array(alphaData);
-    //   console.log(">>>>>extracting Alpha", myPeers);
-    if (myPeers) {
-      for (const [_, myPeer] of Object.entries(myPeers)) {
-        //   console.log(">>>>>extracting Alpha : myPeer", myPeer);
-        if (myPeer.alphaChannel && myPeer.alphaChannel.readyState === "open") {
-          myPeer.alphaChannel.send(alphaBuffer);
-          console.log(">>>>>extracting Alpha :sending ! ");
-        }
-      }
-    }
-  }
-
   async function segment(videoElement, canvas) {
     selfieSegmentation.onResults(results => {
       onCanvas(results, canvas);
     });
     await selfieSegmentation.send({ image: videoElement });
   }
+
+  /******************************************************************* */
 
   function initSegment() {
     selfieSegmentation = new SelfieSegmentation({
@@ -93,6 +104,8 @@ const MainController = () => {
 
     //   return selfieSegmentation;
   }
+
+  /******************************************************************* */
 
   async function getCameras() {
     try {
@@ -174,7 +187,7 @@ const MainController = () => {
     console.log("syncStreamRTC called", myStream);
   }
 
-  /*********************************************************** */
+  /******************************************************************* */
 
   const onDoneTakeEvent = imgArr => {
     store.dispatch(setPicturesInfo({ value: imgArr }));
@@ -192,7 +205,7 @@ const MainController = () => {
     socket.on("done_take", onDoneTakeEvent);
   }
 
-  /********************************************************** */
+  /******************************************************************* */
 
   const handleIce = data => {
     const mySocketId = socket.id;
@@ -205,17 +218,16 @@ const MainController = () => {
     }
   };
 
-  const handleTrack = data => {
+  const handleTrack = (data, myPeer) => {
     console.log(">>>>handling track");
     if (data.track.kind === "video") {
       console.log(">>>handling track : video !");
 
       const videoRow = document.getElementById("peerVideos");
-      const peerVideo = document.createElement("video");
+      const peerVideo = myPeer.videoElement;
 
       console.log(peerVideo);
-      // peerVideo.hidden = true;
-      // peerVideo.hidden = false;
+      peerVideo.hidden = true;
       peerVideo.muted = true;
       peerVideo.autoplay = true;
       peerVideo.className = "col";
@@ -253,7 +265,7 @@ const MainController = () => {
       // syncMyPeers();
 
       newConnection.addEventListener("icecandidate", handleIce);
-      newConnection.addEventListener("track", handleTrack);
+      newConnection.addEventListener("track", data => handleTrack(data, newPeer));
 
       // myStream = getMyStream();
 
@@ -268,6 +280,8 @@ const MainController = () => {
       return newPeer;
     }
   }
+
+  /******************************************************************* */
 
   async function onWelcomeEvent(newSocketId) {
     console.log("[welcome] - on - client");
@@ -292,6 +306,8 @@ const MainController = () => {
     console.log("[offer] - emit - client");
   }
 
+  /******************************************************************* */
+
   function onDataChannelEvent(event, oldSocketId) {
     console.log(">>>>>dataChannel received", event.data);
 
@@ -301,6 +317,8 @@ const MainController = () => {
       myPeers[oldSocketId].alphaReceived = new Uint8Array(event.data);
     });
   }
+
+  /******************************************************************* */
 
   async function onOfferEvent(offer, oldSocketId) {
     console.log("[offer] - on - client");
@@ -323,11 +341,15 @@ const MainController = () => {
     console.log("[answer] - emit - client");
   }
 
+  /******************************************************************* */
+
   function onAnswerEvent(answer, newSocketId) {
     console.log("[answer] - on - client");
     const connection = myPeers[newSocketId].connection;
     connection.setRemoteDescription(answer);
   }
+
+  /******************************************************************* */
 
   function onIceEvent(ice, socketId) {
     if (ice) {
@@ -338,6 +360,8 @@ const MainController = () => {
     }
   }
 
+  /******************************************************************* */
+
   async function initWebRTC(_socket) {
     socket = _socket;
     socket.on("welcome", onWelcomeEvent);
@@ -346,14 +370,14 @@ const MainController = () => {
     socket.on("ice", onIceEvent);
   }
 
-  /***************************************** */
+  /******************************************************************* */
 
   const addMemberEvent = async (roomId, nickname) => {
     console.log("[add member] - emit - client");
     socket.emit("add_member", roomId, nickname);
   };
 
-  /***************************************** */
+  /******************************************************************* */
 
   function addAlpha(imageData, alphaReceived) {
     let tmp;
@@ -363,6 +387,8 @@ const MainController = () => {
       alphaIndex = tmp / 4;
       imageData.data[i] = alphaReceived[alphaIndex];
     }
+
+    return imageData;
   }
 
   async function initPeerCanvas() {
@@ -389,14 +415,16 @@ const MainController = () => {
         for (const [_, myPeer] of Object.entries(myPeers)) {
           // console.log(">>>myPeer on Canvas", myPeer);
           if (myPeer.videoElement && myPeer.alphaReceived) {
-            console.log("drawing on");
+            // console.log("drawing on");
             ctx.drawImage(myPeer.videoElement, 0, 0, peerCanvas.width, peerCanvas.height);
             const imageData = ctx.getImageData(0, 0, peerCanvas.width, peerCanvas.height);
+            console.log(myPeer.videoElement);
 
-            addAlpha(imageData, myPeer.alphaReceived);
+            const segImageData = addAlpha(imageData, myPeer.alphaReceived);
 
             ctx.clearRect(0, 0, peerCanvas.width, peerCanvas.height);
-            ctx.putImageData(imageData, 0, 0);
+            // ctx.putImageData(imageData, 0, 0);
+            ctx.putImageData(segImageData, 0, 0);
           }
         }
       }
@@ -409,7 +437,7 @@ const MainController = () => {
     drawPeers();
   }
 
-  /****************************************************** */
+  /******************************************************************* */
 
   const init = async (roomId, nickName) => {
     socket = getSocket();
@@ -421,6 +449,8 @@ const MainController = () => {
       await initPeerCanvas();
     });
   };
+
+  /******************************************************************* */
 
   return {
     init: async roomId => {

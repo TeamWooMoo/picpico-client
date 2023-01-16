@@ -17,8 +17,8 @@ const Picpico = () => {
   const selectDone = useSelector(state => state.picpicoInfo.selectionDisplay);
   const decoDone = useSelector(state => state.picpicoInfo.decoDisplay);
   const galleryDone = useSelector(state => state.picpicoInfo.galleryDisplay);
-  // const controller = MainController();
-  const controller = NewController();
+  const controller = MainController();
+  // const controller = NewController();
 
   useEffect(() => {
     controller.init(id);

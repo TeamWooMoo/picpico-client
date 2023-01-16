@@ -221,6 +221,7 @@ const NewController = () => {
     for (const [peerSocketId, connection] of Object.entries(myPeerConnections)) {
       if (connection === data.target) {
         socket.emit("ice", data.candidate, peerSocketId, mySocketId);
+        console.log(">>>>>emit ice", data.candidate);
         break;
       }
     }
@@ -299,6 +300,7 @@ const NewController = () => {
     console.log(">>>>>>myStream", myStream);
     myStream.getTracks().forEach(track => {
       newConnection.addTrack(track, myStream);
+      console.log(">>>>>senderEnd myStream", myStream);
     });
   };
 
