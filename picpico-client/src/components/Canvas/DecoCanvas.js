@@ -1,7 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { socket } from "../../modules/sockets.mjs";
+import { addStrokeHistory } from "../../slice/drawingInfo.js";
+
 const DecoCanvas = () => {
+  const dispatch = useDispatch();
   const [drawing, setDrawing] = useState(false);
   const strokeArr = useSelector(state => state.drawingInfo.strokes);
   const strokeHistory = useSelector(state => state.drawingInfo.strokeHistory);
@@ -55,9 +58,11 @@ const DecoCanvas = () => {
         decoCtx.lineTo(newX, newY);
         decoCtx.strokeStyle = newColor;
         decoCtx.stroke();
+
+        dispatch(addStrokeHistory({ value: [newSocketId, newX, newY] }));
       }
     }
-  }, [strokeArr, strokeHistory]);
+  }, [strokeArr]);
 
   return (
     <div style={{ position: "relative" }}>
