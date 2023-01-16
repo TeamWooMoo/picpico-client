@@ -234,10 +234,11 @@ const NewController = () => {
       const videoRow = document.getElementById("peerVideos");
       const peerVideo = document.createElement("video");
 
-      peerVideo.autoplay = true;
+      //   peerVideo.autoplay = true;
       peerVideo.className = "col";
       peerVideo.setAttribute("playsinline", "playsinline");
       peerVideo.srcObject = data.streams[0];
+      peerVideo.play();
 
       peerVideo.onplaying = async () => {
         console.log(">>>>>>peerVideo on Playing !");
