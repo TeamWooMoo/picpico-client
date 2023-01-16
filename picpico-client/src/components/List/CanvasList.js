@@ -22,7 +22,14 @@ const CanvasList = ({ controller }) => {
       console.log("canvas list bye~~");
     };
   }, []);
-  return <>{/* {imgArr ? <img src={imgArr[imgArr.length - 1]} alt="plz"></img> : null} */}</>;
+  return (
+    <>
+      <div className="canvasBox">
+        <canvas id="myCanvas" className="canvas" ref={myCanvas} width="100" height="100"></canvas>
+        <canvas id="peerCanvas" className="canvas"></canvas>
+      </div>
+    </>
+  );
 };
 
 export default CanvasList;
