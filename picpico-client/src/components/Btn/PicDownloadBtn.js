@@ -18,10 +18,6 @@ function PicDownloadBtn() {
 
   return (
     <>
-      <div id="imageWrapper">
-        <img />
-        {/* <img src={camera} width="640" height="640" /> */}
-      </div>
       <Button className="btn-shadow" style={{ lineHeight: "15px", margin: "5px 0" }} onClick={onCapture}>
         Download Picture 📥
       </Button>

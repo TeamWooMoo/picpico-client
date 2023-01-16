@@ -13,7 +13,7 @@ const GalleryDoneBtn = () => {
   }
   return (
     <Button className="btn-shadow" style={{ lineHeight: "15px", margin: "5px 0" }} onClick={onGalleryDoneBtnClick}>
-      Finish PicPiCo
+      Finish PicPiCo 🙌
     </Button>
   );
 };

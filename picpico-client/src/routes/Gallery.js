@@ -3,11 +3,7 @@ import { Container } from "rsuite";
 const Gallery = () => {
   return (
     <Container>
-      {/* <ImageWrap ref={imgResult}>
-          <ImageSelected src={images[imageIndex]} alt="background" />
-          <Message>{message}</Message>
-          <Bible>{bible}</Bible>
-        </ImageWrap> */}
+      <img width="100" height="100" />
     </Container>
   );
 };

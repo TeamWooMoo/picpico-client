@@ -56,11 +56,11 @@ const DecoCanvas = () => {
 
   return (
     <div style={{ position: "relative" }}>
-      <canvas ref={decoPeerCanvas} width="500" height="500" style={{ position: "absolute", top: "0px", left: "0px" }}></canvas>
+      <canvas ref={decoPeerCanvas} width="200" height="200" style={{ position: "absolute", top: "0px", left: "0px" }}></canvas>
       <canvas
         ref={decoMyCanvas}
-        width="500"
-        height="500"
+        width="200"
+        height="200"
         style={{ position: "absolute", top: "0px", left: "0px", border: "2px solid white" }}
         onMouseDown={onCanvasDown}
         onMouseMove={onCanvasMove}

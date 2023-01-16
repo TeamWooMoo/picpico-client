@@ -10,7 +10,7 @@ const DecoDoneBtn = () => {
   }
   return (
     <Button className="btn-shadow" style={{ lineHeight: "15px", margin: "5px 0" }} onClick={onDecoDoneBtnClick}>
-      Deco 완료
+      Deco complete ✍️
     </Button>
   );
 };
