@@ -3,7 +3,7 @@ import { CREDENTIAL } from "../config.js";
 import { onDoneTakeEvent } from "./takePic.mjs";
 import { BASE_URL } from "../config.js";
 import { onResetMemberEvent } from "./resetMember.mjs";
-import { onStrokeCanvasEvent } from "./strokeCanvas.mjs";
+import { onStrokeCanvasEvent, onMouseUpEvent, onMouseDownEvent } from "./strokeCanvas.mjs";
 import { onPickPicEvent } from "./pickPic.mjs";
 
 // let socket;
@@ -32,6 +32,8 @@ export async function joinRoom(roomId) {
   socket.on("pick_pic", onPickPicEvent);
   socket.on("done_take", onDoneTakeEvent);
   socket.on("stroke_canvas", onStrokeCanvasEvent);
+  socket.on("mouse_down", onMouseDownEvent);
+  socket.on("mouse_up", onMouseUpEvent);
 }
 // console.log("onstrokecanvasEvent", offsetX, offsetY, "from", id);
 //   store.dispatch(setStrokeInfo({ value: [offsetX, offsetY] }));
