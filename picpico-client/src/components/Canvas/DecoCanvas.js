@@ -1,59 +1,67 @@
 import { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
-const DecoCanvas = ({ controller }) => {
+import { useSelector, useDispatch } from "react-redux";
+import { socket } from "../../modules/sockets.mjs";
+import { addStrokeHistory } from "../../slice/drawingInfo.js";
+
+const DecoCanvas = () => {
+  const dispatch = useDispatch();
   const [drawing, setDrawing] = useState(false);
   const strokeArr = useSelector(state => state.drawingInfo.strokes);
-  const decoCanvas = useRef();
+  const strokeHistory = useSelector(state => state.drawingInfo.strokeHistory);
+  const decoMyCanvas = useRef();
+  const decoPeerCanvas = useRef();
   const roomId = useSelector(state => state.roomInfo.room);
 
-  const onCanvasDown = () => {
+  const onCanvasDown = ({ nativeEvent }) => {
     setDrawing(true);
-  };
-
-  const onCanvasUp = () => {
-    setDrawing(false);
+    const { offsetX, offsetY } = nativeEvent;
+    socket.emit("mouse_down", socket.id, offsetX, offsetY);
   };
 
   const onCanvasMove = ({ nativeEvent }) => {
     const { offsetX, offsetY } = nativeEvent;
-    const decoCtx = decoCanvas.current.getContext("2d");
+    const decoCtx = decoMyCanvas.current.getContext("2d");
     if (!drawing) {
       decoCtx.beginPath();
       decoCtx.moveTo(offsetX, offsetY);
     } else {
+      decoCtx.strokeStyle = "black";
       decoCtx.lineTo(offsetX, offsetY);
       decoCtx.stroke();
-      console.log("그리는 애만 나와야 해");
-      console.log(">>", strokeArr);
-      controller.strokeCanvas(roomId, offsetX, offsetY);
+      socket.emit("stroke_canvas", roomId, offsetX, offsetY, "white", socket.id);
     }
   };
 
-  // useEffect(() => {
-  //   if (strokeArr.length > 0) {
-  //     console.log("듣는 애만 나와야 해");
-  //     const [receivedX, receivedY] = strokeArr[strokeArr.length - 1];
-  //     const decoCtx = decoCanvas.current.getContext("2d");
-  //     decoCtx.beginPath();
-  //     decoCtx.lineTo(receivedX, receivedY);
-  //     decoCtx.strokeStyle = "white";
-  //     decoCtx.stroke();
-  //     decoCtx.moveTo(receivedX, receivedY);
-  //   }
-  // }, [strokeArr]);
+  useEffect(() => {
+    if (strokeArr.length > 0) {
+      const [newX, newY, newColor, newSocketId] = strokeArr[strokeArr.length - 1];
+      if (strokeHistory.hasOwnProperty(newSocketId)) {
+        const { x: oldX, y: oldY } = strokeHistory[newSocketId];
+        const decoCtx = decoPeerCanvas.current.getContext("2d");
+        decoCtx.beginPath();
+        decoCtx.moveTo(oldX, oldY);
+
+        decoCtx.lineTo(newX, newY);
+        decoCtx.strokeStyle = newColor;
+        decoCtx.stroke();
+
+        dispatch(addStrokeHistory({ value: [newSocketId, newX, newY] }));
+      }
+    }
+  }, [strokeArr]);
 
   return (
-    <>
+    <div style={{ position: "relative" }}>
+      <canvas ref={decoPeerCanvas} width="500" height="500" style={{ position: "absolute", top: "0px", left: "0px" }}></canvas>
       <canvas
-        ref={decoCanvas}
+        ref={decoMyCanvas}
         width="500"
         height="500"
-        style={{ border: "2px solid white" }}
+        style={{ position: "absolute", top: "0px", left: "0px", border: "2px solid white" }}
         onMouseDown={onCanvasDown}
         onMouseMove={onCanvasMove}
-        onMouseUp={onCanvasUp}
       ></canvas>
-    </>
+    </div>
   );
 };
 

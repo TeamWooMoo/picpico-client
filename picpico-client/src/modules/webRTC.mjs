@@ -1,6 +1,7 @@
 import store from "../store.js";
 import { setVideosInfo } from "../slice/videosInfo.js";
-let socket;
+// let socket;
+import { socket } from "../modules/sockets.mjs";
 
 /* myPeers
  *    key    :    value
@@ -137,8 +138,8 @@ function onIceEvent(ice, socketId) {
 function onGoneEvent(goneSocketId) {
   store.dispatch(setVideosInfo(goneSocketId));
 }
-export async function initWebRTC(_socket) {
-  socket = _socket;
+export async function initWebRTC() {
+  // socket = _socket;
   socket.on("welcome", onWelcomeEvent);
   socket.on("datachannel", onDataChannelEvent);
   socket.on("offer", onOfferEvent);
