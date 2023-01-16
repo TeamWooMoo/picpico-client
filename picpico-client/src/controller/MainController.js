@@ -1,15 +1,19 @@
 import { addMemberEvent, getSocket, joinRoom } from "../modules/sockets.mjs";
 import { initWebRTC } from "../modules/webRTC.mjs";
-
+import { socket } from "../modules/sockets.mjs";
 const MainController = () => {
-  let socket = getSocket();
+  // let socket = getSocket();
 
   const init = async (roomId, nickName) => {
-    socket.on("connect", async () => {
-      await joinRoom(socket, roomId);
-      await initWebRTC(socket);
-      await addMemberEvent(roomId, nickName);
-    });
+    await joinRoom(roomId);
+    await initWebRTC();
+    await addMemberEvent(roomId, nickName);
+    // socket.on("connect", async () => {
+    //   console.log("connect socket on");
+    //   // await joinRoom(roomId);
+    //   // await initWebRTC();
+    //   // await addMemberEvent(roomId, nickName);
+    // });
   };
 
   return {

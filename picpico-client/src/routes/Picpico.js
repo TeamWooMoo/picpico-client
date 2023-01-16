@@ -19,12 +19,18 @@ const Picpico = () => {
   const controller = MainController();
 
   useEffect(() => {
+    console.log("iniininitnitnitnitnit");
     controller.init(id);
+
+    return () => {
+      console.log("picpico bye~~~~");
+    };
   }, []);
 
   return (
     <>
       {picBoothDone ? (
+        // <KeepAlive>
         <Container className="default_container">
           <Header className="picBoothDone_Header">
             {/* <p>이번 방은 {id}번 방 입니다.</p> */}
@@ -35,7 +41,8 @@ const Picpico = () => {
           </Content>
           <Footer>Footer</Footer>
         </Container>
-      ) : selectDone ? (
+      ) : // </KeepAlive>
+      selectDone ? (
         <Container className="default_container">
           <Selection controller={controller} />
         </Container>
