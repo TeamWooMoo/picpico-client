@@ -17,11 +17,16 @@ function LoginBtn() {
       });
   }
   return (
-    // <div style={{ margin: "10px" }}>
-    <Button block className="yellow_btn" onClick={onKakaoLogin} color="yellow" appearance="primary" style={{ color: "black", padding: "10px 70px" }}>
+    <Button
+      block
+      className="btn-shadow"
+      onClick={onKakaoLogin}
+      color="yellow"
+      appearance="primary"
+      style={{ color: "black", padding: "10px 70px", margin: "10px 0" }}
+    >
       카카오 로그인
     </Button>
-    // </div>
   );
 }
 

@@ -1,4 +1,4 @@
-import { Button } from "rsuite";
+import { Button, Footer } from "rsuite";
 import { useDispatch, useSelector } from "react-redux";
 import { setSelectionInfo, setDecoInfo } from "../../slice/picpicoInfo";
 import { socket } from "../../modules/sockets.mjs";
@@ -12,7 +12,11 @@ const SelectDoneBtn = ({ controller }) => {
     dispatch(setSelectionInfo({ value: false }));
     dispatch(setDecoInfo({ value: true }));
   }
-  return <Button onClick={onSelectDoneBtnClick}>선택완료</Button>;
+  return (
+    <Button className="btn-shadow" style={{ lineHeight: "15px", margin: "5px 0" }} onClick={onSelectDoneBtnClick}>
+      선택 완료 👌
+    </Button>
+  );
 };
 
 export default SelectDoneBtn;

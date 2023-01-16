@@ -8,7 +8,11 @@ const DecoDoneBtn = () => {
     dispatch(setDecoInfo({ value: false }));
     dispatch(setGalleryInfo({ value: true }));
   }
-  return <Button onClick={onDecoDoneBtnClick}>Deco 완료</Button>;
+  return (
+    <Button className="btn-shadow" style={{ lineHeight: "15px", margin: "5px 0" }} onClick={onDecoDoneBtnClick}>
+      Deco 완료
+    </Button>
+  );
 };
 
 export default DecoDoneBtn;

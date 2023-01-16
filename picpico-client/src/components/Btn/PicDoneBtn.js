@@ -21,8 +21,8 @@ const PicDoneBtn = ({ controller }) => {
     };
   });
   return (
-    <Button block size="sm" color="violet" appearance="primary" className="violet_btn" onClick={onPicDoneBtnClick}>
-      사진찍기 완료
+    <Button className="btn-shadow" style={{ lineHeight: "15px", margin: "5px 0" }} onClick={onPicDoneBtnClick}>
+      Done 📸
     </Button>
   );
 };

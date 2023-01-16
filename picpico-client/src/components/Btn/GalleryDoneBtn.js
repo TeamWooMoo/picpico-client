@@ -1,7 +1,6 @@
 import { Button } from "rsuite";
 import { useDispatch } from "react-redux";
 import { setPicBoothInfo, setGalleryInfo } from "../../slice/picpicoInfo";
-import { Link } from "react-router-dom";
 
 const GalleryDoneBtn = () => {
   const dispatch = useDispatch();
@@ -12,7 +11,11 @@ const GalleryDoneBtn = () => {
 
     window.location.href = "/";
   }
-  return <Button onClick={onGalleryDoneBtnClick}>픽피코 완료</Button>;
+  return (
+    <Button className="btn-shadow" style={{ lineHeight: "15px", margin: "5px 0" }} onClick={onGalleryDoneBtnClick}>
+      Finish PicPiCo
+    </Button>
+  );
 };
 
 export default GalleryDoneBtn;

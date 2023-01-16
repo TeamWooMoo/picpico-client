@@ -1,10 +1,9 @@
 import { Button } from "rsuite";
 import html2canvas from "html2canvas";
-import camera from "./../../assets/images/camera.png";
 
 function PicDownloadBtn() {
   const onCapture = () => {
-    html2canvas(document.getElementById("imageWrapper")).then((canvas) => {
+    html2canvas(document.getElementById("imageWrapper")).then(canvas => {
       onSaveImg(canvas.toDataURL("image/jpg"), "PicPiCo_Result.png");
     });
   };
@@ -20,16 +19,11 @@ function PicDownloadBtn() {
   return (
     <>
       <div id="imageWrapper">
-        <img src={camera} width="640" height="640" />
+        <img />
+        {/* <img src={camera} width="640" height="640" /> */}
       </div>
-      <Button
-        block
-        size="sm"
-        color="violet"
-        appearance="primary"
-        onClick={onCapture}
-      >
-        사진 다운로드
+      <Button className="btn-shadow" style={{ lineHeight: "15px", margin: "5px 0" }} onClick={onCapture}>
+        Download Picture 📥
       </Button>
     </>
   );
