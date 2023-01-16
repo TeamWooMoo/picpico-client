@@ -226,7 +226,7 @@ const NewController = () => {
     }
   };
 
-  const handleTrack = data => {
+  const handleTrack = async data => {
     console.log(">>>>>>handleTrack");
     if (data.track.kind === "video") {
       console.log(">>>handling track : video !");
@@ -238,7 +238,7 @@ const NewController = () => {
       peerVideo.className = "col";
       peerVideo.setAttribute("playsinline", "playsinline");
       peerVideo.srcObject = data.streams[0];
-      peerVideo.play();
+      await peerVideo.play();
 
       peerVideo.onplaying = async () => {
         console.log(">>>>>>peerVideo on Playing !");
