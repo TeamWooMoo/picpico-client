@@ -56,12 +56,46 @@ const MainController = () => {
       for (const [_, myPeer] of Object.entries(myPeers)) {
         //   console.log(">>>>>extracting Alpha : myPeer", myPeer);
         if (myPeer.alphaChannel && myPeer.alphaChannel.readyState === "open") {
-          myPeer.alphaChannel.send(alphaBuffer);
+          // myPeer.alphaChannel.send(alphaBuffer);
+
+          const alphaSend = (dataChannel, buffer, chunkSize) => {
+            while (buffer.byteLength) {
+              if (dataChannel.bufferedAmount > dataChannel.bufferedAmountLowThreshold) {
+                dataChannel.onbufferedamountlow = () => {
+                  dataChannel.onbufferedamountlow = null;
+                  alphaSend();
+                };
+                return;
+              }
+              const chunk = buffer.slice(0, chunkSize);
+              buffer = buffer.slice(chunkSize, buffer.byteLength);
+              dataChannel.send(chunk);
+            }
+          };
+
+          alphaSend(myPeer.alphaChannel, alphaBuffer, 1024 * 1024 * 16);
+
           // console.log(">>>>>extracting Alpha :sending ! ");
         }
       }
     }
   }
+
+  const alphaSend = (dataChannel, buffer, chunkSize) => {
+    while (buffer.byteLength) {
+      if (dataChannel.bufferedAmount > dataChannel.bufferedAmountLowThreshold) {
+        dataChannel.onbufferedamountlow = () => {
+          dataChannel.onbufferedamountlow = null;
+          alphaSend();
+        };
+        return;
+      }
+      const chunk = buffer.slice(0, chunkSize);
+      buffer = buffer.slice(chunkSize, buffer.byteLength);
+      dataChannel.send(chunk);
+    }
+  };
+  alphaSend();
 
   function onCanvas(results, canvas) {
     let ctx = canvas.getContext("2d");
