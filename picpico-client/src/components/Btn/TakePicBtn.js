@@ -11,26 +11,17 @@ function TakePicBtn() {
   const onTakePicBtnClick = () => {
     // setCount(prev => prev + 1);
     dispatch(setTakePic({ value: true }));
-    // controller.takePic(count.toString(), picImgArr[picImgArr.length - 1]);
   };
 
   // useEffect(() => {
   //   // if (picImgArr.length > 0) {
-  //     // controller.takePic(picImgArr[picImgArr.length - 1]);
   //     dispatch(setTakePic({ value: false }));
   //   }
   // }, [picImgArr]);
 
   return (
     <>
-      <Button
-        block
-        size="sm"
-        color="violet"
-        appearance="primary"
-        className="violet_btn"
-        onClick={onTakePicBtnClick}
-      >
+      <Button block size="sm" color="violet" appearance="primary" className="violet_btn" onClick={onTakePicBtnClick}>
         사진 찍는 버튼
       </Button>
     </>

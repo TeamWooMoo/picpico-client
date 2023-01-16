@@ -24,7 +24,6 @@ export const addMemberEvent = async (roomId, nickname) => {
 };
 
 export async function joinRoom(roomId) {
-  console.log("client emit join room");
   socket.emit("join_room", roomId, socket.id);
   socket.on("reset_member", onResetMemberEvent);
   socket.on("pick_pic", onPickPicEvent);

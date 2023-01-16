@@ -2,6 +2,7 @@ import store from "../store.js";
 import { setVideosInfo } from "../slice/videosInfo.js";
 // let socket;
 import { socket } from "../modules/sockets.mjs";
+import { myStream } from "../controller/MainController.js";
 
 /* myPeers
  *    key    :    value
@@ -43,19 +44,28 @@ const handleIce = data => {
   }
 };
 
-const handleTrack = data => {
+const handleTrack = (data, myPeer) => {
+  console.log(">>>>handling track");
   if (data.track.kind === "video") {
-    // 실제는 두 가지 방법 중 하나로 구현될 듯
-    // 1.canvas 여러 개를 겹치거나
-    // 2. 하나의 canvas에 다 들어오거나
-    // 현재 아래의 경우는 1번에 가깝지만, 겹치는 css는 적용되지 않음.
-    // const videoRow = document.getElementById('videoRow');
-    // const peerFace = document.createElement('video');
-    // peerFace.autoplay = true;
-    // peerFace.className = 'col';
-    // peerFace.setAttribute('playsinline', 'playsinline');
-    // peerFace.srcObject = data.streams[0];
-    // videoRow.appendChild(peerFace);
+    console.log(">>>handling track : video !");
+
+    const videoRow = document.getElementById("peerVideos");
+    const peerVideo = myPeer.videoElement;
+
+    console.log(peerVideo);
+    peerVideo.hidden = true;
+    peerVideo.muted = true;
+    peerVideo.autoplay = true;
+    peerVideo.className = "col";
+    peerVideo.setAttribute("playsinline", "playsinline");
+
+    peerVideo.srcObject = data.streams[0];
+    videoRow.appendChild(peerVideo);
+    peerVideo.play();
+    console.log(">>>>data throughRTC", data);
+    console.log(">>>>data.streams throughRTC", data.streams[0]);
+    console.log(">>>>peerVideo");
+    console.log(">>>>handing track -> on source to video");
   }
 };
 
@@ -78,8 +88,20 @@ function makeConnection(socketId) {
     const newPeer = new myPeer(newConnection);
     myPeers[socketId] = newPeer;
 
+    // syncMyPeers();
+
     newConnection.addEventListener("icecandidate", handleIce);
-    newConnection.addEventListener("track", handleTrack);
+    newConnection.addEventListener("track", data => handleTrack(data, newPeer));
+
+    // myStream = getMyStream();
+
+    myStream.getTracks().forEach(track => {
+      console.log(">>>myStream", myStream);
+      newConnection.addTrack(track, myStream);
+    });
+
+    // const testVideo = document.createElement("video");
+    // testVideo.srcObject = myStream;
 
     return newPeer;
   }
@@ -93,8 +115,12 @@ async function onWelcomeEvent(newSocketId) {
   const newAlphaChannel = newConnection.createDataChannel("alphaChannel");
   newPeer.alphaChannel = newAlphaChannel;
 
+  console.log("onWelcome : connection", newConnection);
+  console.log("newAlphaChannel", newAlphaChannel);
+  console.log("me : ", socket.id);
+
   newAlphaChannel.addEventListener("message", event => {
-    newPeer.alphaData = new Uint8Array(event.data);
+    newPeer.alphaReceived = new Uint8Array(event.data);
   });
 
   const offer = await newConnection.createOffer();
@@ -104,13 +130,28 @@ async function onWelcomeEvent(newSocketId) {
   console.log("[offer] - emit - client");
 }
 
-function onDataChannelEvent(event) {}
+function onDataChannelEvent(event, oldSocketId) {
+  console.log(">>>>>dataChannel received", event.data);
+
+  myPeers[oldSocketId].alphaChannel = event.channel;
+
+  event.channel.addEventListener("message", event => {
+    myPeers[oldSocketId].alphaReceived = new Uint8Array(event.data);
+  });
+}
 
 async function onOfferEvent(offer, oldSocketId) {
   console.log("[offer] - on - client");
 
   const newPeer = makeConnection(oldSocketId);
   const newConnection = newPeer.connection;
+
+  //   newConnection.addEventListener("datachannel", event => onDataChannelEvent(event, oldSocketId));
+  //   newConnection.addEventListener("datachannel", event => console.log(">>>datachannel", event.channel));
+  newConnection.ondatachannel = event => onDataChannelEvent(event, oldSocketId);
+
+  console.log("onOffer : connection", newConnection);
+  console.log("me :", socket.id);
 
   newConnection.setRemoteDescription(offer);
   const answer = await newConnection.createAnswer();
@@ -139,7 +180,6 @@ function onGoneEvent(goneSocketId) {
   store.dispatch(setVideosInfo(goneSocketId));
 }
 export async function initWebRTC() {
-  // socket = _socket;
   socket.on("welcome", onWelcomeEvent);
   socket.on("datachannel", onDataChannelEvent);
   socket.on("offer", onOfferEvent);

@@ -7,14 +7,14 @@ import VideoList from "../components/List/VideoList";
 import { ButtonGroup } from "rsuite";
 import { useEffect } from "react";
 
-const PicBooth = ({ controller }) => {
+const PicBooth = () => {
   useEffect(() => {
     return () => {};
   }, []);
   return (
     <>
       <div>
-        <CanvasList controller={controller} />
+        <CanvasList />
         <VideoList />
       </div>
 
@@ -23,7 +23,7 @@ const PicBooth = ({ controller }) => {
           <MuteBtn />
           <CameraBtn />
           <TakePicBtn />
-          <PicDoneBtn controller={controller} />
+          <PicDoneBtn />
         </ButtonGroup>
       </div>
     </>

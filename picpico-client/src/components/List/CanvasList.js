@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { setTakePic, setPicCount } from "../../slice/takepicInfo";
 import { socket } from "../../modules/sockets.mjs";
 
-const CanvasList = ({ controller }) => {
+const CanvasList = () => {
   const [count, setCount] = useState(0);
   const dispatch = useDispatch();
   const myCanvas = useRef();

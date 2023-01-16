@@ -4,12 +4,12 @@ import ColorList from "../components/List/ColorList";
 import DecoDoneBtn from "../components/Btn/DecoDoneBtn";
 import DecoCanvas from "../components/Canvas/DecoCanvas";
 
-const Decoration = ({ controller }) => {
+const Decoration = () => {
   return (
     <>
       <MemberList />
-      <DecoCanvas controller={controller} />
-      <PictureList controller={controller} />
+      <DecoCanvas />
+      <PictureList />
       <ColorList />
       <DecoDoneBtn />
     </>

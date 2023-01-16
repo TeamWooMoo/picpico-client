@@ -31,17 +31,17 @@ const Picpico = () => {
             <LinkModal />
           </Header>
           <Content>
-            <PicBooth controller={controller} />
+            <PicBooth />
           </Content>
           <Footer>Footer</Footer>
         </Container>
       ) : selectDone ? (
         <Container className="default_container">
-          <Selection controller={controller} />
+          <Selection />
         </Container>
       ) : decoDone ? (
         <Container className="default_container">
-          <Decoration controller={controller} />
+          <Decoration />
         </Container>
       ) : galleryDone ? (
         <Container className="default_container">

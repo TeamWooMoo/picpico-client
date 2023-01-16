@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import { socket } from "../../modules/sockets.mjs";
-const PictureList = ({ controller }) => {
+const PictureList = () => {
   const [active, setActive] = useState([]);
   const roomId = useSelector(state => state.roomInfo.room);
 
@@ -17,7 +17,6 @@ const PictureList = ({ controller }) => {
       pic.className = "active_pic";
       setActive([...active, picId]);
     }
-    // controller.pickPic(roomId, picId);
     socket.emit("pick_pic", roomId, picId);
   };
 
