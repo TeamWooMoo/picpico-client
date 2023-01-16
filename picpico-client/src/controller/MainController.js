@@ -78,7 +78,7 @@ const MainController = () => {
           };
 
           if (buffer) {
-            console.log(buffer);
+            console.log(">>>>>>>buffer", buffer);
             alphaSend();
           }
 
@@ -87,22 +87,6 @@ const MainController = () => {
       }
     }
   }
-
-  const alphaSend = (dataChannel, buffer, chunkSize) => {
-    while (buffer.byteLength) {
-      if (dataChannel.bufferedAmount > dataChannel.bufferedAmountLowThreshold) {
-        dataChannel.onbufferedamountlow = () => {
-          dataChannel.onbufferedamountlow = null;
-          alphaSend();
-        };
-        return;
-      }
-      const chunk = buffer.slice(0, chunkSize);
-      buffer = buffer.slice(chunkSize, buffer.byteLength);
-      dataChannel.send(chunk);
-    }
-  };
-  alphaSend();
 
   function onCanvas(results, canvas) {
     let ctx = canvas.getContext("2d");
