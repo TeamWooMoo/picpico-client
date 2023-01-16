@@ -1,6 +1,8 @@
 import store from "../store.js";
+
 import { setVideosInfo } from "../slice/videosInfo.js";
-import { myStream, socket } from "../modules/sockets.mjs";
+import { myPeer, myPeers, myStream } from "../controller/MainController.js";
+import { socket } from "./sockets.mjs";
 
 /* myPeers
  *    key    :    value
@@ -14,22 +16,22 @@ import { myStream, socket } from "../modules/sockets.mjs";
  *            }
  */
 
-const myPeers = {};
+// const myPeers = {};
 
-export class myPeer {
-  connection;
-  videoElement;
-  alphaChannel;
-  alphaData;
+// export class myPeer {
+//   connection;
+//   videoElement;
+//   alphaChannel;
+//   alphaData;
 
-  constructor(newConnection) {
-    this.connection = newConnection;
-    this.videoElement = document.createElement("video");
-    this.videoElement.hidden = true;
-    this.alphaChannel = null;
-    this.alphaData = null;
-  }
-}
+//   constructor(newConnection) {
+//     this.connection = newConnection;
+//     this.videoElement = document.createElement("video");
+//     this.videoElement.hidden = true;
+//     this.alphaChannel = null;
+//     this.alphaData = null;
+//   }
+// }
 /******************************************************************* */
 
 const handleIce = data => {
@@ -191,7 +193,6 @@ function onGoneEvent(goneSocketId) {
   store.dispatch(setVideosInfo(goneSocketId));
 }
 export async function initWebRTC() {
-  // socket = _socket;
   socket.on("welcome", onWelcomeEvent);
   socket.on("datachannel", onDataChannelEvent);
   socket.on("offer", onOfferEvent);

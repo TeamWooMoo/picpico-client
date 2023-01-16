@@ -12,32 +12,6 @@ const SERVER = BASE_URL;
 
 export const socket = io(SERVER, socketOptions);
 
-export let myVideo;
-export let myCanvas;
-export let myStream;
-export let selfieSegmentation;
-export let currentCamera;
-export const cameraList = [];
-/******************************************************************* */
-
-export const myPeers = {};
-
-export class myPeer {
-  connection;
-  videoElement;
-  alphaChannel;
-  alphaReceived;
-
-  constructor(newConnection) {
-    this.connection = newConnection;
-    this.videoElement = document.createElement("video");
-    this.videoElement.hidden = true;
-    this.alphaChannel = null;
-    this.alphaReceived = null;
-  }
-}
-
-/******************************************************************* */
 export const addMemberEvent = async (roomId, nickname) => {
   socket.emit("add_member", roomId, nickname);
 };
