@@ -9,8 +9,9 @@ const SelectDoneBtn = ({ controller }) => {
 
   function onSelectDoneBtnClick() {
     socket.emit("done_pick", roomId);
-    dispatch(setSelectionInfo({ value: false }));
-    dispatch(setDecoInfo({ value: true }));
+    socket.emit("next_step", "selection", socket.id);
+    // dispatch(setSelectionInfo({ value: false }));
+    // dispatch(setDecoInfo({ value: true }));
   }
   return (
     <Button className="btn-shadow" style={{ lineHeight: "15px", margin: "5px 0" }} onClick={onSelectDoneBtnClick}>

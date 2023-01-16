@@ -4,16 +4,16 @@ import { setPicBoothInfo, setSelectionInfo } from "../../slice/picpicoInfo";
 import { socket } from "../../modules/sockets.mjs";
 import { useEffect } from "react";
 
-const PicDoneBtn = ({ controller }) => {
+const PicDoneBtn = () => {
   const dispatch = useDispatch();
   const roomId = useSelector(state => state.roomInfo.room);
 
   function onPicDoneBtnClick() {
-    dispatch(setPicBoothInfo({ value: false }));
-    dispatch(setSelectionInfo({ value: true }));
+    // dispatch(setPicBoothInfo({ value: false }));
+    // dispatch(setSelectionInfo({ value: true }));
     console.log("나 다 찍었어");
-    // controller.doneTake(roomId);
     socket.emit("done_take", roomId);
+    socket.emit("next_step", "picBooth", socket.id);
   }
   useEffect(() => {
     return () => {

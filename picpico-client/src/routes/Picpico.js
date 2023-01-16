@@ -27,10 +27,17 @@ const Picpico = () => {
   const decoDone = useSelector(state => state.picpicoInfo.decoDisplay);
   const galleryDone = useSelector(state => state.picpicoInfo.galleryDisplay);
   const controller = MainController();
+  const error = useSelector(state => state.errorInfo.error);
 
   useEffect(() => {
     controller.init(id);
   }, []);
+
+  useEffect(() => {
+    if (error !== "") {
+      alert(error);
+    }
+  }, [error]);
 
   return (
     <>
