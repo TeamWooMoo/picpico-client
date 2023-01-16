@@ -58,13 +58,15 @@ const MainController = () => {
         if (myPeer.alphaChannel && myPeer.alphaChannel.readyState === "open") {
           // myPeer.alphaChannel.send(alphaBuffer);
           let buffer = alphaBuffer;
+          let chunkSize = 1024 * 1024 * 16;
+          const dataChannel = myPeer.alphaChannel;
 
-          const alphaSend = (dataChannel, chunkSize) => {
+          const alphaSend = () => {
             while (buffer.byteLength) {
               if (dataChannel.bufferedAmount > dataChannel.bufferedAmountLowThreshold) {
                 dataChannel.onbufferedamountlow = () => {
                   dataChannel.onbufferedamountlow = null;
-                  alphaSend(dataChannel, chunkSize);
+                  alphaSend();
                 };
                 return;
               }
@@ -75,7 +77,7 @@ const MainController = () => {
             }
           };
 
-          alphaSend(myPeer.alphaChannel, 1024 * 1024 * 16);
+          if (buffer) alphaSend();
 
           // console.log(">>>>>extracting Alpha :sending ! ");
         }
