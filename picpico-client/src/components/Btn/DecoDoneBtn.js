@@ -11,7 +11,7 @@ const DecoDoneBtn = () => {
   }
   return (
     <Button className={isKing ? "btn-shadow" : "btn-deactivate"} style={{ lineHeight: "15px", margin: "5px 0" }} onClick={onDecoDoneBtnClick}>
-      Deco 완료
+      Deco complete ✍️
     </Button>
   );
 };

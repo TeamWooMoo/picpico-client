@@ -8,6 +8,8 @@ import Gallery from "./Gallery";
 import Selection from "./Selection";
 import PicBooth from "./PicBooth";
 import MainController from "../controller/MainController";
+
+// Button
 import MuteBtn from "./../components/Btn/MuteBtn";
 import PicDoneBtn from "../components/Btn/PicDoneBtn";
 import TakePicBtn from "./../components/Btn/TakePicBtn";
@@ -16,7 +18,12 @@ import SelectDoneBtn from "../components/Btn/SelectDoneBtn";
 import DecoDoneBtn from "../components/Btn/DecoDoneBtn";
 import PicDownloadBtn from "../components/Btn/PicDownloadBtn";
 import GalleryDoneBtn from "../components/Btn/GalleryDoneBtn";
-import Message from "./../components/Message";
+
+// Message
+import DecoMessage from "../components/Message/DecoMessage";
+import GalleryMessage from "../components/Message/GalleryMessage";
+import SelectMessage from "../components/Message/SelectMessage";
+
 import "../style/style.css";
 import "./Picpico.css";
 import store from "../store";
@@ -48,6 +55,7 @@ const Picpico = () => {
         <Container className="default_container">
           <Header className="picbooth_header">
             <LinkModal />
+            <h3 style={{ color: "#7986CB" }}>PicPico</h3>
             <PicDoneBtn controller={controller} />
           </Header>
           <Content>
@@ -62,7 +70,7 @@ const Picpico = () => {
       ) : selectDone ? (
         <Container className="default_container">
           <Header className="selection_header">
-            <Message />
+            <SelectMessage />
           </Header>
           <Content>
             <Selection controller={controller} />
@@ -73,7 +81,9 @@ const Picpico = () => {
         </Container>
       ) : decoDone ? (
         <Container className="default_container">
-          <Header className="deco_header"></Header>
+          <Header className="deco_header">
+            <DecoMessage />
+          </Header>
           <Content>
             <Decoration controller={controller} />
           </Content>
@@ -83,7 +93,9 @@ const Picpico = () => {
         </Container>
       ) : galleryDone ? (
         <Container className="default_container">
-          <Header className="gallery_header"></Header>
+          <Header className="gallery_header">
+            <GalleryMessage />
+          </Header>
           <Content>
             <Gallery />
           </Content>

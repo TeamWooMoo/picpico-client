@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { socket } from "../../modules/sockets.mjs";
 import { addStrokeHistory } from "../../slice/drawingInfo.js";
+import "./DecoCanvas.css";
 
 const DecoCanvas = () => {
   const dispatch = useDispatch();
@@ -55,17 +56,19 @@ const DecoCanvas = () => {
   }, [strokeArr]);
 
   return (
-    <div style={{ position: "relative" }}>
-      <canvas ref={decoPeerCanvas} width="500" height="500" style={{ position: "absolute", top: "0px", left: "0px" }}></canvas>
-      <canvas
-        ref={decoMyCanvas}
-        width="500"
-        height="500"
-        style={{ position: "absolute", top: "0px", left: "0px", border: "2px solid white" }}
-        onMouseDown={onCanvasDown}
-        onMouseMove={onCanvasMove}
-        onMouseUp={onCanvasUp}
-      ></canvas>
+    <div className="canvasBox">
+      <div style={{ position: "relative" }}>
+        <canvas ref={decoPeerCanvas} width="200" height="200" style={{ position: "absolute", top: "0px", left: "0px" }}></canvas>
+        <canvas
+          ref={decoMyCanvas}
+          width="200"
+          height="200"
+          style={{ position: "absolute", top: "0px", left: "0px", border: "2px solid white" }}
+          onMouseDown={onCanvasDown}
+          onMouseMove={onCanvasMove}
+          onMouseUp={onCanvasUp}
+        ></canvas>
+      </div>
     </div>
   );
 };

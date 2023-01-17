@@ -11,7 +11,7 @@ const SelectDoneBtn = ({ controller }) => {
   }
   return (
     <Button className={isKing ? "btn-shadow" : "btn-deactivate"} style={{ lineHeight: "15px", margin: "5px 0" }} onClick={onSelectDoneBtnClick}>
-      선택 완료 👌
+      Selection complete 👌
     </Button>
   );
 };

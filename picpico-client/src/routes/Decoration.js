@@ -14,8 +14,10 @@ const Decoration = ({ controller }) => {
     <>
       <MemberList />
       <DecoCanvas controller={controller} />
+      <div>
+        <ColorList />
+      </div>
       <DecoList controller={controller} />
-      <ColorList />
     </>
   );
 };

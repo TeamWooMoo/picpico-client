@@ -1,3 +1,6 @@
+import React from "react";
+import "./ColorList.css";
+
 const ColorList = () => {
   return (
     <ul>
