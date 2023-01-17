@@ -3,17 +3,21 @@ import { createSlice } from "@reduxjs/toolkit";
 const selectionInfo = createSlice({
   name: "selectionInfo",
   initialState: {
-    selection: [],
+    imgList: {},
+    selected: "",
   },
 
   reducers: {
-    setSelectionInfo(state, action) {
-      console.log("setSelectionInfo");
-      state.selection = action.payload.value;
+    setImgListInfo(state, action) {
+      console.log(">>", action.payload.value);
+      state.imgList = action.payload.value;
+    },
+    setSelectedInfo(state, action) {
+      state.selected = action.payload.value;
     },
   },
 });
 
-export let { setMembersInfo } = selectionInfo.actions;
+export let { setImgListInfo, setSelectedInfo } = selectionInfo.actions;
 
 export default selectionInfo;

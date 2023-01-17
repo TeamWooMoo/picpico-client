@@ -9,8 +9,8 @@ export async function initPeerCanvas() {
 
   ctx.willReadFrequently = true;
 
-  peerCanvas.height = 400;
-  peerCanvas.width = 400;
+  peerCanvas.height = 250;
+  peerCanvas.width = 250;
 
   // 먼저 그려지는 context 가 제일 위에 올라옴
   ctx.globalCompositeOperation = "destination-over";

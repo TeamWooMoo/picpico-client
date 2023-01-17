@@ -6,10 +6,8 @@ import "../style/style.css";
 function Room() {
   return (
     <Container className="default_container">
-      <ButtonGroup>
-        <CreateRoomBtn />
-        <EnterRoomBtn />
-      </ButtonGroup>
+      <CreateRoomBtn />
+      <EnterRoomBtn />
     </Container>
   );
 }

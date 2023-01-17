@@ -1,16 +1,17 @@
 import { Button } from "rsuite";
-import { useDispatch } from "react-redux";
-import { setDecoInfo, setGalleryInfo } from "../../slice/picpicoInfo";
+import { useSelector } from "react-redux";
+import { socket } from "../../modules/sockets.mjs";
 
 const DecoDoneBtn = () => {
-  const dispatch = useDispatch();
+  const isKing = useSelector(state => state.membersInfo.king);
+  const roomId = useSelector(state => state.roomInfo.room);
+
   function onDecoDoneBtnClick() {
-    dispatch(setDecoInfo({ value: false }));
-    dispatch(setGalleryInfo({ value: true }));
+    socket.emit("done_deco", roomId, socket.id);
   }
   return (
-    <Button className="btn-shadow" style={{ lineHeight: "15px", margin: "5px 0" }} onClick={onDecoDoneBtnClick}>
-      Deco 완료
+    <Button className={isKing ? "btn-shadow" : "btn-deactivate"} style={{ lineHeight: "15px", margin: "5px 0" }} onClick={onDecoDoneBtnClick}>
+      Deco complete ✍️
     </Button>
   );
 };

@@ -10,8 +10,9 @@ function MuteBtn() {
   };
   return (
     <>
+      {" "}
       {muted ? (
-        <IoVolumeMedium className="drop-shadow" color="white" size="40" padding="5px 0" onClick={onMuteOnOff}></IoVolumeMedium>
+        <IoVolumeMedium style={{}} className="drop-shadow" color="white" size="40" padding="5px 0" onClick={onMuteOnOff}></IoVolumeMedium>
       ) : (
         <IoVolumeMute className="drop-shadow" color="white" size="40" padding="5px 0" onClick={onMuteOnOff}></IoVolumeMute>
       )}

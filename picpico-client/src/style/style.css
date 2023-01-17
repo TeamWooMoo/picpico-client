@@ -10,7 +10,15 @@
 }
 
 .btn-shadow {
-  box-shadow: rgba(0, 0, 0, 0.1) 0 1px 2px 0;
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+  transition: opacity linear 0.1s;
+  box-shadow: rgba(26, 18, 18, 0.25) 0 1px 2px 0;
+}
+
+.btn-deactivate {
+  box-shadow: rgba(141, 136, 133, 0.1) 0 1px 2px 0;
 }
 
 .drop-shadow {

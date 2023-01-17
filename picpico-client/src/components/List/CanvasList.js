@@ -1,27 +1,29 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useRef, useState } from "react";
-import { setTakePic, setPicCount } from "../../slice/takepicInfo";
+import { useEffect, useRef } from "react";
+import { setImgIdxCount, setTakePic } from "../../slice/takepicInfo";
 import { socket } from "../../modules/sockets.mjs";
+import "./CanvasList.css";
 
-const CanvasList = ({ controller }) => {
-  const [count, setCount] = useState(0);
+const CanvasList = () => {
   const dispatch = useDispatch();
   const myCanvas = useRef();
-  const takePic = useSelector(state => state.takepicInfo.takePic);
-  const imgArr = useSelector(state => state.takepicInfo.picImg);
+  const imgIdx = useSelector(state => state.takepicInfo.imgIdx);
+  const shuttered = useSelector(state => state.takepicInfo.takePic);
 
   useEffect(() => {
-    if (takePic === true) {
-      setCount(prev => prev + 1);
-      dispatch(setTakePic({ value: false }));
-      dispatch(setPicCount());
+    if (shuttered === true) {
+      // dispatch(setImgIdxCount({ value: imgIdx + 1 }));
       const url = myCanvas.current.toDataURL();
-      socket.emit("take_pic", count.toString(), url);
+
+      if (typeof imgIdx === "string") {
+        socket.emit("take_pic", (parseInt(imgIdx) + 1).toString(), url);
+      } else {
+        socket.emit("take_pic", (imgIdx + 1).toString(), url);
+      }
+      dispatch(setTakePic({ value: false }));
     }
-    return () => {
-      console.log("canvas list bye~~");
-    };
-  }, []);
+  }, [shuttered]);
+
   return (
     <>
       <div className="canvasBox">
