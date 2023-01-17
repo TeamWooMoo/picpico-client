@@ -63,7 +63,7 @@ const Picpico = () => {
           </Content>
           <Footer className="picbooth_footer">
             <MuteBtn />
-            <TakePicBtn controller={controller} />
+            <TakePicBtn />
             <CameraTransBtn />
           </Footer>
         </Container>

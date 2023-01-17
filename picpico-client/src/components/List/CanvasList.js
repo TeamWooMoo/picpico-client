@@ -18,6 +18,7 @@ const CanvasList = () => {
       dispatch(setTakePic({ value: false }));
     }
   }, [shuttered]);
+
   return (
     <>
       <div className="canvasBox">
