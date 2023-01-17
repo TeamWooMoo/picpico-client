@@ -23,16 +23,16 @@ const CanvasList = () => {
       const videoRow = document.getElementById("peerVideos");
 
       for (const child of allCanvases.children) {
-        // const img = new Image();
-        // img.src = child.toDataURL();
-        // console.log("img:", img);
-        // ctx.drawImage(img, 0, 0);
+        const img = new Image();
+        img.src = child.toDataURL();
+        console.log("img:", img);
+        ctx.drawImage(img, 0, 0);
 
         // const childCtx = child.getContext("webgl");
         console.log("child: ", child);
         // const childImage = childCtx.getImageData(0, 0, 350, 350);
 
-        ctx.drawImage(child, 0, 0);
+        // ctx.drawImage(child, 0, 0);
       }
       const url = filmCanvas.toDataURL();
 
