@@ -7,11 +7,11 @@ const CanvasList = ({ controller }) => {
   const [count, setCount] = useState(0);
   const dispatch = useDispatch();
   const myCanvas = useRef();
-  const takePic = useSelector(state => state.takepicInfo.takePic);
+  const shutterd = useSelector(state => state.takepicInfo.takePic);
   const imgArr = useSelector(state => state.takepicInfo.picImg);
 
   useEffect(() => {
-    if (takePic === true) {
+    if (shutterd === true) {
       setCount(prev => prev + 1);
       dispatch(setTakePic({ value: false }));
       dispatch(setPicCount());
