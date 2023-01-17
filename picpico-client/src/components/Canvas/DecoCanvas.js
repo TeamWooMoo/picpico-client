@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { socket } from "../../modules/sockets.mjs";
 import { addStrokeHistory } from "../../slice/drawingInfo.js";
 import { DecoDragAndDrop } from "../../modules/decoDragAndDrop.mjs";
-import { FlexboxGrid } from "rsuite";
 import "./DecoCanvas.css";
 
 const DecoCanvas = () => {
@@ -84,9 +83,7 @@ const DecoCanvas = () => {
       </FlexboxGrid>
       <div className="canvasBox">
         <canvas className="canvas" ref={decoPeerCanvas} width="350px" height="350px"></canvas>
-
         <canvas className="canvas" ref={decoMyCanvas} onMouseDown={onCanvasDown} onMouseMove={onCanvasMove} onMouseUp={onCanvasUp}></canvas>
-
         <div id="sticker_field" style={{ position: "absolute", top: "0px", left: "0px", width: "502px", height: "502px" }}>
           <img
             alt="sticker1"
@@ -102,15 +99,7 @@ const DecoCanvas = () => {
           />
         </div>
         {mode === "stroke" ? (
-          <canvas
-            ref={decoEventCanvas}
-            width="350px"
-            height="350px"
-            style={{ position: "absolute", top: "0px", left: "0px", border: "2px solid white" }}
-            onMouseDown={onCanvasDown}
-            onMouseMove={onCanvasMove}
-            onMouseUp={onCanvasUp}
-          ></canvas>
+          <canvas ref={decoEventCanvas} width="350px" height="350px" onMouseDown={onCanvasDown} onMouseMove={onCanvasMove} onMouseUp={onCanvasUp}></canvas>
         ) : null}
       </div>
     </>

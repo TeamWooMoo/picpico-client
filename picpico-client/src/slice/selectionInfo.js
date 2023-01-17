@@ -3,12 +3,13 @@ import { createSlice } from "@reduxjs/toolkit";
 const selectionInfo = createSlice({
   name: "selectionInfo",
   initialState: {
-    imgList: [],
+    imgList: {},
     selected: "",
   },
 
   reducers: {
     setImgListInfo(state, action) {
+      console.log(">>", action.payload.value);
       state.imgList = action.payload.value;
     },
     setSelectedInfo(state, action) {
