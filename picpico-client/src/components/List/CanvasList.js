@@ -12,12 +12,14 @@ const CanvasList = () => {
 
   useEffect(() => {
     if (shutterd === true) {
-      dispatch(setTakePic({ value: false }));
+      // console.log(shutterd);
+      // console.log("shutterd 확인 !!");
       dispatch(setImgIdxCount({ value: imgIdx + 1 }));
       const url = myCanvas.current.toDataURL();
       socket.emit("take_pic", imgIdx.toString(), url);
+      dispatch(setTakePic({ value: false }));
     }
-  }, []);
+  }, [shutterd]);
   return (
     <>
       <div className="canvasBox">
