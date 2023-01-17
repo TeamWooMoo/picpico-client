@@ -1,13 +1,15 @@
 import { Button } from "rsuite";
 import { useDispatch } from "react-redux";
 import { setPicBoothInfo, setGalleryInfo } from "../../slice/picpicoInfo";
+import { socket } from "../../modules/sockets.mjs";
 
 const GalleryDoneBtn = () => {
   const dispatch = useDispatch();
 
   function onGalleryDoneBtnClick() {
-    dispatch(setGalleryInfo({ value: false }));
-    dispatch(setPicBoothInfo({ value: true }));
+    socket.emit("next_step", "gallery", socket.id);
+    // dispatch(setGalleryInfo({ value: false }));
+    // dispatch(setPicBoothInfo({ value: true }));
 
     window.location.href = "/";
   }
