@@ -21,7 +21,7 @@ function CreateRoomBtn() {
       .then(res => {
         //    서버가 어떻게 주는지에 따라서 아래는 바뀔 것
         console.log(res);
-        navigate(`/room/${res.data.roomId}`);
+        navigate(`/rooms/${res.data.roomId}`);
         // navigate(`/room/100`);
       })
       .catch(err => {

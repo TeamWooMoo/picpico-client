@@ -12,6 +12,7 @@ const SelectList = () => {
   const onImageClick = event => {
     const pic = event.target;
     const picId = pic.dataset.pid;
+    console.log(`click ${picId}`);
     socket.emit("pick_pic", roomId, picId);
   };
   // imgArr의 id == selected인걸 봐서 activate <=> deactivate 토글처럼

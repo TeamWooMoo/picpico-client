@@ -14,7 +14,7 @@ const Home = () => {
         <LoginBtn />
       </Link>
       {/* 임의로 넣어 놓은 버튼 */}
-      <Link to={"/room"}>
+      <Link to={"/rooms"}>
         <button>room</button>
       </Link>
     </Container>
