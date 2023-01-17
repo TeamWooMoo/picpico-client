@@ -3,13 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-<<<<<<< HEAD
     "@mediapipe/selfie_segmentation": "^0.1.1671057942",
-=======
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@mui/material": "^5.11.4",
->>>>>>> main
     "@reduxjs/toolkit": "^1.9.1",
     "@rsuite/icons": "^1.0.2",
     "@testing-library/jest-dom": "^5.16.5",
