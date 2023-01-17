@@ -1,9 +1,10 @@
+import "./DecoCanvas.css";
 import { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { socket } from "../../modules/sockets.mjs";
 import { addStrokeHistory } from "../../slice/drawingInfo.js";
-import "./DecoCanvas.css";
 import { DecoDragAndDrop } from "../../modules/decoDragAndDrop.mjs";
+import { FlexboxGrid } from "rsuite";
 
 const DecoCanvas = () => {
   const dispatch = useDispatch();
@@ -75,57 +76,46 @@ const DecoCanvas = () => {
     dragAndDrop.init();
   }, []);
 
-    return (
-        <>
-            <button onClick={onStrokeBtnClick}>그리기</button>
-            <button onClick={onStickerBtnClick}>스티커</button>
-            <div className="canvasBox">
-                {/* <div style={{ position: "relative" }}> */}
-                <canvas
-                    ref={decoPeerCanvas}
-                    width="500px"
-                    height="500px"
-                    style={{position: "absolute", top: "0px", left: "0px", border: "2px solid white"}}
-                ></canvas>
-                <canvas
-                    ref={decoMyCanvas}
-                    width="500px"
-                    height="500px"
-                    style={{position: "absolute", top: "0px", left: "0px", border: "2px solid white"}}
-                    onMouseDown={onCanvasDown}
-                    onMouseMove={onCanvasMove}
-                    onMouseUp={onCanvasUp}
-                ></canvas>
-                <div id="sticker_field" style={{position: "absolute", top: "0px", left: "0px", width: "502px", height: "502px"}}>
-                    <div class="draggable" style={{position: "absolute", width: "100px", height: "100px"}}>
-                        <img
-                            alt="sticker1"
-                            src="https://i.pinimg.com/originals/18/11/30/181130c64c246318e1e4d463d1844ed7.gif"
-                            // class="draggable"
-                            style={{position: "absolute", width: "100px", height: "100px"}}
-                        />
-                    </div>
-                    <div class="draggable" style={{position: "absolute", width: "100px", height: "100px"}}>
-                        <img
-                            alt="sticker2"
-                            src="https://storage.cobak.co/uploads/1585038492476558_8eeec6050c.gif"
-                            // class="draggable"
-                            style={{position: "absolute", width: "100px", height: "100px"}}
-                        />
-                    </div>
-                </div>
-                {mode === "stroke" ? (
-                    <canvas
-                        ref={decoEventCanvas}
-                        width="500px"
-                        height="500px"
-                        style={{position: "absolute", top: "0px", left: "0px", border: "2px solid white"}}
-                        onMouseDown={onCanvasDown}
-                        onMouseMove={onCanvasMove}
-                        onMouseUp={onCanvasUp}
-                    ></canvas>
-                ) : null}
+  return (
+    <>
+      <FlexboxGrid>
+        <button onClick={onStrokeBtnClick}>그리기</button>
+        <button onClick={onStickerBtnClick}>스티커</button>
+      </FlexboxGrid>
+      <FlexboxGrid className="DecoCanvasBox">
+        <canvas className="decocanvas" ref={decoPeerCanvas}></canvas>
+        <canvas
+          className="decocanvas"
+          ref={decoMyCanvas}
+          width="300px"
+          height="300px"
+          onMouseDown={onCanvasDown}
+          onMouseMove={onCanvasMove}
+          onMouseUp={onCanvasUp}
+        ></canvas>
+        <div className="decocanvas" id="sticker_field">
+            <div class="draggable" style={{position: "absolute", width: "100px", height: "100px"}}>
+                <img
+                    alt="sticker1"
+                    src="https://i.pinimg.com/originals/18/11/30/181130c64c246318e1e4d463d1844ed7.gif"
+                    // class="draggable"
+                    style={{position: "absolute", width: "100px", height: "100px"}}
+                />
             </div>
+            <div class="draggable" style={{position: "absolute", width: "100px", height: "100px"}}>
+                <img
+                    alt="sticker2"
+                    src="https://storage.cobak.co/uploads/1585038492476558_8eeec6050c.gif"
+                    // class="draggable"
+                    style={{position: "absolute", width: "100px", height: "100px"}}
+                />
+            </div>
+        </div>
+        {mode === "stroke" ? (
+          <canvas className="decocanvas" ref={decoEventCanvas} onMouseDown={onCanvasDown} onMouseMove={onCanvasMove} onMouseUp={onCanvasUp}></canvas>
+        ) : null}
+      </FlexboxGrid>
+
     </>
   );
 };

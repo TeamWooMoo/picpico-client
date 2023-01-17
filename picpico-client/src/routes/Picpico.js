@@ -24,6 +24,9 @@ import DecoMessage from "../components/Message/DecoMessage";
 import GalleryMessage from "../components/Message/GalleryMessage";
 import SelectMessage from "../components/Message/SelectMessage";
 
+// List
+import MemberList from "../components/List/MemberList";
+
 import "../style/style.css";
 import "./Picpico.css";
 import store from "../store";
@@ -63,7 +66,7 @@ const Picpico = () => {
           </Content>
           <Footer className="picbooth_footer">
             <MuteBtn />
-            <TakePicBtn />
+            <TakePicBtn controller={controller} />
             <CameraTransBtn />
           </Footer>
         </Container>
@@ -85,6 +88,7 @@ const Picpico = () => {
             <DecoMessage />
           </Header>
           <Content>
+            <MemberList />
             <Decoration controller={controller} />
           </Content>
           <Footer className="deco_footer">
