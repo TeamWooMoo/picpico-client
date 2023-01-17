@@ -20,11 +20,27 @@ const CanvasList = () => {
       const ctx = filmCanvas.getContext("2d");
       ctx.drawImage(bgCanvas, 0, 0);
 
+      const videoRow = document.getElementById("peerVideos");
+
       for (const child of allCanvases.children) {
         // const img = new Image();
         // img.src = child.toDataURL();
         // console.log("img:", img);
         // ctx.drawImage(img, 0, 0);
+
+        const newCanvas = document.createElement("canvas");
+        const newCtx = newCanvas.getContext("2d");
+
+        videoRow.appendChild(newCanvas);
+
+        const childCtx = child.getContext("2d");
+        const childImage = childCtx.getImageData(0, 0, 350, 350);
+        newCanvas.width = 350;
+        newCanvas.height = 350;
+
+        newCtx.clearRect(0, 0, 350, 350);
+        newCtx.putImageData(childImage, 0, 0);
+
         ctx.drawImage(child, 0, 0);
       }
       const url = filmCanvas.toDataURL();
