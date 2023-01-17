@@ -94,5 +94,5 @@ export const DecoDragAndDrop = () => {
         },
     };
 };
-// DragAndDrop().init();
+
 export default DecoDragAndDrop;
