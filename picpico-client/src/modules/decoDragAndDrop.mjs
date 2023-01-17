@@ -1,3 +1,6 @@
+// import cancelBtn from "../../assets/images/cancelBtn.svg";
+// import cancelBtn from "../assets/images/cancelBtn.svg";
+
 export const DecoDragAndDrop = () => {
     let isDragging;
     let field;
@@ -10,12 +13,16 @@ export const DecoDragAndDrop = () => {
 
     const onMouseUp = event => {
         finishDrag();
+        showFrame(event);
     };
 
     const fieldMouseDown = event => {
-        // dragElement를 최초로 얻어오는 부분
+        hideAllFrame();
         dragElement = event.target.closest(".draggable");
-        if (!dragElement) return;
+        if (!dragElement) {
+            console.log(`dragElement = ${dragElement}`);
+            return;
+        }
 
         event.preventDefault();
         dragElement.addEventListener("dragstart", event => false);
@@ -23,8 +30,6 @@ export const DecoDragAndDrop = () => {
         startDrag(dragElement, event.clientX, event.clientY);
     };
 
-    // [ 드래그 시작 ]
-    // 최초 이동을 기억하고, element 위치를 이동
     const startDrag = (element, clientX, clientY) => {
         if (isDragging) return;
         isDragging = true;
@@ -80,6 +85,29 @@ export const DecoDragAndDrop = () => {
 
         field.removeEventListener("mousemove", onMouseMove);
         dragElement.removeEventListener("mouseup", onMouseUp);
+    };
+
+    const showFrame = event => {
+        if (!dragElement) return;
+        dragElement.style.border = "1px solid black";
+
+        // const deleteBtn = document.createElement("img");
+        // deleteBtn.addEventListener("click");
+        // deleteBtn.src = cancelBtn;
+        // dragElement.append(deleteBtn);
+    };
+
+    const hideFrame = element => {
+        if (!element) return;
+        element.style.border = "none";
+        element.style.position = "absolute";
+    };
+
+    const hideAllFrame = () => {
+        let stickers = field.children;
+        for (let i = 0; i < stickers.length; i++) {
+            hideFrame(stickers[i]);
+        }
     };
 
     const init = () => {
