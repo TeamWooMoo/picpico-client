@@ -19,6 +19,8 @@ import GalleryDoneBtn from "../components/Btn/GalleryDoneBtn";
 import Message from "./../components/Message";
 import "../style/style.css";
 import "./Picpico.css";
+import store from "../store";
+import { setErrorInfo } from "../slice/errorInfo";
 
 const Picpico = () => {
   const { id } = useParams();
@@ -27,10 +29,18 @@ const Picpico = () => {
   const decoDone = useSelector(state => state.picpicoInfo.decoDisplay);
   const galleryDone = useSelector(state => state.picpicoInfo.galleryDisplay);
   const controller = MainController();
+  const error = useSelector(state => state.errorInfo.error);
 
   useEffect(() => {
     controller.init(id);
   }, []);
+
+  useEffect(() => {
+    if (error !== "") {
+      alert(error);
+      // store.dispatch(setErrorInfo(""))
+    }
+  }, [error]);
 
   return (
     <>
