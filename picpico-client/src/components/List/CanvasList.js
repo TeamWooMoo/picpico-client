@@ -34,7 +34,7 @@ const CanvasList = () => {
         videoRow.appendChild(newCanvas);
 
         const childCtx = child.getContext("2d");
-        console.log("child: ", child);
+        console.log("child: ", child, childCtx);
         const childImage = childCtx.getImageData(0, 0, 350, 350);
         newCanvas.width = 350;
         newCanvas.height = 350;
