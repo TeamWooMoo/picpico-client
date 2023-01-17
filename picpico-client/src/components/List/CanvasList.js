@@ -33,7 +33,7 @@ const CanvasList = () => {
 
         videoRow.appendChild(newCanvas);
 
-        const childCtx = child.getContext("2d");
+        const childCtx = child.getContext("webgl");
         console.log("child: ", child, childCtx);
         const childImage = childCtx.getImageData(0, 0, 350, 350);
         newCanvas.width = 350;
