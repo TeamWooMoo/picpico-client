@@ -8,16 +8,16 @@ const CanvasList = () => {
   const dispatch = useDispatch();
   const myCanvas = useRef();
   const imgIdx = useSelector(state => state.takepicInfo.imgIdx);
-  const shutterd = useSelector(state => state.takepicInfo.takePic);
+  const shuttered = useSelector(state => state.takepicInfo.takePic);
 
   useEffect(() => {
-    if (shutterd === true) {
-      dispatch(setTakePic({ value: false }));
+    if (shuttered === true) {
       dispatch(setImgIdxCount({ value: imgIdx + 1 }));
       const url = myCanvas.current.toDataURL();
       socket.emit("take_pic", imgIdx.toString(), url);
+      dispatch(setTakePic({ value: false }));
     }
-  }, []);
+  }, [shuttered]);
   return (
     <>
       <div className="canvasBox">
