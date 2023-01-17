@@ -1,8 +1,8 @@
 .color-options {
   display: flex;
-  flex-direction: column;
-  gap: 5px;
+  justify-content: center;
   align-items: center;
+  gap: 5px;
 }
 .color-option {
   width: 15px;

@@ -25,8 +25,7 @@ import GalleryMessage from "../components/Message/GalleryMessage";
 import SelectMessage from "../components/Message/SelectMessage";
 
 // List
-import DecoList from "../components/List/DecoList";
-import ColorList from "../components/List/ColorList";
+import MemberList from "../components/List/MemberList";
 
 import "../style/style.css";
 import "./Picpico.css";
@@ -89,9 +88,8 @@ const Picpico = () => {
             <DecoMessage />
           </Header>
           <Content>
+            <MemberList />
             <Decoration controller={controller} />
-            <ColorList />
-            <DecoList />
           </Content>
           <Footer className="deco_footer">
             <DecoDoneBtn />

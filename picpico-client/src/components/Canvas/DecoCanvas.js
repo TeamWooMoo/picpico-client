@@ -1,9 +1,10 @@
+import "./DecoCanvas.css";
 import { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { socket } from "../../modules/sockets.mjs";
 import { addStrokeHistory } from "../../slice/drawingInfo.js";
 import { DecoDragAndDrop } from "../../modules/decoDragAndDrop.mjs";
-import "./DecoCanvas.css";
+import { FlexboxGrid } from "rsuite";
 
 const DecoCanvas = () => {
   const dispatch = useDispatch();
@@ -77,14 +78,22 @@ const DecoCanvas = () => {
 
   return (
     <>
-      <FlexboxGrid justify="center">
+      <FlexboxGrid>
         <button onClick={onStrokeBtnClick}>그리기</button>
         <button onClick={onStickerBtnClick}>스티커</button>
       </FlexboxGrid>
-      <div className="canvasBox">
-        <canvas className="canvas" ref={decoPeerCanvas} width="350px" height="350px"></canvas>
-        <canvas className="canvas" ref={decoMyCanvas} onMouseDown={onCanvasDown} onMouseMove={onCanvasMove} onMouseUp={onCanvasUp}></canvas>
-        <div id="sticker_field" style={{ position: "absolute", top: "0px", left: "0px", width: "502px", height: "502px" }}>
+      <FlexboxGrid className="DecoCanvasBox">
+        <canvas className="decocanvas" ref={decoPeerCanvas}></canvas>
+        <canvas
+          className="decocanvas"
+          ref={decoMyCanvas}
+          width="300px"
+          height="300px"
+          onMouseDown={onCanvasDown}
+          onMouseMove={onCanvasMove}
+          onMouseUp={onCanvasUp}
+        ></canvas>
+        <div className="decocanvas" id="sticker_field">
           <img
             alt="sticker1"
             src="https://i.pinimg.com/originals/18/11/30/181130c64c246318e1e4d463d1844ed7.gif"
@@ -99,9 +108,9 @@ const DecoCanvas = () => {
           />
         </div>
         {mode === "stroke" ? (
-          <canvas ref={decoEventCanvas} width="350px" height="350px" onMouseDown={onCanvasDown} onMouseMove={onCanvasMove} onMouseUp={onCanvasUp}></canvas>
+          <canvas className="decocanvas" ref={decoEventCanvas} onMouseDown={onCanvasDown} onMouseMove={onCanvasMove} onMouseUp={onCanvasUp}></canvas>
         ) : null}
-      </div>
+      </FlexboxGrid>
     </>
   );
 };
