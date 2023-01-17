@@ -13,7 +13,8 @@ const membersInfo = createSlice({
       state.members = action.payload.value;
     },
     setKingInfo(state, action) {
-      state.members = action.payload.value;
+      console.log("im king");
+      state.king = action.payload.value;
     },
   },
 });

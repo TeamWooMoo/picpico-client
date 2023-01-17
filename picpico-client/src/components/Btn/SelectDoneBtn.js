@@ -1,19 +1,16 @@
 import { Button, Footer } from "rsuite";
-import { useDispatch, useSelector } from "react-redux";
-import { setSelectionInfo, setDecoInfo } from "../../slice/picpicoInfo";
+import { useSelector } from "react-redux";
 import { socket } from "../../modules/sockets.mjs";
 
 const SelectDoneBtn = ({ controller }) => {
-  const dispatch = useDispatch();
   const roomId = useSelector(state => state.roomInfo.room);
+  const isKing = useSelector(state => state.membersInfo.king);
 
   function onSelectDoneBtnClick() {
-    // dispatch(setSelectionInfo({ value: false }));
-    // dispatch(setDecoInfo({ value: true }));
     socket.emit("done_pick", roomId, socket.id);
   }
   return (
-    <Button className="btn-shadow" style={{ lineHeight: "15px", margin: "5px 0" }} onClick={onSelectDoneBtnClick}>
+    <Button className={isKing ? "btn-shadow" : "btn-deactivate"} style={{ lineHeight: "15px", margin: "5px 0" }} onClick={onSelectDoneBtnClick}>
       선택 완료 👌
     </Button>
   );
