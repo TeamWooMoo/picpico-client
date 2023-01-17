@@ -1,9 +1,9 @@
-import PictureList from "../components/List/PictureList";
+import SelectList from "../components/List/SelectList";
 
 const Selection = ({ controller }) => {
   return (
     <>
-      <PictureList controller={controller} />
+      <SelectList controller={controller} />
     </>
   );
 };

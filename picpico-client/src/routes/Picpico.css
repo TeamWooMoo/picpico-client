@@ -1,6 +1,8 @@
 .picbooth_header {
   color: black;
+  background-color: #ced5ff;
   width: 100%;
+  height: 70px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -21,7 +23,9 @@
 
 .selection_header {
   color: black;
+  background-color: #ced5ff;
   width: 100%;
+  height: 70px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -40,7 +44,10 @@
 }
 
 .deco_header {
+  color: black;
+  background-color: #ced5ff;
   width: 100%;
+  height: 70px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -61,7 +68,9 @@
 
 .gallery_header {
   color: black;
+  background-color: #ced5ff;
   width: 100%;
+  height: 70px;
   display: flex;
   flex-direction: row;
   align-items: center;

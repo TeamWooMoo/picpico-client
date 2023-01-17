@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useRef, useState } from "react";
 import { setTakePic, setPicCount } from "../../slice/takepicInfo";
 import { socket } from "../../modules/sockets.mjs";
+import "./CanvasList.css";
 
 const CanvasList = ({ controller }) => {
   const [count, setCount] = useState(0);

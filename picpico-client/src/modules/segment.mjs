@@ -48,8 +48,8 @@ function onCanvas(results, canvas) {
 
   ctx.save();
 
-  canvas.width = 400;
-  canvas.height = 400;
+  canvas.width = 250;
+  canvas.height = 250;
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.drawImage(results.image, 0, 0, canvas.width, canvas.height);

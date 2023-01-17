@@ -1,9 +1,10 @@
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import { socket } from "../../modules/sockets.mjs";
-import { List } from "rsuite";
+import ImageList from "@mui/material/ImageList";
+import ImageListItem from "@mui/material/ImageListItem";
 
-const PictureList = ({ controller }) => {
+const SelectList = ({ controller }) => {
   const [active, setActive] = useState([]);
   const roomId = useSelector(state => state.roomInfo.room);
 
@@ -33,26 +34,35 @@ const PictureList = ({ controller }) => {
   // useEffect(() => {
   //   //방장이 누른 이미지 활성화
   // }, [selected]);
-
+  const itemData = [
+    {
+      img: "https://images.unsplash.com/photo-1549388604-817d15aa0110",
+      title: "Bed",
+    },
+    {
+      img: "https://images.unsplash.com/photo-1525097487452-6278ff080c31",
+      title: "Books",
+    },
+    {
+      img: "https://images.unsplash.com/photo-1523413651479-597eb2da0ad6",
+      title: "Sink",
+    },
+  ];
   return (
-    <List hover>
-      <List.Item>
-        {/* <img
-          src={"https://recipe1.ezmember.co.kr/cache/recipe/2018/08/01/eeb4da99110208dc6ea8dced1142cac01.jpg"}
-          width="10"
-          height="10"
-          data-pic={`pic-${1}`}
-          alt="soysauce"
-          id="soysauce"
-          crossOrigin="Anonymous"
-          onClick={onTestClick}
-        ></img>
-        {pictureLI} */}
-      </List.Item>
-      <List.Item>Violets are blue</List.Item>
-      <List.Item>Sugar is sweet</List.Item>
-      <List.Item>And so are you</List.Item>
-    </List>
+    <>
+      <ImageList sx={{ width: 200, height: 200 }} cols={3} rowHeight={164}>
+        {itemData.map(item => (
+          <ImageListItem key={item.img}>
+            <img
+              src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
+              srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+              alt={item.title}
+              loading="lazy"
+            />
+          </ImageListItem>
+        ))}
+      </ImageList>
+    </>
   );
 };
-export default PictureList;
+export default SelectList;

@@ -1,15 +1,17 @@
 import MemberList from "../components/List/MemberList";
-import PictureList from "../components/List/PictureList";
-import ColorList from "../components/List/ColorList";
 import DecoCanvas from "../components/Canvas/DecoCanvas";
+import DecoList from "../components/List/DecoList";
+import ColorList from "../components/List/ColorList";
 
 const Decoration = ({ controller }) => {
   return (
     <>
       <MemberList />
       <DecoCanvas controller={controller} />
-      <PictureList controller={controller} />
-      <ColorList />
+      <div>
+        <ColorList />
+      </div>
+      <DecoList controller={controller} />
     </>
   );
 };

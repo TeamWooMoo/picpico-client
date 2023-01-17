@@ -6,6 +6,7 @@ import videosInfo from "./slice/videosInfo";
 import drawingInfo from "./slice/drawingInfo";
 import roomInfo from "./slice/roomInfo";
 import pictureInfo from "./slice/pictureInfo";
+import decoInfo from "./slice/decoInfo";
 
 const store = configureStore({
   reducer: {
@@ -15,7 +16,8 @@ const store = configureStore({
     videosInfo: videosInfo.reducer,
     drawingInfo: drawingInfo.reducer,
     roomInfo: roomInfo.reducer,
-    pictureInfo: picpicoInfo.reducer,
+    pictureInfo: pictureInfo.reducer,
+    decoInfo: decoInfo.reducer,
   },
 });
 
