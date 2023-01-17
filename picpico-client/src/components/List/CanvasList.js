@@ -16,8 +16,9 @@ const CanvasList = () => {
       const ctx = filmCanvas.getContext("2d");
       console.log("<<<<<<", filmCanvas, ctx);
       for (const child of allCanvases.children) {
-        console.log(">>", child);
-        ctx.drawImage(child, 0, 0);
+        const img = new Image();
+        img.src = child.toDataURL();
+        ctx.drawImage(img.src, 0, 0);
       }
       const url = filmCanvas.toDataURL();
 
