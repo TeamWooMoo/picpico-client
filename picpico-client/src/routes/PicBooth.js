@@ -4,15 +4,15 @@ import { useEffect } from "react";
 import store from "../store";
 import { setErrorInfo } from "../slice/errorInfo";
 
-const PicBooth = ({ controller }) => {
-  useEffect(() => {
-    store.dispatch(setErrorInfo(""));
-    return () => {};
-  }, []);
+const PicBooth = () => {
+  // useEffect(() => {
+  //   store.dispatch(setErrorInfo(""));
+  //   return () => {};
+  // }, []);
   return (
     <>
       <div>
-        <CanvasList controller={controller} />
+        <CanvasList />
         <VideoList />
       </div>
     </>

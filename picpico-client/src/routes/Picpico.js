@@ -42,12 +42,12 @@ const Picpico = () => {
     controller.init(id);
   }, []);
 
-  useEffect(() => {
-    if (error !== "") {
-      alert(error);
-      // store.dispatch(setErrorInfo(""))
-    }
-  }, [error]);
+  // useEffect(() => {
+  //   if (error !== "") {
+  //     alert(error);
+  //     // store.dispatch(setErrorInfo(""))
+  //   }
+  // }, [error]);
 
   return (
     <>
