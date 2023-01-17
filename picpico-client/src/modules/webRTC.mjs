@@ -41,7 +41,7 @@ const handleTrack = (data, myPeer) => {
     const peerCanvasGL = myPeer.canvasElement;
 
     console.log(peerVideo);
-    // peerVideo.hidden = true;
+    peerVideo.hidden = true;
     // peerVideo.muted = true;
     // peerVideo.autoplay = true;
     peerVideo.className = "col";
