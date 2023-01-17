@@ -4,7 +4,7 @@ import { List } from "rsuite";
 import "./DecoList.css";
 
 const DecoList = () => {
-  return <ul></ul>;
+  return <></>;
 };
 
 export default DecoList;

@@ -4,7 +4,7 @@ const MemberList = () => {
   const members = useSelector(state => state.membersInfo.members);
   const memberLI = members.map(val => <li>{val}</li>);
 
-  return <ul r>{memberLI}</ul>;
+  return <>{memberLI}</>;
 };
 
 export default MemberList;
