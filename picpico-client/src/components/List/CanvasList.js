@@ -29,6 +29,7 @@ const CanvasList = () => {
       <div className="canvasBox">
         <canvas id="myCanvas" className="canvas" ref={myCanvas} width="100" height="100"></canvas>
         <canvas id="peerCanvas" className="canvas"></canvas>
+        <div id="peerCanvases"></div>
       </div>
     </>
   );

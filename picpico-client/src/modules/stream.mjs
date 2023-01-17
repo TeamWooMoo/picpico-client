@@ -1,5 +1,8 @@
-import { cameraList, currentCamera, myCanvas, myStream, myVideo } from "../controller/MainController.js";
+import { cameraList, currentCamera, myCanvas, myFace, myStream, myVideo } from "../controller/MainController.js";
 import { segment, initSegment } from "./segment.mjs";
+import { getFaceSize } from "./tracking-facesize.mjs";
+
+/******************************************************************* */
 
 async function getCameras() {
   try {
@@ -18,6 +21,8 @@ async function getCameras() {
     console.log(e);
   }
 }
+
+/******************************************************************* */
 
 async function getMedia(deviceId) {
   const initialConstraints = {
@@ -49,9 +54,25 @@ async function getMedia(deviceId) {
   }
 }
 
+/******************************************************************* */
+
 export async function initStream() {
   myVideo = document.getElementById("myVideo");
   myCanvas = document.getElementById("myCanvas");
+
+  myVideo.width = 350;
+  myVideo.height = 350;
+  myCanvas.hidden = true;
+
+  const canvasRow = document.getElementById("peerCanvases");
+
+  myFace = document.createElement("canvas");
+
+  canvasRow.appendChild(myFace);
+  myFace.className = "canvasRow";
+  myFace.style.position = "absolute";
+  myFace.style.top = "0px";
+  myFace.style.left = "0px";
 
   myVideo.onplaying = async () => {
     myVideo.hidden = true;
@@ -74,6 +95,8 @@ export async function initStream() {
     }
 
     await getFrames();
+
+    // getFaceSize();
   };
 
   //   await getDevices();
