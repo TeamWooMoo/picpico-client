@@ -60,7 +60,8 @@ const handleTrack = (data, myPeer) => {
       peerCanvasGL.style.position = "absolute";
       peerCanvasGL.style.top = "0px";
       peerCanvasGL.style.left = "0px";
-      peerCanvasGL.id = `${uuid()}`;
+      peerCanvasGL.setAttribute("uid", `${uuid()}`);
+      // peerCanvasGL.id = `${uuid()}`;
 
       initWebGL(peerVideo, peerCanvasGL);
     };
