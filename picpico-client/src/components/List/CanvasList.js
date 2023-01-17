@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import { setTakePic } from "../../slice/takepicInfo";
 import { socket } from "../../modules/sockets.mjs";
 import "./CanvasList.css";
-var PNG = require("png-js");
 
 const CanvasList = () => {
   const dispatch = useDispatch();
@@ -12,33 +11,28 @@ const CanvasList = () => {
 
   useEffect(() => {
     if (shuttered === true) {
-      // const bgCanvas = document.getElementById("bgCanvas");
-      // const bgCtx = bgCanvas.getContext("2d");
-      // bgCtx.fillStyle = "red";
-      // bgCtx.fillRect(0, 0, 350, 350);
+      const bgCanvas = document.getElementById("bgCanvas");
+      const bgCtx = bgCanvas.getContext("2d");
+      bgCtx.fillStyle = "red";
+      bgCtx.fillRect(0, 0, 350, 350);
       const filmCanvas = document.getElementById("filmCanvas"); // canvas
       const allCanvases = document.getElementById("allCanvases"); // div
       const ctx = filmCanvas.getContext("2d");
-      // ctx.drawImage(bgCanvas, 0, 0);
+      ctx.drawImage(bgCanvas, 0, 0);
 
       const videoRow = document.getElementById("peerVideos");
 
       for (const child of allCanvases.children) {
-        const gl = child.getContext("webgl");
+        // const img = new Image();
+        // img.src = child.toDataURL();
+        // console.log("img:", img);
+        // ctx.drawImage(img, 0, 0);
 
-        var pixels = new Uint8Array(child.width * child.height * 4);
-        gl.readPixels(0, 0, child.width, child.height, gl.RGBA, gl.UNSIGNED_BYTE, pixels);
+        // const childCtx = child.getContext("webgl");
+        console.log("child: ", child);
+        // const childImage = childCtx.getImageData(0, 0, 350, 350);
 
-        var png = new PNG({
-          width: child.width,
-          height: child.height,
-          filterType: -1,
-        });
-
-        png.data = pixels;
-        var pngData = Image.sync.write(png);
-
-        filmCanvas.putImageData(pngData, 0, 0);
+        ctx.drawImage(child, 0, 0);
       }
       const url = filmCanvas.toDataURL();
 
