@@ -1,23 +1,10 @@
-import { myPeers } from "../controller/MainController.js";
+import { myPeers, peerCanvas } from "../controller/MainController.js";
 
-function addAlpha(imageData, alphaReceived, piledAlpha) {
-  let tmp;
-  let alphaIndex;
-  for (let i = 3; i < imageData.data.length; i += 4) {
-    tmp = i - 3;
-    alphaIndex = tmp / 4;
-
-    piledAlpha[alphaIndex] += alphaReceived[alphaIndex];
-
-    imageData.data[i] = piledAlpha[alphaIndex];
-  }
-
-  return { imageData, piledAlpha };
-}
-
+//! dataChannel을 이용해서 넘어온 alphaData를 이용하는 방법
+//! 임시 폐기
+/*
 export async function initPeerCanvas() {
   const peerCanvas = document.getElementById("peerCanvas");
-
   const ctx = peerCanvas.getContext("2d");
 
   ctx.willReadFrequently = true;
@@ -61,3 +48,19 @@ export async function initPeerCanvas() {
 
   drawPeers();
 }
+
+function addAlpha(imageData, alphaReceived, piledAlpha) {
+  let tmp;
+  let alphaIndex;
+  for (let i = 3; i < imageData.data.length; i += 4) {
+    tmp = i - 3;
+    alphaIndex = tmp / 4;
+
+    piledAlpha[alphaIndex] += alphaReceived[alphaIndex];
+
+    imageData.data[i] = piledAlpha[alphaIndex];
+  }
+
+  return { imageData, piledAlpha };
+}
+*/

@@ -1,37 +1,22 @@
 import store from "../store.js";
-
 import { setVideosInfo } from "../slice/videosInfo.js";
 import { myPeer, myPeers, myStream } from "../controller/MainController.js";
 import { socket } from "./sockets.mjs";
+import { initWebGL } from "./webgl-transparency.mjs";
 
 /* myPeers
  *    key    :    value
  *
  * socketId  :    myPeer
  *            {
- *                connection   :
- *                videoElement :
- *                alphaChannel :
- *                alphaData    :
+ *                connection    :
+ *                videoElement  :
+ *                canvasElement :
+//  *                alphaChannel  :
+//  *                alphaData     :
  *            }
  */
 
-// const myPeers = {};
-
-// export class myPeer {
-//   connection;
-//   videoElement;
-//   alphaChannel;
-//   alphaData;
-
-//   constructor(newConnection) {
-//     this.connection = newConnection;
-//     this.videoElement = document.createElement("video");
-//     this.videoElement.hidden = true;
-//     this.alphaChannel = null;
-//     this.alphaData = null;
-//   }
-// }
 /******************************************************************* */
 
 const handleIce = data => {
@@ -51,22 +36,32 @@ const handleTrack = (data, myPeer) => {
     console.log(">>>handling track : video !");
 
     const videoRow = document.getElementById("peerVideos");
+    const canvasRow = document.getElementById("peerCanvases");
     const peerVideo = myPeer.videoElement;
+    const peerCanvasGL = myPeer.canvasElement;
 
     console.log(peerVideo);
-    peerVideo.hidden = true;
-    peerVideo.muted = true;
-    peerVideo.autoplay = true;
+    // peerVideo.hidden = true;
+    // peerVideo.muted = true;
+    // peerVideo.autoplay = true;
     peerVideo.className = "col";
     peerVideo.setAttribute("playsinline", "playsinline");
 
     peerVideo.srcObject = data.streams[0];
     videoRow.appendChild(peerVideo);
     peerVideo.play();
-    console.log(">>>>data throughRTC", data);
-    console.log(">>>>data.streams throughRTC", data.streams[0]);
-    console.log(">>>>peerVideo");
+
     console.log(">>>>handing track -> on source to video");
+
+    peerVideo.onplaying = () => {
+      canvasRow.appendChild(peerCanvasGL);
+      peerCanvasGL.className = "canvasRow";
+      peerCanvasGL.style.position = "absolute";
+      peerCanvasGL.style.top = "0px";
+      peerCanvasGL.style.left = "0px";
+
+      initWebGL(peerVideo, peerCanvasGL);
+    };
   }
 };
 
@@ -89,20 +84,13 @@ function makeConnection(socketId) {
     const newPeer = new myPeer(newConnection);
     myPeers[socketId] = newPeer;
 
-    // syncMyPeers();
-
     newConnection.addEventListener("icecandidate", handleIce);
     newConnection.addEventListener("track", data => handleTrack(data, newPeer));
-
-    // myStream = getMyStream();
 
     myStream.getTracks().forEach(track => {
       console.log(">>>myStream", myStream);
       newConnection.addTrack(track, myStream);
     });
-
-    // const testVideo = document.createElement("video");
-    // testVideo.srcObject = myStream;
 
     return newPeer;
   }
@@ -115,16 +103,18 @@ async function onWelcomeEvent(newSocketId) {
 
   const newPeer = makeConnection(newSocketId);
   const newConnection = newPeer.connection;
+
+  // !for DataChannel : 임시 폐기
+  /*
   const newAlphaChannel = newConnection.createDataChannel("alphaChannel");
   newPeer.alphaChannel = newAlphaChannel;
 
-  console.log("onWelcome : connection", newConnection);
   console.log("newAlphaChannel", newAlphaChannel);
-  console.log("me : ", socket.id);
 
   newAlphaChannel.addEventListener("message", event => {
     newPeer.alphaReceived = new Uint8Array(event.data);
   });
+  */
 
   const offer = await newConnection.createOffer();
   newConnection.setLocalDescription(offer);
@@ -134,7 +124,7 @@ async function onWelcomeEvent(newSocketId) {
 }
 
 /******************************************************************* */
-
+/*
 function onDataChannelEvent(event, oldSocketId) {
   console.log(">>>>>dataChannel received", event.data);
 
@@ -144,7 +134,7 @@ function onDataChannelEvent(event, oldSocketId) {
     myPeers[oldSocketId].alphaReceived = new Uint8Array(event.data);
   });
 }
-
+*/
 /******************************************************************* */
 
 async function onOfferEvent(offer, oldSocketId) {
@@ -153,12 +143,7 @@ async function onOfferEvent(offer, oldSocketId) {
   const newPeer = makeConnection(oldSocketId);
   const newConnection = newPeer.connection;
 
-  //   newConnection.addEventListener("datachannel", event => onDataChannelEvent(event, oldSocketId));
-  //   newConnection.addEventListener("datachannel", event => console.log(">>>datachannel", event.channel));
-  newConnection.ondatachannel = event => onDataChannelEvent(event, oldSocketId);
-
-  console.log("onOffer : connection", newConnection);
-  console.log("me :", socket.id);
+  // newConnection.ondatachannel = event => onDataChannelEvent(event, oldSocketId);
 
   newConnection.setRemoteDescription(offer);
   const answer = await newConnection.createAnswer();
@@ -192,9 +177,12 @@ function onIceEvent(ice, socketId) {
 function onGoneEvent(goneSocketId) {
   store.dispatch(setVideosInfo(goneSocketId));
 }
+
+/******************************************************************* */
+
 export async function initWebRTC() {
   socket.on("welcome", onWelcomeEvent);
-  socket.on("datachannel", onDataChannelEvent);
+  // socket.on("datachannel", onDataChannelEvent);
   socket.on("offer", onOfferEvent);
   socket.on("answer", onAnswerEvent);
   socket.on("ice", onIceEvent);
