@@ -14,10 +14,10 @@ const CanvasList = () => {
       const filmCanvas = document.getElementById("filmCanvas");
       const allCanvases = document.getElementById("allCanvases");
       const ctx = filmCanvas.getContext("2d");
-      console.log("<<<<<<", filmCanvas, ctx);
       for (const child of allCanvases.children) {
         const img = new Image();
         img.src = child.toDataURL();
+        console.log("img:", img);
         ctx.drawImage(img, 0, 0);
       }
       const url = filmCanvas.toDataURL();
