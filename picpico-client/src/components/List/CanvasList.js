@@ -29,7 +29,7 @@ const CanvasList = () => {
       }
       dispatch(setTakePic({ value: false }));
 
-      // ctx.clearRect(0, 0, 350, 350);
+      ctx.clearRect(0, 0, 350, 350);
     }
   }, [shuttered]);
 
