@@ -20,7 +20,6 @@ export const DecoDragAndDrop = () => {
         hideAllFrame();
         dragElement = event.target.closest(".draggable");
         if (!dragElement) {
-            console.log(`dragElement = ${dragElement}`);
             return;
         }
 
@@ -71,16 +70,19 @@ export const DecoDragAndDrop = () => {
             newX = field.getBoundingClientRect().left;
         }
 
-        dragElement.style.left = newX + "px";
-        dragElement.style.top = newY + "px";
+        console.log(`clientX=${clientX}, clientY=${clientY}`);
+        console.log(`newX=${newX}, newY=${newY}`);
+        dragElement.style.left = newX - field.getBoundingClientRect().left + "px";
+        dragElement.style.top = newY - field.getBoundingClientRect().top + "px";
     };
 
     const finishDrag = () => {
         if (!isDragging) return;
         isDragging = false;
 
-        dragElement.style.top = parseInt(dragElement.style.top) - field.getBoundingClientRect().top + "px";
-        dragElement.style.left = parseInt(dragElement.style.left) - field.getBoundingClientRect().left + "px";
+        dragElement.style.top = parseInt(dragElement.style.top) + "px";
+        dragElement.style.left = parseInt(dragElement.style.left) + "px";
+
         dragElement.style.position = "absolute";
 
         field.removeEventListener("mousemove", onMouseMove);
@@ -116,9 +118,22 @@ export const DecoDragAndDrop = () => {
         field.addEventListener("mousedown", fieldMouseDown);
     };
 
+    const reset = () => {
+        isDragging = false;
+        if (!field) return;
+        field.removeEventListener("mousedown", fieldMouseDown);
+        const stickers = field.children;
+        for (let i = 0; i < stickers.length; i++) {
+            stickers[i].removeEventListener("dragstart");
+        }
+    };
+
     return {
         init: () => {
             init();
+        },
+        reset: () => {
+            reset();
         },
     };
 };
