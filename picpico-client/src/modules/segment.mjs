@@ -1,15 +1,42 @@
 import { SelfieSegmentation } from "@mediapipe/selfie_segmentation";
-import { myPeers, selfieSegmentation } from "../controller/MainController.js";
+import { myFace, myPeers, selfieSegmentation } from "../controller/MainController.js";
+import { getFaceSize } from "./tracking-facesize.mjs";
 
 function onCanvas(results, canvas) {
   let ctx = canvas.getContext("2d");
+  let myCtx = myFace.getContext("2d");
+
+  /****** */
+
+  myCtx.willReadFrequently = true;
+
+  myCtx.save();
+
+  myFace.width = 350;
+  myFace.height = 350;
+
+  myCtx.clearRect(0, 0, canvas.width, canvas.height);
+  myCtx.drawImage(results.image, 0, 0, myFace.width, myFace.height);
+
+  // if (results.image) {
+  //   // console.log("results.image <- must not be undefined", results.image);
+  //   const img = myCtx.getImageData(0, 0, myFace.width, myFace.height);
+  //   getFaceSize(img);
+  // }
+
+  myCtx.globalCompositeOperation = "destination-in";
+  myCtx.drawImage(results.segmentationMask, 0, 0, canvas.width, canvas.height);
+
+  myCtx.restore();
+
+  /****** */
 
   ctx.willReadFrequently = true;
 
   ctx.save();
 
-  canvas.width = 400;
-  canvas.height = 400;
+  canvas.width = 350;
+  canvas.height = 350;
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.drawImage(results.image, 0, 0, canvas.width, canvas.height);

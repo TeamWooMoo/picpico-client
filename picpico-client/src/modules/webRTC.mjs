@@ -55,6 +55,11 @@ const handleTrack = (data, myPeer) => {
 
     peerVideo.onplaying = () => {
       canvasRow.appendChild(peerCanvasGL);
+      peerCanvasGL.className = "canvasRow";
+      peerCanvasGL.style.position = "absolute";
+      peerCanvasGL.style.top = "0px";
+      peerCanvasGL.style.left = "0px";
+
       initWebGL(peerVideo, peerCanvasGL);
     };
   }
