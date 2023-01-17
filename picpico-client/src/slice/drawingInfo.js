@@ -4,12 +4,16 @@ import { createSlice } from "@reduxjs/toolkit";
 const drawingInfo = createSlice({
   name: "drawingInfo",
   initialState: {
+    decoList: [],
     strokes: [],
     strokeColor: "black",
     strokeHistory: {},
   },
 
   reducers: {
+    setDecoListInfo(state, action) {
+      state.decoList = action.payload.value;
+    },
     setStrokeInfo(state, action) {
       state.strokes = [...state.strokes, action.payload.value];
     },
@@ -24,6 +28,6 @@ const drawingInfo = createSlice({
   },
 });
 
-export let { setStrokeInfo, addStrokeHistory, setStrokeColorInfo } = drawingInfo.actions;
+export let { setStrokeInfo, addStrokeHistory, setStrokeColorInfo, setDecoListInfo } = drawingInfo.actions;
 
 export default drawingInfo;

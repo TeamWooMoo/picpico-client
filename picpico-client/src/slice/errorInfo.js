@@ -3,16 +3,16 @@ import { createSlice } from "@reduxjs/toolkit";
 const errorInfo = createSlice({
   name: "errorInfo",
   initialState: {
-    error: "",
+    difference: false,
   },
 
   reducers: {
-    setErrorInfo(state, action) {
+    setErrorDiffInfo(state, action) {
       state.error = action.payload.value;
     },
   },
 });
 
-export let { setErrorInfo } = errorInfo.actions;
+export let { setErrorDiffInfo } = errorInfo.actions;
 
 export default errorInfo;

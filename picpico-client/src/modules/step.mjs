@@ -1,3 +1,4 @@
+import { setDecoListInfo } from "../slice/drawingInfo.js";
 import { setDecoInfo, setGalleryInfo, setPicBoothInfo, setSelectionInfo } from "../slice/picpicoInfo.js";
 import { setImgListInfo } from "../slice/selectionInfo.js";
 import store from "../store.js";
@@ -8,7 +9,8 @@ export const onDoneTakeEvent = imgArr => {
   store.dispatch(setSelectionInfo({ value: true }));
 };
 
-export const onDonePickEvent = () => {
+export const onDonePickEvent = imgArr => {
+  store.dispatch(setDecoListInfo({ value: imgArr }));
   store.dispatch(setSelectionInfo({ value: false }));
   store.dispatch(setDecoInfo({ value: true }));
 };

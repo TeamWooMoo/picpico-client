@@ -5,7 +5,7 @@ import { BASE_URL } from "../config.js";
 import { onResetMemberEvent } from "./resetMember.mjs";
 import { onStrokeCanvasEvent, onMouseDownEvent } from "./strokeCanvas.mjs";
 import { onPickPicEvent } from "./pickPic.mjs";
-import { onPermissionDeniedEvent } from "./error.mjs";
+import { onWrongPickEvent } from "./error.mjs";
 import { onTakePicEvent } from "./takepic.mjs";
 
 // let socket;
@@ -28,5 +28,6 @@ export async function joinRoom(roomId) {
   socket.on("done_deco", onDoneDecoEvent);
   socket.on("stroke_canvas", onStrokeCanvasEvent);
   socket.on("mouse_down", onMouseDownEvent);
-  socket.on("permission_denied", onPermissionDeniedEvent);
+  // socket.on("permission_denied", onPermissionDeniedEvent);
+  socket.on("wrong_pick", onWrongPickEvent);
 }

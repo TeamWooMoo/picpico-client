@@ -1,9 +1,8 @@
 import { useSelector } from "react-redux";
-import { useState } from "react";
-import { List } from "rsuite";
 import "./DecoList.css";
 
 const DecoList = () => {
+  const decoImgList = useSelector(state => state.drawingInfo.decoList);
   return <ul></ul>;
 };
 

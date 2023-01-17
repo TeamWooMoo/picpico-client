@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { setStrokeColorInfo } from "../../slice/drawingInfo";
 import store from "../../store";
 import "./ColorList.css";
