@@ -1,7 +1,8 @@
+import "./Decoration.css";
 import { FlexboxGrid } from "rsuite";
+import MemberList from "../components/List/MemberList";
 import DecoCanvas from "../components/Canvas/DecoCanvas";
-import DecoList from "../components/List/DecoList";
-import ColorList from "../components/List/ColorList";
+
 // import { useEffect } from "react";
 // import store from "../store";
 // import { setErrorInfo } from "../slice/errorInfo";
@@ -12,10 +13,9 @@ const Decoration = () => {
   // }, []);
   return (
     <>
-      <FlexboxGrid>
+      <FlexboxGrid className="decoration">
+        <MemberList />
         <DecoCanvas style={{ margin: "auto", width: "1000px" }} />
-        <DecoList />
-        <ColorList />
       </FlexboxGrid>
     </>
   );

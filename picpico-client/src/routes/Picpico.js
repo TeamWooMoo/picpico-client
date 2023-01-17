@@ -26,6 +26,8 @@ import SelectMessage from "../components/Message/SelectMessage";
 
 // List
 import MemberList from "../components/List/MemberList";
+import DecoList from "../components/List/DecoList";
+import ColorList from "../components/List/ColorList";
 
 import "../style/style.css";
 import "./Picpico.css";
@@ -90,6 +92,8 @@ const Picpico = () => {
           <Content>
             <MemberList />
             <Decoration controller={controller} />
+            <DecoList />
+            <ColorList />
           </Content>
           <Footer className="deco_footer">
             <DecoDoneBtn />

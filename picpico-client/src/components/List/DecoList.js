@@ -1,10 +1,11 @@
-import { useSelector } from "react-redux";
-import { useState } from "react";
-import { List } from "rsuite";
-import "./DecoList.css";
+import { FlexboxGrid } from "rsuite";
 
 const DecoList = () => {
-  return <></>;
+  return (
+    <>
+      <FlexboxGrid justify="center">Decolist 확인</FlexboxGrid>
+    </>
+  );
 };
 
 export default DecoList;
