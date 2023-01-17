@@ -25,7 +25,6 @@ const picpicoInfo = createSlice({
   },
 });
 
-export let { setPicBoothInfo, setSelectionInfo, setDecoInfo, setGalleryInfo } =
-  picpicoInfo.actions;
+export let { setPicBoothInfo, setSelectionInfo, setDecoInfo, setGalleryInfo } = picpicoInfo.actions;
 
 export default picpicoInfo;

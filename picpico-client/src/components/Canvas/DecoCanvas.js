@@ -9,8 +9,10 @@ const DecoCanvas = () => {
   const [drawing, setDrawing] = useState(false);
   const strokeArr = useSelector(state => state.drawingInfo.strokes);
   const strokeHistory = useSelector(state => state.drawingInfo.strokeHistory);
+  const strokeColor = useSelector(state => state.drawingInfo.strokeColor);
   const decoMyCanvas = useRef();
   const decoPeerCanvas = useRef();
+
   const roomId = useSelector(state => state.roomInfo.room);
 
   const onCanvasDown = ({ nativeEvent }) => {
@@ -30,10 +32,10 @@ const DecoCanvas = () => {
       decoCtx.beginPath();
       decoCtx.moveTo(offsetX, offsetY);
     } else {
-      decoCtx.strokeStyle = "black";
+      decoCtx.strokeStyle = strokeColor;
       decoCtx.lineTo(offsetX, offsetY);
       decoCtx.stroke();
-      socket.emit("stroke_canvas", roomId, offsetX, offsetY, "white", socket.id);
+      socket.emit("stroke_canvas", roomId, offsetX, offsetY, strokeColor, socket.id);
     }
   };
 

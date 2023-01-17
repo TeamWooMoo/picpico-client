@@ -4,13 +4,17 @@ import { createSlice } from "@reduxjs/toolkit";
 const drawingInfo = createSlice({
   name: "drawingInfo",
   initialState: {
-    strokeHistory: {},
     strokes: [],
+    strokeColor: "black",
+    strokeHistory: {},
   },
 
   reducers: {
     setStrokeInfo(state, action) {
       state.strokes = [...state.strokes, action.payload.value];
+    },
+    setStrokeColorInfo(state, action) {
+      state.strokeColor = action.payload.value;
     },
     addStrokeHistory(state, action) {
       const [socketId, receivedX, receivedY] = action.payload.value;
@@ -20,6 +24,6 @@ const drawingInfo = createSlice({
   },
 });
 
-export let { setStrokeInfo, addStrokeHistory } = drawingInfo.actions;
+export let { setStrokeInfo, addStrokeHistory, setStrokeColorInfo } = drawingInfo.actions;
 
 export default drawingInfo;

@@ -6,18 +6,18 @@ import { useEffect } from "react";
 import store from "../store";
 import { setErrorInfo } from "../slice/errorInfo";
 
-const Decoration = ({ controller }) => {
-  useEffect(() => {
-    store.dispatch(setErrorInfo(""));
-  }, []);
+const Decoration = () => {
+  // useEffect(() => {
+  //   store.dispatch(setErrorInfo(""));
+  // }, []);
   return (
     <>
       <MemberList />
-      <DecoCanvas controller={controller} />
+      <DecoCanvas />
       <div>
         <ColorList />
       </div>
-      <DecoList controller={controller} />
+      <DecoList />
     </>
   );
 };
