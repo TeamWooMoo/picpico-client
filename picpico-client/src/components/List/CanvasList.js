@@ -11,14 +11,21 @@ const CanvasList = () => {
 
   useEffect(() => {
     if (shuttered === true) {
-      const filmCanvas = document.getElementById("filmCanvas");
-      const allCanvases = document.getElementById("allCanvases");
+      const bgCanvas = document.getElementById("bgCanvas");
+      const bgCtx = bgCanvas.getContext("2d");
+      bgCtx.fillStyle = "red";
+      bgCtx.fillRect(0, 0, 350, 350);
+      const filmCanvas = document.getElementById("filmCanvas"); // canvas
+      const allCanvases = document.getElementById("allCanvases"); // div
       const ctx = filmCanvas.getContext("2d");
+      ctx.drawImage(bgCanvas, 0, 0);
+
       for (const child of allCanvases.children) {
-        const img = new Image();
-        img.src = child.toDataURL();
-        console.log("img:", img);
-        ctx.drawImage(img, 0, 0);
+        // const img = new Image();
+        // img.src = child.toDataURL();
+        // console.log("img:", img);
+        // ctx.drawImage(img, 0, 0);
+        ctx.drawImage(child, 0, 0);
       }
       const url = filmCanvas.toDataURL();
 
@@ -36,6 +43,7 @@ const CanvasList = () => {
   return (
     <>
       <div className="canvasBox">
+        <canvas id="bgCanvas" className="canvas" width="350" height="350"></canvas>
         <canvas id="myGreenCanvas" className="canvas"></canvas>
         <div id="allCanvases"></div>
         <canvas id="filmCanvas" className="canvas" width="350" height="350"></canvas>
