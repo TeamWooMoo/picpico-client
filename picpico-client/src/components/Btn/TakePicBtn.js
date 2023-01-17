@@ -1,7 +1,6 @@
 import { useDispatch } from "react-redux";
 import { IoRadioButtonOnOutline } from "react-icons/io5";
 import { setTakePic } from "../../slice/takepicInfo";
-import "./TakePicBtn.css";
 
 function TakePicBtn() {
   const dispatch = useDispatch();
