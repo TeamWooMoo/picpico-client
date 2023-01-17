@@ -36,7 +36,7 @@ const handleTrack = (data, myPeer) => {
     console.log(">>>handling track : video !");
 
     const videoRow = document.getElementById("peerVideos");
-    const canvasRow = document.getElementById("peerCanvases");
+    const canvasRow = document.getElementById("allCanvases");
     const peerVideo = myPeer.videoElement;
     const peerCanvasGL = myPeer.canvasElement;
 

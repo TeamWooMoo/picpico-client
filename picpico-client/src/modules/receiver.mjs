@@ -1,4 +1,4 @@
-import { myPeers, peerCanvas } from "../controller/MainController.js";
+// import { myPeers, peerCanvas } from "../controller/MainController.js";
 
 //! dataChannel을 이용해서 넘어온 alphaData를 이용하는 방법
 //! 임시 폐기
