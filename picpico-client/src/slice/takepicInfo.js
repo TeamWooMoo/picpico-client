@@ -5,8 +5,6 @@ const takepicInfo = createSlice({
   initialState: {
     takePic: false,
     imgIdx: 0,
-    picImg: [],
-    selected: [],
   },
 
   reducers: {
@@ -16,16 +14,9 @@ const takepicInfo = createSlice({
     setImgIdxCount(state, action) {
       state.imgIdx = action.payload.value;
     },
-    setPicImg(state, action) {
-      // 찍은 애들이 여기에 들어갈거에요
-      state.picImg = action.payload.value;
-    },
-    setSelected(state, action) {
-      state.selected = [...state.selected, action.payload.value];
-    },
   },
 });
 
-export let { setTakePic, setImgIdxCount, setPicImg, setSelected } = takepicInfo.actions;
+export let { setTakePic, setImgIdxCount } = takepicInfo.actions;
 
 export default takepicInfo;

@@ -73,7 +73,7 @@ const Picpico = () => {
             <SelectMessage />
           </Header>
           <Content>
-            <Selection controller={controller} />
+            <Selection />
           </Content>
           <Footer className="selection_footer">
             <SelectDoneBtn />
