@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { socket } from "../../modules/sockets.mjs";
 import { addStrokeHistory } from "../../slice/drawingInfo.js";
 import "./DecoCanvas.css";
+import { DragAndDrop } from "../../modules/drag-and-drop.mjs";
 
 const DecoCanvas = () => {
   const dispatch = useDispatch();
@@ -57,20 +58,40 @@ const DecoCanvas = () => {
     }
   }, [strokeArr]);
 
+  useEffect(() => {
+    const dragAndDrop = DragAndDrop();
+    dragAndDrop.init();
+  }, []);
+
   return (
     <div className="canvasBox">
-      <div style={{ position: "relative" }}>
-        <canvas ref={decoPeerCanvas} width="200" height="200" style={{ position: "absolute", top: "0px", left: "0px" }}></canvas>
-        <canvas
-          ref={decoMyCanvas}
-          width="200"
-          height="200"
-          style={{ position: "absolute", top: "0px", left: "0px", border: "2px solid white" }}
-          onMouseDown={onCanvasDown}
-          onMouseMove={onCanvasMove}
-          onMouseUp={onCanvasUp}
-        ></canvas>
+      {/* <div style={{ position: "relative" }}> */}
+      <canvas ref={decoPeerCanvas} width="500px" height="500px" style={{ position: "absolute", top: "0px", left: "0px", border: "2px solid white" }}></canvas>
+      <canvas
+        ref={decoMyCanvas}
+        width="500px"
+        height="500px"
+        style={{ position: "absolute", top: "0px", left: "0px", border: "2px solid white" }}
+        onMouseDown={onCanvasDown}
+        onMouseMove={onCanvasMove}
+        onMouseUp={onCanvasUp}
+      ></canvas>
+
+      <div id="sticker_field" style={{ position: "absolute", top: "0px", left: "0px", width: "502px", height: "502px" }}>
+        <img
+          alt="sticker1"
+          src="https://i.pinimg.com/originals/18/11/30/181130c64c246318e1e4d463d1844ed7.gif"
+          class="draggable"
+          style={{ position: "absolute", width: "100px", height: "100px" }}
+        />
+        <img
+          alt="sticker2"
+          src="https://storage.cobak.co/uploads/1585038492476558_8eeec6050c.gif"
+          class="draggable"
+          style={{ position: "absolute", width: "100px", height: "100px" }}
+        />
       </div>
+      {/* </div> */}
     </div>
   );
 };
