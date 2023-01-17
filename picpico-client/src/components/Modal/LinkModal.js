@@ -1,7 +1,8 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Modal, Button, ButtonToolbar } from "rsuite";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import { shareKakao } from "../Btn/KakaoShareBtn";
 
 function LinkModal() {
   const [open, setOpen] = useState(false);
@@ -20,6 +21,14 @@ function LinkModal() {
       alert("클립보드에 링크가 실패하였습니다.");
     }
   };
+
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://developers.kakao.com/sdk/js/kakao.js";
+    script.async = true;
+    document.body.appendChild(script);
+    return () => document.body.removeChild(script);
+  }, []);
 
   return (
     <>
@@ -42,6 +51,13 @@ function LinkModal() {
           </CopyToClipboard>
           <Button block style={{ color: "black", lineHeight: "15px", margin: "10px 0" }} className="btn-shadow">
             📥 카카오톡 전송
+          </Button>
+          <Button onClick={() => shareKakao(window.location.href)}>
+            <img
+              className="w-12 h-12"
+              src={"https://developers.kakao.com/assets/img/about/logos/kakaotalksharing/kakaotalk_sharing_btn_medium.png"}
+              alt={"카카오톡 공유하기"}
+            />
           </Button>
         </Modal.Body>
         <Modal.Footer>
