@@ -20,7 +20,7 @@ function EnterRoomForm() {
       .then(res => {
         const roomName = res.data.roomId;
         dispatch(setRoomInfo({ value: roomName }));
-        navigate(`/rooms/${roomName}`);
+        navigate(`/room/${roomName}`);
       })
       .catch(() => {
         alert("없는 방 번호 입니다.");

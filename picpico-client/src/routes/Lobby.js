@@ -3,7 +3,7 @@ import EnterRoomBtn from "../components/Btn/EnterRoomBtn";
 import { Container, ButtonGroup } from "rsuite";
 import "../style/style.css";
 
-function Room() {
+function Lobby() {
   return (
     <Container className="default_container">
       <CreateRoomBtn />
@@ -11,4 +11,4 @@ function Room() {
     </Container>
   );
 }
-export default Room;
+export default Lobby;

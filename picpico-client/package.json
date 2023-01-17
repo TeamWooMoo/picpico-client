@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@mediapipe/selfie_segmentation": "^0.1.1671057942",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
+    "@mediapipe/selfie_segmentation": "^0.1.1671057942",
     "@mui/material": "^5.11.4",
     "@reduxjs/toolkit": "^1.9.1",
     "@rsuite/icons": "^1.0.2",
