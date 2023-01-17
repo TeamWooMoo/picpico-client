@@ -1,6 +1,8 @@
 import { cameraList, currentCamera, myCanvas, myStream, myVideo } from "../controller/MainController.js";
 import { segment, initSegment } from "./segment.mjs";
 
+/******************************************************************* */
+
 async function getCameras() {
   try {
     const devices = await navigator.mediaDevices.enumerateDevices();
@@ -18,6 +20,8 @@ async function getCameras() {
     console.log(e);
   }
 }
+
+/******************************************************************* */
 
 async function getMedia(deviceId) {
   const initialConstraints = {
@@ -48,6 +52,8 @@ async function getMedia(deviceId) {
     console.log(e);
   }
 }
+
+/******************************************************************* */
 
 export async function initStream() {
   myVideo = document.getElementById("myVideo");
