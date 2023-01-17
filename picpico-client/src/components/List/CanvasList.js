@@ -12,9 +12,14 @@ const CanvasList = () => {
 
   useEffect(() => {
     if (shuttered === true) {
-      dispatch(setImgIdxCount({ value: imgIdx + 1 }));
+      // dispatch(setImgIdxCount({ value: imgIdx + 1 }));
       const url = myCanvas.current.toDataURL();
-      socket.emit("take_pic", imgIdx.toString(), url);
+
+      if (typeof imgIdx === "string") {
+        socket.emit("take_pic", (parseInt(imgIdx) + 1).toString(), url);
+      } else {
+        socket.emit("take_pic", (imgIdx + 1).toString(), url);
+      }
       dispatch(setTakePic({ value: false }));
     }
   }, [shuttered]);

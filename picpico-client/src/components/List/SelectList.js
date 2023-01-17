@@ -7,7 +7,7 @@ import { useEffect } from "react";
 const SelectList = () => {
   const roomId = useSelector(state => state.roomInfo.room);
   const selected = useSelector(state => state.selectionInfo.selected); //숫자 스트링 그 자체
-  const imgData = useSelector(state => state.selectionInfo.ImageList);
+  const imgData = useSelector(state => state.selectionInfo.imgList);
   //imgArr가 보여야 함.
   const onImageClick = event => {
     const pic = event.target;
@@ -23,13 +23,13 @@ const SelectList = () => {
   }, [selected]);
   return (
     <>
-      {/* <ImageList sx={{ width: 350, height: 350 }} cols={1} rowHeight={350}>
-        {imgData.map(img => (
+      <ImageList sx={{ width: 350, height: 350 }} cols={1} rowHeight={350}>
+        {Object.values(imgData).map(({ picture }, idx) => (
           <ImageListItem>
-            <img alt={`pic-${img.idx}`} onClick={onImageClick} src={img.src} data-pid={img.idx} id={`pic-${img.idx}`} />
+            <img alt={`pic-${idx}`} onClick={onImageClick} src={picture} data-pid={idx} id={`pic-${idx}`} />
           </ImageListItem>
         ))}
-      </ImageList> */}
+      </ImageList>
     </>
   );
 };
