@@ -3,6 +3,7 @@ import { setVideosInfo } from "../slice/videosInfo.js";
 import { myPeer, myPeers, myStream } from "../controller/MainController.js";
 import { socket } from "./sockets.mjs";
 import { initWebGL } from "./webgl-transparency.mjs";
+import uuid from "react-uuid";
 
 /* myPeers
  *    key    :    value
@@ -59,6 +60,7 @@ const handleTrack = (data, myPeer) => {
       peerCanvasGL.style.position = "absolute";
       peerCanvasGL.style.top = "0px";
       peerCanvasGL.style.left = "0px";
+      peerCanvasGL.id = `${uuid()}`;
 
       initWebGL(peerVideo, peerCanvasGL);
     };
