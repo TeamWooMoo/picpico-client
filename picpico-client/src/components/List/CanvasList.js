@@ -18,7 +18,7 @@ const CanvasList = () => {
       for (const child of allCanvases.children) {
         const img = new Image();
         img.src = child.toDataURL();
-        ctx.drawImage(img.src, 0, 0);
+        ctx.drawImage(img, 0, 0);
       }
       const url = filmCanvas.toDataURL();
 
