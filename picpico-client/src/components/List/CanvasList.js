@@ -14,6 +14,7 @@ const CanvasList = () => {
       const filmCanvas = document.getElementById("filmCanvas");
       const allCanvases = document.getElementById("allCanvases");
       const ctx = filmCanvas.getContext("2d");
+      console.log("<<<<<<", filmCanvas, ctx);
       for (const child of allCanvases.children) {
         console.log(">>", child);
         ctx.drawImage(child, 0, 0);
@@ -27,7 +28,7 @@ const CanvasList = () => {
       }
       dispatch(setTakePic({ value: false }));
 
-      ctx.clearRect(0, 0, 350, 350);
+      // ctx.clearRect(0, 0, 350, 350);
     }
   }, [shuttered]);
 
