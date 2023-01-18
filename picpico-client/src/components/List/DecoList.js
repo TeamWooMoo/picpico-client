@@ -27,7 +27,7 @@ const DecoList = () => {
     <>
       <ImageList sx={{ width: 350, height: 350 }} cols={3} rowHeight={250}>
         {Object.values(decoData).map(({ picture }, idx) =>
-          idx != currIdx ? null : (
+          idx == currIdx ? null : (
             <ImageListItem>
               <img alt={`deco-${idx}`} onClick={onDecoImgClick} src={picture} data-deco={idx} id={`deco-${idx}`} />
             </ImageListItem>
