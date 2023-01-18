@@ -94,7 +94,14 @@ const DecoCanvas = () => {
     idxArr.forEach(idx => {
       const imgCanvas = document.getElementById(`img-${idx}`);
       const imgCtx = imgCanvas.getContext("2d");
-      imgCtx.drawImage(decoData[idx]["picture"], 0, 0);
+
+      const newImg = new Image();
+
+      console.log(">>><<<>>>", decoData[idx]["picture"]);
+      newImg.src = decoData[idx]["picture"];
+      newImg.onload = async function () {
+        await imgCtx.drawImage(newImg, 0, 0);
+      };
     });
   }, []);
 
