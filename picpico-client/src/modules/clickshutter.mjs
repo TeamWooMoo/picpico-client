@@ -22,22 +22,11 @@ export const onSendPicEvent = (idx, imgArr) => {
   imgArr.forEach(obj => {
     const url = obj.picture;
     const img = new Image();
-    const img2 = fetch(url)
-      .then(resp => resp.arrayBuffer())
-      .then(buffer => {
-        // console.log("unit", buffer, Object.keys(buffer)["Unit8Array"]);
-        const array = new Uint8ClampedArray(buffer);
-        console.log("array", array);
-        const imageData = new ImageData(array, 350, 350);
-        ctx.putImageData(imageData, 0, 0);
-      });
 
-    // img.src = url;
-    // img.addEventListener("load", () => {
-    //   ctx.drawImage(img, 0, 0);
-    // });
-    // console.log("url:", url);
-    console.log(">>url", img.src, img);
+    img.src = url;
+    img.onload = function () {
+      ctx.drawImage(img, 0, 0);
+    };
   });
 
   const resultUrl = canvas.toDataURL("image/png");
