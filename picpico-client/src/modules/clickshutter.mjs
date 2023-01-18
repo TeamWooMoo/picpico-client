@@ -23,12 +23,13 @@ export const onSendPicEvent = (idx, imgArr) => {
     const url = obj.picture;
     const img2 = fetch(url)
       .then(resp => resp.arrayBuffer())
-      .then(console.log);
+      .then(buffer => {
+        ctx.putImageData(buffer.Uint8Array, 0, 0);
+      });
 
     const img = new Image();
     // console.log("url:", url);
     console.log(">>url", img.src, img);
-    ctx.drawImage(img, 0, 0);
     img.src = url;
   });
 
