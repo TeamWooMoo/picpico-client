@@ -7,10 +7,12 @@ function LoginBtn() {
   function onKakaoLogin() {
     axios
       .get(API.KAKAOLOGIN)
-
       .then(res => {
-        const rescheck = res;
-        window.location.href = rescheck.data.url;
+          const rescheck = res;
+          // console.log(rescheck.data.url);
+          console.log(rescheck);
+
+          window.location.href = rescheck.data;
       })
       .catch(err => {
         alert("로그인에 실패하였습니다.");
