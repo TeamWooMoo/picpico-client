@@ -21,7 +21,8 @@ const SelectList = () => {
     if (selected !== "") {
       console.log("<<selected:", selected);
       const imgTag = document.getElementById(`pic-${selected}`);
-      imgTag.classList.toggle("activate_pic");
+      imgTag.style.border = "3px solid tomato";
+      console.log("imgTag:", imgTag);
     }
   }, [selected]);
   return (
