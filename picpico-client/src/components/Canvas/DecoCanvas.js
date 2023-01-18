@@ -101,9 +101,7 @@ const DecoCanvas = () => {
       //   console.log("idx:", idx);
       //   console.log("doc", document);
       const imgCanvas = document.getElementById(`img-${idx}`);
-      console.log("imgCanvas >>> ", imgCanvas);
       const imgCtx = imgCanvas.getContext("2d");
-      console.log("imgCtx >>> ", imgCtx);
 
       //   const newImg = new Image();
 
@@ -130,7 +128,7 @@ const DecoCanvas = () => {
       </FlexboxGrid>
       <FlexboxGrid className="DecoCanvasBox">
         <div className="canvasWrapper">
-          {idxArr.forEach(idx => {
+          {idxArr.map(idx => {
             <div data-setid={`set-${idx}`} id={`set-${idx}`}>
               <canvas className="decocanvas" width="300px" height="300px" data-img={idx} id={`img-${idx}`}></canvas>
               <canvas className="decocanvas" width="300px" height="300px" data-my={idx} id={`my-${idx}`}></canvas>
