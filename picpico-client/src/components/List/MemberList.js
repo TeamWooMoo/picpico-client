@@ -8,7 +8,7 @@ const MemberList = () => {
   return (
     <div>
       <FlexboxGrid justify="center">
-        <ul style={{ color: "black", textAlign: "center", listStyle: "none" }}>
+        <ul style={{ color: "black", textAlign: "center", listStyle: "none", paddingLeft: 0 }}>
           {memberKeys.map(idx => (
             <li style={{ float: "left" }}>{members[idx]["nickName"]}</li>
           ))}
