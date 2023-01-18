@@ -81,8 +81,12 @@ const Picpico = () => {
             <p style={{ visibility: "hidden" }}>hidden</p>
           </Header>
           <Content>
-            <Selection />
+            <DecoMessage />
+            {/* <MemberList /> */}
           </Content>
+          <Footer>
+            <Selection />
+          </Footer>
           <Footer className="selection_footer">
             <SelectDoneBtn />
           </Footer>
@@ -97,15 +101,12 @@ const Picpico = () => {
           <Content>
             <Decoration controller={controller} />
           </Content>
-          {/* 데코할 사진 리스트 */}
-          <Footer className="decolist_container">
-            <DecoList />
-          </Footer>
           {/* Color List & Sticker List */}
-          <Footer className="tabbar_container">
-            <TabBar />
-          </Footer>
+
           <Footer className="deco_footer">
+            <Footer>
+              <TabBar />
+            </Footer>
             <DecoDoneBtn />
           </Footer>
         </Container>
