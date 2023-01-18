@@ -1,8 +1,10 @@
-.canvasBox {
-  margin: 10px;
-  position: relative;
+.canvasBox .canvas {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 2px solid white;
   box-shadow: inset;
-  background-color: gray;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
 }
@@ -13,7 +15,20 @@
 
 .canvasRow,
 .canvas {
-  position: absolute;
+  /* position: absolute;
   top: 0px;
-  left: 0px;
+  left: 0px; */
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateX(-50%);
+  border: 2px solid white;
+  box-shadow: inset;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+#filmCanvas {
+  top: 7.5%;
+  left: 50%;
 }

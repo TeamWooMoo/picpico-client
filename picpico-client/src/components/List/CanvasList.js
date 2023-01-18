@@ -36,11 +36,11 @@ const CanvasList = () => {
     <>
       <div className="canvasBox">
         <canvas id="myGreenCanvas" className="canvas"></canvas>
-        <div id="allCanvases" ref={allCanvases}></div>
-        <canvas id="filmCanvas" className="canvas" width="350" height="350" ref={filmCanvas}></canvas>
+        <div id="allCanvases" width="350" height="350" ref={allCanvases}></div>
+        <canvas id="filmCanvas" width="350" height="350" className="canvas" ref={filmCanvas}></canvas>
       </div>
 
-      <canvas id="drawnCanvas" hidden="hidden" className="canvas" width="350" height="350"></canvas>
+      <canvas id="drawnCanvas" hidden="hidden" className="canvas"></canvas>
     </>
   );
 };
