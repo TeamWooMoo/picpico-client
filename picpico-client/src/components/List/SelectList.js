@@ -5,6 +5,7 @@ import ImageListItem from "@mui/material/ImageListItem";
 import { useEffect } from "react";
 import { setSelectedInfo } from "../../slice/selectionInfo.js";
 import "./SelectList.css";
+import { List } from "@mui/material";
 
 const SelectList = () => {
   const dispatch = useDispatch();
@@ -31,15 +32,15 @@ const SelectList = () => {
   }, [selected]);
   return (
     <>
-      <ImageList sx={{ width: 350, height: 350 }} cols={1} rowHeight={350}>
+      <List sx={{ width: 350, height: 350 }} cols={1} rowHeight={350}>
         {Object.values(imgData).map(({ picture }, idx) =>
           idx == 0 ? null : (
-            <ImageListItem>
+            <List.Item>
               <img alt={`pic-${idx}`} onClick={onImageClick} src={picture} data-pid={idx} id={`pic-${idx}`} />
-            </ImageListItem>
+            </List.Item>
           )
         )}
-      </ImageList>
+      </List>
     </>
   );
 };
