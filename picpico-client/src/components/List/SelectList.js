@@ -36,7 +36,7 @@ const SelectList = () => {
   }, [selected]);
   return (
     <>
-      <ImageList sx={{ width: 350, height: 350 }} cols={1} rowHeight={350}>
+      <ImageList sx={{ width: 365, height: 450 }} cols={1} rowHeight={350}>
         {Object.values(imgData).map(({ picture }, idx) =>
           idx == 0 ? null : (
             <ImageListItem>
