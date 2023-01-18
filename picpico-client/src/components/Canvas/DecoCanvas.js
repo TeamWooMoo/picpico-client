@@ -123,12 +123,12 @@ const DecoCanvas = () => {
       </FlexboxGrid>
       <FlexboxGrid className="DecoCanvasBox">
         <div className="canvasWrapper">
-          {Object.values(decoData).map(({ picture }, idx) => (
-            <div data-setid={`set-${idx + 1}`} id={`set-${idx + 1}`}>
-              <canvas className="decocanvas" width="300px" height="300px" data-img={idx} id={`img-${idx + 1}`}></canvas>
-              <canvas className="decocanvas" width="300px" height="300px" data-my={idx} id={`my-${idx + 1}`}></canvas>
-              <canvas className="decocanvas" width="300px" height="300px" data-peer={idx} id={`peer-${idx + 1}`}></canvas>
-              <div className="decocanvas" id={`sticker-${idx + 1}`} style={{ position: "absolute", width: "300px", height: "300px" }}>
+          {Object.keys(decoData).forEach(idx => {
+            <div data-setid={`set-${idx}`} id={`set-${idx}`}>
+              <canvas className="decocanvas" width="300px" height="300px" data-img={idx} id={`img-${idx}`}></canvas>
+              <canvas className="decocanvas" width="300px" height="300px" data-my={idx} id={`my-${idx}`}></canvas>
+              <canvas className="decocanvas" width="300px" height="300px" data-peer={idx} id={`peer-${idx}`}></canvas>
+              <div className="decocanvas" id={`sticker-${idx}`} style={{ position: "absolute", width: "300px", height: "300px" }}>
                 <div class="draggable" style={{ position: "absolute", width: "100px", height: "100px" }}>
                   <img
                     alt="sticker1"
@@ -146,8 +146,8 @@ const DecoCanvas = () => {
                   />
                 </div>
               </div>
-            </div>
-          ))}
+            </div>;
+          })}
 
           {mode === "stroke" ? (
             <canvas
