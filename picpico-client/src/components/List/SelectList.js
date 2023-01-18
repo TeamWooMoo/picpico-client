@@ -1,11 +1,10 @@
+import "./SelectList.css";
 import { useDispatch, useSelector } from "react-redux";
 import { socket } from "../../modules/sockets.mjs";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import { useEffect } from "react";
 import { setSelectedInfo } from "../../slice/selectionInfo.js";
-import "./SelectList.css";
-import { List } from "rsuite";
 
 const SelectList = () => {
   const dispatch = useDispatch();
@@ -32,15 +31,15 @@ const SelectList = () => {
   }, [selected]);
   return (
     <>
-      <List sx={{ width: 350, height: 350 }} cols={1} rowHeight={350}>
+      <ImageList sx={{ width: 350, height: 350 }} cols={1} rowHeight={350}>
         {Object.values(imgData).map(({ picture }, idx) =>
           idx == 0 ? null : (
-            <List.Item>
+            <ImageListItem>
               <img alt={`pic-${idx}`} onClick={onImageClick} src={picture} data-pid={idx} id={`pic-${idx}`} />
-            </List.Item>
+            </ImageListItem>
           )
         )}
-      </List>
+      </ImageList>
     </>
   );
 };
