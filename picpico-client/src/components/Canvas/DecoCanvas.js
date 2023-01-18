@@ -64,35 +64,33 @@ const DecoCanvas = () => {
   };
 
   useEffect(() => {
-    if (rendered && strokeArr.length > 0) {
+    if (strokeArr.length > 0) {
       const [newX, newY, newColor, newSocketId, newIdx] = strokeArr[strokeArr.length - 1];
       if (strokeHistory.hasOwnProperty(newSocketId)) {
-        const { x: oldX, y: oldY, i: oldIdx } = strokeHistory[newSocketId];
-        const decoPeerCanvas = document.getElementById(`peer-${oldIdx}`);
-        const decoCtx = decoPeerCanvas.getContext("2d");
-        decoCtx.beginPath();
-        decoCtx.moveTo(oldX, oldY);
-
-        decoCtx.lineTo(newX, newY);
-        decoCtx.strokeStyle = newColor;
-        decoCtx.stroke();
-
-        dispatch(addStrokeHistory({ value: [newSocketId, newX, newY, newIdx] }));
+        // const { x: oldX, y: oldY, i: oldIdx } = strokeHistory[newSocketId];
+        // const decoPeerCanvas = document.getElementById(`peer-${oldIdx}`);
+        // const decoCtx = decoPeerCanvas.getContext("2d");
+        // decoCtx.beginPath();
+        // decoCtx.moveTo(oldX, oldY);
+        // decoCtx.lineTo(newX, newY);
+        // decoCtx.strokeStyle = newColor;
+        // decoCtx.stroke();
+        // dispatch(addStrokeHistory({ value: [newSocketId, newX, newY, newIdx] }));
       }
     }
   }, [strokeArr]);
 
   /* 여기 해야 합니다 */
   useEffect(() => {
-    if (rendered && targetImgIdx !== "") {
+    if (targetImgIdx !== "") {
       console.log("targetImgIdx:", targetImgIdx);
       console.log("decoData", decoData);
       console.log();
-      const canvasWrapper = document.querySelector(".canvasWrapper");
-      const targetDiv = document.getElementById(`set-${targetImgIdx}`);
-      canvasWrapper.insertAdjacentElement("beforeend", targetDiv);
-      const ctx = decoEventCanvas.current.getContext("2d");
-      ctx.clearRect(0, 0, 300, 300);
+      // const canvasWrapper = document.querySelector(".canvasWrapper");
+      // const targetDiv = document.getElementById(`set-${targetImgIdx}`);
+      // canvasWrapper.insertAdjacentElement("beforeend", targetDiv);
+      // const ctx = decoEventCanvas.current.getContext("2d");
+      // ctx.clearRect(0, 0, 300, 300);
     }
   }, [targetImgIdx]);
 
