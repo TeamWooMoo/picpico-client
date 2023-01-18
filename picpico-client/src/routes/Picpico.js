@@ -26,6 +26,9 @@ import SelectMessage from "../components/Message/SelectMessage";
 
 // List
 import MemberList from "../components/List/MemberList";
+import ColorList from "../components/List/ColorList";
+import TabBar from "../components/TabBar/TabBar";
+import DecoList from "../components/List/DecoList";
 
 import "../style/style.css";
 import "./Picpico.css";
@@ -73,7 +76,9 @@ const Picpico = () => {
       ) : selectDone ? (
         <Container className="default_container">
           <Header className="selection_header">
+            <MuteBtn className="muted_left" />
             <SelectMessage />
+            <p style={{ visibility: "hidden" }}>hidden</p>
           </Header>
           <Content>
             <Selection />
@@ -85,12 +90,21 @@ const Picpico = () => {
       ) : decoDone ? (
         <Container className="default_container">
           <Header className="deco_header">
+            <MuteBtn className="muted_left" />
             <DecoMessage />
+            <p style={{ visibility: "hidden" }}>hidden</p>
           </Header>
           <Content>
-            <MemberList />
             <Decoration controller={controller} />
           </Content>
+          {/* 데코할 사진 리스트 */}
+          <Footer className="decolist_container">
+            <DecoList />
+          </Footer>
+          {/* Color List & Sticker List */}
+          <Footer className="tabbar_container">
+            <TabBar />
+          </Footer>
           <Footer className="deco_footer">
             <DecoDoneBtn />
           </Footer>
@@ -98,13 +112,14 @@ const Picpico = () => {
       ) : galleryDone ? (
         <Container className="default_container">
           <Header className="gallery_header">
+            <MuteBtn className="muted_left" />
             <GalleryMessage />
+            <p style={{ visibility: "hidden" }}>hidden</p>
           </Header>
           <Content>
             <Gallery />
           </Content>
           <Footer className="gallery_footer">
-            <PicDownloadBtn />
             <GalleryDoneBtn />
           </Footer>
         </Container>

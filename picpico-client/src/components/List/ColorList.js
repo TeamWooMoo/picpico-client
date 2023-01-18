@@ -11,7 +11,7 @@ const ColorList = () => {
   };
   return (
     <>
-      <FlexboxGrid className="color-options">
+      <FlexboxGrid justify="center" className="color-options">
         <div onClick={onColorClick} className="color-option" style={{ backgroundColor: "#ee4035" }} data-color="#ee4035"></div>
         <div onClick={onColorClick} className="color-option" style={{ backgroundColor: "#f37736" }} data-color="#f37736"></div>
         <div onClick={onColorClick} className="color-option" style={{ backgroundColor: "#fdf498" }} data-color="#fdf498"></div>
