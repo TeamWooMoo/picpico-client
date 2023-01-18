@@ -5,7 +5,6 @@ import { socket } from "../../modules/sockets.mjs";
 import { addStrokeHistory } from "../../slice/drawingInfo.js";
 import { DecoDragAndDrop } from "../../modules/decoDragAndDrop.mjs";
 import { FlexboxGrid, Button } from "rsuite";
-import { ConsoleLogger } from "@nestjs/common";
 
 const DecoCanvas = () => {
   const targetImgIdx = useSelector(state => state.decoInfo.myDecoCanvas);
@@ -58,6 +57,10 @@ const DecoCanvas = () => {
   //   setMode("sticker");
   //   dragAndDrop.init(targetImgIdx);
   // };
+
+  useEffect(() => {
+    console.log("mode change");
+  }, [mode]);
 
   useEffect(() => {
     if (strokeArr.length > 0) {
