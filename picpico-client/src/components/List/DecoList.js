@@ -5,11 +5,7 @@ import "./DecoList.css";
 import GalleryMessage from "./../Message/GalleryMessage";
 
 const DecoList = () => {
-  return (
-    <>
-      <GalleryMessage />
-    </>
-  );
+  return <></>;
 };
 
 export default DecoList;
