@@ -28,12 +28,12 @@ export const onSendPicEvent = (idx, imgArr) => {
     //     ctx.putImageData(buffer.Uint8Array, 0, 0);
     //   });
 
+    img.src = url;
     img.addEventListener("load", () => {
       ctx.drawImage(img, 0, 0);
     });
     // console.log("url:", url);
     console.log(">>url", img.src, img);
-    img.src = url;
   });
 
   const resultUrl = canvas.toDataURL("image/png");
