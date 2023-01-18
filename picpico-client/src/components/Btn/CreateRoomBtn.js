@@ -3,7 +3,7 @@ import uuid from "react-uuid";
 import { useNavigate } from "react-router-dom";
 import { Button, FlexboxGrid } from "rsuite";
 import { API } from "../../config";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setRoomInfo } from "../../slice/roomInfo";
 import { socket } from "../../modules/sockets.mjs";
 import { setKingInfo } from "../../slice/membersInfo";
@@ -11,13 +11,14 @@ import { setKingInfo } from "../../slice/membersInfo";
 function CreateRoomBtn() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const nickName = useSelector(state=>state.membersInfo.nickname)
 
   function onCreateBtnClick() {
     const roomId = uuid();
     dispatch(setKingInfo({ value: true }));
     dispatch(setRoomInfo({ value: roomId }));
     axios
-      .post(API.ROOM, { roomId: roomId, nickname: "king", socketId: socket.id })
+      .post(API.ROOM, { roomId: roomId, nickname: nickName, socketId: socket.id })
       .then(res => {
         //    서버가 어떻게 주는지에 따라서 아래는 바뀔 것
         console.log(res);
