@@ -1,4 +1,3 @@
-import { useSelector } from "react-redux";
 import { setIdxCount, setTakePic } from "../slice/takepicInfo.js";
 import store from "../store.js";
 import { socket } from "./sockets.mjs";
@@ -22,6 +21,10 @@ export const onSendPicEvent = (idx, imgArr) => {
 
   imgArr.forEach(obj => {
     const url = obj.picture;
+    const img2 = fetch(url)
+      .then(resp => resp.arrayBuffer())
+      .then(console.log);
+
     const img = new Image();
     // console.log("url:", url);
     console.log(">>url", img.src, img);
