@@ -1,11 +1,11 @@
 import { Button } from "rsuite";
-import html2canvas from "html2canvas";
+// import html2canvas from "html2canvas";
 
 function PicDownloadBtn() {
   const onCapture = () => {
-    html2canvas(document.getElementById("imageWrapper")).then(canvas => {
-      onSaveImg(canvas.toDataURL("image/jpg"), "PicPiCo_Result.png");
-    });
+    // html2canvas(document.getElementById("imageWrapper")).then(canvas => {
+    // onSaveImg(canvas.toDataURL("image/jpg"), "PicPiCo_Result.png");
+    // });
   };
   const onSaveImg = (url, filename) => {
     const link = document.createElement("a");
