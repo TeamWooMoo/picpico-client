@@ -81,7 +81,6 @@ const Picpico = () => {
             <p style={{ visibility: "hidden" }}>hidden</p>
           </Header>
           <Content>
-            <DecoMessage />
             <MemberList />
           </Content>
           <Footer>
