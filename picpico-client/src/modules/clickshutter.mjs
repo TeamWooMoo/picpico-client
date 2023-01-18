@@ -22,16 +22,17 @@ export const onSendPicEvent = (idx, imgArr) => {
   imgArr.forEach(obj => {
     const url = obj.picture;
     const img = new Image();
-    // const img2 = fetch(url)
-    //   .then(resp => resp.arrayBuffer())
-    //   .then(buffer => {
-    //     ctx.putImageData(buffer.Uint8Array, 0, 0);
-    //   });
+    const img2 = fetch(url)
+      .then(resp => resp.arrayBuffer())
+      .then(buffer => {
+        const imageData = new ImageData(buffer.Uint8Array, 350, 350);
+        ctx.putImageData(imageData, 0, 0);
+      });
 
-    img.src = url;
-    img.addEventListener("load", () => {
-      ctx.drawImage(img, 0, 0);
-    });
+    // img.src = url;
+    // img.addEventListener("load", () => {
+    //   ctx.drawImage(img, 0, 0);
+    // });
     // console.log("url:", url);
     console.log(">>url", img.src, img);
   });
