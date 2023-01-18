@@ -21,10 +21,10 @@ function PicDownloadBtn() {
 
   return (
     <>
-      <div id="imageWrapper" style={{ margin: "15px", width: "350", height: "350", boxShadow: "rgba(26, 18, 18, 0.25) 0 1px 2px 0" }}>
+      <div id="imageWrapper" style={{ margin: "15px", boxShadow: "rgba(26, 18, 18, 0.25) 0 1px 2px 0" }}>
         <img width="350px" height="350px" src={narin} />
       </div>
-      <Button className="btn-shadow" style={{ lineHeight: "15px", margin: "5px 0" }} onClick={onCapture}>
+      <Button className="btn-shadow" style={{ lineHeight: "15px" }} onClick={onCapture}>
         Download Picture 📥
       </Button>
     </>
