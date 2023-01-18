@@ -1,12 +1,67 @@
 // {사진(낙서 포함) + 그 위의 스티커url, 스티커 좌표 } x 4
-// 각 사진 dim : 350 x 350
-// 각 sticker = gif or png
+// 각 resultImage dim : 350 x 350
+// 각 sticker = gif (or png)
 // gif 인 경우 20 frames (각 10frames 2장)
 
 import { decompressFrames, parseGIF } from "gifuct-js";
+import { makeGIF } from "./resultGIF.mjs";
 
-let resultCanvas = document.createElement("canvas"); // 나중에 import 실제 element from component 가져와야함
-let resultImages = []; // {사진 + (각 사진 위의 스티커url, 좌표, frames) 여러개 } x 4 일 것임
+export let resultCanvas = document.createElement("canvas"); // ! 나중에 import 실제 element from component 가져와야함
+export let resultImages = []; // {사진 + (각 사진 위의 스티커url, 좌표, frames) 여러개 } x 4 일 것임
+export let readyToMakeGIF; // ! 컴포넌트 쪽에서 만들어야 하고 그걸 import 하는 걸로 수정 해야함
+
+/***************************************************************** */
+
+export class ResultImage {
+  resultUrl;
+  stickers; // Sticker의 배열
+
+  constructor(_resultUrl, _stickers) {
+    this.resultUrl = _resultUrl;
+    this.stickers = _stickers;
+  }
+}
+
+/***************************************************************** */
+
+export class Sticker {
+  stickerUrl;
+  axisX;
+  axisY;
+  frames; // frame의 배열
+
+  constructor(_stickerUrl, _axisX, _axisY) {
+    this.stickerUrl = _stickerUrl;
+    this.axisX = _axisX;
+    this.axisY = _axisY;
+    this.frames = null;
+  }
+}
+
+/********************* frame from 'gifuct-js' *******************/
+// {
+//     //! The color table lookup index for each pixel
+//     pixels: [...],
+//     //! the dimensions of the gif frame (see disposal method)
+//     dims: {
+//         top: 0,
+//         left: 10,
+//         width: 100,
+//         height: 50
+//     },
+//     //! the time in milliseconds that this frame should be shown
+//     delay: 50,
+//     //! the disposal method (see below)
+//     disposalType: 1,
+//     //! an array of colors that the pixel data points to
+//     colorTable: [...],
+//     //! An optional color index that represents transparency (see below)
+//     transparentIndex: 33,
+//     //! Uint8ClampedArray color converted patch information for drawing ->
+//     patch: [...] // TODO : 이걸 사용해서 new ImageData 생성
+//}
+
+/***************************************************************** */
 
 function decodeGIF(url) {
   const promisedGif = fetch(url)
@@ -19,7 +74,11 @@ function decodeGIF(url) {
     });
 }
 
-function makeResultCanvas() {
+/***************************************************************** */
+
+// 마지막 결과화면에서 각 유저가 보게 될 다 꾸며진 그림 on canvas
+// 스티커가 움직이게 그려줌
+export function makeResultCanvas() {
   const resultCtx = resultCanvas.getContext("2d");
 
   resultCtx.willReadFrequently = true;
@@ -28,36 +87,44 @@ function makeResultCanvas() {
   resultCanvas.height = 350 * 4;
 
   //! 자료구조 정해야 함
-  // resultImages반복문 돌면서 스티커 parsing
-  // eachResult[].stickerFrames = decodeGIF(eachResult [].url) => 자료구조 정해야함
+  // resultImages반복문 돌면서 스티커 parsing => 각 사진의 스티커목록 하나마다 frames를 연결해줌
+  // currentResult[].stickerFrames = decodeGIF(eachResult [].url) => 자료구조 정해야함
 
-  // let frameIndex = 0
+  for (let imageIndex = 0; imageIndex < resultImages.length; imageIndex++) {
+    let currentResult = resultImages[imageIndex];
+
+    for (let stickerIndex = 0; currentResult.stickers.length; stickerIndex++) {
+      const currentSticker = currentResult.stickers[stickerIndex];
+      currentSticker.frames = decodeGIF(currentSticker.stickerUrl);
+    }
+  }
+
+  let frameIndex = 0;
 
   const drawResult = () => {
     resultCtx.save();
 
-    // resultCtx.clearRect();
+    resultCtx.clearRect();
     //
     // resultImages 반복문 돌면서 각 eachResult 에 대해 그리기 실행
-    // for(let i = 0; i< resultImages.length; i++ )
-    // {
-    //     const eachResult = resultImages[i];
-    //     resultCtx = putFrame(eachResult, resultCtx, frameIndex, i)
-    // }
+    for (let imageIndex = 0; imageIndex < resultImages.length; imageIndex++) {
+      const currentResult = resultImages[imageIndex];
+      resultCtx = putFrame(currentResult, resultCtx, frameIndex, imageIndex);
+    }
 
     resultCtx.restore();
 
-    // frameIndex++;
-    // if(frameIndex == 20) frameIndex = 0;
+    frameIndex++;
 
-    // if(frameIndex == 0 && flagMakeFramePNG)
-    // {
-    //      captureFrame();
-    //      if(frameIndex == 20) {
-    //          flagMakeFramePNG = false;
-    //          makeGIF();
-    //      }
-    // }
+    if (readyToMakeGIF && frameIndex === 0) {
+      //      captureFrame(); // 찍는 거 어딘가에 img 태그로 추가해 두게 함
+      if (frameIndex === 19) {
+        readyToMakeGIF = false;
+        makeGIF();
+      }
+    }
+
+    if (frameIndex === 19) frameIndex = 0;
 
     requestAnimationFrame(drawResult);
   };
@@ -65,19 +132,23 @@ function makeResultCanvas() {
   drawResult();
 }
 
+/***************************************************************** */
+
 // 한 사진을 올리고 그 사진에 대한 스티커들 그리기
-function putFrame(eachResult, resultCtx, frameIndex, imageIndex) {
+function putFrame(currentResult, resultCtx, frameIndex, imageIndex) {
   //
-  // resultCtx.drawImage(eachResult.사진, 0, 350*imageIndex)
+  resultCtx.drawImage(currentResult.resultUrl, 0, 350 * imageIndex);
   //
   // 해당 사진의 스티커들 반복문 돌면서 그려주기
-  // for()
-  // {
-  //    const frames = eachResult.frames;
-  //    const stickerX = eachResult.axisX;
-  //    const stickerY = eachResult.axisY;
-  //    const stickerImageData = new ImageData(frames[frameIndex].patch, frames[frameIndex].dims.width, frames[frameIndex].dims.height);
-  //
-  //    resultCtx.putImageData(stickerImageData, stickerX, 350*imageIndex + stickerY);
-  // }
+  for (let stickerIndex = 0; stickerIndex < currentResult.stickers.length; stickerIndex++) {
+    const currentSticker = currentResult.stickers[stickerIndex];
+    const frames = currentSticker.frames;
+    const stickerX = currentSticker.axisX;
+    const stickerY = currentSticker.axisY;
+    const stickerImageData = new ImageData(frames[frameIndex].patch, frames[frameIndex].dims.width, frames[frameIndex].dims.height);
+
+    resultCtx.putImageData(stickerImageData, stickerX, 350 * imageIndex + stickerY);
+  }
+
+  return resultCtx;
 }
