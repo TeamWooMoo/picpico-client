@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import { setIdxCount, setTakePic } from "../slice/takepicInfo.js";
 import store from "../store.js";
 import { socket } from "./sockets.mjs";
@@ -10,14 +11,19 @@ export const onClickShutterEvent = idx => {
 
 //im
 export const onSendPicEvent = (idx, imgArr) => {
+  const isKing = store.getState().membersInfo.king;
+
+  console.log("나는 방장ㅇ이야");
   const canvas = document.createElement("canvas");
   const ctx = canvas.getContext("2d");
   console.log("on send pic event idx: ", idx);
 
   imgArr.forEach(obj => {
     const url = obj.picture;
-    console.log("url:", url);
-    ctx.drawImage(url, 0, 0);
+    const img = new Image();
+    img.src = url;
+    // console.log("url:", url);
+    ctx.drawImage(img, 0, 0);
   });
 
   const resultUrl = canvas.toDataURL();
