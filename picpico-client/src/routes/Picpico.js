@@ -103,7 +103,9 @@ const Picpico = () => {
           </Content>
 
           {/* Color List & Sticker List */}
-
+          <Footer>
+            <DecoList />
+          </Footer>
           <Footer className="deco_footer">
             <Footer>
               <TabBar />

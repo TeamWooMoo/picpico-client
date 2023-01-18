@@ -24,13 +24,13 @@ const DecoList = () => {
   };
   return (
     <>
-      {/* <ImageList sx={{ width: 350, height: 350 }} cols={3} rowHeight={150}>
+      <ImageList sx={{ width: 350, height: 350 }} cols={3} rowHeight={150}>
         {Object.values(decoData).map(({ picture }, idx) => (
-          <ImageListItem>
+          <ImageListItem style={{ flex: 1, flexDirection: "row" }}>
             <img alt={`deco-${idx + 1}`} onClick={onDecoImgClick} src={picture} data-deco={idx + 1} id={`deco-${idx + 1}`} />
           </ImageListItem>
         ))}
-      </ImageList> */}
+      </ImageList>
     </>
   );
 };

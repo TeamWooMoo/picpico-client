@@ -13,8 +13,6 @@ const Decoration = () => {
   return (
     <>
       <DecoCanvas style={{ margin: "auto", width: "1000px" }} />
-
-      <DecoList />
     </>
   );
 };
