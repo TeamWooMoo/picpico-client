@@ -84,6 +84,7 @@ const DecoCanvas = () => {
   useEffect(() => {
     if (targetImgIdx !== "") {
       console.log("targetImgIdx:", targetImgIdx);
+      console.log("decoData", decoData);
       const canvasWrapper = document.querySelector(".canvasWrapper");
       const targetDiv = document.getElementById(`set-${targetImgIdx}`);
       canvasWrapper.insertAdjacentElement("beforeend", targetDiv);
