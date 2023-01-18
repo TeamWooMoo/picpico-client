@@ -4,6 +4,7 @@ import { FlexboxGrid } from "rsuite";
 const MemberList = () => {
   const members = useSelector(state => state.membersInfo.members);
   const memberKeys = Object(members).keys();
+  console.log("memberksys:", memberKeys);
 
   return (
     <div>
