@@ -11,22 +11,29 @@ export const onClickShutterEvent = idx => {
 
 //im
 export const onSendPicEvent = async (idx, imgArr) => {
-  console.log("나는 방장ㅇ이야");
   const canvas = document.getElementById("drawnCanvas");
-  console.log("canvas:", canvas);
   const ctx = canvas.getContext("2d");
-  console.log("on send pic event idx: ", idx);
+  async function first() {
+    console.log("나는 방장ㅇ이야");
+    console.log("canvas:", canvas);
+    console.log("on send pic event idx: ", idx);
 
-  await imgArr.forEach(async obj => {
-    const url = obj.picture;
-    const img = new Image();
+    let newImgArr = [];
 
-    img.src = url;
-    img.onload = function () {
-      ctx.drawImage(img, 0, 0);
-      console.log("img:", img.src);
-    };
-  });
+    await imgArr.forEach(async obj => {
+      const url = obj.picture;
+      const img = new Image();
+      newImgArr.push(img);
+
+      img.src = url;
+      img.onload = async function () {
+        await ctx.drawImage(img, 0, 0);
+        console.log("img:", img.src);
+      };
+    });
+  }
+
+  await first();
 
   const resultUrl = await canvas.toDataURL("image/png");
   await socket.emit("result_pic", idx, resultUrl);
