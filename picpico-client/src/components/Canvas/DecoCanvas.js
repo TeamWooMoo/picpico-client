@@ -16,6 +16,7 @@ const DecoCanvas = () => {
   const strokeArr = useSelector(state => state.drawingInfo.strokes);
   const strokeHistory = useSelector(state => state.drawingInfo.strokeHistory);
   const strokeColor = useSelector(state => state.drawingInfo.strokeColor);
+  let rendered = false;
 
   // const decoMyCanvas = useRef();
   // const decoPeerCanvas = useRef();
@@ -63,7 +64,7 @@ const DecoCanvas = () => {
   };
 
   useEffect(() => {
-    if (strokeArr.length > 0) {
+    if (rendered && strokeArr.length > 0) {
       const [newX, newY, newColor, newSocketId, newIdx] = strokeArr[strokeArr.length - 1];
       if (strokeHistory.hasOwnProperty(newSocketId)) {
         const { x: oldX, y: oldY, i: oldIdx } = strokeHistory[newSocketId];
@@ -83,7 +84,7 @@ const DecoCanvas = () => {
 
   /* 여기 해야 합니다 */
   useEffect(() => {
-    if (targetImgIdx !== "") {
+    if (rendered && targetImgIdx !== "") {
       console.log("targetImgIdx:", targetImgIdx);
       console.log("decoData", decoData);
       console.log();
@@ -112,6 +113,7 @@ const DecoCanvas = () => {
         await imgCtx.drawImage(newImg, 0, 0);
       };
     });
+    rendered = true;
   }, []);
 
   const dragAndDrop = DecoDragAndDrop();
