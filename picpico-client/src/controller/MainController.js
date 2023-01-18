@@ -48,8 +48,9 @@ const MainController = () => {
   };
 
   return {
-    init: async roomId => {
-      const nickName = "user";
+    init: async (roomId, nickName) => {
+      console.log(">>>>>>>", roomId, nickName)
+      // const nickName = "user";
       await init(roomId, nickName);
     },
   };

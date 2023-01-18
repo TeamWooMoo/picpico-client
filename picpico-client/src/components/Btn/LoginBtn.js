@@ -12,7 +12,7 @@ function LoginBtn() {
           // console.log(rescheck.data.url);
           console.log(rescheck);
 
-          window.location.href = rescheck.data;
+          window.location.href = rescheck.data.url;
       })
       .catch(err => {
         alert("로그인에 실패하였습니다.");
