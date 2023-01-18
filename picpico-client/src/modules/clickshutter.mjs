@@ -1,3 +1,4 @@
+import { async } from "rxjs";
 import { setIdxCount, setTakePic } from "../slice/takepicInfo.js";
 import store from "../store.js";
 import { socket } from "./sockets.mjs";
@@ -16,7 +17,7 @@ export const onSendPicEvent = async (idx, imgArr) => {
   const ctx = canvas.getContext("2d");
   console.log("on send pic event idx: ", idx);
 
-  imgArr.forEach(obj => {
+  await imgArr.forEach(async obj => {
     const url = obj.picture;
     const img = new Image();
 
