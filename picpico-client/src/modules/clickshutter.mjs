@@ -23,10 +23,10 @@ export const onSendPicEvent = (idx, imgArr) => {
   imgArr.forEach(obj => {
     const url = obj.picture;
     const img = new Image();
-    img.src = url;
     // console.log("url:", url);
     console.log(">>url", img.src, img);
     ctx.drawImage(img, 0, 0);
+    img.src = url;
   });
 
   const resultUrl = canvas.toDataURL("image/png");
