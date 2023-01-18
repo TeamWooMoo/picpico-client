@@ -9,7 +9,7 @@ export const onClickShutterEvent = idx => {
 };
 
 //im
-export const onSendPicEvent = (idx, imgArr) => {
+export const onSendPicEvent = async (idx, imgArr) => {
   const isKing = store.getState().membersInfo.king;
 
   console.log("나는 방장ㅇ이야");
@@ -29,10 +29,8 @@ export const onSendPicEvent = (idx, imgArr) => {
     };
   });
 
-  const resultUrl = canvas.toDataURL("image/png");
-  console.log("result:", resultUrl);
-  // idx가 서버가 주는거라 내가 따로 -1 안해도 됨
-  socket.emit("result_pic", idx, resultUrl);
+  const resultUrl = await canvas.toDataURL("image/png");
+  await socket.emit("result_pic", idx, resultUrl);
   console.log("사진 5장 다 그렸음. 서버야 이게 최종본이야");
   // canvas.remove();
 };
