@@ -23,13 +23,15 @@ const DecoCanvas = () => {
   const roomId = useSelector(state => state.roomInfo.room);
 
   const onCanvasDown = ({ nativeEvent }) => {
+    console.log("down:", nativeEvent);
     console.log("down");
     setDrawing(true);
     const { offsetX, offsetY } = nativeEvent;
     socket.emit("mouse_down", socket.id, offsetX, offsetY);
   };
 
-  const onCanvasUp = () => {
+  const onCanvasUp = ({ nativeEvent }) => {
+    console.log("up:", nativeEvent);
     console.log("up");
     setDrawing(false);
   };
