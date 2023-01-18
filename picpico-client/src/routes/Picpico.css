@@ -88,3 +88,25 @@
   justify-content: space-evenly;
   padding: 15px 20px;
 }
+
+.decolist_container {
+  width: 100%;
+  height: 90px;
+  background-color: #cebd00;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  /* padding: 10px; */
+}
+
+.tabbar_container {
+  width: 100%;
+  height: 100px;
+  /* background-color: #c229e9; */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  /* padding: 10px; */
+}
