@@ -36,7 +36,7 @@ const shader = `
   `;
 
 export function initWebGL(source, target) {
-  const gl = target.getContext("webgl", { premultipliedAlpha: false }); //! target :peerCanvas
+  const gl = target.getContext("webgl", { premultipliedAlpha: false, preserverDrawingBuffer: true }); //! target :peerCanvas
 
   const vs = gl.createShader(gl.VERTEX_SHADER);
   gl.shaderSource(vs, "attribute vec2 c; void main(void) { gl_Position=vec4(c, 0.0, 1.0); }");

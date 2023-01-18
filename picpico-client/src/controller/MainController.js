@@ -6,10 +6,11 @@ import { initStream } from "../modules/stream.mjs";
 /******************************************************************* */
 
 export let myVideo;
+export let myGreenCanvas;
 export let myCanvas;
 export let myFace; //! 이름 변경 해야함
 export let myStream;
-export let peerCanvas;
+// export let peerCanvas;
 export let selfieSegmentation;
 export let currentCamera;
 export const cameraList = [];

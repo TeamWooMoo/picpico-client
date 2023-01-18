@@ -6,6 +6,7 @@ const PicDoneBtn = () => {
   const roomId = useSelector(state => state.roomInfo.room);
   const isKing = useSelector(state => state.membersInfo.king);
   function onPicDoneBtnClick() {
+    console.log("i want to quit picBooth");
     socket.emit("done_take", roomId, socket.id);
   }
 
