@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import store from "../store";
 import { setErrorInfo } from "../slice/errorInfo";
 import DecoList from "../components/List/DecoList";
+import { useSelector } from "react-redux";
 
 const Decoration = () => {
   // useEffect(() => {

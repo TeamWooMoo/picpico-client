@@ -7,12 +7,14 @@ import { DecoDragAndDrop } from "../../modules/decoDragAndDrop.mjs";
 import { FlexboxGrid, Button } from "rsuite";
 
 const DecoCanvas = () => {
+  const targetImgIdx = useSelector(state => state.decoInfo.myDecoCanvas);
   const dispatch = useDispatch();
   const [mode, setMode] = useState("stroke");
   const [drawing, setDrawing] = useState(false);
   const strokeArr = useSelector(state => state.drawingInfo.strokes);
   const strokeHistory = useSelector(state => state.drawingInfo.strokeHistory);
   const strokeColor = useSelector(state => state.drawingInfo.strokeColor);
+
   const decoMyCanvas = useRef();
   const decoPeerCanvas = useRef();
   const decoEventCanvas = useRef();
@@ -73,10 +75,14 @@ const DecoCanvas = () => {
     }
   }, [strokeArr]);
 
-  const dragAndDrop = DecoDragAndDrop();
-  // dragAndDrop.init();
+  /* 여기 해야 합니다 */
   // useEffect(() => {
-  // }, []);
+  //   if (targetImgIdx !== "") {
+  //     const ctx = imgCanvas.current.getContext("2d");
+  //   }
+  // }, [targetImgIdx]);
+
+  const dragAndDrop = DecoDragAndDrop();
 
   return (
     <>
