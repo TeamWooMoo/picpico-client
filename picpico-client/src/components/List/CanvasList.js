@@ -21,6 +21,7 @@ const CanvasList = () => {
       const url = filmCanvas.current.toDataURL(); // 내 얼굴만 있는 이미지 url
 
       socket.emit("send_pic", (parseInt(idx) - 1).toString(), url);
+      console.log("내 사진만 한장 보낼게!");
 
       dispatch(setTakePic({ value: false }));
 
