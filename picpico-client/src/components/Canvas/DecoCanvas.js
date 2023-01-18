@@ -83,14 +83,11 @@ const DecoCanvas = () => {
   /* 여기 해야 합니다 */
   useEffect(() => {
     if (targetImgIdx !== "") {
-      console.log("targetImgIdx:", targetImgIdx);
-      console.log("decoData", decoData);
-      console.log();
-      // const canvasWrapper = document.querySelector(".canvasWrapper");
-      // const targetDiv = document.getElementById(`set-${targetImgIdx}`);
-      // canvasWrapper.insertAdjacentElement("beforeend", targetDiv);
-      // const ctx = decoEventCanvas.current.getContext("2d");
-      // ctx.clearRect(0, 0, 300, 300);
+      const canvasWrapper = document.querySelector(".canvasWrapper");
+      const targetDiv = document.getElementById(`set-${targetImgIdx}`);
+      canvasWrapper.insertAdjacentElement("beforeend", targetDiv);
+      const ctx = decoEventCanvas.current.getContext("2d");
+      ctx.clearRect(0, 0, 300, 300);
     }
   }, [targetImgIdx]);
 
@@ -103,13 +100,13 @@ const DecoCanvas = () => {
       const imgCanvas = document.getElementById(`img-${idx}`);
       const imgCtx = imgCanvas.getContext("2d");
 
-      //   const newImg = new Image();
+      const newImg = new Image();
 
-      //   console.log(">>><<<>>>", decoData[idx]["picture"]);
-      //   newImg.src = decoData[idx]["picture"];
-      //   newImg.onload = async function () {
-      //     await imgCtx.drawImage(newImg, 0, 0);
-      //   };
+      console.log(">>><<<>>>", decoData[idx]["picture"]);
+      newImg.src = decoData[idx]["picture"];
+      newImg.onload = async function () {
+        await imgCtx.drawImage(newImg, 0, 0);
+      };
     });
     rendered = true;
   }, []);
