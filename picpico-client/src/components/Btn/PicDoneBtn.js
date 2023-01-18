@@ -6,11 +6,12 @@ const PicDoneBtn = () => {
   const roomId = useSelector(state => state.roomInfo.room);
   const isKing = useSelector(state => state.membersInfo.king);
   function onPicDoneBtnClick() {
+    console.log("i want to quit picBooth");
     socket.emit("done_take", roomId, socket.id);
   }
 
   return (
-    <Button className={isKing ? "btn-shadow" : "btn-deactivate"} style={{ lineHeight: "15px", margin: "5px 0" }} onClick={onPicDoneBtnClick}>
+    <Button className={isKing ? "btn-shadow" : "btn-deactivate"} style={{ lineHeight: "15px" }} onClick={onPicDoneBtnClick}>
       Done 📸
     </Button>
   );

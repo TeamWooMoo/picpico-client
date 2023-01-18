@@ -16,7 +16,7 @@ function EnterRoomBtn() {
         <FlexboxGrid className="room_btn">
           <Button
             className="btn-shadow"
-            style={{ width: "250px", color: "black", padding: "10px 70px", borderRadius: "6px", lineHeight: "15px", margin: "5px 0" }}
+            style={{ width: "250px", color: "black", padding: "10px 70px", borderRadius: "6px", lineHeight: "15px", margin: "7px 0" }}
             onClick={onEnterRoomBtnClick}
           >
             방 코드 입력 후 입장

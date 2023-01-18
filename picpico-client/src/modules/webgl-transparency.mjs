@@ -36,7 +36,14 @@ const shader = `
   `;
 
 export function initWebGL(source, target) {
-  const gl = target.getContext("webgl", { premultipliedAlpha: false }); //! target :peerCanvas
+  console.log(">>>>>>>source", source);
+  console.log("확인1>>>>>source dimension", source.videoWidth, source.videoHeight);
+  console.log("확인2>>>>source dim", source.width, source.height);
+  source.style.setProperty("object-fit", "fill", "important");
+
+  //! videoWidth, videoHeight => only getter. READ-ONLY
+
+  const gl = target.getContext("webgl", { premultipliedAlpha: false, preserverDrawingBuffer: true }); //! target :peerCanvas
 
   const vs = gl.createShader(gl.VERTEX_SHADER);
   gl.shaderSource(vs, "attribute vec2 c; void main(void) { gl_Position=vec4(c, 0.0, 1.0); }");
@@ -89,14 +96,19 @@ export function initWebGL(source, target) {
 
     // console.log(now, metadata);
 
-    target.width = metadata.width;
-    target.height = metadata.height;
+    // target.width = metadata.width;
+    target.width = source.width;
+    // target.height = metadata.height;
+    target.height = source.height;
 
-    gl.viewport(0, 0, metadata.width, metadata.height);
+    // gl.viewport(0, 0, metadata.width, metadata.height);
+    gl.viewport(0, 0, source.width, source.height);
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, source); //! Source
     gl.uniform1i(texLoc, 0);
-    gl.uniform1f(texWidthLoc, metadata.width);
-    gl.uniform1f(texHeightLoc, metadata.height);
+    // gl.uniform1f(texWidthLoc, metadata.width);
+    // gl.uniform1f(texHeightLoc, metadata.height);
+    gl.uniform1f(texWidthLoc, source.width);
+    gl.uniform1f(texHeightLoc, source.height);
 
     gl.uniform3f(keyColorLoc, parseInt("00", 16) / 255, parseInt("ff", 16) / 255, parseInt("00", 16) / 255);
     gl.uniform1f(similarityLoc, 0.4);

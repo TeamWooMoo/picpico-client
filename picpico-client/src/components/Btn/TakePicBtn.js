@@ -1,18 +1,17 @@
-import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { IoRadioButtonOnOutline } from "react-icons/io5";
-import { setTakePic } from "../../slice/takepicInfo";
-
+import { socket } from "../../modules/sockets.mjs";
 function TakePicBtn() {
-  const dispatch = useDispatch();
+  const idx = useSelector(state => state.takepicInfo.idx);
 
   const onTakePicBtnClick = () => {
     console.log("사진 찍히니 ~");
-    dispatch(setTakePic({ value: true }));
+    socket.emit("click_shutter", idx);
   };
 
   return (
     <>
-      <IoRadioButtonOnOutline className="btn" color="red" size="40" padding="5px 0" onClick={onTakePicBtnClick}></IoRadioButtonOnOutline>
+      <IoRadioButtonOnOutline id="takePicBtn" className="btn" color="red" size="40" padding="5px 0" onClick={onTakePicBtnClick}></IoRadioButtonOnOutline>
     </>
   );
 }

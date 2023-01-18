@@ -44,7 +44,7 @@ const StickerList = () => {
   return (
     <>
       <FlexboxGrid justify="center" className="color-options">
-        <div style={{ height: "30px" }}></div>
+        <div style={{ height: "40px" }}></div>
         <div id="drag-items">
           {/* <img style={{ height: "40px" }} onClick={() => onStickerClick(narin)} src={narin} draggable="true" /> */}
           {/* <img style={{ height: "40px" }} onClick={() => onStickerClick(dabom)} src={dabom} draggable="true" /> */}

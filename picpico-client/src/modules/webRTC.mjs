@@ -3,6 +3,7 @@ import { setVideosInfo } from "../slice/videosInfo.js";
 import { myPeer, myPeers, myStream } from "../controller/MainController.js";
 import { socket } from "./sockets.mjs";
 import { initWebGL } from "./webgl-transparency.mjs";
+import uuid from "react-uuid";
 
 /* myPeers
  *    key    :    value
@@ -36,12 +37,15 @@ const handleTrack = (data, myPeer) => {
     console.log(">>>handling track : video !");
 
     const videoRow = document.getElementById("peerVideos");
-    const canvasRow = document.getElementById("peerCanvases");
+    const canvasRow = document.getElementById("allCanvases");
     const peerVideo = myPeer.videoElement;
     const peerCanvasGL = myPeer.canvasElement;
 
     console.log(peerVideo);
-    // peerVideo.hidden = true;
+    peerVideo.hidden = true;
+    peerVideo.width = 350;
+    peerVideo.height = 350;
+
     // peerVideo.muted = true;
     // peerVideo.autoplay = true;
     peerVideo.className = "col";
@@ -59,6 +63,9 @@ const handleTrack = (data, myPeer) => {
       peerCanvasGL.style.position = "absolute";
       peerCanvasGL.style.top = "0px";
       peerCanvasGL.style.left = "0px";
+      // peerCanvasGL.style.transform = "translateX(-50%)";
+      peerCanvasGL.setAttribute("uid", `${uuid()}`);
+      // peerCanvasGL.id = `${uuid()}`;
 
       initWebGL(peerVideo, peerCanvasGL);
     };

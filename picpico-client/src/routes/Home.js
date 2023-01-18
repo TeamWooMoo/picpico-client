@@ -14,8 +14,8 @@ const Home = () => {
         <LoginBtn />
       </Link>
       {/* 임의로 넣어 놓은 버튼 */}
-      <Link to={"/room"}>
-        <button>room</button>
+      <Link to={"/lobby"}>
+        <button>Lobby</button>
       </Link>
     </Container>
   );

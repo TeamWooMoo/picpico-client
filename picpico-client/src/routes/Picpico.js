@@ -76,11 +76,17 @@ const Picpico = () => {
       ) : selectDone ? (
         <Container className="default_container">
           <Header className="selection_header">
+            <MuteBtn className="muted_left" />
             <SelectMessage />
+            <p style={{ visibility: "hidden" }}>hidden</p>
           </Header>
           <Content>
-            <Selection />
+            <DecoMessage />
+            {/* <MemberList /> */}
           </Content>
+          <Footer>
+            <Selection />
+          </Footer>
           <Footer className="selection_footer">
             <SelectDoneBtn />
           </Footer>
@@ -88,33 +94,34 @@ const Picpico = () => {
       ) : decoDone ? (
         <Container className="default_container">
           <Header className="deco_header">
+            <MuteBtn className="muted_left" />
             <DecoMessage />
+            <p style={{ visibility: "hidden" }}>hidden</p>
           </Header>
           <Content>
             <Decoration controller={controller} />
           </Content>
-          {/* 데코할 사진 리스트 */}
-          <Footer className="decolist_container">
-            <DecoList />
-          </Footer>
+
           {/* Color List & Sticker List */}
-          <Footer className="tabbar_container">
-            <TabBar />
-          </Footer>
+
           <Footer className="deco_footer">
+            <Footer>
+              <TabBar />
+            </Footer>
             <DecoDoneBtn />
           </Footer>
         </Container>
       ) : galleryDone ? (
         <Container className="default_container">
           <Header className="gallery_header">
+            <MuteBtn className="muted_left" />
             <GalleryMessage />
+            <p style={{ visibility: "hidden" }}>hidden</p>
           </Header>
           <Content>
             <Gallery />
           </Content>
           <Footer className="gallery_footer">
-            <PicDownloadBtn />
             <GalleryDoneBtn />
           </Footer>
         </Container>
