@@ -73,7 +73,7 @@ const TabBar = () => {
       dispatch(setDecoModeInfo({ value: "stroke" }));
     } else {
       console.log("sticker mode");
-      dispatch(setDecoModeInfo({ value: "stroke" }));
+      dispatch(setDecoModeInfo({ value: "sticker" }));
     }
   };
 
