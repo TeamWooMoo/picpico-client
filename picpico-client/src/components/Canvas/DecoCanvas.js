@@ -11,30 +11,23 @@ const DecoCanvas = () => {
   const decoData = useSelector(state => state.decoInfo.decoList);
   const idxArr = Object.keys(decoData);
   const dispatch = useDispatch();
-  const [mode, setMode] = useState("stroke");
+  const mode = useSelector(state => state.decoInfo.decoMode);
   const [drawing, setDrawing] = useState(false);
   const strokeArr = useSelector(state => state.drawingInfo.strokes);
   const strokeHistory = useSelector(state => state.drawingInfo.strokeHistory);
   const strokeColor = useSelector(state => state.drawingInfo.strokeColor);
-  let rendered = false;
 
-  // const decoMyCanvas = useRef();
-  // const decoPeerCanvas = useRef();
   const decoEventCanvas = useRef();
 
   const roomId = useSelector(state => state.roomInfo.room);
 
   const onCanvasDown = ({ nativeEvent }) => {
-    console.log("down:", nativeEvent);
-    console.log("down");
     setDrawing(true);
     const { offsetX, offsetY } = nativeEvent;
     socket.emit("mouse_down", socket.id, offsetX, offsetY, targetImgIdx);
   };
 
   const onCanvasUp = ({ nativeEvent }) => {
-    console.log("up:", nativeEvent);
-    console.log("up");
     setDrawing(false);
   };
 
@@ -53,15 +46,15 @@ const DecoCanvas = () => {
     }
   };
 
-  const onStrokeBtnClick = () => {
-    setMode("stroke");
-    dragAndDrop.reset(targetImgIdx);
-  };
+  // const onStrokeBtnClick = () => {
+  //   setMode("stroke");
+  //   dragAndDrop.reset(targetImgIdx);
+  // };
 
-  const onStickerBtnClick = () => {
-    setMode("sticker");
-    dragAndDrop.init(targetImgIdx);
-  };
+  // const onStickerBtnClick = () => {
+  //   setMode("sticker");
+  //   dragAndDrop.init(targetImgIdx);
+  // };
 
   useEffect(() => {
     if (strokeArr.length > 0) {
@@ -93,7 +86,6 @@ const DecoCanvas = () => {
   }, [targetImgIdx]);
 
   useEffect(() => {
-    console.log("idxARR: ", idxArr);
     idxArr.forEach(idx => {
       const imgCanvas = document.getElementById(`img-${idx}`);
       const imgCtx = imgCanvas.getContext("2d");
@@ -111,14 +103,14 @@ const DecoCanvas = () => {
 
   return (
     <>
-      <FlexboxGrid>
+      {/* <FlexboxGrid>
         <Button appearance="default" onClick={onStrokeBtnClick}>
           그리기
         </Button>
         <Button appearance="default" onClick={onStickerBtnClick}>
           스티커
         </Button>
-      </FlexboxGrid>
+      </FlexboxGrid> */}
       <FlexboxGrid className="DecoCanvasBox">
         <div className="canvasWrapper">
           {idxArr.map(idx => (

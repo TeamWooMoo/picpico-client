@@ -5,6 +5,7 @@ const decoInfo = createSlice({
   initialState: {
     decoList: {},
     myDecoCanvas: "",
+    decoMode: "stroke",
   },
 
   reducers: {
@@ -14,9 +15,12 @@ const decoInfo = createSlice({
     setMyDecoCanvasInfo(state, action) {
       state.myDecoCanvas = action.payload.value;
     },
+    setDecoModeInfo(state, action) {
+      state.decoMode = action.payload.value;
+    },
   },
 });
 
-export let { setDecoListInfo, setMyDecoCanvasInfo } = decoInfo.actions;
+export let { setDecoListInfo, setMyDecoCanvasInfo, setDecoModeInfo } = decoInfo.actions;
 
 export default decoInfo;
