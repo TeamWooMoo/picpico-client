@@ -1,7 +1,7 @@
 import store from "../store.js";
 import { setStrokeInfo, addStrokeHistory } from "../slice/drawingInfo.js";
-export const onStrokeCanvasEvent = (offsetX, offsetY, color, socketId) => {
-  store.dispatch(setStrokeInfo({ value: [offsetX, offsetY, color, socketId] }));
+export const onStrokeCanvasEvent = (offsetX, offsetY, color, socketId, idx) => {
+  store.dispatch(setStrokeInfo({ value: [offsetX, offsetY, color, socketId, idx] }));
 };
 
 export const onMouseDownEvent = (socketId, offsetX, offsetY, idx) => {

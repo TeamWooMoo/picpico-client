@@ -86,29 +86,25 @@ const DecoCanvas = () => {
       const canvasWrapper = document.querySelector(".canvasWrapper");
       const targetDiv = document.getElementById(`set-${targetImgIdx}`);
       canvasWrapper.insertAdjacentElement("beforeend", targetDiv);
+
       const ctx = decoEventCanvas.current.getContext("2d");
       ctx.clearRect(0, 0, 300, 300);
     }
   }, [targetImgIdx]);
 
   useEffect(() => {
-    // const idxArr = Object.keys(decoData);
     console.log("idxARR: ", idxArr);
     idxArr.forEach(idx => {
-      //   console.log("idx:", idx);
-      //   console.log("doc", document);
       const imgCanvas = document.getElementById(`img-${idx}`);
       const imgCtx = imgCanvas.getContext("2d");
 
       const newImg = new Image();
 
-      console.log(">>><<<>>>", decoData[idx]["picture"]);
       newImg.src = decoData[idx]["picture"];
       newImg.onload = async function () {
         await imgCtx.drawImage(newImg, 0, 0);
       };
     });
-    rendered = true;
   }, []);
 
   const dragAndDrop = DecoDragAndDrop();
@@ -126,7 +122,7 @@ const DecoCanvas = () => {
       <FlexboxGrid className="DecoCanvasBox">
         <div className="canvasWrapper">
           {idxArr.map(idx => (
-            <div data-setid={`set-${idx}`} id={`set-${idx}`}>
+            <div data-setid={`set-${idx}`} id={`set-${idx}`} style={{ visibility: idx != targetImgIdx ? "hidden" : "visible" }}>
               <canvas className="decocanvas" width="300px" height="300px" data-img={idx} id={`img-${idx}`}></canvas>
               <canvas className="decocanvas" width="300px" height="300px" data-my={idx} id={`my-${idx}`}></canvas>
               <canvas className="decocanvas" width="300px" height="300px" data-peer={idx} id={`peer-${idx}`}></canvas>
