@@ -18,7 +18,7 @@ const CanvasList = () => {
       const myCanvas = allCanvases.current.children[0];
       const filmCtx = filmCanvas.current.getContext("2d");
       filmCtx.drawImage(myCanvas, 0, 0);
-      const url = filmCanvas.current.toDataURL(); // 내 얼굴만 있는 이미지 url
+      const url = filmCanvas.current.toDataURL("image/png"); // 내 얼굴만 있는 이미지 url
 
       socket.emit("send_pic", (parseInt(idx) - 1).toString(), url);
       console.log("내 사진만 한장 보낼게!");
