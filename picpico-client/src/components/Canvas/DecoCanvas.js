@@ -128,7 +128,7 @@ const DecoCanvas = () => {
       </FlexboxGrid>
       <FlexboxGrid className="DecoCanvasBox">
         <div className="canvasWrapper">
-          {idxArr.map(idx => {
+          {idxArr.map(idx => (
             <div data-setid={`set-${idx}`} id={`set-${idx}`}>
               <canvas className="decocanvas" width="300px" height="300px" data-img={idx} id={`img-${idx}`}></canvas>
               <canvas className="decocanvas" width="300px" height="300px" data-my={idx} id={`my-${idx}`}></canvas>
@@ -151,8 +151,8 @@ const DecoCanvas = () => {
                   />
                 </div>
               </div>
-            </div>;
-          })}
+            </div>
+          ))}
 
           {mode === "stroke" ? (
             <canvas
