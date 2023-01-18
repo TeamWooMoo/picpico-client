@@ -39,6 +39,8 @@ const CanvasList = () => {
         <div id="allCanvases" ref={allCanvases}></div>
         <canvas id="filmCanvas" className="canvas" width="350" height="350" ref={filmCanvas}></canvas>
       </div>
+
+      <canvas id="drawnCanvas" className="canvas" width="350" height="350"></canvas>
     </>
   );
 };

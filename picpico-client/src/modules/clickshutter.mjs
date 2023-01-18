@@ -10,12 +10,9 @@ export const onClickShutterEvent = idx => {
 
 //im
 export const onSendPicEvent = async (idx, imgArr) => {
-  const isKing = store.getState().membersInfo.king;
-
   console.log("나는 방장ㅇ이야");
-  const canvas = document.createElement("canvas");
-  canvas.width = 350;
-  canvas.height = 350;
+  const canvas = document.getElementById("drawnCanvas");
+  console.log("canvas:", canvas);
   const ctx = canvas.getContext("2d");
   console.log("on send pic event idx: ", idx);
 
