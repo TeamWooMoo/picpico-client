@@ -70,10 +70,10 @@ const TabBar = () => {
     clickTab(index);
     if (index === 0) {
       console.log("stroke mode");
-      dispatch(setDecoModeInfo("stroke"));
+      dispatch(setDecoModeInfo({ value: "stroke" }));
     } else {
       console.log("sticker mode");
-      dispatch(setDecoModeInfo("sticker"));
+      dispatch(setDecoModeInfo({ value: "stroke" }));
     }
   };
 
