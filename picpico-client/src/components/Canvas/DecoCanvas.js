@@ -29,7 +29,7 @@ const DecoCanvas = () => {
     console.log("down");
     setDrawing(true);
     const { offsetX, offsetY } = nativeEvent;
-    socket.emit("mouse_down", socket.id, offsetX, offsetY);
+    socket.emit("mouse_down", socket.id, offsetX, offsetY, targetImgIdx);
   };
 
   const onCanvasUp = ({ nativeEvent }) => {
