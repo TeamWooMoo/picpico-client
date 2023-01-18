@@ -25,6 +25,9 @@ const SelectList = () => {
       console.log("<<selected:", selected);
       const imgTag = document.getElementById(`pic-${selected}`);
       imgTag.classList.toggle("activate_pic");
+      if (imgTag.classList.includes("activate_pic")) {
+        imgTag.style.border = "3px solid tomato";
+      }
       console.log("imgTag:", imgTag);
       dispatch(setSelectedInfo({ value: "" }));
     }
