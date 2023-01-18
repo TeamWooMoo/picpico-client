@@ -23,6 +23,7 @@ export const onSendPicEvent = (idx, imgArr) => {
     const img = new Image();
     img.src = url;
     // console.log("url:", url);
+    console.log(">>url", url);
     ctx.drawImage(img, 0, 0);
   });
 
@@ -30,4 +31,5 @@ export const onSendPicEvent = (idx, imgArr) => {
   // idx가 서버가 주는거라 내가 따로 -1 안해도 됨
   socket.emit("result_pic", idx, resultUrl);
   console.log("사진 5장 다 그렸음. 서버야 이게 최종본이야");
+  canvas.remove();
 };
