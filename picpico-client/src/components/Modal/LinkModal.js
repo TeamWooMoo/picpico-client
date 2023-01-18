@@ -19,7 +19,14 @@ function LinkModal() {
     try {
       alert("클립보드에 링크가 복사되었습니다.");
     } catch (error) {
-      alert("클립보드에 링크가 실패하였습니다.");
+      alert("클립보드에 복사를 실패하였습니다.");
+    }
+  };
+  const onRoomNumCopy = () => {
+    try {
+      alert("클립보드에 방 번호가 복사되었습니다.");
+    } catch (error) {
+      alert("클립보드에 복사를 실패하였습니다.");
     }
   };
 
@@ -59,7 +66,7 @@ function LinkModal() {
             </Button>
           </CopyToClipboard>
           <CopyToClipboard text={room_num}>
-            <Button block style={{ color: "black", lineHeight: "15px", margin: "10px 0" }} className="btn-shadow">
+            <Button block style={{ color: "black", lineHeight: "15px", margin: "10px 0" }} className="btn-shadow" onClick={onRoomNumCopy}>
               📲 방 번호
             </Button>
           </CopyToClipboard>
