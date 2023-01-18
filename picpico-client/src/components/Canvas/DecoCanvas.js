@@ -67,15 +67,15 @@ const DecoCanvas = () => {
     if (strokeArr.length > 0) {
       const [newX, newY, newColor, newSocketId, newIdx] = strokeArr[strokeArr.length - 1];
       if (strokeHistory.hasOwnProperty(newSocketId)) {
-        // const { x: oldX, y: oldY, i: oldIdx } = strokeHistory[newSocketId];
-        // const decoPeerCanvas = document.getElementById(`peer-${oldIdx}`);
-        // const decoCtx = decoPeerCanvas.getContext("2d");
-        // decoCtx.beginPath();
-        // decoCtx.moveTo(oldX, oldY);
-        // decoCtx.lineTo(newX, newY);
-        // decoCtx.strokeStyle = newColor;
-        // decoCtx.stroke();
-        // dispatch(addStrokeHistory({ value: [newSocketId, newX, newY, newIdx] }));
+        const { x: oldX, y: oldY, i: oldIdx } = strokeHistory[newSocketId];
+        const decoPeerCanvas = document.getElementById(`peer-${oldIdx}`);
+        const decoCtx = decoPeerCanvas.getContext("2d");
+        decoCtx.beginPath();
+        decoCtx.moveTo(oldX, oldY);
+        decoCtx.lineTo(newX, newY);
+        decoCtx.strokeStyle = newColor;
+        decoCtx.stroke();
+        dispatch(addStrokeHistory({ value: [newSocketId, newX, newY, newIdx] }));
       }
     }
   }, [strokeArr]);
