@@ -68,6 +68,7 @@ const DecoCanvas = () => {
       const [newX, newY, newColor, newSocketId, newIdx] = strokeArr[strokeArr.length - 1];
       if (strokeHistory.hasOwnProperty(newSocketId)) {
         const { x: oldX, y: oldY, i: oldIdx } = strokeHistory[newSocketId];
+        console.log("~~~~", oldX, oldY, oldIdx);
         const decoPeerCanvas = document.getElementById(`peer-${oldIdx}`);
         const decoCtx = decoPeerCanvas.getContext("2d");
         decoCtx.beginPath();
@@ -108,7 +109,6 @@ const DecoCanvas = () => {
         await imgCtx.drawImage(newImg, 0, 0);
       };
     });
-    rendered = true;
   }, []);
 
   const dragAndDrop = DecoDragAndDrop();
