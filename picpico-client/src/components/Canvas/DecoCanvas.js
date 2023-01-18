@@ -68,7 +68,6 @@ const DecoCanvas = () => {
       const [newX, newY, newColor, newSocketId, newIdx] = strokeArr[strokeArr.length - 1];
       if (strokeHistory.hasOwnProperty(newSocketId)) {
         const { x: oldX, y: oldY, i: oldIdx } = strokeHistory[newSocketId];
-        console.log("~~~~", oldX, oldY, oldIdx);
         const decoPeerCanvas = document.getElementById(`peer-${oldIdx}`);
         const decoCtx = decoPeerCanvas.getContext("2d");
         decoCtx.beginPath();
@@ -87,23 +86,20 @@ const DecoCanvas = () => {
       const canvasWrapper = document.querySelector(".canvasWrapper");
       const targetDiv = document.getElementById(`set-${targetImgIdx}`);
       canvasWrapper.insertAdjacentElement("beforeend", targetDiv);
+
       const ctx = decoEventCanvas.current.getContext("2d");
       ctx.clearRect(0, 0, 300, 300);
     }
   }, [targetImgIdx]);
 
   useEffect(() => {
-    // const idxArr = Object.keys(decoData);
     console.log("idxARR: ", idxArr);
     idxArr.forEach(idx => {
-      //   console.log("idx:", idx);
-      //   console.log("doc", document);
       const imgCanvas = document.getElementById(`img-${idx}`);
       const imgCtx = imgCanvas.getContext("2d");
 
       const newImg = new Image();
 
-      console.log(">>><<<>>>", decoData[idx]["picture"]);
       newImg.src = decoData[idx]["picture"];
       newImg.onload = async function () {
         await imgCtx.drawImage(newImg, 0, 0);
@@ -125,31 +121,33 @@ const DecoCanvas = () => {
       </FlexboxGrid>
       <FlexboxGrid className="DecoCanvasBox">
         <div className="canvasWrapper">
-          {idxArr.map(idx => (
-            <div data-setid={`set-${idx}`} id={`set-${idx}`}>
-              <canvas className="decocanvas" width="300px" height="300px" data-img={idx} id={`img-${idx}`}></canvas>
-              <canvas className="decocanvas" width="300px" height="300px" data-my={idx} id={`my-${idx}`}></canvas>
-              <canvas className="decocanvas" width="300px" height="300px" data-peer={idx} id={`peer-${idx}`}></canvas>
-              <div className="decocanvas" id={`sticker-${idx}`} style={{ position: "absolute", width: "300px", height: "300px" }}>
-                <div class="draggable" style={{ position: "absolute", width: "100px", height: "100px" }}>
-                  <img
-                    alt="sticker1"
-                    src="https://i.pinimg.com/originals/18/11/30/181130c64c246318e1e4d463d1844ed7.gif"
-                    // class="draggable"
-                    style={{ position: "absolute", width: "100px", height: "100px" }}
-                  />
-                </div>
-                <div class="draggable" style={{ position: "absolute", width: "100px", height: "100px" }}>
-                  <img
-                    alt="sticker2"
-                    src="https://storage.cobak.co/uploads/1585038492476558_8eeec6050c.gif"
-                    // class="draggable"
-                    style={{ position: "absolute", width: "100px", height: "100px" }}
-                  />
+          {idxArr.map(idx =>
+            idx != targetImgIdx ? null : (
+              <div data-setid={`set-${idx}`} id={`set-${idx}`}>
+                <canvas className="decocanvas" width="300px" height="300px" data-img={idx} id={`img-${idx}`}></canvas>
+                <canvas className="decocanvas" width="300px" height="300px" data-my={idx} id={`my-${idx}`}></canvas>
+                <canvas className="decocanvas" width="300px" height="300px" data-peer={idx} id={`peer-${idx}`}></canvas>
+                <div className="decocanvas" id={`sticker-${idx}`} style={{ position: "absolute", width: "300px", height: "300px" }}>
+                  <div class="draggable" style={{ position: "absolute", width: "100px", height: "100px" }}>
+                    <img
+                      alt="sticker1"
+                      src="https://i.pinimg.com/originals/18/11/30/181130c64c246318e1e4d463d1844ed7.gif"
+                      // class="draggable"
+                      style={{ position: "absolute", width: "100px", height: "100px" }}
+                    />
+                  </div>
+                  <div class="draggable" style={{ position: "absolute", width: "100px", height: "100px" }}>
+                    <img
+                      alt="sticker2"
+                      src="https://storage.cobak.co/uploads/1585038492476558_8eeec6050c.gif"
+                      // class="draggable"
+                      style={{ position: "absolute", width: "100px", height: "100px" }}
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            )
+          )}
 
           {mode === "stroke" ? (
             <canvas
