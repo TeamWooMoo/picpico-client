@@ -1,14 +1,20 @@
 import { Button } from "rsuite";
-import html2canvas from "html2canvas";
+
+// import html2canvas from "html2canvas";
+
 import camera from "./../../assets/images/camera.png";
 import narin from "../../assets/gif/narin.gif";
+
 
 function PicDownloadBtn() {
   const onCapture = () => {
     // html2canvas(document.getElementById("imageWrapper")).then(canvas => {
-    //   onSaveImg(canvas.toDataURL("image/jpg"), "PicPiCo_Result.png");
+
+    // onSaveImg(canvas.toDataURL("image/jpg"), "PicPiCo_Result.png");
     // });
+
     onSaveImg(narin, "PicPiCo_Result.gif");
+
   };
   const onSaveImg = (url, filename) => {
     const link = document.createElement("a");
