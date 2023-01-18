@@ -68,9 +68,11 @@ const TabBar = () => {
     // 해당 함수가 실행되면 현재 선택된 Tab Menu 가 갱신.
     console.log("index:", index);
     clickTab(index);
-    if (index == 0) {
+    if (index === 0) {
+      console.log("stroke mode");
       dispatch(setDecoModeInfo("stroke"));
     } else {
+      console.log("sticker mode");
       dispatch(setDecoModeInfo("sticker"));
     }
   };
