@@ -1,4 +1,4 @@
-import { cameraList, currentCamera, myCanvas, myFace, myStream, myVideo } from "../controller/MainController.js";
+import { cameraList, currentCamera, myGreenCanvas, myFace, myStream, myVideo } from "../controller/MainController.js";
 import { segment, initSegment } from "./segment.mjs";
 import { getFaceSize } from "./tracking-facesize.mjs";
 
@@ -40,11 +40,11 @@ async function getMedia(deviceId) {
 
     await myVideo.play();
 
-    myStream = await myCanvas.captureStream();
+    myStream = await myGreenCanvas.captureStream();
     console.log("myStream", myStream);
     await myStream.addTrack(mediaStream.getAudioTracks()[0]);
 
-    console.log("capturing myCanvas to stream");
+    console.log("capturing myGreenCanvas to stream");
 
     if (!deviceId) {
       return await getCameras();
@@ -58,13 +58,13 @@ async function getMedia(deviceId) {
 
 export async function initStream() {
   myVideo = document.getElementById("myVideo");
-  myCanvas = document.getElementById("myCanvas");
+  myGreenCanvas = document.getElementById("myGreenCanvas");
 
   myVideo.width = 350;
   myVideo.height = 350;
-  myCanvas.hidden = true;
+  myGreenCanvas.hidden = true;
 
-  const canvasRow = document.getElementById("peerCanvases");
+  const canvasRow = document.getElementById("allCanvases");
 
   myFace = document.createElement("canvas");
 
@@ -79,8 +79,8 @@ export async function initStream() {
 
     initSegment();
 
-    myCanvas.height = myVideo.height;
-    myCanvas.width = myVideo.width;
+    myGreenCanvas.height = myVideo.height;
+    myGreenCanvas.width = myVideo.width;
 
     let lastTime = new Date();
 
@@ -88,7 +88,7 @@ export async function initStream() {
       const now = myVideo.currentTime;
       if (now > lastTime) {
         const fps = (1 / (now - lastTime)).toFixed();
-        await segment(myVideo, myCanvas);
+        await segment(myVideo, myGreenCanvas);
       }
       lastTime = now;
       requestAnimationFrame(getFrames);

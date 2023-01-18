@@ -9,4 +9,8 @@ export class AppController {
   @Get("/login")
   @Render("index")
   getLogin() {}
+
+  @Get("/lobby")
+  @Render("index")
+  getLobby() {}
 }
