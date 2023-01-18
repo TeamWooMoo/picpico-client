@@ -7,7 +7,7 @@ import StickerList from "../List/StickerList";
 
 const TabMenu = styled.div`
   // background-color: #dcdcdc;
-  color: white;
+  color: gray;
   font-weight: bold;
   display: flex;
   flex-direction: row;
