@@ -76,7 +76,9 @@ const Picpico = () => {
       ) : selectDone ? (
         <Container className="default_container">
           <Header className="selection_header">
+            <MuteBtn className="muted_left" />
             <SelectMessage />
+            <p style={{ visibility: "hidden" }}>hidden</p>
           </Header>
           <Content>
             <Selection />
@@ -88,7 +90,9 @@ const Picpico = () => {
       ) : decoDone ? (
         <Container className="default_container">
           <Header className="deco_header">
+            <MuteBtn className="muted_left" />
             <DecoMessage />
+            <p style={{ visibility: "hidden" }}>hidden</p>
           </Header>
           <Content>
             <Decoration controller={controller} />
@@ -108,13 +112,14 @@ const Picpico = () => {
       ) : galleryDone ? (
         <Container className="default_container">
           <Header className="gallery_header">
+            <MuteBtn className="muted_left" />
             <GalleryMessage />
+            <p style={{ visibility: "hidden" }}>hidden</p>
           </Header>
           <Content>
             <Gallery />
           </Content>
           <Footer className="gallery_footer">
-            <PicDownloadBtn />
             <GalleryDoneBtn />
           </Footer>
         </Container>

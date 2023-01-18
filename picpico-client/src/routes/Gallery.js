@@ -1,9 +1,10 @@
 import { Container } from "rsuite";
+import PicDownloadBtn from "../components/Btn/PicDownloadBtn";
 
 const Gallery = () => {
   return (
     <Container>
-      <img width="100" height="100" />
+      <PicDownloadBtn />
     </Container>
   );
 };
