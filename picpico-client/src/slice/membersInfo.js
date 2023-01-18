@@ -10,7 +10,7 @@ const membersInfo = createSlice({
   reducers: {
     setMembersInfo(state, action) {
       state.members = action.payload.value;
-      console.log("setMembersInfo", state.members);
+      console.log("setMembersInfo", state.members, Object.keys(state.members));
     },
     setKingInfo(state, action) {
       console.log("im king");
