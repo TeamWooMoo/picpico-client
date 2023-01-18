@@ -65,6 +65,7 @@ const Picpico = () => {
             <PicDoneBtn controller={controller} />
           </Header>
           <Content>
+            <MemberList />
             <PicBooth controller={controller} />
           </Content>
           <Footer className="picbooth_footer">
