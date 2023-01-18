@@ -39,5 +39,5 @@ export const onSendPicEvent = async (idx, imgArr) => {
   await socket.emit("result_pic", idx, resultUrl);
   console.log("result:", resultUrl);
   console.log("사진 5장 다 그렸음. 서버야 이게 최종본이야");
-  ctx.clearReact(0, 0, 350, 350);
+  ctx.clearRect(0, 0, 350, 350);
 };
