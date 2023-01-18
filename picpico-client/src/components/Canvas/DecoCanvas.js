@@ -9,6 +9,7 @@ import { FlexboxGrid, Button } from "rsuite";
 const DecoCanvas = () => {
   const targetImgIdx = useSelector(state => state.decoInfo.myDecoCanvas);
   const decoData = useSelector(state => state.decoInfo.decoList);
+  const idxArr = Object.keys(decoData);
   const dispatch = useDispatch();
   const [mode, setMode] = useState("stroke");
   const [drawing, setDrawing] = useState(false);
@@ -95,20 +96,21 @@ const DecoCanvas = () => {
   }, [targetImgIdx]);
 
   useEffect(() => {
-    const idxArr = Object.keys(decoData);
+    // const idxArr = Object.keys(decoData);
     console.log("idxARR: ", idxArr);
     idxArr.forEach(idx => {
       console.log("idx:", idx);
-      const imgCanvas = document.getElementById(`img-${idx}`);
-      const imgCtx = imgCanvas.getContext("2d");
+      console.log("doc", document);
+      // const imgCanvas = document.getElementById(`img-${idx}`);
+      // const imgCtx = imgCanvas.getContext("2d");
 
-      const newImg = new Image();
+      // const newImg = new Image();
 
-      console.log(">>><<<>>>", decoData[idx]["picture"]);
-      newImg.src = decoData[idx]["picture"];
-      newImg.onload = async function () {
-        await imgCtx.drawImage(newImg, 0, 0);
-      };
+      // console.log(">>><<<>>>", decoData[idx]["picture"]);
+      // newImg.src = decoData[idx]["picture"];
+      // newImg.onload = async function () {
+      //   await imgCtx.drawImage(newImg, 0, 0);
+      // };
     });
   }, []);
 
@@ -126,7 +128,7 @@ const DecoCanvas = () => {
       </FlexboxGrid>
       <FlexboxGrid className="DecoCanvasBox">
         <div className="canvasWrapper">
-          {Object.keys(decoData).forEach(idx => {
+          {idxArr.forEach(idx => {
             <div data-setid={`set-${idx}`} id={`set-${idx}`}>
               <canvas className="decocanvas" width="300px" height="300px" data-img={idx} id={`img-${idx}`}></canvas>
               <canvas className="decocanvas" width="300px" height="300px" data-my={idx} id={`my-${idx}`}></canvas>
