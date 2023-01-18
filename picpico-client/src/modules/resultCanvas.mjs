@@ -62,14 +62,14 @@ export class Sticker {
 //}
 
 /***************************************************************** */
-
 function decodeGIF(url) {
+  console.log(">>>>>decodeGIF called");
   const promisedGif = fetch(url)
     .then(resp => resp.arrayBuffer())
     .then(buff => {
       const gif = parseGIF(buff);
       const frames = decompressFrames(gif, true);
-
+      console.log(">>>>>>>>>frame return");
       return frames;
     });
 }
@@ -79,7 +79,7 @@ function decodeGIF(url) {
 // 마지막 결과화면에서 각 유저가 보게 될 다 꾸며진 그림 on canvas
 // 스티커가 움직이게 그려줌
 export function makeResultCanvas() {
-  const resultCtx = resultCanvas.getContext("2d");
+  let resultCtx = resultCanvas.getContext("2d");
 
   resultCtx.willReadFrequently = true;
 
@@ -93,18 +93,19 @@ export function makeResultCanvas() {
   for (let imageIndex = 0; imageIndex < resultImages.length; imageIndex++) {
     let currentResult = resultImages[imageIndex];
 
-    for (let stickerIndex = 0; currentResult.stickers.length; stickerIndex++) {
+    for (let stickerIndex = 0; stickerIndex < currentResult.stickers.length; stickerIndex++) {
       const currentSticker = currentResult.stickers[stickerIndex];
       currentSticker.frames = decodeGIF(currentSticker.stickerUrl);
     }
   }
 
+  console.log(">>>>all images parsed. resultImages:", resultImages);
   let frameIndex = 0;
 
   const drawResult = () => {
     resultCtx.save();
 
-    resultCtx.clearRect();
+    resultCtx.clearRect(0, 0, resultCanvas.width, resultCanvas.height);
     //
     // resultImages 반복문 돌면서 각 eachResult 에 대해 그리기 실행
     for (let imageIndex = 0; imageIndex < resultImages.length; imageIndex++) {
@@ -117,6 +118,7 @@ export function makeResultCanvas() {
     frameIndex++;
 
     if (readyToMakeGIF && frameIndex === 0) {
+      console.log(">>>>>>making a gif. frame #", frameIndex);
       //      captureFrame(); // 찍는 거 어딘가에 img 태그로 추가해 두게 함
       if (frameIndex === 19) {
         readyToMakeGIF = false;
@@ -129,7 +131,7 @@ export function makeResultCanvas() {
     requestAnimationFrame(drawResult);
   };
 
-  drawResult();
+  setTimeout(() => drawResult, 1000);
 }
 
 /***************************************************************** */
@@ -137,7 +139,9 @@ export function makeResultCanvas() {
 // 한 사진을 올리고 그 사진에 대한 스티커들 그리기
 function putFrame(currentResult, resultCtx, frameIndex, imageIndex) {
   //
-  resultCtx.drawImage(currentResult.resultUrl, 0, 350 * imageIndex);
+  const resultImg = new Image();
+  resultImg.src = currentResult.resultUrl;
+  resultCtx.drawImage(resultImg, 0, 350 * imageIndex);
   //
   // 해당 사진의 스티커들 반복문 돌면서 그려주기
   for (let stickerIndex = 0; stickerIndex < currentResult.stickers.length; stickerIndex++) {
@@ -145,6 +149,9 @@ function putFrame(currentResult, resultCtx, frameIndex, imageIndex) {
     const frames = currentSticker.frames;
     const stickerX = currentSticker.axisX;
     const stickerY = currentSticker.axisY;
+
+    console.log(">>>>>>currentSticker.frames", frames);
+    console.log(">>>>>>frames[frameIndex]", frames[frameIndex]);
     const stickerImageData = new ImageData(frames[frameIndex].patch, frames[frameIndex].dims.width, frames[frameIndex].dims.height);
 
     resultCtx.putImageData(stickerImageData, stickerX, 350 * imageIndex + stickerY);

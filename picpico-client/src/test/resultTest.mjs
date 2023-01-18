@@ -31,6 +31,8 @@ export const gifTest = () => {
   resultImages.push(testResult2);
   resultImages.push(testResult3);
 
+  console.log(">>>>>>>init resultImages :", resultImages);
+
   const testArea = document.getElementById("testArea");
 
   testArea.appendChild(resultCanvas);
