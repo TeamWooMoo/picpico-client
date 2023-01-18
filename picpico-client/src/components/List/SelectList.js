@@ -1,10 +1,13 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { socket } from "../../modules/sockets.mjs";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import { useEffect } from "react";
+import { setSelectedInfo } from "../../slice/selectionInfo.js";
+import "./SelectList.css";
 
 const SelectList = () => {
+  const dispatch = useDispatch();
   const roomId = useSelector(state => state.roomInfo.room);
   const selected = useSelector(state => state.selectionInfo.selected); //숫자 스트링 그 자체
   const imgData = useSelector(state => state.selectionInfo.imgList);
@@ -21,8 +24,9 @@ const SelectList = () => {
     if (selected !== "") {
       console.log("<<selected:", selected);
       const imgTag = document.getElementById(`pic-${selected}`);
-      imgTag.style.border = "3px solid tomato";
+      imgTag.classList.toggle("activate_pic");
       console.log("imgTag:", imgTag);
+      dispatch(setSelectedInfo({ value: "" }));
     }
   }, [selected]);
   return (
