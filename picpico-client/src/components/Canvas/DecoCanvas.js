@@ -5,6 +5,7 @@ import { socket } from "../../modules/sockets.mjs";
 import { addStrokeHistory } from "../../slice/drawingInfo.js";
 import { DecoDragAndDrop } from "../../modules/decoDragAndDrop.mjs";
 import { FlexboxGrid, Button } from "rsuite";
+import { ConsoleLogger } from "@nestjs/common";
 
 const DecoCanvas = () => {
   const targetImgIdx = useSelector(state => state.decoInfo.myDecoCanvas);
@@ -22,12 +23,14 @@ const DecoCanvas = () => {
   const roomId = useSelector(state => state.roomInfo.room);
 
   const onCanvasDown = ({ nativeEvent }) => {
+    console.log("down!!!");
     setDrawing(true);
     const { offsetX, offsetY } = nativeEvent;
     socket.emit("mouse_down", socket.id, offsetX, offsetY, targetImgIdx);
   };
 
   const onCanvasUp = ({ nativeEvent }) => {
+    console.log("up!!!");
     setDrawing(false);
   };
 
