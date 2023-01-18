@@ -6,9 +6,11 @@ const MemberList = () => {
   const memberLI = members.map(val => <li>{val}</li>);
 
   return (
-    <>
-      <FlexboxGrid justify="center">{memberLI}</FlexboxGrid>
-    </>
+    <div>
+      <FlexboxGrid justify="center">
+        <p style={{ color: "black", textAlign: "center" }}>{memberLI}</p>
+      </FlexboxGrid>
+    </div>
   );
 };
 

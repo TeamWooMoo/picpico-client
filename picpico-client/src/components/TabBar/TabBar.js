@@ -7,7 +7,7 @@ import StickerList from "../List/StickerList";
 
 const TabMenu = styled.div`
   // background-color: #dcdcdc;
-
+  font-size: large;
   color: gray;
   font-weight: bold;
   display: flex;
@@ -19,20 +19,25 @@ const TabMenu = styled.div`
   list-style: none;
   cursor: pointer;
   margin: 5px;
+  gap: 10px;
 
   .submenu {
     ${"" /* 기본 Tabmenu 에 대한 CSS를 구현합니다. */}
+    // position: fixed;
     display: flex;
     text-align: center;
     justify-content: space-between;
     // width: 100px;
     height: 30px;
-    padding: 10px;
+    padding: 5px;
     font-size: 15px;
   }
 
   .focused {
     ${"" /* 선택된 Tabmenu 에만 적용되는 CSS를 구현합니다.  */}
+    // position: fixed;
+    font-size: large;
+    
     color: black;
   }
 

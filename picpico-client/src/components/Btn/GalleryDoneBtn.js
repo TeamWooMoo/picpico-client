@@ -14,7 +14,7 @@ const GalleryDoneBtn = () => {
     window.location.href = "/";
   }
   return (
-    <Button className="btn-shadow" style={{ lineHeight: "15px", margin: "5px 0" }} onClick={onGalleryDoneBtnClick}>
+    <Button className="btn-shadow" style={{ lineHeight: "15px" }} onClick={onGalleryDoneBtnClick}>
       Finish PicPiCo 🙌
     </Button>
   );
