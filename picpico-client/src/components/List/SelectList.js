@@ -27,6 +27,8 @@ const SelectList = () => {
       imgTag.classList.toggle("activate_pic");
       if (imgTag.classList.contains("activate_pic")) {
         imgTag.style.border = "3px solid tomato";
+      } else {
+        imgTag.style.border = "";
       }
       console.log("imgTag:", imgTag);
       dispatch(setSelectedInfo({ value: "" }));
