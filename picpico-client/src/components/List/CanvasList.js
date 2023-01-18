@@ -3,49 +3,55 @@ import { useEffect } from "react";
 import { setTakePic } from "../../slice/takepicInfo";
 import { socket } from "../../modules/sockets.mjs";
 import "./CanvasList.css";
+import { Capture } from "../../modules/capture.mjs";
 
 const CanvasList = () => {
   const dispatch = useDispatch();
   const imgIdx = useSelector(state => state.takepicInfo.imgIdx);
   const shuttered = useSelector(state => state.takepicInfo.takePic);
 
+  // useEffect(() => {
+  //   if (shuttered === true) {
+  //     const bgCanvas = document.getElementById("bgCanvas");
+  //     const bgCtx = bgCanvas.getContext("2d");
+  //     bgCtx.fillStyle = "red";
+  //     bgCtx.fillRect(0, 0, 350, 350);
+  //     const filmCanvas = document.getElementById("filmCanvas"); // canvas
+  //     const allCanvases = document.getElementById("allCanvases"); // div
+  //     const ctx = filmCanvas.getContext("2d");
+  //     ctx.drawImage(bgCanvas, 0, 0);
+
+  //     const videoRow = document.getElementById("peerVideos");
+
+  //     for (const child of allCanvases.children) {
+  //       // const img = new Image();
+  //       // img.src = child.toDataURL();
+  //       // console.log("img:", img);
+  //       // ctx.drawImage(img, 0, 0);
+
+  //       // const childCtx = child.getContext("webgl");
+  //       console.log("child: ", child);
+  //       const blob = child.toBlob();
+  //       // const childImage = childCtx.getImageData(0, 0, 350, 350);
+
+  //       ctx.drawImage(child, 0, 0);
+  //     }
+  //     const url = filmCanvas.toDataURL();
+
+  //     if (typeof imgIdx === "string") {
+  //       socket.emit("take_pic", (parseInt(imgIdx) + 1).toString(), url);
+  //     } else {
+  //       socket.emit("take_pic", (imgIdx + 1).toString(), url);
+  //     }
+  //     dispatch(setTakePic({ value: false }));
+
+  //     ctx.clearRect(0, 0, 350, 350);
+  //   }
+  // }, [shuttered]);
+
   useEffect(() => {
-    if (shuttered === true) {
-      const bgCanvas = document.getElementById("bgCanvas");
-      const bgCtx = bgCanvas.getContext("2d");
-      bgCtx.fillStyle = "red";
-      bgCtx.fillRect(0, 0, 350, 350);
-      const filmCanvas = document.getElementById("filmCanvas"); // canvas
-      const allCanvases = document.getElementById("allCanvases"); // div
-      const ctx = filmCanvas.getContext("2d");
-      ctx.drawImage(bgCanvas, 0, 0);
-
-      const videoRow = document.getElementById("peerVideos");
-
-      for (const child of allCanvases.children) {
-        const img = new Image();
-        img.src = child.toDataURL();
-        console.log("img:", img);
-        ctx.drawImage(img, 0, 0);
-
-        // const childCtx = child.getContext("webgl");
-        console.log("child: ", child);
-        // const childImage = childCtx.getImageData(0, 0, 350, 350);
-
-        // ctx.drawImage(child, 0, 0);
-      }
-      const url = filmCanvas.toDataURL();
-
-      if (typeof imgIdx === "string") {
-        socket.emit("take_pic", (parseInt(imgIdx) + 1).toString(), url);
-      } else {
-        socket.emit("take_pic", (imgIdx + 1).toString(), url);
-      }
-      dispatch(setTakePic({ value: false }));
-
-      ctx.clearRect(0, 0, 350, 350);
-    }
-  }, [shuttered]);
+    Capture();
+  }, []);
 
   return (
     <>

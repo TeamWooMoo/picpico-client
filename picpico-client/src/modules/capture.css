@@ -1,0 +1,12 @@
+@import url("https://webglfundamentals.org/webgl/resources/webgl-tutorials.css");
+body {
+  margin: 0;
+}
+.filmCanvas {
+  width: 350;
+  height: 350;
+  display: block;
+}
+button {
+  pointer-events: initial;
+}
