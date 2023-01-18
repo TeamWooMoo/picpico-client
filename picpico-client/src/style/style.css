@@ -5,7 +5,10 @@
   background-color: #e8eaf6;
   justify-content: center;
   align-items: center;
-  /* height: 100vh; */
+
+  width: 375px;
+  height: 667px;
+
   vertical-align: middle;
   /* width: 80%; */
   margin: 0 auto;

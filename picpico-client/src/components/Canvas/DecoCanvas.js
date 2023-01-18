@@ -7,33 +7,41 @@ import { DecoDragAndDrop } from "../../modules/decoDragAndDrop.mjs";
 import { FlexboxGrid, Button } from "rsuite";
 
 const DecoCanvas = () => {
+  const targetImgIdx = useSelector(state => state.decoInfo.myDecoCanvas);
+  const decoData = useSelector(state => state.decoInfo.decoList);
+  const idxArr = Object.keys(decoData);
   const dispatch = useDispatch();
   const [mode, setMode] = useState("stroke");
   const [drawing, setDrawing] = useState(false);
   const strokeArr = useSelector(state => state.drawingInfo.strokes);
   const strokeHistory = useSelector(state => state.drawingInfo.strokeHistory);
   const strokeColor = useSelector(state => state.drawingInfo.strokeColor);
-  const decoMyCanvas = useRef();
-  const decoPeerCanvas = useRef();
+  let rendered = false;
+
+  // const decoMyCanvas = useRef();
+  // const decoPeerCanvas = useRef();
   const decoEventCanvas = useRef();
 
   const roomId = useSelector(state => state.roomInfo.room);
 
   const onCanvasDown = ({ nativeEvent }) => {
+    console.log("down:", nativeEvent);
     console.log("down");
     setDrawing(true);
     const { offsetX, offsetY } = nativeEvent;
-    socket.emit("mouse_down", socket.id, offsetX, offsetY);
+    socket.emit("mouse_down", socket.id, offsetX, offsetY, targetImgIdx);
   };
 
-  const onCanvasUp = () => {
+  const onCanvasUp = ({ nativeEvent }) => {
+    console.log("up:", nativeEvent);
     console.log("up");
     setDrawing(false);
   };
 
   const onCanvasMove = ({ nativeEvent }) => {
+    const decoCanvas = document.getElementById(`my-${targetImgIdx}`);
     const { offsetX, offsetY } = nativeEvent;
-    const decoCtx = decoMyCanvas.current.getContext("2d");
+    const decoCtx = decoCanvas.getContext("2d");
     if (!drawing) {
       decoCtx.beginPath();
       decoCtx.moveTo(offsetX, offsetY);
@@ -41,42 +49,69 @@ const DecoCanvas = () => {
       decoCtx.strokeStyle = strokeColor;
       decoCtx.lineTo(offsetX, offsetY);
       decoCtx.stroke();
-      socket.emit("stroke_canvas", roomId, offsetX, offsetY, strokeColor, socket.id);
+      socket.emit("stroke_canvas", roomId, offsetX, offsetY, strokeColor, socket.id, targetImgIdx);
     }
   };
 
   const onStrokeBtnClick = () => {
     setMode("stroke");
-    dragAndDrop.reset();
+    dragAndDrop.reset(targetImgIdx);
   };
 
   const onStickerBtnClick = () => {
     setMode("sticker");
-    dragAndDrop.init();
+    dragAndDrop.init(targetImgIdx);
   };
 
   useEffect(() => {
     if (strokeArr.length > 0) {
-      const [newX, newY, newColor, newSocketId] = strokeArr[strokeArr.length - 1];
+      const [newX, newY, newColor, newSocketId, newIdx] = strokeArr[strokeArr.length - 1];
       if (strokeHistory.hasOwnProperty(newSocketId)) {
-        const { x: oldX, y: oldY } = strokeHistory[newSocketId];
-        const decoCtx = decoPeerCanvas.current.getContext("2d");
+        const { x: oldX, y: oldY, i: oldIdx } = strokeHistory[newSocketId];
+        const decoPeerCanvas = document.getElementById(`peer-${oldIdx}`);
+        const decoCtx = decoPeerCanvas.getContext("2d");
         decoCtx.beginPath();
         decoCtx.moveTo(oldX, oldY);
-
         decoCtx.lineTo(newX, newY);
         decoCtx.strokeStyle = newColor;
         decoCtx.stroke();
-
-        dispatch(addStrokeHistory({ value: [newSocketId, newX, newY] }));
+        dispatch(addStrokeHistory({ value: [newSocketId, newX, newY, newIdx] }));
       }
     }
   }, [strokeArr]);
 
+  /* 여기 해야 합니다 */
+  useEffect(() => {
+    if (targetImgIdx !== "") {
+      const canvasWrapper = document.querySelector(".canvasWrapper");
+      const targetDiv = document.getElementById(`set-${targetImgIdx}`);
+      canvasWrapper.insertAdjacentElement("beforeend", targetDiv);
+      const ctx = decoEventCanvas.current.getContext("2d");
+      ctx.clearRect(0, 0, 300, 300);
+    }
+  }, [targetImgIdx]);
+
+  useEffect(() => {
+    // const idxArr = Object.keys(decoData);
+    console.log("idxARR: ", idxArr);
+    idxArr.forEach(idx => {
+      //   console.log("idx:", idx);
+      //   console.log("doc", document);
+      const imgCanvas = document.getElementById(`img-${idx}`);
+      const imgCtx = imgCanvas.getContext("2d");
+
+      const newImg = new Image();
+
+      console.log(">>><<<>>>", decoData[idx]["picture"]);
+      newImg.src = decoData[idx]["picture"];
+      newImg.onload = async function () {
+        await imgCtx.drawImage(newImg, 0, 0);
+      };
+    });
+    rendered = true;
+  }, []);
+
   const dragAndDrop = DecoDragAndDrop();
-  // dragAndDrop.init();
-  // useEffect(() => {
-  // }, []);
 
   return (
     <>
@@ -89,37 +124,45 @@ const DecoCanvas = () => {
         </Button>
       </FlexboxGrid>
       <FlexboxGrid className="DecoCanvasBox">
-        <canvas className="decocanvas" ref={decoPeerCanvas} width="300px" height="300px"></canvas>
-        <canvas className="decocanvas" ref={decoMyCanvas} width="300px" height="300px"></canvas>
-        <div className="decocanvas" id="sticker_field" style={{ position: "absolute", width: "300px", height: "300px" }}>
-          <div class="draggable" style={{ position: "absolute", width: "100px", height: "100px" }}>
-            <img
-              alt="sticker1"
-              src="https://i.pinimg.com/originals/18/11/30/181130c64c246318e1e4d463d1844ed7.gif"
-              // class="draggable"
-              style={{ position: "absolute", width: "100px", height: "100px" }}
-            />
-          </div>
-          <div class="draggable" style={{ position: "absolute", width: "100px", height: "100px" }}>
-            <img
-              alt="sticker2"
-              src="https://storage.cobak.co/uploads/1585038492476558_8eeec6050c.gif"
-              // class="draggable"
-              style={{ position: "absolute", width: "100px", height: "100px" }}
-            />
-          </div>
+        <div className="canvasWrapper">
+          {idxArr.map(idx => (
+            <div data-setid={`set-${idx}`} id={`set-${idx}`}>
+              <canvas className="decocanvas" width="300px" height="300px" data-img={idx} id={`img-${idx}`}></canvas>
+              <canvas className="decocanvas" width="300px" height="300px" data-my={idx} id={`my-${idx}`}></canvas>
+              <canvas className="decocanvas" width="300px" height="300px" data-peer={idx} id={`peer-${idx}`}></canvas>
+              <div className="decocanvas" id={`sticker-${idx}`} style={{ position: "absolute", width: "300px", height: "300px" }}>
+                <div class="draggable" style={{ position: "absolute", width: "100px", height: "100px" }}>
+                  <img
+                    alt="sticker1"
+                    src="https://i.pinimg.com/originals/18/11/30/181130c64c246318e1e4d463d1844ed7.gif"
+                    // class="draggable"
+                    style={{ position: "absolute", width: "100px", height: "100px" }}
+                  />
+                </div>
+                <div class="draggable" style={{ position: "absolute", width: "100px", height: "100px" }}>
+                  <img
+                    alt="sticker2"
+                    src="https://storage.cobak.co/uploads/1585038492476558_8eeec6050c.gif"
+                    // class="draggable"
+                    style={{ position: "absolute", width: "100px", height: "100px" }}
+                  />
+                </div>
+              </div>
+            </div>
+          ))}
+
+          {mode === "stroke" ? (
+            <canvas
+              className="decocanvas"
+              width="300px"
+              height="300px"
+              ref={decoEventCanvas}
+              onMouseDown={onCanvasDown}
+              onMouseMove={onCanvasMove}
+              onMouseUp={onCanvasUp}
+            ></canvas>
+          ) : null}
         </div>
-        {mode === "stroke" ? (
-          <canvas
-            className="decocanvas"
-            width="300px"
-            height="300px"
-            ref={decoEventCanvas}
-            onMouseDown={onCanvasDown}
-            onMouseMove={onCanvasMove}
-            onMouseUp={onCanvasUp}
-          ></canvas>
-        ) : null}
       </FlexboxGrid>
     </>
   );

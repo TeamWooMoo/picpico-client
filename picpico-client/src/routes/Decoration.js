@@ -1,11 +1,10 @@
-import { Container, FlexboxGrid } from "rsuite";
 import DecoCanvas from "../components/Canvas/DecoCanvas";
 
-import ColorList from "../components/List/ColorList";
-
-// import { useEffect } from "react";
-// import store from "../store";
-// import { setErrorInfo } from "../slice/errorInfo";
+import { useEffect } from "react";
+import store from "../store";
+import { setErrorInfo } from "../slice/errorInfo";
+import DecoList from "../components/List/DecoList";
+import { useSelector } from "react-redux";
 
 const Decoration = () => {
   // useEffect(() => {
@@ -14,6 +13,8 @@ const Decoration = () => {
   return (
     <>
       <DecoCanvas style={{ margin: "auto", width: "1000px" }} />
+
+      <DecoList />
     </>
   );
 };

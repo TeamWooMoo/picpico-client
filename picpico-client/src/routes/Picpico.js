@@ -101,6 +101,7 @@ const Picpico = () => {
           <Content>
             <Decoration controller={controller} />
           </Content>
+
           {/* Color List & Sticker List */}
 
           <Footer className="deco_footer">
