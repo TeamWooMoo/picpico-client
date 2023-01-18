@@ -15,6 +15,8 @@ export const onSendPicEvent = (idx, imgArr) => {
 
   console.log("나는 방장ㅇ이야");
   const canvas = document.createElement("canvas");
+  canvas.width = 350;
+  canvas.height = 350;
   const ctx = canvas.getContext("2d");
   console.log("on send pic event idx: ", idx);
 
