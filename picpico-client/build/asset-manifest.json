@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/static/css/main.ebdca199.css",
-    "main.js": "/static/js/main.030530a6.js",
+    "main.js": "/static/js/main.f7bf471b.js",
     "static/media/sticker_machine.png": "/static/media/sticker_machine.07d50a4710165ad24002.png",
     "index.html": "/index.html",
     "main.ebdca199.css.map": "/static/css/main.ebdca199.css.map",
-    "main.030530a6.js.map": "/static/js/main.030530a6.js.map"
+    "main.f7bf471b.js.map": "/static/js/main.f7bf471b.js.map"
   },
   "entrypoints": [
     "static/css/main.ebdca199.css",
-    "static/js/main.030530a6.js"
+    "static/js/main.f7bf471b.js"
   ]
 }

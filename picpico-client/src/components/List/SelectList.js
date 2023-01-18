@@ -5,7 +5,7 @@ import ImageListItem from "@mui/material/ImageListItem";
 import { useEffect } from "react";
 import { setSelectedInfo } from "../../slice/selectionInfo.js";
 import "./SelectList.css";
-import { List } from "@mui/material";
+import { List } from "rsuite";
 
 const SelectList = () => {
   const dispatch = useDispatch();
