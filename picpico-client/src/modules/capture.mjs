@@ -1,5 +1,6 @@
+import * as webglUtils from "webgl-dev-utils.js";
+import { m4 } from "m4.js";
 export const Capture = () => {
-  const webglUtils = window.webgl_utils;
   const m4 = window.m4;
   const filmCanvas = document.getElementById("filmCanvas"); //canvas
   const gl = filmCanvas.getContext("webgl");
