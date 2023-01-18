@@ -24,13 +24,14 @@ const SelectList = () => {
   }, [selected]);
   return (
     <>
-      <ImageList sx={{ width: 350, height: 350 }} cols={1} rowHeight={350}>
+      {/* <ImageList sx={{ width: 350, height: 350 }} cols={1} rowHeight={350}>
         {Object.values(imgData).map(({ picture }, idx) => (
           <ImageListItem>
             <img alt={`pic-${idx}`} onClick={onImageClick} src={picture} data-pid={idx} id={`pic-${idx}`} />
           </ImageListItem>
         ))}
-      </ImageList>
+      </ImageList> */}
+      <div>"hahaha"</div>
     </>
   );
 };

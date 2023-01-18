@@ -9,7 +9,7 @@ export const onDoneTakeEvent = imgArr => {
   store.dispatch(setSelectionInfo({ value: true }));
 };
 
-export const onDonePickEvent = () => {
+export const onDonePickEvent = imgArr => {
   store.dispatch(setSelectionInfo({ value: false }));
   store.dispatch(setDecoInfo({ value: true }));
 };
