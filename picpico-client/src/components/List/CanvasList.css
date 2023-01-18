@@ -1,6 +1,6 @@
 .canvasBox .canvas {
   position: absolute;
-  top: 15%;
+  top: 40%;
   left: 50%;
   transform: translateX(-50%);
   border: 2px solid white;
@@ -15,12 +15,7 @@
 
 .canvasRow,
 .canvas {
-  /* position: absolute;
-  top: 0px;
-  left: 0px; */
   position: absolute;
-  top: 0;
-  left: 0;
   transform: translateX(-50%);
   border: 2px solid white;
   box-shadow: inset;
@@ -29,6 +24,6 @@
 }
 
 #filmCanvas {
-  top: 7.5%;
+  top: auto;
   left: 50%;
 }
