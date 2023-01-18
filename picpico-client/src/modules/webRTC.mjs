@@ -43,6 +43,9 @@ const handleTrack = (data, myPeer) => {
 
     console.log(peerVideo);
     peerVideo.hidden = true;
+    peerVideo.width = 350;
+    peerVideo.height = 350;
+
     // peerVideo.muted = true;
     // peerVideo.autoplay = true;
     peerVideo.className = "col";

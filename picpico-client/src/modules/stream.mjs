@@ -27,7 +27,7 @@ async function getCameras() {
 async function getMedia(deviceId) {
   const initialConstraints = {
     audio: true,
-    video: { facingMod: "user" },
+    video: { facingMod: "user", width: 350, height: 350 },
   };
   const cameraConstraints = {
     audio: true,
@@ -42,6 +42,7 @@ async function getMedia(deviceId) {
 
     myStream = await myGreenCanvas.captureStream();
     console.log("myStream", myStream);
+    console.log(">>>>myStream.getVideoTracks()[0]", myStream.getVideoTracks()[0]);
     await myStream.addTrack(mediaStream.getAudioTracks()[0]);
 
     console.log("capturing myGreenCanvas to stream");
@@ -63,6 +64,8 @@ export async function initStream() {
   myVideo.width = 350;
   myVideo.height = 350;
   myGreenCanvas.hidden = true;
+  myGreenCanvas.height = myVideo.height;
+  myGreenCanvas.width = myVideo.width;
 
   const canvasRow = document.getElementById("allCanvases");
 
@@ -78,9 +81,6 @@ export async function initStream() {
     myVideo.hidden = true;
 
     initSegment();
-
-    myGreenCanvas.height = myVideo.height;
-    myGreenCanvas.width = myVideo.width;
 
     let lastTime = new Date();
 
