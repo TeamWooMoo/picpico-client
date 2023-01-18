@@ -4,19 +4,19 @@ const takepicInfo = createSlice({
   name: "takepicInfo",
   initialState: {
     takePic: false,
-    imgIdx: 0,
+    idx: 0,
   },
 
   reducers: {
     setTakePic(state, action) {
       state.takePic = action.payload.value;
     },
-    setImgIdxCount(state, action) {
-      state.imgIdx = action.payload.value;
+    setIdxCount(state, action) {
+      state.idx = action.payload.value;
     },
   },
 });
 
-export let { setTakePic, setImgIdxCount } = takepicInfo.actions;
+export let { setTakePic, setIdxCount } = takepicInfo.actions;
 
 export default takepicInfo;
