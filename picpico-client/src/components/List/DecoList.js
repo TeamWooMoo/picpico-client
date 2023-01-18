@@ -10,6 +10,12 @@ const DecoList = () => {
   const dispatch = useDispatch();
   const decoData = useSelector(state => state.decoInfo.decoList);
   const idxArr = Object.keys(decoData);
+
+  const decoColors = useSelector(state => state.decoInfo.colorList);
+  const decoMapping = {};
+  for (let i = 0; i < 4; i++) {
+    decoMapping[idxArr[i]] = decoColors[i];
+  }
   // /*
   //   사진 인덱스  {
   //     viewers: [{nickName: 닉네임, socketId: 닉네임}]
@@ -28,7 +34,14 @@ const DecoList = () => {
       <ImageList sx={{ width: 350 }} cols={4} rowHeight={10}>
         {idxArr.map(idx => (
           <ImageListItem style={{ flex: 1, flexDirection: "row" }}>
-            <img alt={`deco-${idx}`} onClick={onDecoImgClick} src={decoData[idx]["picture"]} data-deco={idx} id={`deco-${idx}`} />
+            <img
+              alt={`deco-${idx}`}
+              onClick={onDecoImgClick}
+              src={decoData[idx]["picture"]}
+              data-deco={idx}
+              id={`deco-${idx}`}
+              style={{ border: `2px solid ${decoMapping[idx]}` }}
+            />
           </ImageListItem>
         ))}
       </ImageList>

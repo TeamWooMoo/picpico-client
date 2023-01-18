@@ -6,6 +6,7 @@ const decoInfo = createSlice({
     decoList: {},
     myDecoCanvas: "",
     decoMode: "stroke",
+    colorList: ["#d62d20", "#ffa700", "#008744", "#0057e7"],
   },
 
   reducers: {
