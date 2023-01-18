@@ -9,7 +9,6 @@ const DecoList = () => {
   const [prevIdx, setPrevIdx] = useState(1);
   const dispatch = useDispatch();
   const decoData = useSelector(state => state.decoInfo.decoList);
-  const currIdx = useSelector(state => state.decoInfo.myDecoCanvas);
   // /*
   //   사진 인덱스  {
   //     viewers: [{nickName: 닉네임, socketId: 닉네임}]
@@ -26,13 +25,11 @@ const DecoList = () => {
   return (
     <>
       <ImageList sx={{ width: 350, height: 350 }} cols={3} rowHeight={250}>
-        {Object.values(decoData).map(({ picture }, idx) =>
-          idx == currIdx ? null : (
-            <ImageListItem>
-              <img alt={`deco-${idx}`} onClick={onDecoImgClick} src={picture} data-deco={idx} id={`deco-${idx}`} />
-            </ImageListItem>
-          )
-        )}
+        {Object.values(decoData).map(({ picture }, idx) => (
+          <ImageListItem>
+            <img alt={`deco-${idx}`} onClick={onDecoImgClick} src={picture} data-deco={idx} id={`deco-${idx}`} />
+          </ImageListItem>
+        ))}
       </ImageList>
     </>
   );
