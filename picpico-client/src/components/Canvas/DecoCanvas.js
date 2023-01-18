@@ -85,10 +85,11 @@ const DecoCanvas = () => {
     if (targetImgIdx !== "") {
       console.log("targetImgIdx:", targetImgIdx);
       console.log("decoData", decoData);
-      const canvasWrapper = document.querySelector(".canvasWrapper");
-      const targetDiv = document.getElementById(`set-${targetImgIdx}`);
-      canvasWrapper.insertAdjacentElement("beforeend", targetDiv);
-      const ctx = decoEventCanvas.current.getContext("2d");
+      // console.log();
+      // const canvasWrapper = document.querySelector(".canvasWrapper");
+      // const targetDiv = document.getElementById(`set-${targetImgIdx}`);
+      // canvasWrapper.insertAdjacentElement("beforeend", targetDiv);
+      // const ctx = decoEventCanvas.current.getContext("2d");
       // ctx.clearRect(0, 0, 300, 300);
     }
   }, [targetImgIdx]);
