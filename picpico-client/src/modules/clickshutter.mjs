@@ -25,7 +25,7 @@ export const onSendPicEvent = (idx, imgArr) => {
     const img = new Image();
     img.src = url;
     // console.log("url:", url);
-    console.log(">>url", url);
+    console.log(">>url", img.src, img);
     ctx.drawImage(img, 0, 0);
   });
 
