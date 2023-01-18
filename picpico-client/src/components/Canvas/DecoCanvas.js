@@ -85,9 +85,18 @@ const DecoCanvas = () => {
       const targetDiv = document.getElementById(`set-${targetImgIdx}`);
       canvasWrapper.insertAdjacentElement("beforeend", targetDiv);
       const ctx = decoEventCanvas.current.getContext("2d");
-      ctx.clearRect(0, 0, 300, 300);
+      // ctx.clearRect(0, 0, 300, 300);
     }
   }, [targetImgIdx]);
+
+  useEffect(() => {
+    const idxArr = Object.keys(decoData);
+    idxArr.forEach(idx => {
+      const imgCanvas = document.getElementById(`img-${idx}`);
+      const imgCtx = imgCanvas.getContext("2d");
+      imgCtx.drawImage(decoData[idx]["picture"], 0, 0);
+    });
+  }, []);
 
   const dragAndDrop = DecoDragAndDrop();
 
