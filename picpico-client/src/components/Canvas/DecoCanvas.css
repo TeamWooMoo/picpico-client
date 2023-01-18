@@ -3,8 +3,6 @@
   top: 15%;
   left: 50%;
   transform: translateX(-50%);
-  width: 300px;
-  height: 300px;
   border: 2px solid white;
   box-shadow: inset;
   border-radius: 10px;
