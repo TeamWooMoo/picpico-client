@@ -9,6 +9,20 @@ export const onClickShutterEvent = idx => {
   store.dispatch(setTakePic({ value: true }));
 };
 
+const dataURLtoFile = (dataurl, fileName) => {
+  var arr = dataurl.split(","),
+    mime = arr[0].match(/:(.*?);/)[1],
+    bstr = atob(arr[1]),
+    n = bstr.length,
+    u8arr = new Uint8Array(n);
+
+  while (n--) {
+    u8arr[n] = bstr.charCodeAt(n);
+  }
+
+  return new File([u8arr], fileName, { type: mime });
+};
+
 //im
 export const onSendPicEvent = (idx, imgArr) => {
   const isKing = store.getState().membersInfo.king;
@@ -22,11 +36,12 @@ export const onSendPicEvent = (idx, imgArr) => {
 
   imgArr.forEach(obj => {
     const url = obj.picture;
-    const img = new Image();
-    img.src = url;
-    // console.log("url:", url);
-    console.log(">>url", img.src, img);
-    ctx.drawImage(img, 0, 0);
+    // const img = new Image();
+    // img.src = url;
+    // // console.log("url:", url);
+    // console.log(">>url", img.src, img);
+    const file = dataURLtoFile(url, "plz.png");
+    ctx.drawImage(file, 0, 0);
   });
 
   const resultUrl = canvas.toDataURL();
