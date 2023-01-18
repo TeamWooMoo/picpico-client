@@ -2,17 +2,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 5px;
+  margin: 10px;
+  gap: 10px;
 }
 .color-option {
-  width: 15px;
-  height: 15px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   cursor: pointer;
   border: 2px solid white;
   transition: transform ease-in-out 0.1s;
   box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
 }
+
 .color-option:hover {
   transform: scale(1.2);
 }

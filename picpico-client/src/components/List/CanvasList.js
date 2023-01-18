@@ -21,8 +21,6 @@ const CanvasList = () => {
       const url = filmCanvas.current.toDataURL("image/png"); // 내 얼굴만 있는 이미지 url
 
       socket.emit("send_pic", (parseInt(idx) - 1).toString(), url);
-      console.log("before", url);
-      console.log("내 사진만 한장 보낼게!");
 
       dispatch(setTakePic({ value: false }));
 
@@ -36,11 +34,10 @@ const CanvasList = () => {
     <>
       <div className="canvasBox">
         <canvas id="myGreenCanvas" className="canvas"></canvas>
-        <div id="allCanvases" ref={allCanvases}></div>
-        <canvas id="filmCanvas" className="canvas" width="350" height="350" ref={filmCanvas}></canvas>
+        <div id="allCanvases" width="350" height="350" ref={allCanvases}></div>
+        <canvas id="filmCanvas" width="350" height="350" className="canvas" ref={filmCanvas}></canvas>
       </div>
-
-      <canvas id="drawnCanvas" hidden="hidden" className="canvas" width="350" height="350"></canvas>
+      <canvas id="drawnCanvas" width="350" height="350" hidden="hidden" className="canvas"></canvas>
     </>
   );
 };

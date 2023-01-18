@@ -43,6 +43,9 @@ const handleTrack = (data, myPeer) => {
 
     console.log(peerVideo);
     peerVideo.hidden = true;
+    peerVideo.width = 350;
+    peerVideo.height = 350;
+
     // peerVideo.muted = true;
     // peerVideo.autoplay = true;
     peerVideo.className = "col";
@@ -60,6 +63,7 @@ const handleTrack = (data, myPeer) => {
       peerCanvasGL.style.position = "absolute";
       peerCanvasGL.style.top = "0px";
       peerCanvasGL.style.left = "0px";
+      // peerCanvasGL.style.transform = "translateX(-50%)";
       peerCanvasGL.setAttribute("uid", `${uuid()}`);
       // peerCanvasGL.id = `${uuid()}`;
 

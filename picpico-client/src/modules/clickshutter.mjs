@@ -1,4 +1,3 @@
-import { async } from "rxjs";
 import { setIdxCount, setTakePic } from "../slice/takepicInfo.js";
 import store from "../store.js";
 import { socket } from "./sockets.mjs";
@@ -18,17 +17,13 @@ export const onSendPicEvent = async (idx, imgArr) => {
     console.log("canvas:", canvas);
     console.log("on send pic event idx: ", idx);
 
-    let newImgArr = [];
-
     await imgArr.forEach(async obj => {
       const url = obj.picture;
       const img = new Image();
-      newImgArr.push(img);
 
       img.src = url;
       img.onload = async function () {
         await ctx.drawImage(img, 0, 0);
-        console.log("img:", img.src);
       };
     });
   }

@@ -7,6 +7,7 @@ import drawingInfo from "./slice/drawingInfo";
 import roomInfo from "./slice/roomInfo";
 import errorInfo from "./slice/errorInfo";
 import selectionInfo from "./slice/selectionInfo";
+import decoInfo from "./slice/decoInfo";
 const store = configureStore({
   reducer: {
     picpicoInfo: picpicoInfo.reducer,
@@ -17,6 +18,7 @@ const store = configureStore({
     roomInfo: roomInfo.reducer,
     errorInfo: errorInfo.reducer,
     selectionInfo: selectionInfo.reducer,
+    decoInfo: decoInfo.reducer,
   },
 });
 

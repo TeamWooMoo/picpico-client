@@ -13,8 +13,8 @@ const membersInfo = createSlice({
       state.nickname = action.payload.value;
     },
     setMembersInfo(state, action) {
-      console.log("setMembersInfo");
       state.members = action.payload.value;
+      console.log("setMembersInfo", state.members, Object.keys(state.members));
     },
     setKingInfo(state, action) {
       console.log("im king");

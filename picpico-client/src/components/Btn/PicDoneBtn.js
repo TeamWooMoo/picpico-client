@@ -11,7 +11,7 @@ const PicDoneBtn = () => {
   }
 
   return (
-    <Button className={isKing ? "btn-shadow" : "btn-deactivate"} style={{ lineHeight: "15px", margin: "5px 0" }} onClick={onPicDoneBtnClick}>
+    <Button className={isKing ? "btn-shadow" : "btn-deactivate"} style={{ lineHeight: "15px" }} onClick={onPicDoneBtnClick}>
       Done 📸
     </Button>
   );
