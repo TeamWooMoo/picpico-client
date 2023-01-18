@@ -91,7 +91,7 @@ const DecoCanvas = () => {
       <FlexboxGrid className="DecoCanvasBox">
         <canvas className="decocanvas" ref={decoPeerCanvas} width="300px" height="300px"></canvas>
         <canvas className="decocanvas" ref={decoMyCanvas} width="300px" height="300px"></canvas>
-        <div className="decocanvas" id="sticker_field" width="300px" height="300px" style={{ position: "absolute" }}>
+        <div className="decocanvas" id="sticker_field" style={{ position: "absolute", width: "300px", height: "300px" }}>
           <div class="draggable" style={{ position: "absolute", width: "100px", height: "100px" }}>
             <img
               alt="sticker1"
