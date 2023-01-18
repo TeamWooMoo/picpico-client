@@ -82,7 +82,7 @@ const Picpico = () => {
           </Header>
           <Content>
             <DecoMessage />
-            {/* <MemberList /> */}
+            <MemberList />
           </Content>
           <Footer>
             <Selection />
