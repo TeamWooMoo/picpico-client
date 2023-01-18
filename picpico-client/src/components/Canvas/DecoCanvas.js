@@ -97,20 +97,22 @@ const DecoCanvas = () => {
   useEffect(() => {
     // const idxArr = Object.keys(decoData);
     console.log("idxARR: ", idxArr);
-    // idxArr.forEach(idx => {
-    //   console.log("idx:", idx);
-    //   console.log("doc", document);
-    //   const imgCanvas = document.getElementById(`img-${idx}`);
-    //   const imgCtx = imgCanvas.getContext("2d");
+    idxArr.forEach(idx => {
+      //   console.log("idx:", idx);
+      //   console.log("doc", document);
+      const imgCanvas = document.getElementById(`img-${idx}`);
+      console.log("imgCanvas >>> ", imgCanvas);
+      const imgCtx = imgCanvas.getContext("2d");
+      console.log("imgCtx >>> ", imgCtx);
 
-    //   const newImg = new Image();
+      //   const newImg = new Image();
 
-    //   console.log(">>><<<>>>", decoData[idx]["picture"]);
-    //   newImg.src = decoData[idx]["picture"];
-    //   newImg.onload = async function () {
-    //     await imgCtx.drawImage(newImg, 0, 0);
-    //   };
-    // });
+      //   console.log(">>><<<>>>", decoData[idx]["picture"]);
+      //   newImg.src = decoData[idx]["picture"];
+      //   newImg.onload = async function () {
+      //     await imgCtx.drawImage(newImg, 0, 0);
+      //   };
+    });
     rendered = true;
   }, []);
 
