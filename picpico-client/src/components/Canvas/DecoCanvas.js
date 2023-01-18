@@ -86,12 +86,12 @@ const DecoCanvas = () => {
     if (targetImgIdx !== "") {
       console.log("targetImgIdx:", targetImgIdx);
       console.log("decoData", decoData);
-      // console.log();
-      // const canvasWrapper = document.querySelector(".canvasWrapper");
-      // const targetDiv = document.getElementById(`set-${targetImgIdx}`);
-      // canvasWrapper.insertAdjacentElement("beforeend", targetDiv);
-      // const ctx = decoEventCanvas.current.getContext("2d");
-      // ctx.clearRect(0, 0, 300, 300);
+      console.log();
+      const canvasWrapper = document.querySelector(".canvasWrapper");
+      const targetDiv = document.getElementById(`set-${targetImgIdx}`);
+      canvasWrapper.insertAdjacentElement("beforeend", targetDiv);
+      const ctx = decoEventCanvas.current.getContext("2d");
+      ctx.clearRect(0, 0, 300, 300);
     }
   }, [targetImgIdx]);
 
@@ -101,16 +101,16 @@ const DecoCanvas = () => {
     idxArr.forEach(idx => {
       console.log("idx:", idx);
       console.log("doc", document);
-      // const imgCanvas = document.getElementById(`img-${idx}`);
-      // const imgCtx = imgCanvas.getContext("2d");
+      const imgCanvas = document.getElementById(`img-${idx}`);
+      const imgCtx = imgCanvas.getContext("2d");
 
-      // const newImg = new Image();
+      const newImg = new Image();
 
-      // console.log(">>><<<>>>", decoData[idx]["picture"]);
-      // newImg.src = decoData[idx]["picture"];
-      // newImg.onload = async function () {
-      //   await imgCtx.drawImage(newImg, 0, 0);
-      // };
+      console.log(">>><<<>>>", decoData[idx]["picture"]);
+      newImg.src = decoData[idx]["picture"];
+      newImg.onload = async function () {
+        await imgCtx.drawImage(newImg, 0, 0);
+      };
     });
   }, []);
 
