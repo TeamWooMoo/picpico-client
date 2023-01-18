@@ -25,7 +25,7 @@ export const onSendPicEvent = (idx, imgArr) => {
     const img2 = fetch(url)
       .then(resp => resp.arrayBuffer())
       .then(buffer => {
-        console.log("unit", buffer, typeof buffer);
+        console.log("unit", buffer, Object.keys(buffer));
         const imageData = new ImageData(buffer.Uint8Array, 350, 350);
         ctx.putImageData(imageData, 0, 0);
       });
