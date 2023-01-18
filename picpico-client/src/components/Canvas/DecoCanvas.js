@@ -91,7 +91,9 @@ const DecoCanvas = () => {
 
   useEffect(() => {
     const idxArr = Object.keys(decoData);
+    console.log("idxARR: ", idxArr);
     idxArr.forEach(idx => {
+      console.log("idx:", idx);
       const imgCanvas = document.getElementById(`img-${idx}`);
       const imgCtx = imgCanvas.getContext("2d");
 
