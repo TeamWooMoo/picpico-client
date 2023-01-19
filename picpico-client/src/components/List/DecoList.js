@@ -31,9 +31,9 @@ const DecoList = () => {
   };
   return (
     <>
-      <ImageList sx={{ width: 350 }} cols={4} rowHeight={10}>
+      <ImageList sx={{ width: 350, height: 100 }} cols={4} rowHeight={100}>
         {idxArr.map(idx => (
-          <ImageListItem style={{ flex: 1, flexDirection: "row", height: "0" }}>
+          <ImageListItem style={{ flex: 1, flexDirection: "row", height: 100 }}>
             <img
               alt={`deco-${idx}`}
               onClick={onDecoImgClick}
