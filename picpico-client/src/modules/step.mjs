@@ -3,6 +3,8 @@ import { setDecoInfo, setGalleryInfo, setPicBoothInfo, setSelectionInfo } from "
 import { setImgListInfo } from "../slice/selectionInfo.js";
 import store from "../store.js";
 import { socket } from "./sockets.mjs";
+import { ResultImage, Sticker } from "../modules/resultCanvas.mjs";
+import { gifTest } from "../test/resultTest.mjs";
 
 export const onDoneTakeEvent = imgArr => {
   console.log("picBooth done~~", imgArr);
@@ -26,8 +28,17 @@ export const onDoneDecoEvent = () => {
 };
 
 export const onSubmitDecoEvent = realResult => {
+  gifTest(realResult);
+  store.dispatch(setRealResultInfo({ value: realResult }));
+
   store.dispatch(setDecoInfo({ value: false }));
   store.dispatch(setGalleryInfo({ value: true }));
+
+  // for (let i = 0; i < realResult.length; i++) {
+  //   const curRealResult = realResult[i];
+
+  // resultImages.push(new ResultImage(curRealResult["resultUrl"], curRealResult["stickers"]));
+  // }
+
   console.log("realResult:", realResult);
-  store.dispatch(setRealResultInfo({ value: realResult }));
 };
