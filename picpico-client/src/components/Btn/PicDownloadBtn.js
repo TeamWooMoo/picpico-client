@@ -4,7 +4,7 @@ import { Button } from "rsuite";
 
 import camera from "./../../assets/images/camera.png";
 import narin from "../../assets/gif/narin.gif";
-
+import { gifTest } from "../../test/resultTest.mjs";
 
 function PicDownloadBtn() {
   const onCapture = () => {
@@ -14,7 +14,6 @@ function PicDownloadBtn() {
     // });
 
     onSaveImg(narin, "PicPiCo_Result.gif");
-
   };
   const onSaveImg = (url, filename) => {
     const link = document.createElement("a");
@@ -27,12 +26,14 @@ function PicDownloadBtn() {
 
   return (
     <>
+      <div id="testArea"></div>
       <div id="imageWrapper" style={{ margin: "15px", boxShadow: "rgba(26, 18, 18, 0.25) 0 1px 2px 0" }}>
         <img width="350px" height="350px" src={narin} />
       </div>
       <Button className="btn-shadow" style={{ lineHeight: "15px" }} onClick={onCapture}>
         Download Picture 📥
       </Button>
+      <Button onClick={gifTest}> Test </Button>
     </>
   );
 }
