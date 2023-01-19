@@ -11,30 +11,25 @@ const DecoCanvas = () => {
   const decoData = useSelector(state => state.decoInfo.decoList);
   const idxArr = Object.keys(decoData);
   const dispatch = useDispatch();
-  const [mode, setMode] = useState("stroke");
+  const mode = useSelector(state => state.decoInfo.decoMode);
   const [drawing, setDrawing] = useState(false);
   const strokeArr = useSelector(state => state.drawingInfo.strokes);
   const strokeHistory = useSelector(state => state.drawingInfo.strokeHistory);
   const strokeColor = useSelector(state => state.drawingInfo.strokeColor);
-  let rendered = false;
 
-  // const decoMyCanvas = useRef();
-  // const decoPeerCanvas = useRef();
   const decoEventCanvas = useRef();
 
   const roomId = useSelector(state => state.roomInfo.room);
 
   const onCanvasDown = ({ nativeEvent }) => {
-    console.log("down:", nativeEvent);
-    console.log("down");
+    console.log("down!!!");
     setDrawing(true);
     const { offsetX, offsetY } = nativeEvent;
     socket.emit("mouse_down", socket.id, offsetX, offsetY, targetImgIdx);
   };
 
   const onCanvasUp = ({ nativeEvent }) => {
-    console.log("up:", nativeEvent);
-    console.log("up");
+    console.log("up!!!");
     setDrawing(false);
   };
 
@@ -53,15 +48,19 @@ const DecoCanvas = () => {
     }
   };
 
-  const onStrokeBtnClick = () => {
-    setMode("stroke");
-    dragAndDrop.reset(targetImgIdx);
-  };
+  // const onStrokeBtnClick = () => {
+  //   setMode("stroke");
+  //   dragAndDrop.reset(targetImgIdx);
+  // };
 
-  const onStickerBtnClick = () => {
-    setMode("sticker");
-    dragAndDrop.init(targetImgIdx);
-  };
+  // const onStickerBtnClick = () => {
+  //   setMode("sticker");
+  //   dragAndDrop.init(targetImgIdx);
+  // };
+
+  useEffect(() => {
+    console.log("mode change");
+  }, [mode]);
 
   useEffect(() => {
     if (strokeArr.length > 0) {
@@ -86,47 +85,42 @@ const DecoCanvas = () => {
       const canvasWrapper = document.querySelector(".canvasWrapper");
       const targetDiv = document.getElementById(`set-${targetImgIdx}`);
       canvasWrapper.insertAdjacentElement("beforeend", targetDiv);
+
       const ctx = decoEventCanvas.current.getContext("2d");
       ctx.clearRect(0, 0, 300, 300);
     }
   }, [targetImgIdx]);
 
   useEffect(() => {
-    // const idxArr = Object.keys(decoData);
-    console.log("idxARR: ", idxArr);
     idxArr.forEach(idx => {
-      //   console.log("idx:", idx);
-      //   console.log("doc", document);
       const imgCanvas = document.getElementById(`img-${idx}`);
       const imgCtx = imgCanvas.getContext("2d");
 
       const newImg = new Image();
 
-      console.log(">>><<<>>>", decoData[idx]["picture"]);
       newImg.src = decoData[idx]["picture"];
       newImg.onload = async function () {
         await imgCtx.drawImage(newImg, 0, 0);
       };
     });
-    rendered = true;
   }, []);
 
   const dragAndDrop = DecoDragAndDrop();
 
   return (
     <>
-      <FlexboxGrid>
+      {/* <FlexboxGrid>
         <Button appearance="default" onClick={onStrokeBtnClick}>
           그리기
         </Button>
         <Button appearance="default" onClick={onStickerBtnClick}>
           스티커
         </Button>
-      </FlexboxGrid>
+      </FlexboxGrid> */}
       <FlexboxGrid className="DecoCanvasBox">
         <div className="canvasWrapper">
           {idxArr.map(idx => (
-            <div data-setid={`set-${idx}`} id={`set-${idx}`}>
+            <div data-setid={`set-${idx}`} id={`set-${idx}`} style={{ visibility: idx != targetImgIdx ? "hidden" : "visible" }}>
               <canvas className="decocanvas" width="300px" height="300px" data-img={idx} id={`img-${idx}`}></canvas>
               <canvas className="decocanvas" width="300px" height="300px" data-my={idx} id={`my-${idx}`}></canvas>
               <canvas className="decocanvas" width="300px" height="300px" data-peer={idx} id={`peer-${idx}`}></canvas>

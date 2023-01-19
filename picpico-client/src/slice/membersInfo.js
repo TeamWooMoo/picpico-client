@@ -3,14 +3,18 @@ import { createSlice } from "@reduxjs/toolkit";
 const membersInfo = createSlice({
   name: "membersInfo",
   initialState: {
+    nickname: "",
     members: [],
     king: false,
   },
 
   reducers: {
+    setNickNameInfo(state, action){
+      state.nickname = action.payload.value;
+    },
     setMembersInfo(state, action) {
-      console.log("setMembersInfo");
       state.members = action.payload.value;
+      console.log("setMembersInfo", state.members, Object.keys(state.members));
     },
     setKingInfo(state, action) {
       console.log("im king");
@@ -19,6 +23,6 @@ const membersInfo = createSlice({
   },
 });
 
-export let { setMembersInfo, setKingInfo } = membersInfo.actions;
+export let { setNickNameInfo, setMembersInfo, setKingInfo } = membersInfo.actions;
 
 export default membersInfo;

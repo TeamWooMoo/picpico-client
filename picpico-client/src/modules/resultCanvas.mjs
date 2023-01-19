@@ -5,7 +5,6 @@
 
 import { decompressFrames, parseGIF } from "gifuct-js";
 import { makeGIF } from "./resultGIF.mjs";
-import { async } from "rxjs";
 
 export let resultCanvas = document.createElement("canvas"); // ! 나중에 import 실제 element from component 가져와야함
 export let resultImages = []; // {사진 + (각 사진 위의 스티커url, 좌표, frames) 여러개 } x 4 일 것임
