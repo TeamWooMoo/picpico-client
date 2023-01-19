@@ -6,14 +6,14 @@ function Title() {
   return (
     <div>
       <FlexboxGrid justify="center">
-        <h1 className="intro" style={{ color: "black", textAlign: "center" }}>
+        <h1 className="intro" style={{ fontFamily: "'Palatino Linotype', 'Book Antiqua', Palatino, serif", color: "black", textAlign: "center" }}>
           PicPiCo
         </h1>
       </FlexboxGrid>
       <FlexboxGrid justify="center">
-        <h6 className="intro" style={{ color: "#204675", textAlign: "center" }}>
+        <h5 className="intro" style={{ fontFamily: "'Palatino Linotype', 'Book Antiqua', Palatino, serif", color: "#204675", textAlign: "center" }}>
           : take Pictures with Peer Connection
-        </h6>
+        </h5>
       </FlexboxGrid>
     </div>
   );
