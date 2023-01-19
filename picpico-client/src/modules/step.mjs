@@ -28,11 +28,11 @@ export const onDoneDecoEvent = () => {
 };
 
 export const onSubmitDecoEvent = realResult => {
-  gifTest(realResult);
   store.dispatch(setRealResultInfo({ value: realResult }));
 
   store.dispatch(setDecoInfo({ value: false }));
   store.dispatch(setGalleryInfo({ value: true }));
+  gifTest(realResult);
 
   // for (let i = 0; i < realResult.length; i++) {
   //   const curRealResult = realResult[i];
