@@ -1,6 +1,8 @@
 // import cancelBtn from "../../assets/images/cancelBtn.svg";
 // import cancelBtn from "../assets/images/cancelBtn.svg";
 
+import {socket} from "./sockets.mjs";
+
 export const DecoDragAndDrop = () => {
     let isDragging;
     let field;
@@ -74,6 +76,8 @@ export const DecoDragAndDrop = () => {
         console.log(`newX=${newX}, newY=${newY}`);
         dragElement.style.left = newX - field.getBoundingClientRect().left + "px";
         dragElement.style.top = newY - field.getBoundingClientRect().top + "px";
+
+        socket.emit("sticker_move", dragElement.style.left, dragElement.style.top, field.id, dragElement.src);
     };
 
     const finishDrag = () => {
