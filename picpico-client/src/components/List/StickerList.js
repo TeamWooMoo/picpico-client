@@ -41,6 +41,7 @@ const StickerList = () => {
   const onNarinClick = () => {
     makeGIF();
   };
+
   return (
     <>
       <FlexboxGrid justify="center" className="color-options">

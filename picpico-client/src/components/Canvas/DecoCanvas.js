@@ -131,7 +131,7 @@ const DecoCanvas = () => {
               <canvas className="decocanvas" width="300px" height="300px" data-my={idx} id={`my-${idx}`}></canvas>
               <canvas className="decocanvas" width="300px" height="300px" data-peer={idx} id={`peer-${idx}`}></canvas>
               <div className="decocanvas" id={`sticker-${idx}`} style={{ position: "absolute", width: "300px", height: "300px" }}>
-                <div class="draggable" style={{ position: "absolute", width: "100px", height: "100px" }}>
+                {/* <div class="draggable" style={{ position: "absolute", width: "100px", height: "100px" }}>
                   <img
                     alt="sticker1"
                     src="https://i.pinimg.com/originals/18/11/30/181130c64c246318e1e4d463d1844ed7.gif"
@@ -146,7 +146,7 @@ const DecoCanvas = () => {
                     // class="draggable"
                     style={{ position: "absolute", width: "100px", height: "100px" }}
                   />
-                </div>
+                </div> */}
               </div>
             </div>
           ))}
