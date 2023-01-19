@@ -28,8 +28,8 @@ function PicDownloadBtn() {
                     <div id="testArea"></div>
                 </ImageList>
             </div>
-            <Button className="btn-shadow" style={{lineHeight: "15px"}} onClick={onCapture}>
-                Download Picture 📥
+            <Button className="btn-shadow" style={{lineHeight: "15px", width: "30px"}} onClick={onCapture}>
+                내보내기 📥
             </Button>
             {/* <Button onClick={gifTest}> Test </Button> */}
         </>
