@@ -147,6 +147,7 @@ const DecoCanvas = () => {
               onMouseDown={onCanvasDown}
               onMouseMove={onCanvasMove}
               onMouseUp={onCanvasUp}
+              style={{ border: `2px solid ${decoMapping[targetImgIdx]}` }}
             ></canvas>
           ) : null}
         </div>
