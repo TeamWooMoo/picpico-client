@@ -7,6 +7,9 @@ const decoInfo = createSlice({
     myDecoCanvas: "",
     decoMode: "stroke",
     colorList: ["#d62d20", "#ffa700", "#008744", "#0057e7"],
+    doneDeco: false,
+    resultList: [],
+    realResultList: [],
   },
 
   reducers: {
@@ -19,9 +22,18 @@ const decoInfo = createSlice({
     setDecoModeInfo(state, action) {
       state.decoMode = action.payload.value;
     },
+    setDoneDecoInfo(state, action) {
+      state.doneDeco = action.payload.value;
+    },
+    setResultInfo(state, action) {
+      state.resultList = action.payload.value;
+    },
+    setRealResultInfo(state, action) {
+      state.realResultList = action.payload.value;
+    },
   },
 });
 
-export let { setDecoListInfo, setMyDecoCanvasInfo, setDecoModeInfo } = decoInfo.actions;
+export let { setDecoListInfo, setMyDecoCanvasInfo, setDecoModeInfo, setDoneDecoInfo, setResultInfo, setRealResultInfo } = decoInfo.actions;
 
 export default decoInfo;

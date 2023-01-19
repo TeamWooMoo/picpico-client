@@ -1,7 +1,10 @@
-import { setDecoListInfo, setMyDecoCanvasInfo } from "../slice/decoInfo.js";
+import { setDecoListInfo, setDoneDecoInfo, setMyDecoCanvasInfo, setRealResultInfo } from "../slice/decoInfo.js";
 import { setDecoInfo, setGalleryInfo, setPicBoothInfo, setSelectionInfo } from "../slice/picpicoInfo.js";
 import { setImgListInfo } from "../slice/selectionInfo.js";
 import store from "../store.js";
+import { socket } from "./sockets.mjs";
+import { ResultImage, Sticker } from "../modules/resultCanvas.mjs";
+import { gifTest } from "../test/resultTest.mjs";
 
 export const onDoneTakeEvent = imgArr => {
   console.log("picBooth done~~", imgArr);
@@ -18,6 +21,23 @@ export const onDonePickEvent = imgArr => {
 };
 
 export const onDoneDecoEvent = () => {
+  const result = store.getState().decoInfo.resultList;
+  socket.emit("submit_deco", result);
+  // store.dispatch(setDecoInfo({ value: false }));
+  // store.dispatch(setGalleryInfo({ value: true }));
+};
+
+export const onSubmitDecoEvent = async realResult => {
+  store.dispatch(setRealResultInfo({ value: realResult }));
+
   store.dispatch(setDecoInfo({ value: false }));
   store.dispatch(setGalleryInfo({ value: true }));
+
+  // for (let i = 0; i < realResult.length; i++) {
+  //   const curRealResult = realResult[i];
+
+  // resultImages.push(new ResultImage(curRealResult["resultUrl"], curRealResult["stickers"]));
+  // }
+
+  console.log("realResult:", realResult);
 };
