@@ -5,7 +5,6 @@
 
 import {decompressFrames, parseGIF} from "gifuct-js";
 import {makeGIF} from "./resultGIF.mjs";
-import {async} from "rxjs";
 
 export let resultCanvas = document.createElement("canvas"); // ! 나중에 import 실제 element from component 가져와야함
 export let resultImages = []; // {사진 + (각 사진 위의 스티커url, 좌표, frames) 여러개 } x 4 일 것임
@@ -153,8 +152,8 @@ export async function makeResultCanvas() {
         requestAnimationFrame(drawResult);
     };
 
-    setTimeout(() => drawResult(), 1000);
-    // drawResult();
+    // setTimeout(() => drawResult(), 1000);
+    drawResult();
 }
 
 /***************************************************************** */
@@ -178,9 +177,10 @@ function putFrame(currentResult, resultCtx, frameIndex, imageIndex) {
 
         // console.log(">>>>>>currentSticker.frames", frames);
         // console.log(">>>>>>frames[frameIndex]", frames[frameIndex]);
+
         const stickerImageData = new ImageData(frames[frameIndex].patch, frames[frameIndex].dims.width, frames[frameIndex].dims.height);
-        resultCtx.globalCompositeOperation = "destination-over";
         resultCtx.putImageData(stickerImageData, stickerX, 350 * imageIndex + stickerY);
+        resultCtx.globalCompositeOperation = "destination-atop";
     }
 
     return resultCtx;
