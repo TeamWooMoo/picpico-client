@@ -9,3 +9,5 @@ export const onPickDecoEvent = obj => {
 export const onPickStickerEvent = (url, imgIdx) => {
     store.dispatch(setStickerInfo({value: {idx: imgIdx, url: url}}));
 };
+
+export const onStickerMoveEvent = () => {};

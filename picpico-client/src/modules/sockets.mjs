@@ -34,4 +34,5 @@ export async function joinRoom(roomId) {
     socket.on("pick_deco", onPickDecoEvent);
     socket.on("submit_deco", onSubmitDecoEvent);
     socket.on("pick_sticker", onPickStickerEvent);
+    socket.on("sticker_move", onStickerMoveEvent);
 }
