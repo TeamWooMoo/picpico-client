@@ -17,6 +17,14 @@ const DecoCanvas = () => {
   const strokeHistory = useSelector(state => state.drawingInfo.strokeHistory);
   const strokeColor = useSelector(state => state.drawingInfo.strokeColor);
 
+  // const decos = useSelector(state => state.decoInfo.decoList);
+  // const decoKeys = Object.keys(decos);
+  const decoColors = useSelector(state => state.decoInfo.colorList);
+  const decoMapping = {};
+  for (let i = 0; i < 4; i++) {
+    decoMapping[idxArr[i]] = decoColors[i];
+  }
+
   const decoEventCanvas = useRef();
 
   const roomId = useSelector(state => state.roomInfo.room);
@@ -109,38 +117,23 @@ const DecoCanvas = () => {
 
   return (
     <>
-      {/* <FlexboxGrid>
-        <Button appearance="default" onClick={onStrokeBtnClick}>
-          그리기
-        </Button>
-        <Button appearance="default" onClick={onStickerBtnClick}>
-          스티커
-        </Button>
-      </FlexboxGrid> */}
       <FlexboxGrid className="DecoCanvasBox">
         <div className="canvasWrapper">
           {idxArr.map(idx => (
             <div data-setid={`set-${idx}`} id={`set-${idx}`} style={{ visibility: idx != targetImgIdx ? "hidden" : "visible" }}>
               <canvas className="decocanvas" width="300px" height="300px" data-img={idx} id={`img-${idx}`}></canvas>
               <canvas className="decocanvas" width="300px" height="300px" data-my={idx} id={`my-${idx}`}></canvas>
-              <canvas className="decocanvas" width="300px" height="300px" data-peer={idx} id={`peer-${idx}`}></canvas>
+              <canvas
+                className="decocanvas"
+                width="300px"
+                height="300px"
+                data-peer={idx}
+                id={`peer-${idx}`}
+                style={{ border: `2px solid ${decoMapping[idx]}` }}
+              ></canvas>
               <div className="decocanvas" id={`sticker-${idx}`} style={{ position: "absolute", width: "300px", height: "300px" }}>
-                <div class="draggable" style={{ position: "absolute", width: "100px", height: "100px" }}>
-                  <img
-                    alt="sticker1"
-                    src="https://i.pinimg.com/originals/18/11/30/181130c64c246318e1e4d463d1844ed7.gif"
-                    // class="draggable"
-                    style={{ position: "absolute", width: "100px", height: "100px" }}
-                  />
-                </div>
-                <div class="draggable" style={{ position: "absolute", width: "100px", height: "100px" }}>
-                  <img
-                    alt="sticker2"
-                    src="https://storage.cobak.co/uploads/1585038492476558_8eeec6050c.gif"
-                    // class="draggable"
-                    style={{ position: "absolute", width: "100px", height: "100px" }}
-                  />
-                </div>
+                <div class="draggable" style={{ position: "absolute", width: "100px", height: "100px" }}></div>
+                <div class="draggable" style={{ position: "absolute", width: "100px", height: "100px" }}></div>
               </div>
             </div>
           ))}
@@ -154,6 +147,7 @@ const DecoCanvas = () => {
               onMouseDown={onCanvasDown}
               onMouseMove={onCanvasMove}
               onMouseUp={onCanvasUp}
+              style={{ border: `2px solid ${decoMapping[targetImgIdx]}` }}
             ></canvas>
           ) : null}
         </div>
