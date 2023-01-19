@@ -22,9 +22,7 @@ const MemberList = () => {
       {decoDisplay ? (
         <FlexboxGrid justify="center">
           <ul style={{ color: "black", textAlign: "center", listStyle: "none", paddingLeft: 0 }}>
-            {decoKeys.map(idx =>
-              Object.entries(decos[idx]["viewers"]).map(obj => <li style={{ float: "left", color: decoMapping[idx] }}>{obj["nickName"]}</li>)
-            )}
+            {decoKeys.map(idx => decos[idx]["viewers"].map(obj => <li style={{ float: "left", color: decoMapping[idx] }}>{obj["nickName"]}</li>))}
           </ul>
         </FlexboxGrid>
       ) : (
