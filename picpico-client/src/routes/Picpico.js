@@ -43,7 +43,7 @@ const Picpico = () => {
   const galleryDone = useSelector(state => state.picpicoInfo.galleryDisplay);
   const controller = MainController();
   const error = useSelector(state => state.errorInfo.error);
-  const nickName = useSelector(state=>state.membersInfo.nickname)
+  const nickName = useSelector(state => state.membersInfo.nickname);
 
   useEffect(() => {
     controller.init(id, nickName);
