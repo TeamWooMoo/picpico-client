@@ -1,7 +1,9 @@
+import { ConsoleLogger } from "@nestjs/common";
 import { useSelector } from "react-redux";
 import { FlexboxGrid } from "rsuite";
 
 const MemberList = () => {
+  // const myImg = useSelector(state => state.decoInfo.myDecoCanvas);
   const members = useSelector(state => state.membersInfo.members);
   const memberKeys = Object.keys(members);
 
@@ -10,6 +12,7 @@ const MemberList = () => {
 
   const decos = useSelector(state => state.decoInfo.decoList);
   const decoKeys = Object.keys(decos);
+  console.log("obj:", decos);
   console.log("decoKeys", decoKeys);
   const decoColors = useSelector(state => state.decoInfo.colorList);
   const decoMapping = {};
