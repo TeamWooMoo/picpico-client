@@ -2,12 +2,12 @@ import { ImageList, ImageListItem } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { socket } from "../../modules/sockets.mjs";
 import "./DecoList.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { setMyDecoCanvasInfo } from "../../slice/decoInfo.js";
 
 const DecoList = () => {
-  const [prevIdx, setPrevIdx] = useState(1);
   const dispatch = useDispatch();
+  const [prevIdx, setPrevIdx] = useState(1);
   const decoData = useSelector(state => state.decoInfo.decoList);
   const idxArr = Object.keys(decoData);
 
@@ -30,6 +30,7 @@ const DecoList = () => {
     dispatch(setMyDecoCanvasInfo({ value: decoIdx }));
     setPrevIdx(decoIdx);
   };
+
   return (
     <>
       <ImageList sx={{ width: 350, height: 100 }} cols={4} rowHeight={100}>

@@ -1,7 +1,8 @@
-import { setDecoListInfo, setMyDecoCanvasInfo } from "../slice/decoInfo.js";
+import { setDecoListInfo, setDoneDecoInfo, setMyDecoCanvasInfo, setRealResultInfo } from "../slice/decoInfo.js";
 import { setDecoInfo, setGalleryInfo, setPicBoothInfo, setSelectionInfo } from "../slice/picpicoInfo.js";
 import { setImgListInfo } from "../slice/selectionInfo.js";
 import store from "../store.js";
+import { socket } from "./sockets.mjs";
 
 export const onDoneTakeEvent = imgArr => {
   console.log("picBooth done~~", imgArr);
@@ -18,6 +19,15 @@ export const onDonePickEvent = imgArr => {
 };
 
 export const onDoneDecoEvent = () => {
+  const result = store.getState().decoInfo.resultList;
+  socket.emit("submit_deco", result);
+  // store.dispatch(setDecoInfo({ value: false }));
+  // store.dispatch(setGalleryInfo({ value: true }));
+};
+
+export const onSubmitDecoEvent = realResult => {
   store.dispatch(setDecoInfo({ value: false }));
   store.dispatch(setGalleryInfo({ value: true }));
+  console.log("realResult:", realResult);
+  store.dispatch(setRealResultInfo({ value: realResult }));
 };

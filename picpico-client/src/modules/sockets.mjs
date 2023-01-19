@@ -1,6 +1,6 @@
 import { io } from "socket.io-client";
 import { CREDENTIAL } from "../config.js";
-import { onDoneDecoEvent, onDonePickEvent, onDoneTakeEvent } from "./step.mjs";
+import { onDoneDecoEvent, onDonePickEvent, onDoneTakeEvent, onSubmitDecoEvent } from "./step.mjs";
 import { BASE_URL } from "../config.js";
 import { onResetMemberEvent } from "./resetMember.mjs";
 import { onStrokeCanvasEvent, onMouseDownEvent } from "./strokeCanvas.mjs";
@@ -32,4 +32,5 @@ export async function joinRoom(roomId) {
   socket.on("mouse_down", onMouseDownEvent);
   socket.on("permission_denied", onPermissionDeniedEvent);
   socket.on("pick_deco", onPickDecoEvent);
+  socket.on("submit_deco", onSubmitDecoEvent);
 }

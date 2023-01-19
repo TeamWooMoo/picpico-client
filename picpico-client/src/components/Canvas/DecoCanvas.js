@@ -5,10 +5,13 @@ import { socket } from "../../modules/sockets.mjs";
 import { addStrokeHistory } from "../../slice/drawingInfo.js";
 import { DecoDragAndDrop } from "../../modules/decoDragAndDrop.mjs";
 import { FlexboxGrid, Button } from "rsuite";
+import { setResultInfo } from "../../slice/decoInfo";
+import { ResultImage, Sticker } from "../../modules/resultCanvas.mjs";
 
 const DecoCanvas = () => {
   const targetImgIdx = useSelector(state => state.decoInfo.myDecoCanvas);
   const decoData = useSelector(state => state.decoInfo.decoList);
+  const doneDeco = useSelector(state => state.decoInfo.doneDeco);
   const idxArr = Object.keys(decoData);
   const dispatch = useDispatch();
   const mode = useSelector(state => state.decoInfo.decoMode);
@@ -26,18 +29,15 @@ const DecoCanvas = () => {
   }
 
   const decoEventCanvas = useRef();
-
   const roomId = useSelector(state => state.roomInfo.room);
 
   const onCanvasDown = ({ nativeEvent }) => {
-    console.log("down!!!");
     setDrawing(true);
     const { offsetX, offsetY } = nativeEvent;
     socket.emit("mouse_down", socket.id, offsetX, offsetY, targetImgIdx);
   };
 
-  const onCanvasUp = ({ nativeEvent }) => {
-    console.log("up!!!");
+  const onCanvasUp = () => {
     setDrawing(false);
   };
 
@@ -65,6 +65,30 @@ const DecoCanvas = () => {
   //   setMode("sticker");
   //   dragAndDrop.init(targetImgIdx);
   // };
+
+  useEffect(() => {
+    if (doneDeco === true) {
+      const resultImages = [];
+      idxArr.forEach(idx => {
+        const canvas = document.getElementById(`img-${idx}`);
+        const peer = document.getElementById(`peer-${idx}`);
+        const my = document.getElementById(`my-${idx}`);
+        const ctx = canvas.getContext("2d");
+
+        ctx.drawImage(peer, 0, 0);
+        ctx.drawImage(my, 0, 0);
+
+        const curImage = new ResultImage(canvas.toDataURL(), []);
+        // 스티커 넣어줘야함
+        // for문 돌면서
+        // const curSticker =  new Sticker('sticker url', 'axisX', 'axisY');
+        // curImage.stickers.push(curSticker)
+        resultImages.push(curImage);
+      });
+
+      dispatch(setResultInfo({ value: resultImages }));
+    }
+  }, [doneDeco]);
 
   useEffect(() => {
     console.log("mode change");
