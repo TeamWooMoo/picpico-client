@@ -6,6 +6,7 @@ const MemberList = () => {
   const memberKeys = Object.keys(members);
 
   const decoDisplay = useSelector(state => state.picpicoInfo.decoDisplay);
+  console.log("decodis:", decoDisplay);
 
   const decos = useSelector(state => state.decoInfo.decoList);
   const decoKeys = Object.keys(decos);
@@ -21,9 +22,7 @@ const MemberList = () => {
       {decoDisplay ? (
         <FlexboxGrid justify="center">
           <ul style={{ color: "black", textAlign: "center", listStyle: "none", paddingLeft: 0 }}>
-            {decoKeys.map(idx =>
-              decos[idx]["viewers"].map(viewer => <li style={{ float: "left", color: decoMapping[idx] }}>{decos[idx]["viewers"][viewer]}</li>)
-            )}
+            {decoKeys.map(idx => decos[idx]["viewers"].map((viewer, sid) => <li style={{ float: "left", color: decoMapping[idx] }}>{viewer}</li>))}
           </ul>
         </FlexboxGrid>
       ) : (
