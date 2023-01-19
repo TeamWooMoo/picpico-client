@@ -132,8 +132,22 @@ const DecoCanvas = () => {
                 style={{ border: `2px solid ${decoMapping[idx]}` }}
               ></canvas>
               <div className="decocanvas" id={`sticker-${idx}`} style={{ position: "absolute", width: "300px", height: "300px" }}>
-                <div class="draggable" style={{ position: "absolute", width: "100px", height: "100px" }}></div>
-                <div class="draggable" style={{ position: "absolute", width: "100px", height: "100px" }}></div>
+                {/* <div class="draggable" style={{ position: "absolute", width: "100px", height: "100px" }}>
+                  <img
+                    alt="sticker1"
+                    src="https://i.pinimg.com/originals/18/11/30/181130c64c246318e1e4d463d1844ed7.gif"
+                    // class="draggable"
+                    style={{ position: "absolute", width: "100px", height: "100px" }}
+                  />
+                </div>
+                <div class="draggable" style={{ position: "absolute", width: "100px", height: "100px" }}>
+                  <img
+                    alt="sticker2"
+                    src="https://storage.cobak.co/uploads/1585038492476558_8eeec6050c.gif"
+                    // class="draggable"
+                    style={{ position: "absolute", width: "100px", height: "100px" }}
+                  />
+                </div> */}
               </div>
             </div>
           ))}
