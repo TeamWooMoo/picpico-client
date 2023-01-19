@@ -3,12 +3,16 @@ import { FlexboxGrid } from "rsuite";
 
 const MemberList = () => {
   const members = useSelector(state => state.membersInfo.members);
-  const memberLI = members.map(val => <li>{val}</li>);
+  const memberKeys = Object.keys(members);
 
   return (
     <div>
       <FlexboxGrid justify="center">
-        <p style={{ color: "black", textAlign: "center" }}>{memberLI}</p>
+        <ul style={{ color: "black", textAlign: "center", listStyle: "none", paddingLeft: 0 }}>
+          {memberKeys.map(idx => (
+            <li style={{ float: "left" }}>{members[idx]["nickName"]}</li>
+          ))}
+        </ul>
       </FlexboxGrid>
     </div>
   );

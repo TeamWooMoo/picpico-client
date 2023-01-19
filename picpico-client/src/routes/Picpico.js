@@ -43,17 +43,11 @@ const Picpico = () => {
   const galleryDone = useSelector(state => state.picpicoInfo.galleryDisplay);
   const controller = MainController();
   const error = useSelector(state => state.errorInfo.error);
+  const nickName = useSelector(state=>state.membersInfo.nickname)
 
   useEffect(() => {
-    controller.init(id);
+    controller.init(id, nickName);
   }, []);
-
-  // useEffect(() => {
-  //   if (error !== "") {
-  //     alert(error);
-  //     // store.dispatch(setErrorInfo(""))
-  //   }
-  // }, [error]);
 
   return (
     <>
@@ -65,6 +59,7 @@ const Picpico = () => {
             <PicDoneBtn controller={controller} />
           </Header>
           <Content>
+            <MemberList />
             <PicBooth controller={controller} />
           </Content>
           <Footer className="picbooth_footer">
@@ -81,8 +76,7 @@ const Picpico = () => {
             <p style={{ visibility: "hidden" }}>hidden</p>
           </Header>
           <Content>
-            <DecoMessage />
-            {/* <MemberList /> */}
+            <MemberList />
           </Content>
           <Footer>
             <Selection />
@@ -99,11 +93,14 @@ const Picpico = () => {
             <p style={{ visibility: "hidden" }}>hidden</p>
           </Header>
           <Content>
+            <MemberList />
             <Decoration controller={controller} />
           </Content>
 
           {/* Color List & Sticker List */}
-
+          <Footer>
+            <DecoList />
+          </Footer>
           <Footer className="deco_footer">
             <Footer>
               <TabBar />
@@ -119,6 +116,7 @@ const Picpico = () => {
             <p style={{ visibility: "hidden" }}>hidden</p>
           </Header>
           <Content>
+            <MemberList />
             <Gallery />
           </Content>
           <Footer className="gallery_footer">

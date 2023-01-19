@@ -1,4 +1,4 @@
-import { Controller, Get, Render } from "@nestjs/common";
+import { Controller, Get, Param, Render } from "@nestjs/common";
 
 @Controller("/")
 export class AppController {
@@ -10,7 +10,9 @@ export class AppController {
   @Render("index")
   getLogin() {}
 
-  @Get("/lobby")
+  @Get("/lobby/:nickname")
   @Render("index")
-  getLobby() {}
+  getLobby(@Param() nickname: string) {
+    return {'nickname':nickname};
+  }
 }

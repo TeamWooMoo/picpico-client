@@ -24,7 +24,6 @@ export const onSendPicEvent = async (idx, imgArr) => {
       img.src = url;
       img.onload = async function () {
         await ctx.drawImage(img, 0, 0);
-        console.log("img:", img.src);
       };
     });
   }

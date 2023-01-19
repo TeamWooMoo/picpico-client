@@ -7,9 +7,11 @@ function LoginBtn() {
   function onKakaoLogin() {
     axios
       .get(API.KAKAOLOGIN)
-
       .then(res => {
         const rescheck = res;
+        // console.log(rescheck.data.url);
+        console.log(rescheck);
+
         window.location.href = rescheck.data.url;
       })
       .catch(err => {
@@ -21,9 +23,8 @@ function LoginBtn() {
       block
       className="btn-shadow"
       onClick={onKakaoLogin}
-      color="yellow"
       appearance="primary"
-      style={{ color: "black", padding: "10px 70px", margin: "10px 0" }}
+      style={{ backgroundColor: "#fae100", color: "black", padding: "10px 70px", margin: "10px 0" }}
     >
       카카오 로그인
     </Button>
