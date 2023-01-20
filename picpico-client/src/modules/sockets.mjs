@@ -7,7 +7,7 @@ import { onStrokeCanvasEvent, onMouseDownEvent } from "./strokeCanvas.mjs";
 import { onPickPicEvent } from "./pickPic.mjs";
 import { onPermissionDeniedEvent } from "./error.mjs";
 import { onClickShutterEvent, onSendPicEvent } from "./clickshutter.mjs";
-import { onPickDecoEvent, onPickStickerEvent, onStickerMoveEvent } from "./decoCanvas.mjs";
+import { onPickDecoEvent, onPickStickerEvent } from "./decoCanvas.mjs";
 // let socket;
 const socketOptions = { withCredentials: CREDENTIAL.withCredentials };
 const SERVER = BASE_URL;
@@ -33,5 +33,4 @@ export async function joinRoom(roomId) {
   socket.on("pick_deco", onPickDecoEvent);
   socket.on("submit_deco", onSubmitDecoEvent);
   socket.on("pick_sticker", onPickStickerEvent);
-  socket.on("sticker_move", onStickerMoveEvent);
 }
