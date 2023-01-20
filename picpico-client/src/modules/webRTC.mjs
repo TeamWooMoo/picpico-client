@@ -46,7 +46,7 @@ const handleTrack = (data, myPeer) => {
     peerVideo.width = 350;
     peerVideo.height = 350;
 
-    // peerVideo.muted = true;
+    // pecderVideo.muted = true;
     // peerVideo.autoplay = true;
     peerVideo.className = "col";
     peerVideo.setAttribute("playsinline", "playsinline");
