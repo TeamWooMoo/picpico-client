@@ -1,13 +1,14 @@
-import { io } from "socket.io-client";
-import { CREDENTIAL } from "../config.js";
-import { onDoneDecoEvent, onDonePickEvent, onDoneTakeEvent, onSubmitDecoEvent } from "./step.mjs";
-import { BASE_URL } from "../config.js";
-import { onResetMemberEvent } from "./resetMember.mjs";
-import { onStrokeCanvasEvent, onMouseDownEvent } from "./strokeCanvas.mjs";
-import { onPickPicEvent } from "./pickPic.mjs";
-import { onPermissionDeniedEvent } from "./error.mjs";
-import { onClickShutterEvent, onSendPicEvent } from "./clickshutter.mjs";
-import { onPickDecoEvent, onPickStickerEvent } from "./decoCanvas.mjs";
+import {io} from "socket.io-client";
+import {CREDENTIAL} from "../config.js";
+import {onDoneDecoEvent, onDonePickEvent, onDoneTakeEvent, onSubmitDecoEvent} from "./step.mjs";
+import {BASE_URL} from "../config.js";
+import {onResetMemberEvent} from "./resetMember.mjs";
+import {onStrokeCanvasEvent, onMouseDownEvent} from "./strokeCanvas.mjs";
+import {onPickPicEvent} from "./pickPic.mjs";
+import {onPermissionDeniedEvent} from "./error.mjs";
+import {onClickShutterEvent, onSendPicEvent} from "./clickshutter.mjs";
+import {onPickDecoEvent, onPickStickerEvent, onStickerMoveEvent} from "./decoCanvas.mjs";
+
 
 // let socket;
 const socketOptions = { withCredentials: CREDENTIAL.withCredentials };
