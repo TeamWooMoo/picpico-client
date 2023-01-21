@@ -74,7 +74,7 @@ const TabBar = () => {
       dispatch(setDecoModeInfo({ value: "stroke" }));
     } else {
       dragAndDrop.init(targetImgIdx);
-      dispatch(setDecoModeInfo({ value: "sticker" }));
+      // dispatch(setDecoModeInfo({ value: "sticker" }));
     }
   };
 
