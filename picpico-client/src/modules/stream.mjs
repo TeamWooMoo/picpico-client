@@ -116,3 +116,8 @@ export async function initStream() {
 export const handleMuteClick = muted => {
     myStream.getAudioTracks().forEach(track => (track.enabled = !muted));
 };
+
+export const offVideoTrack = () => {
+    myStream.getVideoTracks().forEach(track => (track.enabled = false));
+    console.log("stopped sending video");
+};

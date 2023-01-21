@@ -34,6 +34,7 @@ import "../style/style.css";
 import "./Picpico.css";
 import store from "../store";
 import { setErrorInfo } from "../slice/errorInfo";
+import AudioList from "../components/List/AudioList";
 
 const Picpico = () => {
     const { id } = useParams();
@@ -77,6 +78,7 @@ const Picpico = () => {
                         {/* <p style={{ visibility: "hidden" }}>hidden</p> */}
                     </Header>
                     <Content>
+                        <AudioList />
                         <MemberList />
                     </Content>
                     <Footer>
@@ -92,6 +94,7 @@ const Picpico = () => {
                         <DecoDoneBtn />
                     </Header>
                     <Content>
+                        <AudioList />
                         <MemberList />
                         <Decoration controller={controller} />
                     </Content>
@@ -114,6 +117,7 @@ const Picpico = () => {
                         <GalleryDoneBtn />
                     </Header>
                     <Content>
+                        <AudioList />
                         <MemberList />
                         <Gallery />
                     </Content>

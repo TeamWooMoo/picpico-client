@@ -13,6 +13,7 @@ import uuid from "react-uuid";
  *                connection    :
  *                videoElement  :
  *                canvasElement :
+ *                audioTrack    :
 //  *                alphaChannel  :
 //  *                alphaData     :
  *            }
@@ -41,6 +42,8 @@ const handleTrack = (data, myPeer) => {
         const canvasRow = document.getElementById("allCanvases");
         const peerVideo = myPeer.videoElement;
         const peerCanvasGL = myPeer.canvasElement;
+        // const peerAudio = myPeer.audioTrack;
+
         let peerOrder;
 
         for (let i = 0; i < membersArr.length; i++) {
@@ -49,6 +52,10 @@ const handleTrack = (data, myPeer) => {
                 break;
             }
         }
+
+        //! component 변경 시 audio stream 전달 구현 위해 추가
+        // console.log("data.streams[0].getAudioTracks()[0]", data.streams[0].getAudioTracks()[0]);
+        myPeer.mediaStream = data.streams[0];
 
         peerVideo.hidden = true;
         peerVideo.width = 350;
