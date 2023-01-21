@@ -106,6 +106,7 @@ const DecoCanvas = () => {
   /* 여기 해야 합니다 */
   useEffect(() => {
     if (targetImgIdx !== "") {
+      console.log("targetImgIdx:", targetImgIdx);
       dispatch(setDecoModeInfo({ value: "stroke" }));
       const canvasWrapper = document.querySelector(".canvasWrapper");
       const targetDiv = document.getElementById(`set-${targetImgIdx}`);
