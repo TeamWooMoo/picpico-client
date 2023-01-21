@@ -13,6 +13,9 @@ const Home = () => {
       <Link to={"/login"}>
         <LoginBtn />
       </Link>
+      <Link to={"/lobby/정나린"}>
+        <button>Room</button>
+      </Link>
     </Container>
   );
 };
