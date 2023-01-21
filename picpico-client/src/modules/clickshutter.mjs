@@ -21,7 +21,7 @@ export const onSendPicEvent = async (idx, imgArr) => {
     //   });
     // }
     // await first();
-
+    console.log(">>", imgArr);
     const testImg = document.getElementById("testCanvas");
     testImg.src = imgArr;
     // const resultUrl = await canvas.toDataURL("image/png");
