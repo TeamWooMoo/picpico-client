@@ -13,6 +13,9 @@ const Home = () => {
       <Link to={"/login"}>
         <LoginBtn />
       </Link>
+      <Link to={"/lobby/user"}>
+        <button>room</button>
+      </Link>
     </Container>
   );
 };

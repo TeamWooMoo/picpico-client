@@ -11,9 +11,9 @@ function CameraBtn() {
   return (
     <>
       {camera ? (
-        <IoVideocam size="40" color="black" padding="10px 0" onClick={onCameraOnOff}></IoVideocam>
+        <IoVideocam className="btn-shadow" size="40px" color="black" padding="10px 0" onClick={onCameraOnOff}></IoVideocam>
       ) : (
-        <IoVideocamOff size="40" color="black" padding="10px 0" onClick={onCameraOnOff}></IoVideocamOff>
+        <IoVideocamOff className="btn-shadow" size="40px" color="black" padding="10px 0" onClick={onCameraOnOff}></IoVideocamOff>
       )}
     </>
   );

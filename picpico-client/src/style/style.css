@@ -1,17 +1,13 @@
 .default_container {
   color: black;
-  width: 375px;
-  height: 667px;
   background-color: #e8eaf6;
   justify-content: center;
   align-items: center;
-
-  width: 375px;
-  height: 667px;
-
   vertical-align: middle;
-  /* width: 80%; */
+  height: 100vh;
   margin: 0 auto;
+  /* width: 375px;
+  height: 667px; */
 }
 
 .btn-shadow {
@@ -19,13 +15,13 @@
   font-weight: bold;
   cursor: pointer;
   transition: opacity linear v0.1s;
-  box-shadow: rgba(26, 18, 18, 0.25) 0 1px 2px 0;
+  filter: drop-shadow(0 4px 3px rgb(0 0 0 / 0.08));
 }
 
 .btn-deactivate {
-  box-shadow: rgba(141, 136, 133, 0.1) 0 1px 2px 0;
+  filter: drop-shadow(0 4px 3px rgb(0 0 0 / 0.08));
 }
 
 .drop-shadow {
-  filter: drop-shadow(0, 0, 0, 0.1);
+  filter: drop-shadow(0 4px 3px rgb(0 0 0 / 0.08));
 }
