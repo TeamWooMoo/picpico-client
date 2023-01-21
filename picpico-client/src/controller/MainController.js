@@ -23,6 +23,7 @@ export class myPeer {
     connection;
     videoElement;
     canvasElement;
+    mediaStream;
     // alphaChannel;
     // alphaReceived;
     mySocketId;
@@ -32,6 +33,7 @@ export class myPeer {
         this.videoElement = document.createElement("video");
         // this.videoElement.hidden = true;
         this.canvasElement = document.createElement("canvas");
+        this.mediaStream = null;
         // this.alphaChannel = null;
         // this.alphaReceived = null;
     }
