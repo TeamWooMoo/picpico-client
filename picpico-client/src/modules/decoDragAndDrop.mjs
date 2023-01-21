@@ -77,7 +77,7 @@ export const DecoDragAndDrop = () => {
         dragElement.style.left = newX - field.getBoundingClientRect().left + "px";
         dragElement.style.top = newY - field.getBoundingClientRect().top + "px";
 
-        socket.emit("sticker_move", dragElement.style.left, dragElement.style.top, field.id, dragElement.src);
+        socket.emit("sticker_move", dragElement.style.left, dragElement.style.top, field.id, dragElement.children[0].scr);
     };
 
     const finishDrag = () => {
@@ -128,6 +128,7 @@ export const DecoDragAndDrop = () => {
         if (!field) return;
         field.removeEventListener("mousedown", fieldMouseDown);
         const stickers = field.children;
+        console.log("reset() stickers >>>> ", stickers);
         for (let i = 0; i < stickers.length; i++) {
             stickers[i].removeEventListener("dragstart");
         }

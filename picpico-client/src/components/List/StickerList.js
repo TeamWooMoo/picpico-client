@@ -15,8 +15,9 @@ import {socket} from "../../modules/sockets.mjs";
 const StickerList = () => {
     const targetImgIdx = useSelector(state => state.decoInfo.myDecoCanvas);
     const onStickerClick = url => {
-        console.log("스티커 클릭");
+        console.log("스티커 클릭 url=", url);
         socket.emit("pick_sticker", url, targetImgIdx);
+
         // server에게 putsticker 이벤트보냄
         // server에서는 방의 모두에게 putsticker 이벤트와 스티커 정보 보냄
         // 방의 모두는 putsticker 이벤트와 스티커 정보가 들어오면 그 스티커를 캔버스에 생성함
