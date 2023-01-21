@@ -1,7 +1,7 @@
 import { useState } from "react";
-import mic_btn from "./../../assets/images/icon-mic.png";
-import mute_btn from "./../../assets/images/icon-mute.png";
 import { handleMuteClick } from "../../modules/stream.mjs";
+import mic from "./../../assets/images/icon-mic.png";
+import mute from "./../../assets/images/icon-mute.png";
 
 function MuteBtn() {
     const [muted, setMuted] = useState(true);
@@ -13,9 +13,9 @@ function MuteBtn() {
     return (
         <>
             {muted ? (
-                <img src={mic_btn} className="drop-shadow" style={{ width: "40px", height: "40px" }} onClick={onMuteOnOff} />
+                <img src={mic} className="drop-shadow" style={{ width: "40px", height: "40px" }} onClick={onMuteOnOff} />
             ) : (
-                <img src={mute_btn} className="drop-shadow" style={{ width: "40px", height: "40px" }} onClick={onMuteOnOff} />
+                <img src={mute} className="drop-shadow" style={{ width: "40px", height: "40px" }} onClick={onMuteOnOff} />
             )}
         </>
     );
