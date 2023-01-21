@@ -82,6 +82,7 @@ export async function initStream() {
     myFace.style.position = "absolute";
     myFace.style.top = "0px";
     myFace.style.left = "0px";
+    myFace.style.backgroundColor = "white";
 
     myVideo.onplaying = async () => {
         myVideo.hidden = true;

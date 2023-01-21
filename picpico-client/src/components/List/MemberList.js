@@ -5,23 +5,7 @@ import { socket } from "../../modules/sockets.mjs";
 import store from "../../store";
 
 const MemberList = () => {
-    // const myImg = useSelector(state => state.decoInfo.myDecoCanvas);
     const members = useSelector(state => state.membersInfo.members);
-    let myOrder;
-
-    // useEffect(() => {
-    //     const memberArr = store.getState().membersInfo.members;
-    //     console.log("memberArr", memberArr);
-    //     for (let i = 0; i < memberArr.length - 1; i++) {
-    //         if (memberArr[i].socketId === socket.id) {
-    //             myOrder = i;
-    //             console.log("my order!!!!");
-    //             break;
-    //         }
-    //     }
-    //     const myFace = document.getElementById("myFace");
-    //     myFace.style.zIndex = myOrder;
-    // }, [members]);
     const memberKeys = Object.keys(members);
 
     const decoDisplay = useSelector(state => state.picpicoInfo.decoDisplay);

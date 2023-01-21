@@ -10,33 +10,33 @@
 } */
 
 .canvasBox {
-  position: absolute;
-  top: 22%;
-  left: 50%;
-  transform: translateX(-50%);
-  border: 2px solid white;
-  box-shadow: inset;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+    position: absolute;
+    top: 22%;
+    left: 50%;
+    transform: translateX(-50%);
+    /* border: 2px solid white; */
+    box-shadow: inset;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
 #allCanvases {
-  position: relative;
+    position: relative;
 }
 
 .canvasRow,
 .canvas {
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translateX(-50%);
-  border: 2px solid white;
-  box-shadow: inset;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translateX(-50%);
+    /* border: 2px solid white; */
+    box-shadow: inset;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
 #filmCanvas {
-  top: auto;
-  left: 50%;
+    top: auto;
+    left: 50%;
 }
