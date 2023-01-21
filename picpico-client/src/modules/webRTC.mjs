@@ -90,7 +90,7 @@ const handleTrack = (data, myPeer) => {
                             console.log("아니 이럴 순 없어");
                         }
                         if (peerOrder > parseInt(canvasRow.children[i].id) && peerOrder < parseInt(canvasRow.children[i + 1].id)) {
-                            canvasRow.children.id[i].after(peerCanvasGL);
+                            canvasRow.children[i].id.after(peerCanvasGL);
                             flag = true;
                             break;
                         }
