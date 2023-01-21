@@ -27,7 +27,7 @@ const DecoList = () => {
     const decoIdx = deco.dataset.deco;
     console.log("now:", decoIdx, "prev:", prevIdx);
     socket.emit("pick_deco", socket.id, decoIdx, prevIdx);
-    dispatch({ value: "stroke" });
+    dispatch(setDecoModeInfo({ value: "stroke" }));
     dispatch(setMyDecoCanvasInfo({ value: decoIdx }));
     setPrevIdx(decoIdx);
   };
