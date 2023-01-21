@@ -37,10 +37,10 @@ import { setErrorInfo } from "../slice/errorInfo";
 
 const Picpico = () => {
     const { id } = useParams();
-    const picBoothDone = useSelector(state => state.picpicoInfo.picBoothDisplay);
-    const selectDone = useSelector(state => state.picpicoInfo.selectionDisplay);
-    const decoDone = useSelector(state => state.picpicoInfo.decoDisplay);
-    const galleryDone = useSelector(state => state.picpicoInfo.galleryDisplay);
+    const picBoothDisplay = useSelector(state => state.picpicoInfo.picBoothDisplay);
+    const selectDisplay = useSelector(state => state.picpicoInfo.selectionDisplay);
+    const decoDisplay = useSelector(state => state.picpicoInfo.decoDisplay);
+    const galleryDisplay = useSelector(state => state.picpicoInfo.galleryDisplay);
     const controller = MainController();
     const error = useSelector(state => state.errorInfo.error);
     const nickName = useSelector(state => state.membersInfo.nickname);
@@ -51,7 +51,7 @@ const Picpico = () => {
 
     return (
         <>
-            {picBoothDone ? (
+            {picBoothDisplay ? (
                 <Container className="default_container">
                     <Header className="picbooth_header">
                         <LinkModal />
@@ -68,7 +68,7 @@ const Picpico = () => {
                         <CameraTransBtn />
                     </Footer>
                 </Container>
-            ) : selectDone ? (
+            ) : selectDisplay ? (
                 <Container className="default_container">
                     <Header className="selection_header">
                         <MuteBtn />
@@ -84,7 +84,7 @@ const Picpico = () => {
                     </Footer>
                     <Footer className="selection_footer"></Footer>
                 </Container>
-            ) : decoDone ? (
+            ) : decoDisplay ? (
                 <Container className="default_container">
                     <Header className="deco_header">
                         <MuteBtn />
@@ -106,7 +106,7 @@ const Picpico = () => {
                         </Footer>
                     </Footer>
                 </Container>
-            ) : galleryDone ? (
+            ) : galleryDisplay ? (
                 <Container className="default_container">
                     <Header className="gallery_header">
                         <MuteBtn />
