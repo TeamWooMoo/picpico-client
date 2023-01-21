@@ -6,7 +6,7 @@ export const onResetMemberEvent = nicknameArr => {
     console.log("reset member on", nicknameArr);
     store.dispatch(setMembersInfo({ value: nicknameArr }));
     let myOrder;
-    for (let i = 0; i < nicknameArr.length - 1; i++) {
+    for (let i = 0; i < nicknameArr.length; i++) {
         if (nicknameArr[i]["socketId"] === socket.id) {
             console.log("--------->", nicknameArr[i]["socketId"], socket.id);
             myOrder = i;
