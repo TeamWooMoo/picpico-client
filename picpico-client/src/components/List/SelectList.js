@@ -11,6 +11,7 @@ const SelectList = () => {
     const roomId = useSelector(state => state.roomInfo.room);
     const selected = useSelector(state => state.selectionInfo.selected); //숫자 스트링 그 자체
     const imgData = useSelector(state => state.selectionInfo.imgList);
+    console.log(">> imgData:", imgData);
     //imgArr가 보여야 함.
     const onImageClick = event => {
         const pic = event.target;
@@ -36,7 +37,7 @@ const SelectList = () => {
     }, [selected]);
     return (
         <>
-            <ImageList sx={{ width: 365, height: 450 }} cols={1} rowHeight={350}>
+            {/* <ImageList sx={{ width: 365, height: 450 }} cols={1} rowHeight={350}>
                 {Object.values(imgData).map(({ picture }, idx) =>
                     idx == 0 ? null : (
                         <ImageListItem>
@@ -44,7 +45,8 @@ const SelectList = () => {
                         </ImageListItem>
                     )
                 )}
-            </ImageList>
+            </ImageList> */}
+            hahahahah
         </>
     );
 };
