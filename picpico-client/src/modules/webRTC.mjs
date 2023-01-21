@@ -78,11 +78,17 @@ const handleTrack = (data, myPeer) => {
             } else {
                 console.log("dkdkdkdkdk");
                 let flag = false;
-                for (let i = 0; i < canvasRow.children.length - 1; i++) {
-                    if (peerOrder > parseInt(canvasRow.children[i].id) && peerOrder < parseInt(canvasRow.children[i + 1].id)) {
-                        canvasRow.children.id[i].after(peerCanvasGL);
-                        flag = true;
-                        break;
+                if (peerOrder === 0) {
+                    canvasRow.prepend(peerCanvasGL);
+                } else if (peerOrder === canvasRow.children.length) {
+                    canvasRow.appendChild(peerCanvasGL);
+                } else {
+                    for (let i = 0; i < canvasRow.children.length - 1; i++) {
+                        if (peerOrder > parseInt(canvasRow.children[i].id) && peerOrder < parseInt(canvasRow.children[i + 1].id)) {
+                            canvasRow.children.id[i].after(peerCanvasGL);
+                            flag = true;
+                            break;
+                        }
                     }
                 }
                 if (!flag) {
