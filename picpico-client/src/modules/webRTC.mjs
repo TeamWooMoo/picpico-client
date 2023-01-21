@@ -73,7 +73,7 @@ const handleTrack = (data, myPeer) => {
                 if (canvasRow.children[0].id < peerOrder) {
                     canvasRow.appendChild(peerCanvasGL);
                 } else {
-                    canvasRow.prependChild(peerCanvasGL);
+                    canvasRow.prepend(peerCanvasGL);
                 }
             } else {
                 for (let i = 0; i < canvasRow.children.length - 1; i++) {
