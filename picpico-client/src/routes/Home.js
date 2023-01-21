@@ -6,6 +6,7 @@ import { Container } from "rsuite";
 import "../style/style.css";
 
 const Home = () => {
+
   return (
     <Container className="default_container">
       <Title />
@@ -13,8 +14,10 @@ const Home = () => {
       <Link to={"/login"}>
         <LoginBtn />
       </Link>
+
       <Link to={"/lobby/user"}>
         <button>room</button>
+
       </Link>
     </Container>
   );

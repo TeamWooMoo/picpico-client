@@ -9,7 +9,7 @@ const membersInfo = createSlice({
   },
 
   reducers: {
-    setNickNameInfo(state, action){
+    setNickNameInfo(state, action) {
       state.nickname = action.payload.value;
     },
     setMembersInfo(state, action) {
