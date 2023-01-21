@@ -46,15 +46,16 @@ const DecoCanvas = () => {
     const decoCanvas = document.getElementById(`my-${targetImgIdx}`);
     const { offsetX, offsetY } = nativeEvent;
     const decoCtx = decoCanvas.getContext("2d");
+    const myLineWidth = 10;
     if (!drawing) {
       decoCtx.beginPath();
       decoCtx.moveTo(offsetX, offsetY);
     } else {
-      decoCtx.lineWidth = 20;
+      decoCtx.lineWidth = myLineWidth;
       decoCtx.strokeStyle = strokeColor;
       decoCtx.lineTo(offsetX, offsetY);
       decoCtx.stroke();
-      socket.emit("stroke_canvas", roomId, offsetX, offsetY, strokeColor, socket.id, targetImgIdx, 20);
+      socket.emit("stroke_canvas", roomId, offsetX, offsetY, strokeColor, socket.id, targetImgIdx, myLineWidth);
     }
   };
 
@@ -89,12 +90,12 @@ const DecoCanvas = () => {
 
   useEffect(() => {
     if (strokeArr.length > 0) {
-      const [newX, newY, newColor, newSocketId, newIdx] = strokeArr[strokeArr.length - 1];
+      const [newX, newY, newColor, newSocketId, newIdx, newLindWidth] = strokeArr[strokeArr.length - 1];
       if (strokeHistory.hasOwnProperty(newSocketId)) {
         const { x: oldX, y: oldY, i: oldIdx } = strokeHistory[newSocketId];
         const decoPeerCanvas = document.getElementById(`peer-${oldIdx}`);
         const decoCtx = decoPeerCanvas.getContext("2d");
-        decoCtx.lineWidth = 20;
+        decoCtx.lineWidth = newLindWidth;
         decoCtx.beginPath();
         decoCtx.moveTo(oldX, oldY);
         decoCtx.lineTo(newX, newY);
