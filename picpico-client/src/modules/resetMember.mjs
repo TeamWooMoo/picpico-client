@@ -7,7 +7,8 @@ export const onResetMemberEvent = nicknameArr => {
     store.dispatch(setMembersInfo({ value: nicknameArr }));
     let myOrder;
     for (let i = 0; i < nicknameArr.length - 1; i++) {
-        if (nicknameArr[i].socketId === socket.id) {
+        if (nicknameArr[i]["socketId"] === socket.id) {
+            console.log("--------->", nicknameArr[i]["socketId"], socket.id);
             myOrder = i;
             console.log("my order!!!!", i);
             break;
