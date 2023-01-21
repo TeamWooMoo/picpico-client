@@ -6,19 +6,17 @@ import GalleryDoneBtn from "../components/Btn/GalleryDoneBtn";
 import { gifTest } from "../test/resultTest.mjs";
 
 const Gallery = () => {
-  // 아래의 div에 들어갈 것
-  const realResult = useSelector(state => state.decoInfo.realResultList);
+    // 아래의 div에 들어갈 것
+    const realResult = useSelector(state => state.decoInfo.realResultList);
 
-  useEffect(() => {
-    gifTest(realResult);
-  }, []);
-  return (
-    <Container>
-      <div></div>
-      <PicDownloadBtn />
-      <GalleryDoneBtn />
-    </Container>
-  );
+    useEffect(() => {
+        gifTest(realResult);
+    }, []);
+    return (
+        <Container>
+            <PicDownloadBtn />
+        </Container>
+    );
 };
 
 export default Gallery;

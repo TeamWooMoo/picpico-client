@@ -12,13 +12,7 @@ const PicDoneBtn = () => {
     socket.emit("done_take", roomId, socket.id);
   }
 
-  return (
-    <img src={next_btn} className={isKing ? "btn-shadow" : "btn-deactivate"} style={{ width: "40px", height: "40px" }} onClick={onPicDoneBtnClick} />
-
-    // <Button className={isKing ? "btn-shadow" : "btn-deactivate"} style={{ lineHeight: "15px" }} onClick={onPicDoneBtnClick}>
-    //   Done 📸
-    // </Button>
-  );
+  return <img src={next_btn} className={isKing ? "btn-shadow" : "btn-deactivate"} style={{ width: "40px", height: "40px" }} onClick={onPicDoneBtnClick} />;
 };
 
 export default PicDoneBtn;

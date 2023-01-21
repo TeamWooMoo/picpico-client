@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { IoVolumeMedium } from "react-icons/io5";
-import { IoVolumeMute } from "react-icons/io5";
+import mic_btn from "./../../assets/images/icon-mic.png";
+import mute_btn from "./../../assets/images/icon-mute.png";
 import { handleMuteClick } from "../../modules/stream.mjs";
 
 function MuteBtn() {
@@ -12,14 +12,12 @@ function MuteBtn() {
     };
     return (
         <>
-            {" "}
             {muted ? (
-                <IoVolumeMedium style={{}} className="drop-shadow" color="white" size="40" padding="5px 0" onClick={onMuteOnOff}></IoVolumeMedium>
+                <img src={mic_btn} className="drop-shadow" style={{ width: "40px", height: "40px" }} onClick={onMuteOnOff} />
             ) : (
-                <IoVolumeMute className="drop-shadow" color="white" size="40" padding="5px 0" onClick={onMuteOnOff}></IoVolumeMute>
+                <img src={mute_btn} className="drop-shadow" style={{ width: "40px", height: "40px" }} onClick={onMuteOnOff} />
             )}
         </>
     );
-
 }
 export default MuteBtn;

@@ -1,113 +1,113 @@
 .picbooth_header {
-  color: black;
-  background-color: #b1bcfb;
-  width: 100%;
-  /* height: 70px; */
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  padding: 15px 20px;
+    color: black;
+    background-color: #b1bcfb;
+    width: 100%;
+    /* height: 70px; */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 20px;
 }
 
 .picbooth_footer {
-  width: 100%;
-  background-color: black;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  padding: 15px 20px;
+    width: 100%;
+    background-color: black;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 20px;
 }
 
 .selection_header {
-  color: black;
-  background-color: #ced5ff;
-  width: 100%;
-  height: 70px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px;
+    color: black;
+    background-color: #ced5ff;
+    width: 100%;
+    height: 70px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
 }
 
 .selection_footer {
-  width: 100%;
-  height: 70px;
-  background-color: #ada9ae;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  padding: 15px 20px;
+    width: 100%;
+    height: 70px;
+    /* background-color: #ada9ae; */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 20px;
 }
 
 .deco_header {
-  color: black;
-  background-color: #ced5ff;
-  width: 100%;
-  height: 70px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px;
+    color: black;
+    background-color: #ced5ff;
+    width: 100%;
+    height: 70px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
 }
 
 .deco_footer {
-  color: black;
-  width: 100%;
-  background-color: #ada9ae;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 5px;
+    color: black;
+    width: 100%;
+    background-color: #ada9ae;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
 }
 
 .tabbar_container {
-  width: 100%;
-  background-color: white;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  /* padding: 10px; */
+    width: 100%;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    /* padding: 10px; */
 }
 
 .gallery_header {
-  color: black;
-  background-color: #ced5ff;
-  width: 100%;
-  height: 70px;
-  display: flex;
-  flex-direction: space-between;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px;
+    color: black;
+    background-color: #ced5ff;
+    width: 100%;
+    height: 70px;
+    display: flex;
+    flex-direction: space-between;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
 }
 
 .gallery_footer {
-  color: black;
-  width: 100%;
-  height: 70px;
-  background-color: #ada9ae;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-evenly;
-  padding: 15px 20px;
+    color: black;
+    width: 100%;
+    height: 70px;
+    /* background-color: #ada9ae; */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 15px 20px;
 }
 
 .decolist_container {
-  width: 100%;
-  height: 90px;
-  background-color: #cebd00;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  /* padding: 10px; */
+    width: 100%;
+    height: 90px;
+    background-color: #cebd00;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    /* padding: 10px; */
 }
