@@ -32,7 +32,7 @@ export const onSendPicEvent = async (idx, imgArr) => {
     // if (worker) {
     //   stopWorker();
     // }
-    worker = new Worker("../worker.js");
+    worker = new Worker("./worker.js");
     worker.postMessage("워커 실행");
 
     worker.onmessage = function (e) {
