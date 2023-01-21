@@ -11,5 +11,5 @@ export const onMouseDownEvent = (socketId, offsetX, offsetY, idx) => {
 
 export const onMouseUpEvent = (socketId, offsetX, offsetY, idx) => {
   console.log("on mouse up from someone", socketId, offsetX, offsetY);
-  store.dispatch(addStrokeHistory({ value: [socketId, offsetX, offsetY, idx, false] }));
+  store.dispatch(addStrokeHistory({ value: [socketId, offsetX, offsetY, idx, true] }));
 };
