@@ -83,7 +83,7 @@ const DecoCanvas = () => {
   }, [doneDeco]);
 
   useEffect(() => {
-    console.log("mode change");
+    console.log("mode change:", mode);
   }, [mode]);
 
   useEffect(() => {
