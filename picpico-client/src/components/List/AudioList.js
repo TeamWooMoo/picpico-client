@@ -6,5 +6,9 @@ export default function AudioList() {
         reviveAudio();
     }, []);
 
-    return <div className="audioRow">audioOnTest</div>;
+    return (
+        <div className="audioRow" hidden="true">
+            audioOnTest
+        </div>
+    );
 }
