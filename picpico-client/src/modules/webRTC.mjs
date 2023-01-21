@@ -36,20 +36,20 @@ const handleTrack = (data, myPeer) => {
     if (data.track.kind === "video") {
         console.log(">>>handling track : video !");
 
-        // const membersArr = store.getState().membersInfo.members;
+        const membersArr = store.getState().membersInfo.members;
         const videoRow = document.getElementById("peerVideos");
         const canvasRow = document.getElementById("allCanvases");
         const peerVideo = myPeer.videoElement;
         const peerCanvasGL = myPeer.canvasElement;
-        // let peerOrder;
+        let peerOrder;
 
-        // membersArr.forEach(memberIdx => {
-        //     console.log("forEacth in handleTrack");
-        //     if (membersArr[memberIdx]["socketId"] === myPeer.mySocketId) {
-        //         console.log("peerOrder is set");
-        //         peerOrder = memberIdx;
-        //     }
-        // });
+        membersArr.forEach(memberIdx => {
+            console.log("forEacth in handleTrack");
+            if (membersArr[memberIdx]["socketId"] === myPeer.mySocketId) {
+                console.log("peerOrder is set");
+                peerOrder = memberIdx;
+            }
+        });
 
         peerVideo.hidden = true;
         peerVideo.width = 350;
@@ -67,25 +67,25 @@ const handleTrack = (data, myPeer) => {
         console.log(">>>>handing track -> on source to video");
 
         peerVideo.onplaying = () => {
-            // if (canvasRow.children.length < 1) {
-            //     console.log("im the first one");
-            //     canvasRow.appendChild(peerCanvasGL);
-            // } else if (canvasRow.children.length === 1) {
-            //     if (canvasRow.children[0].id < peerOrder) {
-            //         canvasRow.appendChild(peerCanvasGL);
-            //     } else {
-            //         canvasRow.prependChild(peerCanvasGL);
-            //     }
-            // } else {
-            //     for (let i = 0; i < canvasRow.children.length - 1; i++) {
-            //         if (peerOrder > canvasRow.children.id[i] && peerOrder < canvasRow.children.id[i + 1]) {
-            //             canvasRow.children.id[i].after(peerCanvasGL);
-            //             break;
-            //         }
-            //     }
-            // }
-            canvasRow.appendChild(peerCanvasGL);
-            // peerCanvasGL.id = `${peerOrder}`;
+            if (canvasRow.children.length < 1) {
+                console.log("im the first one");
+                canvasRow.appendChild(peerCanvasGL);
+            } else if (canvasRow.children.length === 1) {
+                if (canvasRow.children[0].id < peerOrder) {
+                    canvasRow.appendChild(peerCanvasGL);
+                } else {
+                    canvasRow.prependChild(peerCanvasGL);
+                }
+            } else {
+                for (let i = 0; i < canvasRow.children.length - 1; i++) {
+                    if (peerOrder > canvasRow.children.id[i] && peerOrder < canvasRow.children.id[i + 1]) {
+                        canvasRow.children.id[i].after(peerCanvasGL);
+                        break;
+                    }
+                }
+            }
+            // canvasRow.appendChild(peerCanvasGL);
+            peerCanvasGL.id = `${peerOrder}`;
             peerCanvasGL.className = "canvasRow";
             peerCanvasGL.style.position = "absolute";
             peerCanvasGL.style.top = "0px";
@@ -118,7 +118,7 @@ function makeConnection(socketId) {
         const newPeer = new myPeer(newConnection);
         myPeers[socketId] = newPeer;
         // newPeer.mySocketId = socketId;
-        // newPeer["mySocketId"] = socketId;
+        newPeer["mySocketId"] = socketId;
 
         newConnection.addEventListener("icecandidate", handleIce);
         newConnection.addEventListener("track", data => handleTrack(data, newPeer));
