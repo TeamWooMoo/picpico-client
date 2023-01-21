@@ -1,43 +1,61 @@
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { FlexboxGrid } from "rsuite";
+import { socket } from "../../modules/sockets.mjs";
+import store from "../../store";
 
 const MemberList = () => {
-  // const myImg = useSelector(state => state.decoInfo.myDecoCanvas);
-  const members = useSelector(state => state.membersInfo.members);
-  const memberKeys = Object.keys(members);
+    // const myImg = useSelector(state => state.decoInfo.myDecoCanvas);
+    const members = useSelector(state => state.membersInfo.members);
+    let myOrder;
 
-  const decoDisplay = useSelector(state => state.picpicoInfo.decoDisplay);
-  console.log("decodis:", decoDisplay);
+    useEffect(() => {
+        const memberArr = store.getState().membersInfo.members;
+        console.log("memberArr", memberArr);
+        for (let i = 0; i < memberArr.length - 1; i++) {
+            if (memberArr[i].socketId === socket.id) {
+                myOrder = i;
+                console.log("my order!!!!");
+                break;
+            }
+        }
+        const myFace = document.getElementById("myFace");
+        myFace.style.zIndex = myOrder;
+    }, [members]);
+    const memberKeys = Object.keys(members);
 
-  const decos = useSelector(state => state.decoInfo.decoList);
-  const decoKeys = Object.keys(decos);
-  console.log("obj:", decos);
-  console.log("decoKeys", decoKeys);
-  const decoColors = useSelector(state => state.decoInfo.colorList);
-  const decoMapping = {};
-  for (let i = 0; i < 4; i++) {
-    decoMapping[decoKeys[i]] = decoColors[i];
-  }
+    const decoDisplay = useSelector(state => state.picpicoInfo.decoDisplay);
+    console.log("decodis:", decoDisplay);
 
-  return (
-    <div>
-      {decoDisplay ? (
-        <FlexboxGrid justify="center">
-          <ul style={{ color: "black", textAlign: "center", listStyle: "none", paddingLeft: 0 }}>
-            {decoKeys.map(idx => decos[idx]["viewers"].map(obj => <li style={{ float: "left", color: decoMapping[idx] }}>{obj["nickName"]}</li>))}
-          </ul>
-        </FlexboxGrid>
-      ) : (
-        <FlexboxGrid justify="center">
-          <ul style={{ color: "black", textAlign: "center", listStyle: "none", paddingLeft: 0 }}>
-            {memberKeys.map(idx => (
-              <li style={{ float: "left" }}>{members[idx]["nickName"]}</li>
-            ))}
-          </ul>
-        </FlexboxGrid>
-      )}
-    </div>
-  );
+    const decos = useSelector(state => state.decoInfo.decoList);
+    const decoKeys = Object.keys(decos);
+    console.log("obj:", decos);
+    console.log("decoKeys", decoKeys);
+    const decoColors = useSelector(state => state.decoInfo.colorList);
+    const decoMapping = {};
+    for (let i = 0; i < 4; i++) {
+        decoMapping[decoKeys[i]] = decoColors[i];
+    }
+
+    return (
+        <div>
+            {decoDisplay ? (
+                <FlexboxGrid justify="center">
+                    <ul style={{ color: "black", textAlign: "center", listStyle: "none", paddingLeft: 0 }}>
+                        {decoKeys.map(idx => decos[idx]["viewers"].map(obj => <li style={{ float: "left", color: decoMapping[idx] }}>{obj["nickName"]}</li>))}
+                    </ul>
+                </FlexboxGrid>
+            ) : (
+                <FlexboxGrid justify="center">
+                    <ul style={{ color: "black", textAlign: "center", listStyle: "none", paddingLeft: 0 }}>
+                        {memberKeys.map(idx => (
+                            <li style={{ float: "left" }}>{members[idx]["nickName"]}</li>
+                        ))}
+                    </ul>
+                </FlexboxGrid>
+            )}
+        </div>
+    );
 };
 
 export default MemberList;
