@@ -2,7 +2,6 @@ import { useSelector } from "react-redux";
 import { FlexboxGrid } from "rsuite";
 
 const MemberList = () => {
-  // const myImg = useSelector(state => state.decoInfo.myDecoCanvas);
   const members = useSelector(state => state.membersInfo.members);
   const memberKeys = Object.keys(members);
 

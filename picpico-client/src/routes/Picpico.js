@@ -36,95 +36,91 @@ import store from "../store";
 import { setErrorInfo } from "../slice/errorInfo";
 
 const Picpico = () => {
-  const { id } = useParams();
-  const picBoothDone = useSelector(state => state.picpicoInfo.picBoothDisplay);
-  const selectDone = useSelector(state => state.picpicoInfo.selectionDisplay);
-  const decoDone = useSelector(state => state.picpicoInfo.decoDisplay);
-  const galleryDone = useSelector(state => state.picpicoInfo.galleryDisplay);
-  const controller = MainController();
-  const error = useSelector(state => state.errorInfo.error);
-  const nickName = useSelector(state => state.membersInfo.nickname);
+    const { id } = useParams();
+    const picBoothDone = useSelector(state => state.picpicoInfo.picBoothDisplay);
+    const selectDone = useSelector(state => state.picpicoInfo.selectionDisplay);
+    const decoDone = useSelector(state => state.picpicoInfo.decoDisplay);
+    const galleryDone = useSelector(state => state.picpicoInfo.galleryDisplay);
+    const controller = MainController();
+    const error = useSelector(state => state.errorInfo.error);
+    const nickName = useSelector(state => state.membersInfo.nickname);
 
-  useEffect(() => {
-    controller.init(id, nickName);
-  }, []);
+    useEffect(() => {
+        controller.init(id, nickName);
+    }, []);
 
-  return (
-    <>
-      {picBoothDone ? (
-        <Container className="default_container">
-          <Header className="picbooth_header">
-            <LinkModal />
-            <h3 style={{ color: "#7986CB" }}>PicPico</h3>
-            <PicDoneBtn />
-          </Header>
-          <Content>
-            <MemberList />
-            <PicBooth />
-          </Content>
-          <Footer className="picbooth_footer">
-            <MuteBtn />
-            <TakePicBtn />
-            <CameraTransBtn />
-          </Footer>
-        </Container>
-      ) : selectDone ? (
-        <Container className="default_container">
-          <Header className="selection_header">
-            <MuteBtn className="muted_left" />
-            <SelectMessage />
-            <p style={{ visibility: "hidden" }}>hidden</p>
-          </Header>
-          <Content>
-            <MemberList />
-          </Content>
-          <Footer>
-            <Selection />
-          </Footer>
-          <Footer className="selection_footer">
-            <SelectDoneBtn />
-          </Footer>
-        </Container>
-      ) : decoDone ? (
-        <Container className="default_container">
-          <Header className="deco_header">
-            <MuteBtn className="muted_left" />
-            <DecoMessage />
-            <p style={{ visibility: "hidden" }}>hidden</p>
-          </Header>
-          <Content>
-            <MemberList />
-            <Decoration controller={controller} />
-          </Content>
+    return (
+        <>
+            {picBoothDone ? (
+                <Container className="default_container">
+                    <Header className="picbooth_header">
+                        <LinkModal />
+                        <h3 style={{ fontFamily: "'Palatino Linotype', 'Book Antiqua', Palatino, serif", color: "#7986CB", textAlign: "center" }}>PicPico</h3>
 
-          {/* Color List & Sticker List */}
-          <Footer>
-            <DecoList />
-          </Footer>
-          <Footer className="deco_footer">
-            <Footer>
-              <TabBar />
-            </Footer>
-            <DecoDoneBtn />
-          </Footer>
-        </Container>
-      ) : galleryDone ? (
-        <Container className="default_container">
-          <Header className="gallery_header">
-            <MuteBtn className="muted_left" />
-            <GalleryMessage />
-            <p style={{ visibility: "hidden" }}>hidden</p>
-          </Header>
-          <Content>
-            <MemberList />
-            <Gallery />
-          </Content>
-          {/* <Footer className="gallery_footer">
-            <GalleryDoneBtn />
-          </Footer> */}
-        </Container>
-      ) : null}
-    </>
-  );
+                        <PicDoneBtn />
+                    </Header>
+                    <Content>
+                        <MemberList />
+                        <PicBooth />
+                    </Content>
+                    <Footer className="picbooth_footer">
+                        <MuteBtn />
+                        <TakePicBtn />
+                        <CameraTransBtn />
+                    </Footer>
+                </Container>
+            ) : selectDone ? (
+                <Container className="default_container">
+                    <Header className="selection_header">
+                        <MuteBtn className="muted_left" />
+                        <SelectMessage />
+                        <SelectDoneBtn />
+                        {/* <p style={{ visibility: "hidden" }}>hidden</p> */}
+                    </Header>
+                    <Content>
+                        <MemberList />
+                    </Content>
+                    <Footer>
+                        <Selection />
+                    </Footer>
+                    <Footer className="selection_footer"></Footer>
+                </Container>
+            ) : decoDone ? (
+                <Container className="default_container">
+                    <Header className="deco_header">
+                        <MuteBtn className="muted_left" />
+                        <DecoMessage />
+                        <DecoDoneBtn />
+                    </Header>
+                    <Content>
+                        <MemberList />
+                        <Decoration controller={controller} />
+                    </Content>
+
+                    {/* Color List & Sticker List */}
+                    <Footer>
+                        <DecoList />
+                    </Footer>
+                    <Footer className="deco_footer">
+                        <Footer>
+                            <TabBar />
+                        </Footer>
+                    </Footer>
+                </Container>
+            ) : galleryDone ? (
+                <Container className="default_container">
+                    <Header className="gallery_header">
+                        <MuteBtn className="muted_left" />
+                        <GalleryMessage />
+                        <GalleryDoneBtn />
+                    </Header>
+                    <Content>
+                        <MemberList />
+                        <Gallery />
+                    </Content>
+                </Container>
+            ) : null}
+        </>
+    );
 };
 export default Picpico;
