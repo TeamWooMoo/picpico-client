@@ -9,22 +9,22 @@ const MemberList = () => {
     const members = useSelector(state => state.membersInfo.members);
     const picBoothDisplay = useSelector(state => state.picpicoInfo.setPicBoothInfo);
     let myOrder;
+    console.log("picBoothDisplay", picBoothDisplay);
 
-    useEffect(() => {
-        if (picBoothDisplay) {
-            const memberArr = store.getState().membersInfo.members;
-            console.log("memberArr", memberArr);
-            for (let i = 0; i < memberArr.length - 1; i++) {
-                if (memberArr[i].socketId === socket.id) {
-                    myOrder = i;
-                    console.log("my order!!!!");
-                    break;
-                }
-            }
-            const myFace = document.getElementById("myFace");
-            myFace.style.zIndex = myOrder;
-        }
-    }, [members]);
+    // useEffect(() => {
+    //     if (picBoothDisplay) {
+    //         console.log("memberArr", members);
+    //         for (let i = 0; i < members.length - 1; i++) {
+    //             if (members[i].socketId === socket.id) {
+    //                 myOrder = i;
+    //                 console.log("my order!!!!");
+    //                 break;
+    //             }
+    //         }
+    //         const myFace = document.getElementById("myFace");
+    //         myFace.style.zIndex = myOrder;
+    //     }
+    // }, [members]);
 
     const memberKeys = Object.keys(members);
 
