@@ -43,13 +43,12 @@ const handleTrack = (data, myPeer) => {
         const peerCanvasGL = myPeer.canvasElement;
         let peerOrder;
 
-        membersArr.forEach(memberIdx => {
-            console.log("forEacth in handleTrack");
-            if (membersArr[memberIdx]["socketId"] === myPeer.mySocketId) {
-                console.log("peerOrder is set");
-                peerOrder = memberIdx;
+        for (let i = 0; i < membersArr.length; i++) {
+            if (membersArr[i]["socketId"] === myPeer.mySocketId) {
+                peerOrder = i;
+                break;
             }
-        });
+        }
 
         peerVideo.hidden = true;
         peerVideo.width = 350;
