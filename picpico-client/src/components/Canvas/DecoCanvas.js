@@ -67,6 +67,7 @@ const DecoCanvas = () => {
     //     dragAndDrop.init(targetImgIdx);
     // };
 
+    /* 최종 결과물을 GIF로 만들기 */
     useEffect(() => {
         if (doneDeco === true) {
             const resultImages = [];
@@ -82,7 +83,7 @@ const DecoCanvas = () => {
                 const curImage = new ResultImage(canvas.toDataURL(), []);
                 // 스티커 넣어줘야함
                 // for문 돌면서
-                // const curSticker =  new Sticker('sticker url', 'axisX', 'axisY');
+                // const curSticker =  new Sticker('sticker_url', 'axisX', 'axisY');
                 // curImage.stickers.push(curSticker)
                 resultImages.push(curImage);
             });
@@ -140,34 +141,34 @@ const DecoCanvas = () => {
 
     const dragAndDrop = DecoDragAndDrop();
 
+    /* 스티커를 스티커 필드 위에 올리기 */
     useEffect(() => {
         if (stickerList.length > 0) {
             const {idx: idx, url: url} = stickerList[stickerList.length - 1];
             const stickerField = document.getElementById(`sticker-${idx}`);
 
+            // 스티커의 div태그
+            // 스티커를 draggable하게 만들어줌
             const newStickerDiv = document.createElement("div");
-            const newStickerImg = document.createElement("img");
             newStickerDiv.className = "draggable";
             newStickerDiv.style.position = "absolute";
             newStickerDiv.style.height = "100px";
             newStickerDiv.style.width = "100px";
 
+            // 스티커의 img태그
+            // 이미지 소스가 담김
+            const newStickerImg = document.createElement("img");
             newStickerImg.alt = "sticker2";
             newStickerImg.src = url;
             newStickerImg.style.position = "absolute";
             newStickerImg.style.width = "100px";
             newStickerImg.style.height = "100px";
 
+            /* <div> <img/> </div> */
             newStickerDiv.appendChild(newStickerImg);
-            stickerField.appendChild(newStickerDiv);
 
-            // // `<div class="draggable" style={{  }}>
-            // //   <img
-            //     alt="sticker2"
-            //     src="${url}"
-            //     style={{ position: "absolute", width: "100px", height: "100px" }}
-            // //   />
-            // // </div>`
+            /* <div id=`sticker-${idx}`> <div> <img/> </div> </div> */
+            stickerField.appendChild(newStickerDiv);
         }
     }, [stickerList]);
 
