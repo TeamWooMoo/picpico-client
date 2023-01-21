@@ -1,5 +1,7 @@
 import { cameraList, currentCamera, myGreenCanvas, myFace, myStream, myVideo } from "../controller/MainController.js";
+import store from "../store.js";
 import { segment, initSegment } from "./segment.mjs";
+import { socket } from "./sockets.mjs";
 import { getFaceSize } from "./tracking-facesize.mjs";
 
 /******************************************************************* */
@@ -72,6 +74,10 @@ export async function initStream() {
     myFace = document.createElement("canvas");
 
     canvasRow.appendChild(myFace);
+
+    myFace.uid = `${socket.id}`;
+    myFace.id = "myFace";
+
     myFace.className = "canvasRow";
     myFace.style.position = "absolute";
     myFace.style.top = "0px";

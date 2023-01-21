@@ -9,6 +9,7 @@ import { setResultInfo } from "../../slice/decoInfo";
 import { ResultImage, Sticker } from "../../modules/resultCanvas.mjs";
 import { setDecoInfo } from "../../slice/picpicoInfo";
 
+
 const DecoCanvas = () => {
   const stickerList = useSelector(state => state.decoInfo.stickerList);
   const targetImgIdx = useSelector(state => state.decoInfo.myDecoCanvas);
@@ -39,38 +40,35 @@ const DecoCanvas = () => {
     socket.emit("mouse_down", socket.id, offsetX, offsetY, targetImgIdx);
   };
 
-  const onCanvasUp = () => {
+  const onCanvasUp = ({ nativeEvent }) => {
     setDrawing(false);
+    const { offsetX, offsetY } = nativeEvent;
+    socket.emit("mouse_up", socket.id, offsetX, offsetY, targetImgIdx);
+
   };
 
   const onCanvasMove = ({ nativeEvent }) => {
     const decoCanvas = document.getElementById(`my-${targetImgIdx}`);
     const { offsetX, offsetY } = nativeEvent;
     const decoCtx = decoCanvas.getContext("2d");
+
+    const myLineWidth = 10;
+
     if (!drawing) {
       decoCtx.beginPath();
       decoCtx.moveTo(offsetX, offsetY);
     } else {
+      decoCtx.lineWidth = myLineWidth;
       decoCtx.strokeStyle = strokeColor;
       decoCtx.lineTo(offsetX, offsetY);
       decoCtx.stroke();
-      socket.emit("stroke_canvas", roomId, offsetX, offsetY, strokeColor, socket.id, targetImgIdx);
+      socket.emit("stroke_canvas", roomId, offsetX, offsetY, strokeColor, socket.id, targetImgIdx, myLineWidth);
     }
   };
 
-  // const onStrokeBtnClick = () => {
-  //     setMode("stroke");
-  //     dragAndDrop.reset(targetImgIdx);
-  // };
-
-  // const onStickerBtnClick = () => {
-  //     setMode("sticker");
-  //     dragAndDrop.init(targetImgIdx);
-  // };
-
   /* 최종 결과물을 GIF로 만들기 */
   useEffect(() => {
-    console.log("doneDeco가 바뀌어야 해요:", doneDeco);
+
     if (doneDeco === true) {
       const resultImages = [];
       idxArr.forEach(idx => {
@@ -89,30 +87,41 @@ const DecoCanvas = () => {
         // curImage.stickers.push(curSticker)
         resultImages.push(curImage);
       });
+
       console.log("너 여기까지 오긴 하니?");
       //   dispatch(setDecoInfo({ value: true }));
+
 
       dispatch(setResultInfo({ value: resultImages }));
     }
   }, [doneDeco]);
 
   useEffect(() => {
-    console.log("mode change");
+
+    console.log("mode change:", mode);  
   }, [mode]);
 
   useEffect(() => {
     if (strokeArr.length > 0) {
-      const [newX, newY, newColor, newSocketId, newIdx] = strokeArr[strokeArr.length - 1];
+
+      const [newX, newY, newColor, newSocketId, newIdx, newLindWidth] = strokeArr[strokeArr.length - 1];
       if (strokeHistory.hasOwnProperty(newSocketId)) {
-        const { x: oldX, y: oldY, i: oldIdx } = strokeHistory[newSocketId];
+        let { x: oldX, y: oldY, i: oldIdx, f: oldDown } = strokeHistory[newSocketId];
         const decoPeerCanvas = document.getElementById(`peer-${oldIdx}`);
         const decoCtx = decoPeerCanvas.getContext("2d");
-        decoCtx.beginPath();
-        decoCtx.moveTo(oldX, oldY);
-        decoCtx.lineTo(newX, newY);
-        decoCtx.strokeStyle = newColor;
-        decoCtx.stroke();
-        dispatch(addStrokeHistory({ value: [newSocketId, newX, newY, newIdx] }));
+        decoCtx.lineWidth = newLindWidth;
+        if (oldDown) {
+          //mouse down
+          decoCtx.beginPath();
+          decoCtx.moveTo(oldX, oldY);
+          oldDown = !oldDown;
+        } else {
+          decoCtx.strokeStyle = newColor;
+          decoCtx.lineTo(newX, newY);
+          decoCtx.stroke();
+        }
+        dispatch(addStrokeHistory({ value: [newSocketId, newX, newY, newIdx, oldDown] }));
+
       }
     }
   }, [strokeArr]);
@@ -120,6 +129,8 @@ const DecoCanvas = () => {
   /* 여기 해야 합니다 */
   useEffect(() => {
     if (targetImgIdx !== "") {
+
+      dispatch(setDecoModeInfo({ value: "stroke" }));
       const canvasWrapper = document.querySelector(".canvasWrapper");
       const targetDiv = document.getElementById(`set-${targetImgIdx}`);
       canvasWrapper.insertAdjacentElement("beforeend", targetDiv);
@@ -142,8 +153,6 @@ const DecoCanvas = () => {
       };
     });
   }, []);
-
-  const dragAndDrop = DecoDragAndDrop();
 
   /* 스티커를 스티커 필드 위에 올리기 */
   useEffect(() => {
@@ -213,19 +222,18 @@ const DecoCanvas = () => {
             </div>
           ))}
 
-          {mode === "stroke" ? (
-            <canvas
-              className="decocanvas"
-              width="300px"
-              height="300px"
-              ref={decoEventCanvas}
-              onMouseDown={onCanvasDown}
-              onMouseMove={onCanvasMove}
-              onMouseUp={onCanvasUp}
-              style={{ border: `2px solid ${decoMapping[targetImgIdx]}` }}
-            ></canvas>
-          ) : null}
         </div>
+        <canvas
+          className="decocanvas"
+          width="300px"
+          height="300px"
+          ref={decoEventCanvas}
+          onMouseDown={onCanvasDown}
+          onMouseMove={onCanvasMove}
+          onMouseUp={onCanvasUp}
+          style={{ border: `2px solid ${decoMapping[targetImgIdx]}`, visibility: mode === "sticker" ? "hidden" : "visible" }}
+        ></canvas>
+
       </FlexboxGrid>
     </>
   );

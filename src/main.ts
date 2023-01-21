@@ -13,8 +13,8 @@ async function bootstrap() {
   app.engine("html", require("ejs").renderFile);
   app.setViewEngine("html");
 
-    const handleListen = () => console.log("Client Server");
-    await app.listen(3000, handleListen);
-    // await app.listen(3001, handleListen);
+  const handleListen = () => console.log("Client Server");
+  await app.listen(3000, handleListen);
+  // await app.listen(3001, handleListen);
 }
 bootstrap();

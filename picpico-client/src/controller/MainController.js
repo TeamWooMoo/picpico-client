@@ -1,6 +1,6 @@
-import {addMemberEvent, joinRoom} from "../modules/sockets.mjs";
-import {initWebRTC} from "../modules/webRTC.mjs";
-import {initStream} from "../modules/stream.mjs";
+import { addMemberEvent, joinRoom } from "../modules/sockets.mjs";
+import { initWebRTC } from "../modules/webRTC.mjs";
+import { initStream } from "../modules/stream.mjs";
 // import { initPeerCanvas } from "../modules/receiver.mjs";
 
 /******************************************************************* */
@@ -25,6 +25,7 @@ export class myPeer {
     canvasElement;
     // alphaChannel;
     // alphaReceived;
+    mySocketId;
 
     constructor(newConnection) {
         this.connection = newConnection;
