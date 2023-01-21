@@ -35,12 +35,11 @@
 .selection_footer {
     width: 100%;
     height: 70px;
-    /* background-color: #ada9ae; */
+    background-color: gray;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    padding: 15px 20px;
 }
 
 .deco_header {

@@ -80,11 +80,9 @@ const Picpico = () => {
                     <Content>
                         <AudioList />
                         <MemberList />
-                    </Content>
-                    <Footer>
                         <Selection />
-                    </Footer>
-                    <Footer className="selection_footer"></Footer>
+                    </Content>
+                    <Footer className="selection_footer">일단 푸터임</Footer>
                 </Container>
             ) : decoDisplay ? (
                 <Container className="default_container">
