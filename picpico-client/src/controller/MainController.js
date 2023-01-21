@@ -25,7 +25,7 @@ export class myPeer {
     canvasElement;
     // alphaChannel;
     // alphaReceived;
-    mySocketId;
+    // mySocketId;
 
     constructor(newConnection) {
         this.connection = newConnection;

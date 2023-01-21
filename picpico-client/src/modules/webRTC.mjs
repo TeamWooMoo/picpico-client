@@ -117,7 +117,7 @@ function makeConnection(socketId) {
     if (socketId !== "") {
         const newPeer = new myPeer(newConnection);
         myPeers[socketId] = newPeer;
-        newPeer.mySocketId = socketId;
+        // newPeer.mySocketId = socketId;
         // newPeer["mySocketId"] = socketId;
 
         newConnection.addEventListener("icecandidate", handleIce);
