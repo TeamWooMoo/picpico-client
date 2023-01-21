@@ -76,11 +76,17 @@ const handleTrack = (data, myPeer) => {
                     canvasRow.prepend(peerCanvasGL);
                 }
             } else {
+                console.log("dkdkdkdkdk");
+                let flag = false;
                 for (let i = 0; i < canvasRow.children.length - 1; i++) {
                     if (peerOrder > parseInt(canvasRow.children[i].id) && peerOrder < parseInt(canvasRow.children[i + 1].id)) {
                         canvasRow.children.id[i].after(peerCanvasGL);
+                        flag = true;
                         break;
                     }
+                }
+                if (!flag) {
+                    console.log("우엑");
                 }
             }
             // canvasRow.appendChild(peerCanvasGL);
