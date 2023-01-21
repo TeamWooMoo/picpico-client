@@ -50,10 +50,11 @@ const DecoCanvas = () => {
       decoCtx.beginPath();
       decoCtx.moveTo(offsetX, offsetY);
     } else {
+      decoCtx.lineWidth = 20;
       decoCtx.strokeStyle = strokeColor;
       decoCtx.lineTo(offsetX, offsetY);
       decoCtx.stroke();
-      socket.emit("stroke_canvas", roomId, offsetX, offsetY, strokeColor, socket.id, targetImgIdx);
+      socket.emit("stroke_canvas", roomId, offsetX, offsetY, strokeColor, socket.id, targetImgIdx, 20);
     }
   };
 
@@ -93,6 +94,7 @@ const DecoCanvas = () => {
         const { x: oldX, y: oldY, i: oldIdx } = strokeHistory[newSocketId];
         const decoPeerCanvas = document.getElementById(`peer-${oldIdx}`);
         const decoCtx = decoPeerCanvas.getContext("2d");
+        decoCtx.lineWidth = 20;
         decoCtx.beginPath();
         decoCtx.moveTo(oldX, oldY);
         decoCtx.lineTo(newX, newY);
