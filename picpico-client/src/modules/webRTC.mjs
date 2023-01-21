@@ -66,6 +66,7 @@ const handleTrack = (data, myPeer) => {
         console.log(">>>>handing track -> on source to video");
 
         peerVideo.onplaying = () => {
+            console.log("my Peer Order: ", peerOrder);
             if (canvasRow.children.length < 1) {
                 console.log("im the first one");
                 canvasRow.appendChild(peerCanvasGL);
@@ -78,6 +79,7 @@ const handleTrack = (data, myPeer) => {
             } else {
                 console.log("dkdkdkdkdk");
                 let flag = false;
+
                 if (peerOrder === 0) {
                     canvasRow.prepend(peerCanvasGL);
                 } else if (peerOrder === canvasRow.children.length) {
