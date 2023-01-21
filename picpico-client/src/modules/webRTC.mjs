@@ -42,8 +42,11 @@ const handleTrack = (data, myPeer) => {
         const peerVideo = myPeer.videoElement;
         const peerCanvasGL = myPeer.canvasElement;
         let peerOrder;
+
         membersArr.forEach(memberIdx => {
+            console.log("forEacth in handleTrack");
             if (membersArr[memberIdx]["socketId"] === myPeer.mySocketId) {
+                console.log("peerOrder is set");
                 peerOrder = memberIdx;
             }
         });
@@ -65,6 +68,7 @@ const handleTrack = (data, myPeer) => {
 
         peerVideo.onplaying = () => {
             if (canvasRow.children.length < 1) {
+                console.log("im the first one");
                 canvasRow.appendChild(peerCanvasGL);
             } else if (canvasRow.children.length === 1) {
                 if (canvasRow.children[0].id < peerOrder) {
