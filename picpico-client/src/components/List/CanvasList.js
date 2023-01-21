@@ -19,7 +19,7 @@ const CanvasList = () => {
             const filmCtx = filmCanvas.current.getContext("2d");
             filmCtx.drawImage(myCanvas, 0, 0);
             const url = filmCanvas.current.toDataURL("image/png"); // 내 얼굴만 있는 이미지 url
-
+            console.log("myFAce: ", url);
             socket.emit("send_pic", (parseInt(idx) - 1).toString(), url, myCanvas.id);
 
             dispatch(setTakePic({ value: false }));
