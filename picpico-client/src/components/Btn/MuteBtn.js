@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { handleMuteClick } from "../../modules/stream.mjs";
 import { setMutedInfo } from "../../slice/picpicoInfo.js";
