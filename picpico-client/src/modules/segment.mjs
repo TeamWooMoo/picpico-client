@@ -15,6 +15,9 @@ function onCanvas(results, canvas) {
     myFace.width = 350;
     myFace.height = 350;
 
+    myCtx.scale(-1, 1);
+    myCtx.translate(-350, 0); // 350은 캔버스 가로 길이
+
     myCtx.clearRect(0, 0, canvas.width, canvas.height);
     myCtx.drawImage(results.image, 0, 0, myFace.width, myFace.height);
 
@@ -37,8 +40,8 @@ function onCanvas(results, canvas) {
 
     canvas.width = 350;
     canvas.height = 350;
-    context.scale(-1, 1);
-    context.translate(-350, 0); // 350은 캔버스 가로 길이
+    ctx.scale(-1, 1);
+    ctx.translate(-350, 0); // 350은 캔버스 가로 길이
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(results.image, 0, 0, canvas.width, canvas.height);
