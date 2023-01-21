@@ -10,6 +10,7 @@ const DecoDoneBtn = () => {
 
   function onDecoDoneBtnClick() {
     socket.emit("done_deco", roomId, socket.id);
+    console.log("done deco");
     dispatch(setDoneDecoInfo({ value: true }));
   }
   return (

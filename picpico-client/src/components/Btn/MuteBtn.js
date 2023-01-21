@@ -20,5 +20,6 @@ function MuteBtn() {
             )}
         </>
     );
+
 }
 export default MuteBtn;

@@ -10,9 +10,9 @@ const CameraTransBtn = () => {
   return (
     <>
       {cameraTrans ? (
-        <IoCameraReverseSharp color="white" size="40" padding="5px 0" onClick={onCameraTransform}></IoCameraReverseSharp>
+        <IoCameraReverseSharp className="drop-shadow" color="white" size="40px" padding="5px 0" onClick={onCameraTransform}></IoCameraReverseSharp>
       ) : (
-        <IoCameraReverseSharp color="white" size="40" padding="5px 0" onClick={onCameraTransform}></IoCameraReverseSharp>
+        <IoCameraReverseSharp className="drop-shadow" color="white" size="40px" padding="5px 0" onClick={onCameraTransform}></IoCameraReverseSharp>
       )}
     </>
   );

@@ -1,19 +1,18 @@
 .picbooth_header {
   color: black;
-  background-color: #ced5ff;
+  background-color: #b1bcfb;
   width: 100%;
-  height: 70px;
+  /* height: 70px; */
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 10px;
+  padding: 15px 20px;
 }
 
 .picbooth_footer {
-  color: black;
   width: 100%;
-  background-color: #ada9ae;
+  background-color: black;
   display: flex;
   flex-direction: row;
   align-items: center;

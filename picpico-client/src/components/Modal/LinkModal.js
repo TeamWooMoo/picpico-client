@@ -4,6 +4,7 @@ import { Modal, Button, ButtonToolbar } from "rsuite";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { shareKakao } from "../Btn/KakaoShareBtn";
 import { flexbox } from "@mui/system";
+import link_btn from "./../../assets/images/icon-link.png";
 
 function LinkModal() {
   const [open, setOpen] = useState(false);
@@ -40,9 +41,7 @@ function LinkModal() {
 
   return (
     <>
-      <Button className="btn-shadow" onClick={handleOpen} style={{ lineHeight: "15px", margin: "5px 0" }}>
-        Link 🔗
-      </Button>
+      <img src={link_btn} className="btn-shadow" style={{ width: "40px", height: "40px" }} onClick={handleOpen} />
       <Modal open={open} onClose={handleClose} style={{ justifyContent: "center", textAlign: "center", width: "250" }}>
         <Modal.Header>
           <Modal.Title>🔜 친구들에게 방 링크를 공유해보세요. </Modal.Title>
@@ -53,8 +52,8 @@ function LinkModal() {
             <br />
           </p>
           <img
-            width="30px"
-            height="30px"
+            width="40px"
+            height="40px"
             className="w-12 h-12"
             src={"https://developers.kakao.com/assets/img/about/logos/kakaotalksharing/kakaotalk_sharing_btn_medium.png"}
             alt={"카카오톡 공유하기"}

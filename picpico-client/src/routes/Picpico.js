@@ -56,15 +56,15 @@ const Picpico = () => {
           <Header className="picbooth_header">
             <LinkModal />
             <h3 style={{ color: "#7986CB" }}>PicPico</h3>
-            <PicDoneBtn controller={controller} />
+            <PicDoneBtn />
           </Header>
           <Content>
             <MemberList />
-            <PicBooth controller={controller} />
+            <PicBooth />
           </Content>
           <Footer className="picbooth_footer">
             <MuteBtn />
-            <TakePicBtn controller={controller} />
+            <TakePicBtn />
             <CameraTransBtn />
           </Footer>
         </Container>
@@ -119,9 +119,9 @@ const Picpico = () => {
             <MemberList />
             <Gallery />
           </Content>
-          <Footer className="gallery_footer">
+          {/* <Footer className="gallery_footer">
             <GalleryDoneBtn />
-          </Footer>
+          </Footer> */}
         </Container>
       ) : null}
     </>
