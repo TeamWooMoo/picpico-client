@@ -16,5 +16,6 @@ export const onResetMemberEvent = nicknameArr => {
     }
     console.log("myOrder", myOrder);
     const myFace = document.getElementById("myFace");
+    myFace.id = `${myOrder}`;
     myFace.style.zIndex = myOrder;
 };
