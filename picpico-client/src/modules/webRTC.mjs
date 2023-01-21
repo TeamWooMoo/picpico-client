@@ -43,7 +43,7 @@ const handleTrack = (data, myPeer) => {
         const peerCanvasGL = myPeer.canvasElement;
         let peerOrder;
         membersArr.forEach(memberIdx => {
-            if (membersArr[memberIdx]["socketId"] == myPeer.mySocketId) {
+            if (membersArr[memberIdx]["socketId"] === myPeer.mySocketId) {
                 peerOrder = memberIdx;
             }
         });
@@ -66,7 +66,7 @@ const handleTrack = (data, myPeer) => {
         peerVideo.onplaying = () => {
             if (canvasRow.children.length < 1) {
                 canvasRow.appendChild(peerCanvasGL);
-            } else if (canvasRow.children.length == 1) {
+            } else if (canvasRow.children.length === 1) {
                 if (canvasRow.children[0].id < peerOrder) {
                     canvasRow.appendChild(peerCanvasGL);
                 } else {
@@ -76,6 +76,7 @@ const handleTrack = (data, myPeer) => {
                 for (let i = 0; i < canvasRow.children.length - 1; i++) {
                     if (peerOrder > canvasRow.children.id[i] && peerOrder < canvasRow.children.id[i + 1]) {
                         canvasRow.children.id[i].after(peerCanvasGL);
+                        break;
                     }
                 }
             }
@@ -111,7 +112,8 @@ function makeConnection(socketId) {
     if (socketId !== "") {
         const newPeer = new myPeer(newConnection);
         myPeers[socketId] = newPeer;
-        newPeer["mySocketId"] = socketId;
+        newPeer.mySocketId = socketId;
+        // newPeer["mySocketId"] = socketId;
 
         newConnection.addEventListener("icecandidate", handleIce);
         newConnection.addEventListener("track", data => handleTrack(data, newPeer));
