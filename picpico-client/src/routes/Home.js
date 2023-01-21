@@ -6,6 +6,7 @@ import { Container } from "rsuite";
 import "../style/style.css";
 
 const Home = () => {
+
   return (
     <Container className="default_container">
       <Title />
