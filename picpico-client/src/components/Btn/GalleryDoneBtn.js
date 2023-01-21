@@ -2,6 +2,7 @@ import { Button } from "rsuite";
 import { useDispatch } from "react-redux";
 import { setPicBoothInfo, setGalleryInfo } from "../../slice/picpicoInfo";
 import { socket } from "../../modules/sockets.mjs";
+import retry_btn from "./../../assets/images/icon-retry.png";
 
 const GalleryDoneBtn = () => {
   const dispatch = useDispatch();
@@ -13,11 +14,7 @@ const GalleryDoneBtn = () => {
 
     window.location.href = "/";
   }
-  return (
-    <Button className="btn-shadow" style={{ lineHeight: "15px" }} onClick={onGalleryDoneBtnClick}>
-      Finish PicPiCo 🙌
-    </Button>
-  );
+  return <img src={retry_btn} className="btn-shadow" style={{ width: "40px", height: "40px" }} onClick={onGalleryDoneBtnClick} />;
 };
 
 export default GalleryDoneBtn;

@@ -5,8 +5,10 @@ import { socket } from "../../modules/sockets.mjs";
 import { addStrokeHistory } from "../../slice/drawingInfo.js";
 import { DecoDragAndDrop } from "../../modules/decoDragAndDrop.mjs";
 import { FlexboxGrid, Button } from "rsuite";
-import { setDecoModeInfo, setResultInfo } from "../../slice/decoInfo";
+import { setResultInfo } from "../../slice/decoInfo";
 import { ResultImage, Sticker } from "../../modules/resultCanvas.mjs";
+import { setDecoInfo } from "../../slice/picpicoInfo";
+
 
 const DecoCanvas = () => {
   const stickerList = useSelector(state => state.decoInfo.stickerList);
@@ -42,13 +44,16 @@ const DecoCanvas = () => {
     setDrawing(false);
     const { offsetX, offsetY } = nativeEvent;
     socket.emit("mouse_up", socket.id, offsetX, offsetY, targetImgIdx);
+
   };
 
   const onCanvasMove = ({ nativeEvent }) => {
     const decoCanvas = document.getElementById(`my-${targetImgIdx}`);
     const { offsetX, offsetY } = nativeEvent;
     const decoCtx = decoCanvas.getContext("2d");
+
     const myLineWidth = 10;
+
     if (!drawing) {
       decoCtx.beginPath();
       decoCtx.moveTo(offsetX, offsetY);
@@ -63,6 +68,7 @@ const DecoCanvas = () => {
 
   /* 최종 결과물을 GIF로 만들기 */
   useEffect(() => {
+
     if (doneDeco === true) {
       const resultImages = [];
       idxArr.forEach(idx => {
@@ -82,16 +88,22 @@ const DecoCanvas = () => {
         resultImages.push(curImage);
       });
 
+      console.log("너 여기까지 오긴 하니?");
+      //   dispatch(setDecoInfo({ value: true }));
+
+
       dispatch(setResultInfo({ value: resultImages }));
     }
   }, [doneDeco]);
 
   useEffect(() => {
-    console.log("mode change:", mode);
+
+    console.log("mode change:", mode);  
   }, [mode]);
 
   useEffect(() => {
     if (strokeArr.length > 0) {
+
       const [newX, newY, newColor, newSocketId, newIdx, newLindWidth] = strokeArr[strokeArr.length - 1];
       if (strokeHistory.hasOwnProperty(newSocketId)) {
         let { x: oldX, y: oldY, i: oldIdx, f: oldDown } = strokeHistory[newSocketId];
@@ -109,6 +121,7 @@ const DecoCanvas = () => {
           decoCtx.stroke();
         }
         dispatch(addStrokeHistory({ value: [newSocketId, newX, newY, newIdx, oldDown] }));
+
       }
     }
   }, [strokeArr]);
@@ -116,11 +129,12 @@ const DecoCanvas = () => {
   /* 여기 해야 합니다 */
   useEffect(() => {
     if (targetImgIdx !== "") {
-      console.log("targetImgIdx:", targetImgIdx);
+
       dispatch(setDecoModeInfo({ value: "stroke" }));
       const canvasWrapper = document.querySelector(".canvasWrapper");
       const targetDiv = document.getElementById(`set-${targetImgIdx}`);
       canvasWrapper.insertAdjacentElement("beforeend", targetDiv);
+
       const ctx = decoEventCanvas.current.getContext("2d");
       ctx.clearRect(0, 0, 300, 300);
     }
@@ -139,8 +153,6 @@ const DecoCanvas = () => {
       };
     });
   }, []);
-
-  //   const dragAndDrop = DecoDragAndDrop();
 
   /* 스티커를 스티커 필드 위에 올리기 */
   useEffect(() => {
@@ -209,6 +221,7 @@ const DecoCanvas = () => {
               </div>
             </div>
           ))}
+
         </div>
         <canvas
           className="decocanvas"
@@ -220,6 +233,7 @@ const DecoCanvas = () => {
           onMouseUp={onCanvasUp}
           style={{ border: `2px solid ${decoMapping[targetImgIdx]}`, visibility: mode === "sticker" ? "hidden" : "visible" }}
         ></canvas>
+
       </FlexboxGrid>
     </>
   );

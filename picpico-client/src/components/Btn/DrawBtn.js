@@ -12,7 +12,7 @@ function TakePicBtn() {
 
   return (
     <>
-      <Button className="btn" color="red" size="40" padding="5px 0" onClick={onTakePicBtnClick}></Button>
+      <Button className="btn-shadow" color="red" size="40px" padding="5px 0" onClick={onTakePicBtnClick}></Button>
     </>
   );
 }

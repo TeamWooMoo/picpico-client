@@ -28,10 +28,12 @@ export const onDoneDecoEvent = () => {
 };
 
 export const onSubmitDecoEvent = async realResult => {
+  console.log("on submit deco");
   store.dispatch(setRealResultInfo({ value: realResult }));
 
   store.dispatch(setDecoInfo({ value: false }));
   store.dispatch(setGalleryInfo({ value: true }));
+  console.log("back to the first");
 
   // for (let i = 0; i < realResult.length; i++) {
   //   const curRealResult = realResult[i];

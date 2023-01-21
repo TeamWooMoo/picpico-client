@@ -74,8 +74,10 @@ export async function initStream() {
     myFace = document.createElement("canvas");
 
     canvasRow.appendChild(myFace);
+
     myFace.uid = `${socket.id}`;
     myFace.id = "myFace";
+
     myFace.className = "canvasRow";
     myFace.style.position = "absolute";
     myFace.style.top = "0px";
@@ -108,3 +110,9 @@ export async function initStream() {
     // await syncStreamRTC(myStream);
     console.log("syncStreamRTC called", myStream);
 }
+
+/******************************************************************* */
+
+export const handleMuteClick = muted => {
+    myStream.getAudioTracks().forEach(track => (track.enabled = !muted));
+};
