@@ -1,8 +1,8 @@
 import store from "../store.js";
-import { setVideosInfo } from "../slice/videosInfo.js";
-import { myPeer, myPeers, myStream } from "../controller/MainController.js";
-import { socket } from "./sockets.mjs";
-import { initWebGL } from "./webgl-transparency.mjs";
+import {setVideosInfo} from "../slice/videosInfo.js";
+import {myPeer, myPeers, myStream} from "../controller/MainController.js";
+import {socket} from "./sockets.mjs";
+import {initWebGL} from "./webgl-transparency.mjs";
 import uuid from "react-uuid";
 
 /* myPeers
@@ -67,39 +67,41 @@ const handleTrack = (data, myPeer) => {
 
         peerVideo.onplaying = () => {
             console.log("my Peer Order: ", peerOrder);
-            if (canvasRow.children.length < 1) {
-                console.log("im the first one");
-                canvasRow.appendChild(peerCanvasGL);
-            } else if (canvasRow.children.length === 1) {
-                if (canvasRow.children[0].id < peerOrder) {
-                    canvasRow.appendChild(peerCanvasGL);
-                } else {
-                    canvasRow.prepend(peerCanvasGL);
-                }
-            } else {
-                console.log("dkdkdkdkdk");
-                let flag = false;
+            canvasRow.appendChild(peerCanvasGL);
+            peerCanvasGL.style.zIndex = peerOrder;
 
-                if (peerOrder === 0) {
-                    canvasRow.prepend(peerCanvasGL);
-                } else if (peerOrder === canvasRow.children.length) {
-                    canvasRow.appendChild(peerCanvasGL);
-                } else {
-                    for (let i = 0; i < canvasRow.children.length - 1; i++) {
-                        if (peerOrder === parseInt(canvasRow.children[i].id)) {
-                            console.log("아니 이럴 순 없어");
-                        }
-                        if (peerOrder > parseInt(canvasRow.children[i].id) && peerOrder < parseInt(canvasRow.children[i + 1].id)) {
-                            canvasRow.children[i].id.after(peerCanvasGL);
-                            flag = true;
-                            break;
-                        }
-                    }
-                }
-                if (!flag) {
-                    console.log("우엑");
-                }
-            }
+            // if (canvasRow.children.length < 1) {
+            //     console.log("im the first one");
+            //     canvasRow.appendChild(peerCanvasGL);
+            // } else if (canvasRow.children.length === 1) {
+            //     if (canvasRow.children[0].id < peerOrder) {
+            //         canvasRow.appendChild(peerCanvasGL);
+            //     } else {
+            //         canvasRow.prepend(peerCanvasGL);
+            //     }
+            // } else {
+            //     let flag = false;
+
+            //     if (peerOrder === 0) {
+            //         canvasRow.prepend(peerCanvasGL);
+            //     } else if (peerOrder === canvasRow.children.length) {
+            //         canvasRow.appendChild(peerCanvasGL);
+            //     } else {
+            //         for (let i = 0; i < canvasRow.children.length - 1; i++) {
+            //             if (peerOrder === parseInt(canvasRow.children[i].id)) {
+            //                 console.log("아니 이럴 순 없어");
+            //             }
+            //             if (peerOrder > parseInt(canvasRow.children[i].id) && peerOrder < parseInt(canvasRow.children[i + 1].id)) {
+            //                 canvasRow.children[i].id.after(peerCanvasGL);
+            //                 flag = true;
+            //                 break;
+            //             }
+            //         }
+            //     }
+            //     if (!flag) {
+            //         console.log("우엑");
+            //     }
+            // }
             // canvasRow.appendChild(peerCanvasGL);
             peerCanvasGL.id = `${peerOrder}`;
             peerCanvasGL.className = "canvasRow";
