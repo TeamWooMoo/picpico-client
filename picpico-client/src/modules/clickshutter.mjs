@@ -22,16 +22,12 @@ export const onSendPicEvent = async (idx, imgArr) => {
     // }
     // await first();
 
-    const testCanvas = document.getElementById("testCanvas");
-    const testCtx = testCanvas.getContext("2d");
-    const img = new Image();
-    img.src = imgArr;
-    testCtx.drawImage(img, 0, 0);
-    const resultUrl = await testCanvas.toDataURL("image/png");
+    const testImg = document.getElementById("testCanvas");
+    testImg.src = imgArr;
     // const resultUrl = await canvas.toDataURL("image/png");
 
-    socket.emit("result_pic", idx, resultUrl);
-    console.log("result:", resultUrl);
-    console.log("사진 5장 다 그렸음. 서버야 이게 최종본이야");
+    // socket.emit("result_pic", idx, resultUrl);
+    // console.log("result:", resultUrl);
+    // console.log("사진 5장 다 그렸음. 서버야 이게 최종본이야");
     // ctx.clearRect(0, 0, 350, 350);
 };
