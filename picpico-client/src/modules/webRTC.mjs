@@ -77,7 +77,7 @@ const handleTrack = (data, myPeer) => {
                 }
             } else {
                 for (let i = 0; i < canvasRow.children.length - 1; i++) {
-                    if (peerOrder > canvasRow.children[i].id && peerOrder < canvasRow.children[i + 1].id) {
+                    if (peerOrder > parseInt(canvasRow.children[i].id) && peerOrder < parseInt(canvasRow.children[i + 1].id)) {
                         canvasRow.children.id[i].after(peerCanvasGL);
                         break;
                     }
