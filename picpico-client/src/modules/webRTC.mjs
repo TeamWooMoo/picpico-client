@@ -43,7 +43,7 @@ const handleTrack = (data, myPeer) => {
         const peerCanvasGL = myPeer.canvasElement;
         let peerOrder;
         membersArr.forEach(memberIdx => {
-            if (membersArr[memberIdx]["socketId"] === myPeer.mySocketId) {
+            if (membersArr[memberIdx]["socketId"] == myPeer.mySocketId) {
                 peerOrder = memberIdx;
             }
         });
