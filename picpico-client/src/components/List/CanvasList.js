@@ -32,7 +32,6 @@ const CanvasList = () => {
 
     return (
         <>
-            <img id="testCanvas"></img>
             <div className="canvasBox">
                 <canvas id="myGreenCanvas" className="canvas"></canvas>
                 <div id="allCanvases" width="350" height="350" ref={allCanvases}></div>
