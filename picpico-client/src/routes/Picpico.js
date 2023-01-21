@@ -56,7 +56,6 @@ const Picpico = () => {
                     <Header className="picbooth_header">
                         <LinkModal />
                         <h3 style={{ fontFamily: "'Palatino Linotype', 'Book Antiqua', Palatino, serif", color: "#7986CB", textAlign: "center" }}>PicPico</h3>
-
                         <PicDoneBtn />
                     </Header>
                     <Content>
@@ -72,7 +71,7 @@ const Picpico = () => {
             ) : selectDone ? (
                 <Container className="default_container">
                     <Header className="selection_header">
-                        <MuteBtn className="muted_left" />
+                        <MuteBtn />
                         <SelectMessage />
                         <SelectDoneBtn />
                         {/* <p style={{ visibility: "hidden" }}>hidden</p> */}
@@ -88,7 +87,7 @@ const Picpico = () => {
             ) : decoDone ? (
                 <Container className="default_container">
                     <Header className="deco_header">
-                        <MuteBtn className="muted_left" />
+                        <MuteBtn />
                         <DecoMessage />
                         <DecoDoneBtn />
                     </Header>
@@ -110,7 +109,7 @@ const Picpico = () => {
             ) : galleryDone ? (
                 <Container className="default_container">
                     <Header className="gallery_header">
-                        <MuteBtn className="muted_left" />
+                        <MuteBtn />
                         <GalleryMessage />
                         <GalleryDoneBtn />
                     </Header>
