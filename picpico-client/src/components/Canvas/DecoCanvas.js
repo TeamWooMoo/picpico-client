@@ -200,18 +200,16 @@ const DecoCanvas = () => {
             </div>
           ))}
 
-          {mode === "stroke" ? (
-            <canvas
-              className="decocanvas"
-              width="300px"
-              height="300px"
-              ref={decoEventCanvas}
-              onMouseDown={onCanvasDown}
-              onMouseMove={onCanvasMove}
-              onMouseUp={onCanvasUp}
-              style={{ border: `2px solid ${decoMapping[targetImgIdx]}` }}
-            ></canvas>
-          ) : null}
+          <canvas
+            className="decocanvas"
+            width="300px"
+            height="300px"
+            ref={decoEventCanvas}
+            onMouseDown={onCanvasDown}
+            onMouseMove={onCanvasMove}
+            onMouseUp={onCanvasUp}
+            style={{ border: `2px solid ${decoMapping[targetImgIdx]}`, visibility: mode === "sticker" ? "hidden" : "visible" }}
+          ></canvas>
         </div>
       </FlexboxGrid>
     </>
