@@ -1,6 +1,6 @@
-import {addMemberEvent, joinRoom} from "../modules/sockets.mjs";
-import {initWebRTC} from "../modules/webRTC.mjs";
-import {initStream} from "../modules/stream.mjs";
+import { addMemberEvent, joinRoom } from "../modules/sockets.mjs";
+import { initWebRTC } from "../modules/webRTC.mjs";
+import { initStream } from "../modules/stream.mjs";
 // import { initPeerCanvas } from "../modules/receiver.mjs";
 
 /******************************************************************* */
@@ -20,40 +20,41 @@ export const cameraList = [];
 export const myPeers = {};
 
 export class myPeer {
-    connection;
-    videoElement;
-    canvasElement;
-    // alphaChannel;
-    // alphaReceived;
+  connection;
+  videoElement;
+  canvasElement;
+  // alphaChannel;
+  // alphaReceived;
+  mySocketId;
 
-    constructor(newConnection) {
-        this.connection = newConnection;
-        this.videoElement = document.createElement("video");
-        // this.videoElement.hidden = true;
-        this.canvasElement = document.createElement("canvas");
-        // this.alphaChannel = null;
-        // this.alphaReceived = null;
-    }
+  constructor(newConnection) {
+    this.connection = newConnection;
+    this.videoElement = document.createElement("video");
+    // this.videoElement.hidden = true;
+    this.canvasElement = document.createElement("canvas");
+    // this.alphaChannel = null;
+    // this.alphaReceived = null;
+  }
 }
 
 /******************************************************************* */
 
 const MainController = () => {
-    const init = async (roomId, nickName) => {
-        await initStream();
-        await joinRoom(roomId);
-        await initWebRTC();
-        await addMemberEvent(roomId, nickName);
-        // await initPeerCanvas();
-    };
+  const init = async (roomId, nickName) => {
+    await initStream();
+    await joinRoom(roomId);
+    await initWebRTC();
+    await addMemberEvent(roomId, nickName);
+    // await initPeerCanvas();
+  };
 
-    return {
-        init: async (roomId, nickName) => {
-            console.log(">>>>>>>", roomId, nickName);
-            // const nickName = "user";
-            await init(roomId, nickName);
-        },
-    };
+  return {
+    init: async (roomId, nickName) => {
+      console.log(">>>>>>>", roomId, nickName);
+      // const nickName = "user";
+      await init(roomId, nickName);
+    },
+  };
 };
 
 export default MainController;
