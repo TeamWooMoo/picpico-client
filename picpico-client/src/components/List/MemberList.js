@@ -75,7 +75,6 @@ const MemberList = () => {
                         onDragStart={e => onDragStart(e, index)}
                         onDragEnter={e => onAvailableItemDragEnter(e, index)}
                         onDragOver={onDragOver}
-                        onDragEnd={onDragEnd}
                         draggable
                     >
                         {option}
