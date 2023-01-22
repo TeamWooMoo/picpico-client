@@ -15,6 +15,7 @@ const SelectList = () => {
     const onImageClick = event => {
         const pic = event.target;
         const picId = pic.dataset.pid;
+
         socket.emit("pick_pic", roomId, picId);
     };
     // imgArr의 id == selected인걸 봐서 activate <=> deactivate 토글처럼
@@ -23,28 +24,42 @@ const SelectList = () => {
         if (selected !== "") {
             console.log("<<selected:", selected);
             const imgTag = document.getElementById(`pic-${selected}`);
+
+
             imgTag.classList.toggle("activate_pic");
+
             if (imgTag.classList.contains("activate_pic")) {
-                imgTag.style.border = "3px solid tomato";
+                imgTag.style.border = "4px solid #2c3e50";
             } else {
                 imgTag.style.border = "";
             }
+
             console.log("imgTag:", imgTag);
+
+
             dispatch(setSelectedInfo({ value: "" }));
         }
     }, [selected]);
     return (
         <>
-            {/* <ImageList sx={{ width: 365, height: 450 }} cols={1} rowHeight={350}>
+
+            <ImageList sx={{ justifyContent: "center", width: 350, height: 500, borderRadius: "7px" }} cols={1} rowHeight={350}>
                 {Object.values(imgData).map(({ picture }, idx) =>
                     idx == 0 ? null : (
                         <ImageListItem>
-                            <img alt={`pic-${idx}`} onClick={onImageClick} src={picture} data-pid={idx} id={`pic-${idx}`} />
+                            <img
+                                alt={`pic-${idx}`}
+                                onClick={onImageClick}
+                                src={picture}
+                                data-pid={idx}
+                                id={`pic-${idx}`}
+                                style={{ backgroundColor: "white" }}
+                            />
                         </ImageListItem>
                     )
                 )}
-            </ImageList> */}
-            hahahahah
+            </ImageList>
+
         </>
     );
 };

@@ -38,7 +38,7 @@ function CreateRoomBtn() {
                         color: "#7986CB",
                         textAlign: "center",
                         width: "250px",
-                        fontWeight: "bold",
+                        fontWeight: "bolder",
                     }}
                 >
                     PicPiCo Enter Room

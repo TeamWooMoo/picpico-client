@@ -1,21 +1,24 @@
-import { useState } from "react";
-import mic_btn from "./../../assets/images/icon-mic.png";
-import mute_btn from "./../../assets/images/icon-mute.png";
+import { useDispatch, useSelector } from "react-redux";
 import { handleMuteClick } from "../../modules/stream.mjs";
+import { setMutedInfo } from "../../slice/picpicoInfo.js";
+import mic from "./../../assets/images/icon-mic.png";
+import mute from "./../../assets/images/icon-mute.png";
 
 function MuteBtn() {
-    const [muted, setMuted] = useState(true);
+    const dispatch = useDispatch();
+    const isMuted = useSelector(state => state.picpicoInfo.isMuted);
+
     const onMuteOnOff = () => {
-        setMuted(current => !current);
-        handleMuteClick(muted);
+        handleMuteClick(isMuted);
+        dispatch(setMutedInfo({ value: !isMuted }));
         console.log("mute on off");
     };
     return (
         <>
-            {muted ? (
-                <img src={mic_btn} className="drop-shadow" style={{ width: "40px", height: "40px" }} onClick={onMuteOnOff} />
+            {isMuted ? (
+                <img src={mic} className="drop-shadow" style={{ width: "40px", height: "40px" }} onClick={onMuteOnOff} />
             ) : (
-                <img src={mute_btn} className="drop-shadow" style={{ width: "40px", height: "40px" }} onClick={onMuteOnOff} />
+                <img src={mute} className="drop-shadow" style={{ width: "40px", height: "40px" }} onClick={onMuteOnOff} />
             )}
         </>
     );
