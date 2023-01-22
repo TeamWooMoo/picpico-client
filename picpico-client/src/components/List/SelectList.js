@@ -11,6 +11,7 @@ const SelectList = () => {
     const roomId = useSelector(state => state.roomInfo.room);
     const selected = useSelector(state => state.selectionInfo.selected); //숫자 스트링 그 자체
     const imgData = useSelector(state => state.selectionInfo.imgList);
+    console.log("imgData: ", imgData);
 
     const refs = useRef([]);
 
@@ -43,7 +44,7 @@ const SelectList = () => {
     return (
         <>
             <ImageList sx={{ justifyContent: "center", width: 350, height: 500, borderRadius: "7px" }} cols={1} rowHeight={350}>
-                {Object.entries(imgData).map(([url, idx]) => (
+                {Object.entries(imgData).map((url, idx) => (
                     <ImageListItem>
                         <img
                             alt={`pic-${idx}`}
