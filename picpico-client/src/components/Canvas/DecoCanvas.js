@@ -89,6 +89,7 @@ const DecoCanvas = () => {
             //   dispatch(setDecoInfo({ value: true }));
 
             dispatch(setResultInfo({ value: resultImages }));
+            console.log("resultImages:", resultImages);
         }
     }, [doneDeco]);
 
