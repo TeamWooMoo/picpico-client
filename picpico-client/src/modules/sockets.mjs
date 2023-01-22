@@ -22,7 +22,9 @@ export async function joinRoom(roomId) {
     socket.emit("join_room", roomId, socket.id);
     socket.on("reset_member", onResetMemberEvent);
     socket.on("click_shutter", onClickShutterEvent);
-    socket.on("send_pic", onSendPicEvent);
+
+    // socket.on("send_pic", onSendPicEvent);
+
     socket.on("pick_pic", onPickPicEvent);
     socket.on("done_take", onDoneTakeEvent);
     socket.on("done_pick", onDonePickEvent);

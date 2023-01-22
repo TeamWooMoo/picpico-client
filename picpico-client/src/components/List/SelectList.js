@@ -16,8 +16,6 @@ const SelectList = () => {
         const pic = event.target;
         const picId = pic.dataset.pid;
 
-        console.log(`click ${picId}`);
-
         socket.emit("pick_pic", roomId, picId);
     };
     // imgArr의 id == selected인걸 봐서 activate <=> deactivate 토글처럼
@@ -26,6 +24,7 @@ const SelectList = () => {
         if (selected !== "") {
             console.log("<<selected:", selected);
             const imgTag = document.getElementById(`pic-${selected}`);
+
 
             imgTag.classList.toggle("activate_pic");
 
@@ -37,11 +36,13 @@ const SelectList = () => {
 
             console.log("imgTag:", imgTag);
 
+
             dispatch(setSelectedInfo({ value: "" }));
         }
     }, [selected]);
     return (
         <>
+
             <ImageList sx={{ justifyContent: "center", width: 350, height: 500, borderRadius: "7px" }} cols={1} rowHeight={350}>
                 {Object.values(imgData).map(({ picture }, idx) =>
                     idx == 0 ? null : (
@@ -58,6 +59,7 @@ const SelectList = () => {
                     )
                 )}
             </ImageList>
+
         </>
     );
 };
