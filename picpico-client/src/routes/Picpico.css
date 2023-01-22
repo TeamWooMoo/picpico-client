@@ -1,8 +1,6 @@
 .picbooth_header {
     color: black;
-    background-color: #b1bcfb;
     width: 100%;
-    /* height: 70px; */
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -23,7 +21,6 @@
 
 .selection_header {
     color: black;
-    background-color: #b1bcfb;
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -34,7 +31,6 @@
 
 .selection_footer {
     width: 100%;
-    height: 70px;
     background-color: gray;
     display: flex;
     flex-direction: row;
@@ -44,7 +40,6 @@
 
 .deco_header {
     color: black;
-    background-color: #b1bcfb;
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -76,7 +71,6 @@
 
 .gallery_header {
     color: black;
-    background-color: #b1bcfb;
     width: 100%;
     display: flex;
     flex-direction: space-between;
@@ -90,7 +84,6 @@
     color: black;
     width: 100%;
     height: 70px;
-    /* background-color: #ada9ae; */
     display: flex;
     flex-direction: row;
     align-items: center;
