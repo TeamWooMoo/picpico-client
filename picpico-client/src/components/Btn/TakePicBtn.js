@@ -3,14 +3,14 @@ import { IoRadioButtonOnOutline } from "react-icons/io5";
 import { IoMdRadioButtonOn } from "react-icons/io";
 import { socket } from "../../modules/sockets.mjs";
 import "./TakePicBtn.css";
-// import { onClickShutterEvent } from "./../../modules/clickshutter.mjs";
+import shutterSound from "../../assets/sound/shutter.mp3";
 
 function TakePicBtn() {
     const idx = useSelector(state => state.takepicInfo.idx);
 
     const onTakePicBtnClick = () => {
         console.log("사진 찍히니 ~");
-        const shutterSound = new Audio("shutter.mp3");
+        const shutterSound = new Audio(shutterSound);
         shutterSound.play().catch(e => {
             console.log(e);
         });
