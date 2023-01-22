@@ -11,12 +11,10 @@ const SelectList = () => {
     const roomId = useSelector(state => state.roomInfo.room);
     const selected = useSelector(state => state.selectionInfo.selected); //숫자 스트링 그 자체
     const imgData = useSelector(state => state.selectionInfo.imgList);
-    console.log(">> imgData:", imgData);
     //imgArr가 보여야 함.
     const onImageClick = event => {
         const pic = event.target;
         const picId = pic.dataset.pid;
-        console.log(`click ${picId}`);
         socket.emit("pick_pic", roomId, picId);
     };
     // imgArr의 id == selected인걸 봐서 activate <=> deactivate 토글처럼
