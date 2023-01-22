@@ -4,7 +4,6 @@ import { FlexboxGrid } from "rsuite";
 import { setMembersInfo } from "../../slice/membersInfo";
 
 const MemberList = () => {
-
     const dispatch = useDispatch();
     const members = useSelector(state => state.membersInfo.members);
     const availableOptionsArr = members.map(({ nickName }, index) => nickName); // 닉네임만 있음.
@@ -28,8 +27,7 @@ const MemberList = () => {
         // 여기에 새롭게 정의된 멤버 순서에 맞게 정렬된 멤버 닉네임 리스트
     };
 
-    const memberKeys = Object.keys(members);
-
+    // const memberKeys = Object.keys(members);
 
     const onDragEnd = e => {
         e.target.classList.remove("grabbing");
