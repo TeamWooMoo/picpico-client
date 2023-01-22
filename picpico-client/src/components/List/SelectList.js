@@ -11,8 +11,9 @@ const SelectList = () => {
     const roomId = useSelector(state => state.roomInfo.room);
     const selected = useSelector(state => state.selectionInfo.selected); //숫자 스트링 그 자체
     const imgData = useSelector(state => state.selectionInfo.imgList);
+    console.log("imgData: ", imgData);
 
-    const refs = useRef([]);
+    // const refs = useRef([]);
 
     //imgArr가 보여야 함.
     const onImageClick = event => {
@@ -24,8 +25,8 @@ const SelectList = () => {
     // imgArr의 id == selected인걸 봐서 activate <=> deactivate 토글처럼
     useEffect(() => {
         if (selected !== "") {
-            // const imgTag = document.getElementById(`pic-${selected}`);
-            const imgTag = refs.current[selected];
+            const imgTag = document.getElementById(`pic-${selected}`);
+            // const imgTag = refs.current[selected];
 
             imgTag.classList.toggle("activate_pic");
 
@@ -43,17 +44,9 @@ const SelectList = () => {
     return (
         <>
             <ImageList sx={{ justifyContent: "center", width: 350, height: 500, borderRadius: "7px" }} cols={1} rowHeight={350}>
-                {Object.values(imgData).map(({ picture }, idx) => (
+                {Object.values(imgData).map((url, idx) => (
                     <ImageListItem>
-                        <img
-                            alt={`pic-${idx}`}
-                            onClick={onImageClick}
-                            src={picture}
-                            data-pid={idx}
-                            id={`pic-${idx}`}
-                            style={{ backgroundColor: "white" }}
-                            ref={el => (refs.current[idx] = el)}
-                        />
+                        <img alt={`pic-${idx}`} onClick={onImageClick} src={url} data-pid={idx} id={`pic-${idx}`} style={{ backgroundColor: "white" }} />
                     </ImageListItem>
                 ))}
             </ImageList>
