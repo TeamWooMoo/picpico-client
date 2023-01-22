@@ -43,7 +43,7 @@ const SelectList = () => {
     return (
         <>
             <ImageList sx={{ justifyContent: "center", width: 350, height: 500, borderRadius: "7px" }} cols={1} rowHeight={350}>
-                {imgData.map((url, idx) => (
+                {Object.entries(imgData).map(([url, idx]) => (
                     <ImageListItem>
                         <img
                             alt={`pic-${idx}`}
