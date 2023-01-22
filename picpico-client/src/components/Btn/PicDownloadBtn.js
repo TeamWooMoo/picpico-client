@@ -28,17 +28,17 @@ function PicDownloadBtn() {
 
     return (
         <>
-            <div id="imageWrapper" style={{ margin: "15px", boxShadow: "rgba(26, 18, 18, 0.25) 0 1px 2px 0" }}>
-                <ImageList sx={{ width: 365, height: 450 }} cols={1} rowHeight={350}>
-                    <div id="testArea"></div>
-                </ImageList>
-            </div>
-            <div style={{ display: "flex", flexDirection: "row" }}>
-                <img src={download_btn} className="btn-shadow" style={{ width: "40px", height: "40px", justifyContent: "center" }} onClick={onCapture} />
+            <ImageList sx={{ justifyContent: "center", width: 350, height: 500, borderRadius: "7px" }} cols={1} rowHeight={350}>
+                <div id="testArea"></div>
+            </ImageList>
+
+            <div style={{ display: "flex", flexDirection: "row", justifyContent: "center" }}>
+                <img id="download" src={download_btn} className="btn-shadow" style={{ width: "40px", height: "40px", margin: "0 10px" }} onClick={onCapture} />
                 <img
+                    id="retry"
                     src={retry_btn}
                     className="btn-shadow"
-                    style={{ width: "40px", height: "40px", justifyContent: "center" }}
+                    style={{ width: "40px", height: "40px", margin: "0 10px" }}
                     onClick={onGalleryDoneBtnClick}
                 />
             </div>

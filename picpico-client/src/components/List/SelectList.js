@@ -30,7 +30,7 @@ const SelectList = () => {
             imgTag.classList.toggle("activate_pic");
 
             if (imgTag.classList.contains("activate_pic")) {
-                imgTag.style.border = "3px solid tomato";
+                imgTag.style.border = "4px solid #2c3e50";
             } else {
                 imgTag.style.border = "";
             }
@@ -42,11 +42,18 @@ const SelectList = () => {
     }, [selected]);
     return (
         <>
-            <ImageList sx={{ justifyContent: "center", width: 350, height: 450 }} cols={1} rowHeight={350}>
+            <ImageList sx={{ justifyContent: "center", width: 350, height: 500, borderRadius: "7px" }} cols={1} rowHeight={350}>
                 {Object.values(imgData).map(({ picture }, idx) =>
                     idx == 0 ? null : (
                         <ImageListItem>
-                            <img alt={`pic-${idx}`} onClick={onImageClick} src={picture} data-pid={idx} id={`pic-${idx}`} />
+                            <img
+                                alt={`pic-${idx}`}
+                                onClick={onImageClick}
+                                src={picture}
+                                data-pid={idx}
+                                id={`pic-${idx}`}
+                                style={{ backgroundColor: "white" }}
+                            />
                         </ImageListItem>
                     )
                 )}

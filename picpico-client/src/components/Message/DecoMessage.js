@@ -7,9 +7,6 @@ function DecoMessage() {
             <FlexboxGrid justify="center">
                 <h4 style={{ fontFamily: "'Palatino Linotype', 'Book Antiqua', Palatino, serif", color: "#7986CB", textAlign: "center" }}>Decoration</h4>
             </FlexboxGrid>
-            <FlexboxGrid justify="center">
-                <p style={{ color: "black", textAlign: "center" }}>Deco your Pictures</p>
-            </FlexboxGrid>
         </div>
     );
 }
