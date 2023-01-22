@@ -41,20 +41,11 @@ const SelectList = () => {
     return (
         <>
             <ImageList sx={{ justifyContent: "center", width: 350, height: 500, borderRadius: "7px" }} cols={1} rowHeight={350}>
-                {Object.values(imgData).map(({ picture }, idx) =>
-                    idx == 0 ? null : (
-                        <ImageListItem>
-                            <img
-                                alt={`pic-${idx}`}
-                                onClick={onImageClick}
-                                src={picture}
-                                data-pid={idx}
-                                id={`pic-${idx}`}
-                                style={{ backgroundColor: "white" }}
-                            />
-                        </ImageListItem>
-                    )
-                )}
+                {Object.values(imgData).map(({ picture }, idx) => (
+                    <ImageListItem>
+                        <img alt={`pic-${idx}`} onClick={onImageClick} src={picture} data-pid={idx} id={`pic-${idx}`} style={{ backgroundColor: "white" }} />
+                    </ImageListItem>
+                ))}
             </ImageList>
         </>
     );
