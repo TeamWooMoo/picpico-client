@@ -10,7 +10,7 @@ function TakePicBtn() {
 
     const onTakePicBtnClick = () => {
         console.log("사진 찍히니 ~");
-        const shutterSound = new Audio(shutterSound);
+        const shutterSound = new Audio("../../assets/sound/shutter.mp3");
         shutterSound.play().catch(e => {
             console.log(e);
         });
