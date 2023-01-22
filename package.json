@@ -30,6 +30,7 @@
     "html2canvas": "^1.4.1",
     "png-js": "^1.0.0",
     "reflect-metadata": "^0.1.13",
+    "rimraf": "^4.1.1",
     "rxjs": "^7.2.0",
     "tracking": "^1.1.3"
   },

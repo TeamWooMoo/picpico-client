@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
     "name": "picpico-client",
     "version": "0.1.0",
     "private": true,
@@ -68,4 +69,87 @@
             "last 1 safari version"
         ]
     }
+=======
+  "name": "picpico-client",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@mediapipe/selfie_segmentation": "^0.1.1671057942",
+    "@mui/material": "^5.11.4",
+    "@reduxjs/toolkit": "^1.9.1",
+    "@rsuite/icons": "^1.0.2",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/html2canvas": "^1.0.0",
+    "animated_gif": "^1.0.2",
+    "axios": "^1.2.2",
+    "cache-manager": "^5.1.4",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.0",
+    "dom-to-image": "^2.6.0",
+    "file-save": "^0.2.0",
+    "gif-transparency": "^2.0.0",
+    "gif.js": "^0.2.0",
+    "gifuct-js": "^2.1.2",
+    "html2canvas": "^1.4.1",
+    "jstracking": "^0.0.3",
+    "react": "^18.2.0",
+    "react-copy-to-clipboard": "^5.1.0",
+    "react-dom": "^18.2.0",
+    "react-icon": "^1.0.0",
+    "react-icons": "^4.7.1",
+    "react-keep-alive": "^2.5.2",
+    "react-redux": "^8.0.5",
+    "react-router-dom": "^6.6.2",
+    "react-scripts": "5.0.1",
+    "react-uuid": "^2.0.0",
+    "rsuite": "^5.24.1",
+    "socket.io-client": "^4.5.4",
+    "stream": "^0.0.2",
+    "styled-components": "^5.3.6",
+    "tracking": "^1.1.3",
+    "util": "^0.12.5",
+    "web-vitals": "^2.1.4",
+    "webgl-utils": "^1.0.1",
+    "workbox-background-sync": "^5.1.4",
+    "workbox-broadcast-update": "^5.1.4",
+    "workbox-cacheable-response": "^5.1.4",
+    "workbox-core": "^5.1.4",
+    "workbox-expiration": "^5.1.4",
+    "workbox-google-analytics": "^5.1.4",
+    "workbox-navigation-preload": "^5.1.4",
+    "workbox-precaching": "^5.1.4",
+    "workbox-range-requests": "^5.1.4",
+    "workbox-routing": "^5.1.4",
+    "workbox-strategies": "^5.1.4",
+    "workbox-streams": "^5.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+>>>>>>> e6c62f4b804615bbe864a703f5c31c8c96fbbe52
 }
