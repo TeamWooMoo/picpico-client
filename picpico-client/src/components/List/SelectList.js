@@ -13,7 +13,7 @@ const SelectList = () => {
     const imgData = useSelector(state => state.selectionInfo.imgList);
     console.log("imgData: ", imgData);
 
-    const refs = useRef([]);
+    // const refs = useRef([]);
 
     //imgArr가 보여야 함.
     const onImageClick = event => {
@@ -44,7 +44,7 @@ const SelectList = () => {
     return (
         <>
             <ImageList sx={{ justifyContent: "center", width: 350, height: 500, borderRadius: "7px" }} cols={1} rowHeight={350}>
-                {Object.entries(imgData).map((url, idx) => (
+                {Object.entries(imgData).map((idx, url) => (
                     <ImageListItem>
                         <img alt={`pic-${idx}`} onClick={onImageClick} src={url} data-pid={idx} id={`pic-${idx}`} style={{ backgroundColor: "white" }} />
                     </ImageListItem>
