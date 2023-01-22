@@ -50,7 +50,6 @@ const SelectList = () => {
                     </ImageListItem>
                 ))}
             </ImageList>
-            {/* {Object.keys(imgData)} */}
         </>
     );
 };
