@@ -24,8 +24,8 @@ const SelectList = () => {
     // imgArr의 id == selected인걸 봐서 activate <=> deactivate 토글처럼
     useEffect(() => {
         if (selected !== "") {
-            // const imgTag = document.getElementById(`pic-${selected}`);
-            const imgTag = refs.current[selected];
+            const imgTag = document.getElementById(`pic-${selected}`);
+            // const imgTag = refs.current[selected];
 
             imgTag.classList.toggle("activate_pic");
 
