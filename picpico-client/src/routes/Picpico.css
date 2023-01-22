@@ -6,6 +6,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 15px 20px;
+    box-shadow: 0 5px 7px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
 .picbooth_footer {
@@ -27,6 +28,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 15px 20px;
+    box-shadow: 0 5px 7px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
 .selection_footer {
@@ -46,6 +48,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 15px 20px;
+    box-shadow: 0 5px 7px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
 .deco_footer {
@@ -78,6 +81,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 15px 20px;
+    box-shadow: 0 5px 7px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
 .gallery_footer {
