@@ -25,7 +25,6 @@ const SelectList = () => {
             console.log("<<selected:", selected);
             const imgTag = document.getElementById(`pic-${selected}`);
 
-
             imgTag.classList.toggle("activate_pic");
 
             if (imgTag.classList.contains("activate_pic")) {
@@ -36,13 +35,11 @@ const SelectList = () => {
 
             console.log("imgTag:", imgTag);
 
-
             dispatch(setSelectedInfo({ value: "" }));
         }
     }, [selected]);
     return (
         <>
-
             <ImageList sx={{ justifyContent: "center", width: 350, height: 500, borderRadius: "7px" }} cols={1} rowHeight={350}>
                 {Object.values(imgData).map(({ picture }, idx) =>
                     idx == 0 ? null : (
@@ -59,7 +56,6 @@ const SelectList = () => {
                     )
                 )}
             </ImageList>
-
         </>
     );
 };
