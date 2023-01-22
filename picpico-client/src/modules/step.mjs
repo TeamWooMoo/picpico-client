@@ -7,39 +7,39 @@ import { ResultImage, Sticker } from "../modules/resultCanvas.mjs";
 import { gifTest } from "../test/resultTest.mjs";
 
 export const onDoneTakeEvent = imgArr => {
-  console.log("picBooth done~~", imgArr);
-  store.dispatch(setImgListInfo({ value: imgArr }));
-  store.dispatch(setPicBoothInfo({ value: false }));
-  store.dispatch(setSelectionInfo({ value: true }));
+    console.log("picBooth done~~", imgArr);
+    store.dispatch(setImgListInfo({ value: imgArr }));
+    store.dispatch(setPicBoothInfo({ value: false }));
+    store.dispatch(setSelectionInfo({ value: true }));
 };
 
 export const onDonePickEvent = imgArr => {
-  store.dispatch(setDecoListInfo({ value: imgArr }));
-  store.dispatch(setSelectionInfo({ value: false }));
-  store.dispatch(setDecoInfo({ value: true }));
-  store.dispatch(setMyDecoCanvasInfo({ value: Object.keys(imgArr)[0] }));
+    store.dispatch(setDecoListInfo({ value: imgArr }));
+    store.dispatch(setSelectionInfo({ value: false }));
+    store.dispatch(setDecoInfo({ value: true }));
+    store.dispatch(setMyDecoCanvasInfo({ value: Object.keys(imgArr)[0] }));
 };
 
 export const onDoneDecoEvent = () => {
-  const result = store.getState().decoInfo.resultList;
-  socket.emit("submit_deco", result);
-  // store.dispatch(setDecoInfo({ value: false }));
-  // store.dispatch(setGalleryInfo({ value: true }));
+    const result = store.getState().decoInfo.resultList;
+    socket.emit("submit_deco", result);
+    // store.dispatch(setDecoInfo({ value: false }));
+    // store.dispatch(setGalleryInfo({ value: true }));
 };
 
 export const onSubmitDecoEvent = async realResult => {
-  console.log("on submit deco");
-  store.dispatch(setRealResultInfo({ value: realResult }));
+    console.log("on submit deco");
+    store.dispatch(setRealResultInfo({ value: realResult }));
 
-  store.dispatch(setDecoInfo({ value: false }));
-  store.dispatch(setGalleryInfo({ value: true }));
-  console.log("back to the first");
+    store.dispatch(setDecoInfo({ value: false }));
+    store.dispatch(setGalleryInfo({ value: true }));
+    console.log("back to the first");
 
-  // for (let i = 0; i < realResult.length; i++) {
-  //   const curRealResult = realResult[i];
+    // for (let i = 0; i < realResult.length; i++) {
+    //   const curRealResult = realResult[i];
 
-  // resultImages.push(new ResultImage(curRealResult["resultUrl"], curRealResult["stickers"]));
-  // }
+    // resultImages.push(new ResultImage(curRealResult["resultUrl"], curRealResult["stickers"]));
+    // }
 
-  console.log("realResult:", realResult);
+    console.log("realResult:", realResult);
 };
