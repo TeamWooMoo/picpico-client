@@ -75,7 +75,7 @@
   }
   ,
   {
-    "src": "./icons/mstile-128x128.png",
+    "src": "./icons/mstile-70x70.png",
     "sizes": "128x128",
     "type": "image/png"
   }
@@ -87,19 +87,19 @@
   }
   ,
   {
-    "src": "./icons/mstile-270x270.png",
+    "src": "./icons/mstile-150x150.png",
     "sizes": "270x270",
     "type": "image/png"
   }
   ,
   {
-    "src": "./icons/mstile-558x270.png",
+    "src": "./icons/mstile-310x150.png",
     "sizes": "558x270",
     "type": "image/png"
   }
   ,
   {
-    "src": "./icons/mstile-558x558.png",
+    "src": "./icons/mstile-310x310.png",
     "sizes": "558x558",
     "type": "image/png"
   }
