@@ -56,7 +56,7 @@ const MemberList = () => {
         <div>
             {picBoothDisplay ? (
                 <ul style={{ color: "violet", textAlign: "center", listStyle: "none", paddingLeft: 0 }}>
-                    {availableOptionsArr.map((option, index) => {
+                    {availableOptionsArr.map((index, option) => {
                         return (
                             <li
                                 style={{ float: "left" }}
