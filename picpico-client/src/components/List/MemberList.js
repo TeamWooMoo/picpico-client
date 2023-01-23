@@ -6,26 +6,25 @@ const MemberList = () => {
     const dispatch = useDispatch();
     const members = useSelector(state => state.membersInfo.members);
     const availableOptionsArr = members.map(({ nickName }, index) => nickName); // 닉네임만 있음.
-    const [draggingItemIndex, setDraggingItemIndex] = useState(0);
-    const [draggingOverItemIndex, setDraggingOverItemIndex] = useState(null);
+    const draggingItemIndex = useRef(0);
+    const draggingOverItemIndex = useRef(null);
 
     const onDragStart = (e, index) => {
         console.log("START e.target", e.target.key);
-        setDraggingItemIndex(e.target.key);
+        draggingItemIndex.current = e.target.key;
         e.target.classList.add("grabbing");
     };
 
     const onAvailableItemDragEnter = (e, index) => {
-        const oldIndex = draggingItemIndex;
-        setDraggingOverItemIndex(index);
+        const oldIndex = draggingItemIndex.current;
+        // setDraggingOverItemIndex(index);
+        draggingOverItemIndex.current = index;
         const copyListItems = [...availableOptionsArr];
-        const dragItemContent = copyListItems[draggingItemIndex];
-        copyListItems.splice(draggingItemIndex, 1);
-        copyListItems.splice(draggingOverItemIndex, 0, dragItemContent);
-        setDraggingItemIndex(draggingOverItemIndex);
-        setDraggingOverItemIndex(null);
-        // dispatch(setMembersInfo({value: }));
-        // 여기에 새롭게 정의된 멤버 순서에 맞게 정렬된 멤버 닉네임 리스트
+        const dragItemContent = copyListItems[draggingItemIndex.current];
+        copyListItems.splice(draggingItemIndex.current, 1);
+        copyListItems.splice(draggingOverItemIndex.current, 0, dragItemContent);
+        draggingItemIndex.current = draggingOverItemIndex.current;
+        draggingOverItemIndex.current = null;
         console.log("old index, new index", oldIndex, index);
         socket.emit("reset_member", oldIndex, index);
         console.log("[reset-member] client emit");
