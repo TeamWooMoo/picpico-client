@@ -10,6 +10,11 @@ export let resultCanvas = document.createElement("canvas"); // ! 나중에 impor
 export let resultImages = []; // {사진 + (각 사진 위의 스티커url, 좌표, frames) 여러개 } x 4 일 것임
 // export let readyToMakeGIF = true; // ! 컴포넌트 쪽에서 만들어야 하고 그걸 import 하는 걸로 수정 해야함
 
+const totalCanvasSize = 350;
+const onePictureRatio = 2;
+const totalFrameCount = 20;
+const firstFrameIndex = 1;
+
 /***************************************************************** */
 
 export class ResultImage {
@@ -81,17 +86,17 @@ async function decodeGIF(url) {
 // 스티커가 움직이게 그려줌
 export async function makeResultCanvas() {
     let resultCtx = resultCanvas.getContext("2d");
-    const dx = [0, 350 / 2, 0, 350 / 2];
-    const dy = [0, 0, 350 / 2, 350 / 2];
+    const dx = [0, totalCanvasSize / onePictureRatio, 0, totalCanvasSize / onePictureRatio];
+    const dy = [0, 0, totalCanvasSize / onePictureRatio, totalCanvasSize / onePictureRatio];
 
     let readyToMakeGIF = true;
     let onCapture = false;
 
     resultCtx.willReadFrequently = true;
 
-    resultCanvas.width = 350;
+    resultCanvas.width = totalCanvasSize;
     // resultCanvas.height = 350 * 4;
-    resultCanvas.height = 350;
+    resultCanvas.height = totalCanvasSize;
     resultCanvas.style.border = "3px solid black";
 
     //! 자료구조 정해야 함
@@ -124,14 +129,14 @@ export async function makeResultCanvas() {
 
         resultImg.onload = () => {
             // resultCtx.drawImage(resultImg, 0, 350 * imageIndex);
-            resultCtx.drawImage(resultImg, dx[imageIndex], dy[imageIndex], 350 / 2, 350 / 2);
+            resultCtx.drawImage(resultImg, dx[imageIndex], dy[imageIndex], totalCanvasSize / onePictureRatio, totalCanvasSize / onePictureRatio);
         };
     }
 
     // 스티커 on
     const drawResult = () => {
-        const dx = [0, 350 / 2, 0, 350 / 2];
-        const dy = [0, 0, 350 / 2, 350 / 2];
+        const dx = [0, totalCanvasSize / onePictureRatio, 0, totalCanvasSize / onePictureRatio];
+        const dy = [0, 0, totalCanvasSize / onePictureRatio, totalCanvasSize / onePictureRatio];
         resultCtx.save();
 
         resultCtx.clearRect(0, 0, resultCanvas.width, resultCanvas.height);
@@ -144,12 +149,12 @@ export async function makeResultCanvas() {
             resultCtx.globalCompositeOperation = "destination-over";
             // resultCtx.drawImage(resultImgArr[imageIndex], 0, 350 * imageIndex);
 
-            resultCtx.drawImage(resultImgArr[imageIndex], dx[imageIndex], dy[imageIndex], 350 / 2, 350 / 2);
+            resultCtx.drawImage(resultImgArr[imageIndex], dx[imageIndex], dy[imageIndex], totalCanvasSize / onePictureRatio, totalCanvasSize / onePictureRatio);
         }
 
         resultCtx.restore();
 
-        if (readyToMakeGIF && frameIndex === 1) {
+        if (readyToMakeGIF && frameIndex === firstFrameIndex) {
             onCapture = true;
             readyToMakeGIF = false;
         }
@@ -159,7 +164,7 @@ export async function makeResultCanvas() {
             captureFrame(resultCanvas); // 찍는 거 어딘가에 img 태그로 추가해 두게 함
         }
 
-        if (onCapture && frameIndex === 19) {
+        if (onCapture && frameIndex === totalFrameCount - 1) {
             onCapture = false;
             // img태그list[] 전부 다 onload(makeGIF);
             setTimeout(() => makeGIF(), 1000);
@@ -167,7 +172,7 @@ export async function makeResultCanvas() {
 
         frameIndex++;
 
-        if (frameIndex === 20) frameIndex = 1;
+        if (frameIndex === totalFrameCount) frameIndex = firstFrameIndex;
 
         requestAnimationFrame(drawResult);
     };
@@ -187,22 +192,22 @@ function putFrame(currentResult, resultCtx, frameIndex, imageIndex) {
     // resultImg.onload = () => {
     //     resultCtx.drawImage(resultImg, 0, 350 * imageIndex);
     // };
-    const dx = [0, 350 / 2, 0, 350 / 2];
-    const dy = [0, 0, 350 / 2, 350 / 2];
+    const dx = [0, totalCanvasSize / onePictureRatio, 0, totalCanvasSize / onePictureRatio];
+    const dy = [0, 0, totalCanvasSize / onePictureRatio, totalCanvasSize / onePictureRatio];
     // 해당 사진의 스티커들 반복문 돌면서 그려주기
     for (let stickerIndex = 0; stickerIndex < currentResult.stickers.length; stickerIndex++) {
         const currentSticker = currentResult.stickers[stickerIndex];
         const frames = currentSticker.frames;
 
-        const stickerX = currentSticker.axisX + dx[imageIndex];
-        const stickerY = currentSticker.axisY + dy[imageIndex];
+        const stickerX = currentSticker.axisX / onePictureRatio + dx[imageIndex];
+        const stickerY = currentSticker.axisY / onePictureRatio + dy[imageIndex];
 
         // console.log(">>>>>>currentSticker.frames", frames);
         // console.log(">>>>>>frames[frameIndex]", frames[frameIndex]);
         const stickerImageData = new ImageData(frames[frameIndex].patch, frames[frameIndex].dims.width, frames[frameIndex].dims.height);
 
-        const stickerWidth = frames[frameIndex].dims.width / 2;
-        const stickerHeight = frames[frameIndex].dims.height / 2;
+        const stickerWidth = frames[frameIndex].dims.width / onePictureRatio;
+        const stickerHeight = frames[frameIndex].dims.height / onePictureRatio;
 
         resultCtx.globalCompositeOperation = "destination-over";
         // resultCtx.putImageData(stickerImageData, stickerX, 350 * imageIndex + stickerY);

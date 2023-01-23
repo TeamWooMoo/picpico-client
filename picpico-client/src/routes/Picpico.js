@@ -1,7 +1,7 @@
-import { useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { Container, Header, Content, Footer } from "rsuite";
+import {useEffect} from "react";
+import {useParams} from "react-router-dom";
+import {useSelector} from "react-redux";
+import {Container, Header, Content, Footer} from "rsuite";
 import LinkModal from "../components/Modal/LinkModal";
 import Decoration from "./Decoration";
 import Gallery from "./Gallery";
@@ -31,11 +31,12 @@ import DecoList from "../components/List/DecoList";
 import "../style/style.css";
 import "./Picpico.css";
 import store from "../store";
-import { setErrorInfo } from "../slice/errorInfo";
+import {setErrorInfo} from "../slice/errorInfo";
 import AudioList from "../components/List/AudioList";
+import ImgList from "../components/List/ImgList";
 
 const Picpico = () => {
-    const { id } = useParams();
+    const {id} = useParams();
     const picBoothDisplay = useSelector(state => state.picpicoInfo.picBoothDisplay);
     const selectDisplay = useSelector(state => state.picpicoInfo.selectionDisplay);
     const decoDisplay = useSelector(state => state.picpicoInfo.decoDisplay);
@@ -54,7 +55,7 @@ const Picpico = () => {
                 <Container className="default_container">
                     <Header className="picbooth_header">
                         <LinkModal />
-                        <h3 style={{ fontFamily: "'Palatino Linotype', 'Book Antiqua', Palatino, serif", color: "#7986CB", textAlign: "center" }}>PicPico</h3>
+                        <h3 style={{fontFamily: "'Palatino Linotype', 'Book Antiqua', Palatino, serif", color: "#7986CB", textAlign: "center"}}>PicPico</h3>
                         <PicDoneBtn />
                     </Header>
                     <Content>
@@ -112,8 +113,9 @@ const Picpico = () => {
                         <GalleryMessage />
                         <GalleryDoneBtn />
                     </Header>
-                    <Content style={{ marginTop: "80" }}>
+                    <Content style={{marginTop: "80"}}>
                         <AudioList />
+                        <ImgList />
                         <Gallery />
                     </Content>
                 </Container>
