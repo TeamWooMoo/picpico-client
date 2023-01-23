@@ -75,7 +75,7 @@ const handleTrack = (data, myPeer) => {
         peerVideo.onplaying = () => {
             console.log("my Peer Order: ", peerOrder);
             canvasRow.appendChild(peerCanvasGL);
-            peerCanvasGL.style.zIndex = peerOrder;
+            // peerCanvasGL.style.zIndex = peerOrder;
 
             // if (canvasRow.children.length < 1) {
             //     console.log("im the first one");
@@ -110,14 +110,13 @@ const handleTrack = (data, myPeer) => {
             //     }
             // }
             // canvasRow.appendChild(peerCanvasGL);
-            peerCanvasGL.id = `${peerOrder}`;
-            peerCanvasGL.className = "canvasRow";
+            peerCanvasGL.classList.add(`${peerOrder}`);
+            peerCanvasGL.classList.add("canvasRow");
             peerCanvasGL.style.position = "absolute";
             peerCanvasGL.style.top = "0px";
             peerCanvasGL.style.left = "0px";
             // peerCanvasGL.style.transform = "translateX(-50%)";
             peerCanvasGL.setAttribute("uid", `${uuid()}`);
-            // peerCanvasGL.id = `${uuid()}`;
 
             initWebGL(peerVideo, peerCanvasGL);
         };
