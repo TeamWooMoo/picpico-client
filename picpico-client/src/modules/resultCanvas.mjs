@@ -3,8 +3,8 @@
 // 각 sticker = gif (or png)
 // gif 인 경우 20 frames (각 10frames 2장)
 
-import { decompressFrames, parseGIF } from "gifuct-js";
-import { captureFrame, makeGIF } from "./resultGIF.mjs";
+import {decompressFrames, parseGIF} from "gifuct-js";
+import {captureFrame, makeGIF} from "./resultGIF.mjs";
 
 export let resultCanvas = document.createElement("canvas"); // ! 나중에 import 실제 element from component 가져와야함
 export let resultImages = []; // {사진 + (각 사진 위의 스티커url, 좌표, frames) 여러개 } x 4 일 것임
@@ -148,7 +148,7 @@ export async function makeResultCanvas() {
 
         resultCtx.restore();
 
-        if (readyToMakeGIF && frameIndex === 0) {
+        if (readyToMakeGIF && frameIndex === 1) {
             onCapture = true;
             readyToMakeGIF = false;
         }
@@ -166,7 +166,7 @@ export async function makeResultCanvas() {
 
         frameIndex++;
 
-        if (frameIndex === 20) frameIndex = 0;
+        if (frameIndex === 20) frameIndex = 1;
 
         requestAnimationFrame(drawResult);
     };
@@ -192,6 +192,7 @@ function putFrame(currentResult, resultCtx, frameIndex, imageIndex) {
     for (let stickerIndex = 0; stickerIndex < currentResult.stickers.length; stickerIndex++) {
         const currentSticker = currentResult.stickers[stickerIndex];
         const frames = currentSticker.frames;
+
         const stickerX = currentSticker.axisX + dx[imageIndex];
         const stickerY = currentSticker.axisY + dy[imageIndex];
 
