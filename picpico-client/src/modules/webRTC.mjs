@@ -42,6 +42,16 @@ const handleTrack = (data, myPeer) => {
         const canvasRow = document.getElementById("allCanvases");
         const peerVideo = myPeer.videoElement;
         const peerCanvasGL = myPeer.canvasElement;
+
+        let peerOrder;
+
+        for (let i = 0; i < membersArr.length; i++) {
+            if (membersArr[i]["socketId"] === myPeer.mySocketId) {
+                peerOrder = i;
+                break;
+            }
+        }
+
         // const peerAudio = myPeer.audioTrack;
 
         //! component 변경 시 audio stream 전달 구현 위해 추가
@@ -65,7 +75,7 @@ const handleTrack = (data, myPeer) => {
 
         peerVideo.onplaying = () => {
             canvasRow.appendChild(peerCanvasGL);
-            // peerCanvasGL.style.zIndex = peerOrder;
+            peerCanvasGL.style.zIndex = peerOrder;
             peerCanvasGL.id = myPeer.mySocketId;
             console.log("my peer id: ", myPeer.mySocketId);
             peerCanvasGL.classList.add("canvasRow");
