@@ -14,8 +14,9 @@ const MemberList = () => {
     const draggingOverItemIndex = useRef(null);
 
     const onDragStart = (e, index) => {
-        console.log("START e.target", e.target.key);
-        draggingItemIndex.current = e.target.key;
+        console.log("target:", e.target);
+        console.log("START e.target", e.target.id);
+        draggingItemIndex.current = e.target.id;
         e.target.classList.add("grabbing");
     };
 
@@ -62,7 +63,7 @@ const MemberList = () => {
                         return (
                             <li
                                 style={{ float: "left" }}
-                                key={index}
+                                id={index}
                                 onDragStart={e => onDragStart(e, index)}
                                 onDragEnter={e => onAvailableItemDragEnter(e, index)}
                                 onDragOver={onDragOver}
