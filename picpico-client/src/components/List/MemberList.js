@@ -5,7 +5,8 @@ import { socket } from "../../modules/sockets.mjs";
 const MemberList = () => {
     const members = useSelector(state => state.membersInfo.members);
     console.log("members:", members);
-    const availableOptionsArr = members.map(({ nickname }, index) => nickname); // 닉네임만 있음.
+    const availableOptionsArr = members.map((index, { nickName }) => nickName); // 닉네임만 있음.
+    console.log("availableOptionsArr", availableOptionsArr);
     const draggingItemIndex = useRef(0);
     const draggingOverItemIndex = useRef(null);
 
