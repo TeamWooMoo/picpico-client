@@ -6,7 +6,7 @@ export const onResetMemberEvent = nicknameArr => {
     for (let i = 0; i < nicknameArr.length; i++) {
         if (nicknameArr[i]["socketId"] === socket.id) {
             const myFace = document.getElementById("myFace");
-            myFace.className = `${i}`;
+            myFace.classList.add(`${i}`);
             myFace.style.zIndex = i;
         } else {
             const peerFace = document.getElementsByClassName(`${i}`);
