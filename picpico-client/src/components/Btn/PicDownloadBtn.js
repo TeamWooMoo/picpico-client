@@ -4,13 +4,15 @@ import { gifTest } from "../../test/resultTest.mjs";
 import ImageList from "@mui/material/ImageList";
 import download_btn from "./../../assets/images/icon-download.png";
 import retry_btn from "./../../assets/images/icon-retry.png";
+import { finalURL } from "../../modules/resultGIF.mjs";
 
 function PicDownloadBtn() {
     const onCapture = () => {
         // html2canvas(document.getElementById("imageWrapper")).then(canvas => {
         // onSaveImg(canvas.toDataURL("image/jpg"), "PicPiCo_Result.png");
         // });
-        onSaveImg(narin, "PicPiCo_Result.gif");
+        if (finalURL) onSaveImg(finalURL, "PicPiCo_Result.gif");
+        else console.log("gif 생성 중");
     };
     const onSaveImg = (url, filename) => {
         const link = document.createElement("a");

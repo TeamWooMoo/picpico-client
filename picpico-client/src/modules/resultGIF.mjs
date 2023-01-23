@@ -1,52 +1,64 @@
 // captureFrame() 으로 생기는 image array 를 가지고 gif 만든 후 다운로드
 import Animated_GIF from "gif-transparency";
+export let finalURL;
 // import Animated_GIF from "animated_gif";
 
 // import GIF from "gif.js";
 
-export function captureFrame() {
-  //! 결과 frame들 모아두는 안보이는 div 하나 필요함 거기에 img append~
+export function captureFrame(canvas) {
+    //! 결과 frame들 모아두는 안보이는 div 하나 필요함 거기에 img append~
+    const imgRow = document.getElementsByClassName("imgRow")[0];
+
+    const frameImageURL = canvas.toDataURL();
+    // const frameImage = new Image()
+    const frameImage = document.createElement("img");
+    frameImage.src = frameImageURL;
+    // frameImage -> div에 추가
+    imgRow.appendChild(frameImage);
 }
 
 export function makeGIF() {
-  //! 결과 frame들 모아두는 안보이는 div 하나 필요함 거기서 img 데려오기
-  const row = document.getElementById("drag-items");
+    console.log(">>>started to make GIF !");
 
-  const imgs = row.querySelectorAll("img");
+    //! 결과 frame들 모아두는 안보이는 div 하나 필요함 거기서 img 데려오기
+    const imgRow = document.getElementsByClassName("imgRow")[0];
 
-  //   const Animated_GIF = require("gif-transparency");
+    const imgs = imgRow.querySelectorAll("img");
 
-  const ag = new Animated_GIF.default({
-    repeat: 0,
-    disposal: 2,
-  });
+    //   const Animated_GIF = require("gif-transparency");
 
-  ag.setSize(350, 350);
-  ag.setDelay(600);
+    const ag = new Animated_GIF.default({
+        repeat: 0,
+        disposal: 2,
+    });
 
-  for (let i = 0; i < imgs.length; i++) {
-    ag.addFrame(imgs[i]);
-    console.log(imgs[i]);
-  }
+    ag.setSize(350, 350);
+    ag.setDelay(40);
 
-  const animatedImage = document.createElement("img");
+    for (let i = 0; i < imgs.length; i++) {
+        ag.addFrame(imgs[i]);
+        // console.log(imgs[i]);
+    }
 
-  // ag.getBase64GIF(image => {
-  //   animatedImage.src = image;
-  //   document.body.appendChild(animatedImage);
-  // });
+    const animatedImage = document.createElement("img");
 
-  ag.getBlobGIF(blob => {
-    const url = window.URL.createObjectURL(blob);
-    animatedImage.src = url;
-    document.body.appendChild(animatedImage);
-  });
+    // ag.getBase64GIF(image => {
+    //   animatedImage.src = image;
+    //   document.body.appendChild(animatedImage);
+    // });
 
-  animatedImage.onload = () => {
-    ag.destroy();
-  };
+    ag.getBlobGIF(blob => {
+        const url = window.URL.createObjectURL(blob);
+        finalURL = url;
+        // animatedImage.src = url;
+        // document.body.appendChild(animatedImage);
+    });
 
-  //! ag.getBase64 (image => image 다운로드 시키기)
+    animatedImage.onload = () => {
+        ag.destroy();
+    };
+
+    //! ag.getBase64 (image => image 다운로드 시키기)
 }
 
 // export function makeGIF() {
