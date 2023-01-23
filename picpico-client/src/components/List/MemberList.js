@@ -41,7 +41,7 @@ const MemberList = () => {
     };
 
     const memberKeys = Object.keys(members);
-    const picBoothDisplay = useSelector(state => state.picpicoInfo.setPicBoothInfo);
+    const picBoothDisplay = useSelector(state => state.picpicoInfo.picBoothDisplay);
     const decoDisplay = useSelector(state => state.picpicoInfo.decoDisplay);
 
     const decoObj = useSelector(state => state.decoInfo.decoList);
