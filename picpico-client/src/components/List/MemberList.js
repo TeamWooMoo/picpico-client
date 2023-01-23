@@ -4,8 +4,11 @@ import { socket } from "../../modules/sockets.mjs";
 
 const MemberList = () => {
     const members = useSelector(state => state.membersInfo.members);
+    const memberKeys = Object.keys(members);
     console.log("members:", members);
-    const availableOptionsArr = members.map((index, obj) => obj.nickName); // 닉네임만 있음.
+    const availableOptionsArr = members.map(member => {
+        return member["nickName"];
+    });
     console.log("availableOptionsArr", availableOptionsArr);
     const draggingItemIndex = useRef(0);
     const draggingOverItemIndex = useRef(null);
@@ -40,7 +43,6 @@ const MemberList = () => {
         e.preventDefault();
     };
 
-    const memberKeys = Object.keys(members);
     const picBoothDisplay = useSelector(state => state.picpicoInfo.picBoothDisplay);
     const decoDisplay = useSelector(state => state.picpicoInfo.decoDisplay);
 
