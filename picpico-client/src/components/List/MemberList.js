@@ -24,9 +24,9 @@ const MemberList = () => {
         copyListItems.splice(draggingItemIndex.current, 1);
         copyListItems.splice(draggingOverItemIndex.current, 0, dragItemContent);
         draggingItemIndex.current = draggingOverItemIndex.current;
-        draggingOverItemIndex.current = null;
         console.log("old index, new index", oldIndex, index);
         socket.emit("reset_member", oldIndex, index);
+        draggingOverItemIndex.current = null;
         console.log("[reset-member] client emit");
     };
 
