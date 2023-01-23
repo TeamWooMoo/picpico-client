@@ -1,4 +1,4 @@
-import {createSlice} from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 // state 수정 방법 아래에 명시
 const decoInfo = createSlice({
     name: "decoInfo",
@@ -38,6 +38,6 @@ const decoInfo = createSlice({
     },
 });
 
-export let {setDecoListInfo, setMyDecoCanvasInfo, setDecoModeInfo, setDoneDecoInfo, setResultInfo, setRealResultInfo, setStickerInfo} = decoInfo.actions;
+export let { setDecoListInfo, setMyDecoCanvasInfo, setDecoModeInfo, setDoneDecoInfo, setResultInfo, setRealResultInfo, setStickerInfo } = decoInfo.actions;
 
 export default decoInfo;
