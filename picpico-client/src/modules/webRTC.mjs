@@ -44,15 +44,6 @@ const handleTrack = (data, myPeer) => {
         const peerCanvasGL = myPeer.canvasElement;
         // const peerAudio = myPeer.audioTrack;
 
-        let peerOrder;
-
-        for (let i = 0; i < membersArr.length; i++) {
-            if (membersArr[i]["socketId"] === myPeer.mySocketId) {
-                peerOrder = i;
-                break;
-            }
-        }
-
         //! component 변경 시 audio stream 전달 구현 위해 추가
         // console.log("data.streams[0].getAudioTracks()[0]", data.streams[0].getAudioTracks()[0]);
         myPeer.mediaStream = data.streams[0];
@@ -73,44 +64,9 @@ const handleTrack = (data, myPeer) => {
         console.log(">>>>handing track -> on source to video");
 
         peerVideo.onplaying = () => {
-            console.log("my Peer Order: ", peerOrder);
             canvasRow.appendChild(peerCanvasGL);
             // peerCanvasGL.style.zIndex = peerOrder;
-
-            // if (canvasRow.children.length < 1) {
-            //     console.log("im the first one");
-            //     canvasRow.appendChild(peerCanvasGL);
-            // } else if (canvasRow.children.length === 1) {
-            //     if (canvasRow.children[0].id < peerOrder) {
-            //         canvasRow.appendChild(peerCanvasGL);
-            //     } else {
-            //         canvasRow.prepend(peerCanvasGL);
-            //     }
-            // } else {
-            //     let flag = false;
-
-            //     if (peerOrder === 0) {
-            //         canvasRow.prepend(peerCanvasGL);
-            //     } else if (peerOrder === canvasRow.children.length) {
-            //         canvasRow.appendChild(peerCanvasGL);
-            //     } else {
-            //         for (let i = 0; i < canvasRow.children.length - 1; i++) {
-            //             if (peerOrder === parseInt(canvasRow.children[i].id)) {
-            //                 console.log("아니 이럴 순 없어");
-            //             }
-            //             if (peerOrder > parseInt(canvasRow.children[i].id) && peerOrder < parseInt(canvasRow.children[i + 1].id)) {
-            //                 canvasRow.children[i].id.after(peerCanvasGL);
-            //                 flag = true;
-            //                 break;
-            //             }
-            //         }
-            //     }
-            //     if (!flag) {
-            //         console.log("우엑");
-            //     }
-            // }
-            // canvasRow.appendChild(peerCanvasGL);
-            peerCanvasGL.classList.add(`${peerOrder}`);
+            peerCanvasGL.classList.add(myPeer.socketId);
             peerCanvasGL.classList.add("canvasRow");
             peerCanvasGL.style.position = "absolute";
             peerCanvasGL.style.top = "0px";

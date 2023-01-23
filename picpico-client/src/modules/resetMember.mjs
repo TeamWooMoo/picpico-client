@@ -6,12 +6,10 @@ export const onResetMemberEvent = nicknameArr => {
     for (let i = 0; i < nicknameArr.length; i++) {
         if (nicknameArr[i]["socketId"] === socket.id) {
             const myFace = document.querySelector(".myFace");
-            console.log(">myFace:", myFace);
-            myFace.id(`${i}`);
             myFace.key = `${i}`;
             myFace.style.zIndex = i;
         } else {
-            const peerFace = document.getElementById(`${i}`);
+            const peerFace = document.querySelector(`.${nicknameArr[i]["socketId"]}`);
             peerFace.style.zIndex = i;
             peerFace.key = `${i}`;
         }

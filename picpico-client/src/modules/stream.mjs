@@ -74,8 +74,7 @@ export async function initStream() {
     myFace = document.createElement("canvas");
 
     canvasRow.appendChild(myFace);
-
-    myFace.uid = `${socket.id}`;
+    myFace.id = `${socket.id}`;
     myFace.classList.add("myFace");
     myFace.classList.add("canvasRow");
 
