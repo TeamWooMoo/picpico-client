@@ -11,6 +11,7 @@ const decoInfo = createSlice({
         resultList: [],
         realResultList: [],
         stickerList: [],
+        stickerPointList: [],
     },
 
     reducers: {
@@ -35,9 +36,14 @@ const decoInfo = createSlice({
         setStickerInfo(state, action) {
             state.stickerList = [...state.stickerList, action.payload.value];
         },
+        setStickerPointInfo(state, action) {
+            state.stickerPointList = [...state.stickerPointList, action.payload.value];
+        },
     },
 });
 
-export let { setDecoListInfo, setMyDecoCanvasInfo, setDecoModeInfo, setDoneDecoInfo, setResultInfo, setRealResultInfo, setStickerInfo } = decoInfo.actions;
+export let {setDecoListInfo, setMyDecoCanvasInfo, setDecoModeInfo, setDoneDecoInfo, setResultInfo, setRealResultInfo, setStickerInfo, setStickerPointInfo} =
+    decoInfo.actions;
+
 
 export default decoInfo;

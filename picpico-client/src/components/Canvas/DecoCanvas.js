@@ -21,6 +21,7 @@ const DecoCanvas = () => {
     const strokeArr = useSelector(state => state.drawingInfo.strokes);
     const strokeHistory = useSelector(state => state.drawingInfo.strokeHistory);
     const strokeColor = useSelector(state => state.drawingInfo.strokeColor);
+    const stickerPointList = useSelector(state => state.decoInfo.stickerPointList);
 
     // const decos = useSelector(state => state.decoInfo.decoList);
     // const decoKeys = Object.keys(decos);
@@ -80,6 +81,10 @@ const DecoCanvas = () => {
 
                 const curImage = new ResultImage(canvas.toDataURL(), []);
                 // 스티커 넣어줘야함
+                const curImageStickerField = document.getElementById(`sticker-${idx}`);
+                console.log("curImageStickerField >>> ", curImageStickerField);
+                const stickers = curImageStickerField.children;
+                console.log("stickers >>> ", stickers);
                 // for문 돌면서
                 // const curSticker = new Sticker('sticker_url', 'axisX', 'axisY');
                 // curImage.stickers.push(curSticker)
@@ -158,8 +163,10 @@ const DecoCanvas = () => {
     /* 스티커를 스티커 필드 위에 올리기 */
     useEffect(() => {
         if (stickerList.length > 0) {
-            const { idx: idx, url: url } = stickerList[stickerList.length - 1];
+            const { idx: idx, url: url, stickerId: stickerId } = stickerList[stickerList.length - 1];
             const stickerField = document.getElementById(`sticker-${idx}`);
+
+            console.log("stickerField.children >>> ", stickerField.children);
 
             // 스티커의 div태그
             // 스티커를 draggable하게 만들어줌
@@ -168,6 +175,7 @@ const DecoCanvas = () => {
             newStickerDiv.style.position = "absolute";
             newStickerDiv.style.height = "100px";
             newStickerDiv.style.width = "100px";
+            newStickerDiv.id = stickerId;
 
             // 스티커의 img태그
             // 이미지 소스가 담김
@@ -185,6 +193,15 @@ const DecoCanvas = () => {
             stickerField.appendChild(newStickerDiv);
         }
     }, [stickerList]);
+
+    useEffect(() => {
+        if (stickerPointList.length > 0) {
+            const [left, top, stickerId] = stickerPointList[stickerPointList.length - 1];
+            const targetSticker = document.getElementById(stickerId);
+            targetSticker.style.left = left;
+            targetSticker.style.top = top;
+        }
+    }, [stickerPointList]);
 
     return (
         <>
