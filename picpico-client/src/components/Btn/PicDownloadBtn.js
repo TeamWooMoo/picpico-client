@@ -1,19 +1,27 @@
 import { socket } from "../../modules/sockets.mjs";
-import narin from "../../assets/gif/narin.gif";
-import { gifTest } from "../../test/resultTest.mjs";
-import ImageList from "@mui/material/ImageList";
+import { useState } from "react";
 import download_btn from "./../../assets/images/icon-download.png";
 import retry_btn from "./../../assets/images/icon-retry.png";
 import { finalURL } from "../../modules/resultGIF.mjs";
+import { doneflag } from "../../modules/resultGIF.mjs";
 
 function PicDownloadBtn() {
+    const [gif, setGIF] = useState(false);
+
     const onCapture = () => {
-        // html2canvas(document.getElementById("imageWrapper")).then(canvas => {
-        // onSaveImg(canvas.toDataURL("image/jpg"), "PicPiCo_Result.png");
-        // });
-        if (finalURL) onSaveImg(finalURL, "PicPiCo_Result.gif");
-        else console.log("gif 생성 중");
+        if (finalURL) {
+            onSaveImg(finalURL, "PicPiCo_Result.gif");
+            console.log(doneflag);
+            setGIF(doneflag);
+        } else {
+            const loading = document.createElement("div");
+            document.body.appendChild(loading);
+            loading.createTextNode("gif 생성 중");
+            document.body.removeChild(loading);
+            // console.log("gif 생성 중");
+        }
     };
+
     const onSaveImg = (url, filename) => {
         const link = document.createElement("a");
         document.body.appendChild(link);
@@ -30,10 +38,13 @@ function PicDownloadBtn() {
 
     return (
         <>
-            <ImageList sx={{ justifyContent: "center", width: 350, height: 500, borderRadius: "7px" }} cols={1} rowHeight={350}>
-                <div id="testArea"></div>
-            </ImageList>
+            {/* gif 사진이 보여지는 곳 */}
+            <div className="item">
+                <div id="testArea" className="polaroid"></div>
+                <div class="caption">PicPico</div>
+            </div>
 
+            {/* 다운로드 버튼과 Home으로 돌아가는 버튼 */}
             <div style={{ display: "flex", flexDirection: "row", justifyContent: "center" }}>
                 <img id="download" src={download_btn} className="btn-shadow" style={{ width: "40px", height: "40px", margin: "0 10px" }} onClick={onCapture} />
                 <img

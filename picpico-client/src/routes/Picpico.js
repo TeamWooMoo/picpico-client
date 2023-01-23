@@ -13,7 +13,7 @@ import MainController from "../controller/MainController";
 import MuteBtn from "./../components/Btn/MuteBtn";
 import PicDoneBtn from "../components/Btn/PicDoneBtn";
 import TakePicBtn from "./../components/Btn/TakePicBtn";
-import CameraTransBtn from "./../components/Btn/CameraTransBtn";
+import TakePicCountMessage from "../components/Message/TakePicCountMessage";
 import SelectDoneBtn from "../components/Btn/SelectDoneBtn";
 import DecoDoneBtn from "../components/Btn/DecoDoneBtn";
 import PicDownloadBtn from "../components/Btn/PicDownloadBtn";
@@ -67,7 +67,7 @@ const Picpico = () => {
                     <Footer className="picbooth_footer">
                         <MuteBtn />
                         <TakePicBtn />
-                        <CameraTransBtn />
+                        <TakePicCountMessage />
                     </Footer>
                 </Container>
             ) : selectDisplay ? (
@@ -83,7 +83,7 @@ const Picpico = () => {
                         <MemberList />
                         <Selection />
                     </Content>
-                    <Footer className="selection_footer">일단 푸터임</Footer>
+                    <Footer className="selection_footer"></Footer>
                 </Container>
             ) : decoDisplay ? (
                 <Container className="default_container">
