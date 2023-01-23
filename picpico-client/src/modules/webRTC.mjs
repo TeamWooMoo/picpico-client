@@ -66,7 +66,8 @@ const handleTrack = (data, myPeer) => {
         peerVideo.onplaying = () => {
             canvasRow.appendChild(peerCanvasGL);
             // peerCanvasGL.style.zIndex = peerOrder;
-            peerCanvasGL.classList.add(myPeer.mySocketId);
+            peerCanvasGL.id = myPeer.mySocketId;
+            console.log("my peer id: ", myPeer.mySocketId);
             peerCanvasGL.classList.add("canvasRow");
             peerCanvasGL.style.position = "absolute";
             peerCanvasGL.style.top = "0px";
