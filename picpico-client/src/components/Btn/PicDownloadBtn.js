@@ -3,22 +3,14 @@ import {useState} from "react";
 import download_btn from "./../../assets/images/icon-download.png";
 import retry_btn from "./../../assets/images/icon-retry.png";
 import {finalURL} from "../../modules/resultGIF.mjs";
+import ImageList from "@mui/material/ImageList";
 // import { doneflag } from "../../modules/resultGIF.mjs";
 function PicDownloadBtn() {
     // const [gif, setGIF] = useState(false);
 
     const onCapture = () => {
-        if (finalURL) {
-            onSaveImg(finalURL, "PicPiCo_Result.gif");
-            // console.log(doneflag);
-            // setGIF(doneflag);
-        } else {
-            // const loading = document.createElement("div");
-            // document.body.appendChild(loading);
-            // loading.createTextNode("gif 생성 중");
-            // document.body.removeChild(loading);
-            console.log("gif 생성 중");
-        }
+        if (finalURL) onSaveImg(finalURL, "PicPiCo_Result.gif");
+        else console.log("gif 생성 중");
     };
 
     const onSaveImg = (url, filename) => {
@@ -38,8 +30,9 @@ function PicDownloadBtn() {
     return (
         <>
             {/* gif 사진이 보여지는 곳 */}
-
+            {/* <ImageList sx={{justifyContent: "center", width: 350, height: 500, borderRadius: "7px"}} cols={1} rowHeight={350}> */}
             <div id="testArea" style={{width: 350, height: 350, backgroundColor: "white", boxShadow: "0 0.25rem 1rem rgba(0, 0, 0, 0.2)", marginTop: 80}}></div>
+            {/* </ImageList> */}
 
             {/* 다운로드 버튼과 Home으로 돌아가는 버튼 */}
             <div style={{display: "flex", flexDirection: "row", justifyContent: "center", marginTop: "15px"}}>
