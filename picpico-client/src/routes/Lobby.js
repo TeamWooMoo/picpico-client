@@ -1,10 +1,10 @@
 import CreateRoomBtn from "../components/Btn/CreateRoomBtn";
 import EnterRoomBtn from "../components/Btn/EnterRoomBtn";
-import { Container, ButtonGroup } from "rsuite";
-import "../style/style.css";
+import { Container } from "rsuite";
 import { useParams } from "react-router-dom";
 import store from "../store";
 import { setNickNameInfo } from "../slice/membersInfo";
+import "../style/style.css";
 
 function Lobby() {
     const { nickname } = useParams();
