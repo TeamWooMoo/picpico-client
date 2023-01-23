@@ -1,9 +1,8 @@
-import { useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useRef } from "react";
+import { useSelector } from "react-redux";
 import { socket } from "../../modules/sockets.mjs";
 
 const MemberList = () => {
-    const dispatch = useDispatch();
     const members = useSelector(state => state.membersInfo.members);
     const availableOptionsArr = members.map(({ nickName }, index) => nickName); // 닉네임만 있음.
     const draggingItemIndex = useRef(0);
