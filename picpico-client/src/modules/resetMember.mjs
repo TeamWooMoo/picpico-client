@@ -17,7 +17,7 @@ export const onChangeLayerEvent = nicknameArr => {
     store.dispatch(setMembersInfo({ value: nicknameArr }));
     console.log("new member list:", nicknameArr);
     for (let i = 0; i < nicknameArr.length; i++) {
-        const face = document.getElementById(`${socket.id}`);
+        const face = document.getElementById(nicknameArr[i]["socketId"]);
         face.key = `${i}`;
         face.style.zIndex = i;
     }
