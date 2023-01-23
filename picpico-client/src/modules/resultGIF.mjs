@@ -1,7 +1,6 @@
 // captureFrame() 으로 생기는 image array 를 가지고 gif 만든 후 다운로드
 import Animated_GIF from "gif-transparency";
 export let finalURL;
-export let doneflag;
 
 export function captureFrame(canvas) {
     //! 결과 frame들 모아두는 안보이는 div 하나 필요함 거기에 img append~
@@ -13,6 +12,7 @@ export function captureFrame(canvas) {
     frameImage.src = frameImageURL;
     // frameImage -> div에 추가
     imgRow.appendChild(frameImage);
+    // document.body.appendChild(frameImage);
 }
 
 export function makeGIF() {
@@ -23,8 +23,6 @@ export function makeGIF() {
 
     const imgs = imgRow.querySelectorAll("img");
 
-    //   const Animated_GIF = require("gif-transparency");
-
     const ag = new Animated_GIF.default({
         repeat: 0,
         disposal: 2,
@@ -33,9 +31,10 @@ export function makeGIF() {
     ag.setSize(350, 350);
     ag.setDelay(40);
 
-    for (let i = 0; i < imgs.length; i++) {
+    for (let i = 1; i < imgs.length; i++) {
         ag.addFrame(imgs[i]);
         // console.log(imgs[i]);
+        console.log("frame added (GIF)", i);
     }
 
     const animatedImage = document.createElement("img");
@@ -48,16 +47,15 @@ export function makeGIF() {
     ag.getBlobGIF(blob => {
         const url = window.URL.createObjectURL(blob);
         finalURL = url;
-        console.log("GIF made !");
-        doneflag = true;
-        // ag.destroy();
+        console.log("made GIF !");
+
         // animatedImage.src = url;
         // document.body.appendChild(animatedImage);
     });
 
-    animatedImage.onload = () => {
-        ag.destroy();
-    };
+    // animatedImage.onload = () => {
+    //     ag.destroy();
+    // };
 
     //! ag.getBase64 (image => image 다운로드 시키기)
 }
