@@ -27,6 +27,7 @@ const DecoCanvas = () => {
     // const decoKeys = Object.keys(decos);
     const decoColors = useSelector(state => state.decoInfo.colorList);
     const decoMapping = {};
+
     for (let i = 0; i < 4; i++) {
         decoMapping[idxArr[i]] = decoColors[i];
     }
@@ -50,7 +51,6 @@ const DecoCanvas = () => {
         const decoCanvas = document.getElementById(`my-${targetImgIdx}`);
         const { offsetX, offsetY } = nativeEvent;
         const decoCtx = decoCanvas.getContext("2d");
-
         const myLineWidth = 10;
 
         if (!drawing) {
@@ -69,12 +69,13 @@ const DecoCanvas = () => {
     useEffect(() => {
         if (doneDeco === true) {
             const resultImages = [];
+            // 꾸민 사진 4개에 대해 각각 실행
             idxArr.forEach(idx => {
-                const canvas = document.getElementById(`img-${idx}`);
-                const peer = document.getElementById(`peer-${idx}`);
-                const my = document.getElementById(`my-${idx}`);
-                const ctx = canvas.getContext("2d");
+                const canvas = document.getElementById(`img-${idx}`); // canvas #img : 사진
+                const peer = document.getElementById(`peer-${idx}`); // canvas #peer : peer drawing
+                const my = document.getElementById(`my-${idx}`); // canvas #my : my drawing
 
+                const ctx = canvas.getContext("2d");
                 ctx.drawImage(peer, 0, 0);
                 ctx.drawImage(my, 0, 0);
 
@@ -85,7 +86,7 @@ const DecoCanvas = () => {
                 const stickers = curImageStickerField.children;
                 console.log("stickers >>> ", stickers);
                 // for문 돌면서
-                // const curSticker =  new Sticker('sticker_url', 'axisX', 'axisY');
+                // const curSticker = new Sticker('sticker_url', 'axisX', 'axisY');
                 // curImage.stickers.push(curSticker)
                 resultImages.push(curImage);
             });
@@ -93,8 +94,7 @@ const DecoCanvas = () => {
             console.log("너 여기까지 오긴 하니?");
             //   dispatch(setDecoInfo({ value: true }));
 
-            dispatch(setResultInfo({ value: resultImages }));
-            console.log("resultImages:", resultImages);
+            dispatch(setResultInfo({ value: resultImages })); // drawing 결과 decoInfo.resultList 에 dispatch
         }
     }, [doneDeco]);
 
@@ -107,9 +107,12 @@ const DecoCanvas = () => {
             const [newX, newY, newColor, newSocketId, newIdx, newLindWidth] = strokeArr[strokeArr.length - 1];
             if (strokeHistory.hasOwnProperty(newSocketId)) {
                 let { x: oldX, y: oldY, i: oldIdx, f: oldDown } = strokeHistory[newSocketId];
+
                 const decoPeerCanvas = document.getElementById(`peer-${oldIdx}`);
                 const decoCtx = decoPeerCanvas.getContext("2d");
+
                 decoCtx.lineWidth = newLindWidth;
+
                 if (oldDown) {
                     //mouse down
                     decoCtx.beginPath();
@@ -120,6 +123,7 @@ const DecoCanvas = () => {
                     decoCtx.lineTo(newX, newY);
                     decoCtx.stroke();
                 }
+
                 dispatch(addStrokeHistory({ value: [newSocketId, newX, newY, newIdx, oldDown] }));
             }
         }
@@ -129,11 +133,14 @@ const DecoCanvas = () => {
     useEffect(() => {
         if (targetImgIdx !== "") {
             dispatch(setDecoModeInfo({ value: "stroke" }));
+
             const canvasWrapper = document.querySelector(".canvasWrapper");
             const targetDiv = document.getElementById(`set-${targetImgIdx}`);
+
             canvasWrapper.insertAdjacentElement("beforeend", targetDiv);
 
             const ctx = decoEventCanvas.current.getContext("2d");
+
             ctx.clearRect(0, 0, 300, 300);
         }
     }, [targetImgIdx]);
@@ -146,6 +153,7 @@ const DecoCanvas = () => {
             const newImg = new Image();
 
             newImg.src = decoData[idx]["picture"];
+
             newImg.onload = async function () {
                 await imgCtx.drawImage(newImg, 0, 0);
             };
