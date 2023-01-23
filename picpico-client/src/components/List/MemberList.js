@@ -54,6 +54,7 @@ const MemberList = () => {
     for (let i = 0; i < 4; i++) {
         decoMapping[decoKeys[i]] = decoColors[i];
     }
+    console.log("picBooth : deco", picBoothDisplay, decoDisplay);
 
     return (
         <div>
