@@ -50,49 +50,50 @@ const TabMenu = styled.div`
 `;
 
 const Desc = styled.div`
-  text-align: center;
-  aligin-items: center;
+    text-align: center;
+    aligin-items: center;
 `;
 
 const TabBar = () => {
-  const targetImgIdx = useSelector(state => state.decoInfo.myDecoCanvas);
-  const dispatch = useDispatch();
-  // Tab Menu 중 현재 어떤 Tab이 선택되어 있는지 확인하기 위한 currentTab 상태와 currentTab을 갱신하는 함수가 존재해야 하고, 초기값은 0.
-  const [currentTab, clickTab] = useState(0);
+    const targetImgIdx = useSelector(state => state.decoInfo.myDecoCanvas);
+    const dispatch = useDispatch();
+    // Tab Menu 중 현재 어떤 Tab이 선택되어 있는지 확인하기 위한 currentTab 상태와 currentTab을 갱신하는 함수가 존재해야 하고, 초기값은 0.
+    const [currentTab, clickTab] = useState(0);
 
-  const menuArr = [
-    { name: "Color", content: <ColorList /> },
-    { name: "Sticker", content: <StickerList /> },
-  ];
+    const menuArr = [
+        { name: "Color", content: <ColorList /> },
+        { name: "Sticker", content: <StickerList /> },
+    ];
 
-  const dragAndDrop = DecoDragAndDrop();
+    const dragAndDrop = DecoDragAndDrop();
 
-  const selectMenuHandler = index => {
-    clickTab(index);
-    if (index === 0) {
-      dragAndDrop.reset();
-      dispatch(setDecoModeInfo({ value: "stroke" }));
-    } else {
-      dragAndDrop.init(targetImgIdx);
-    }
-  };
+    const selectMenuHandler = index => {
+        clickTab(index);
+        if (index === 0) {
+            dragAndDrop.reset();
+            dispatch(setDecoModeInfo({ value: "stroke" }));
+        } else {
+            dragAndDrop.init(targetImgIdx);
+            dispatch(setDecoModeInfo({ value: "sticker" }));
+        }
+    };
 
-  return (
-    <>
-      <div>
-        <TabMenu>
-          {menuArr.map((el, index) => (
-            <li className={index === currentTab ? "submenu focused" : "submenu"} onClick={() => selectMenuHandler(index)}>
-              {el.name}
-            </li>
-          ))}
-        </TabMenu>
-        <Desc>
-          <p>{menuArr[currentTab].content}</p>
-        </Desc>
-      </div>
-    </>
-  );
+    return (
+        <>
+            <div>
+                <TabMenu>
+                    {menuArr.map((el, index) => (
+                        <li className={index === currentTab ? "submenu focused" : "submenu"} onClick={() => selectMenuHandler(index)}>
+                            {el.name}
+                        </li>
+                    ))}
+                </TabMenu>
+                <Desc>
+                    <p>{menuArr[currentTab].content}</p>
+                </Desc>
+            </div>
+        </>
+    );
 };
 
 export default TabBar;
