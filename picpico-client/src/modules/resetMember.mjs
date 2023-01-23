@@ -10,7 +10,7 @@ export const onResetMemberEvent = nicknameArr => {
             myFace.key = `${i}`;
             myFace.style.zIndex = i;
         } else {
-            const peerFace = document.getElementsByClassName(`${i}`);
+            const peerFace = document.querySelector(`${i}`);
             peerFace.style.zIndex = i;
             peerFace.key = `${i}`;
         }
