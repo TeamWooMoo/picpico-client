@@ -10,6 +10,7 @@ const MemberList = () => {
     const draggingOverItemIndex = useRef(null);
 
     const onDragStart = (e, index) => {
+        console.log("START e.target", e.target);
         draggingItemIndex.current = index;
         e.target.classList.add("grabbing");
     };
@@ -31,6 +32,7 @@ const MemberList = () => {
     };
 
     const onDragEnd = e => {
+        console.log("END e.target", e.target);
         e.target.classList.remove("grabbing");
     };
 
