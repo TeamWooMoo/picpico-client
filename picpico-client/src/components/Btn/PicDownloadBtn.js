@@ -3,8 +3,7 @@ import {useState} from "react";
 import download_btn from "./../../assets/images/icon-download.png";
 import retry_btn from "./../../assets/images/icon-retry.png";
 import {finalURL} from "../../modules/resultGIF.mjs";
-import ImageList from "@mui/material/ImageList";
-// import { doneflag } from "../../modules/resultGIF.mjs";
+
 function PicDownloadBtn() {
     // const [gif, setGIF] = useState(false);
 
@@ -30,9 +29,10 @@ function PicDownloadBtn() {
     return (
         <>
             {/* gif 사진이 보여지는 곳 */}
-            {/* <ImageList sx={{justifyContent: "center", width: 350, height: 500, borderRadius: "7px"}} cols={1} rowHeight={350}> */}
-            <div id="testArea" style={{width: 350, height: 350, backgroundColor: "white", boxShadow: "0 0.25rem 1rem rgba(0, 0, 0, 0.2)", marginTop: 80}}></div>
-            {/* </ImageList> */}
+            <div
+                id="testArea"
+                style={{ width: 350, height: 350, backgroundColor: "white", boxShadow: "0 0.25rem 1rem rgba(0, 0, 0, 0.2)", marginTop: 80 }}
+            ></div>
 
             {/* 다운로드 버튼과 Home으로 돌아가는 버튼 */}
             <div style={{display: "flex", flexDirection: "row", justifyContent: "center", marginTop: "15px"}}>
