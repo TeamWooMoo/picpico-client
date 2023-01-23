@@ -5,7 +5,7 @@ const TakePicCountMessage = () => {
 
     return (
         <>
-            <div style={{ color: "white" }} className="drop-shadow" size="30px" padding="5px 0">
+            <div style={{ color: "white" }} className="drop-shadow" size="40px" padding="5px 0">
                 <h3 style={{ fontWeight: "bold" }}>{idx}</h3>
             </div>
         </>

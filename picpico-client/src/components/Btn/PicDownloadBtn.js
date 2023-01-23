@@ -4,7 +4,6 @@ import download_btn from "./../../assets/images/icon-download.png";
 import retry_btn from "./../../assets/images/icon-retry.png";
 import { finalURL } from "../../modules/resultGIF.mjs";
 import { doneflag } from "../../modules/resultGIF.mjs";
-
 function PicDownloadBtn() {
     const [gif, setGIF] = useState(false);
 
@@ -14,11 +13,11 @@ function PicDownloadBtn() {
             console.log(doneflag);
             setGIF(doneflag);
         } else {
-            const loading = document.createElement("div");
-            document.body.appendChild(loading);
-            loading.createTextNode("gif 생성 중");
-            document.body.removeChild(loading);
-            // console.log("gif 생성 중");
+            // const loading = document.createElement("div");
+            // document.body.appendChild(loading);
+            // loading.createTextNode("gif 생성 중");
+            // document.body.removeChild(loading);
+            console.log("gif 생성 중");
         }
     };
 
@@ -39,19 +38,20 @@ function PicDownloadBtn() {
     return (
         <>
             {/* gif 사진이 보여지는 곳 */}
-            <div className="item">
-                <div id="testArea" className="polaroid"></div>
-                <div class="caption">PicPico</div>
-            </div>
+
+            <div
+                id="testArea"
+                style={{ width: 350, height: 350, backgroundColor: "white", boxShadow: "0 0.25rem 1rem rgba(0, 0, 0, 0.2)", marginTop: 80 }}
+            ></div>
 
             {/* 다운로드 버튼과 Home으로 돌아가는 버튼 */}
-            <div style={{ display: "flex", flexDirection: "row", justifyContent: "center" }}>
-                <img id="download" src={download_btn} className="btn-shadow" style={{ width: "40px", height: "40px", margin: "0 10px" }} onClick={onCapture} />
+            <div style={{ display: "flex", flexDirection: "row", justifyContent: "center", marginTop: "15px" }}>
+                <img id="download" src={download_btn} className="btn-shadow" style={{ width: "40px", height: "40px", margin: "10px" }} onClick={onCapture} />
                 <img
                     id="retry"
                     src={retry_btn}
                     className="btn-shadow"
-                    style={{ width: "40px", height: "40px", margin: "0 10px" }}
+                    style={{ width: "40px", height: "40px", margin: "10px" }}
                     onClick={onGalleryDoneBtnClick}
                 />
             </div>
