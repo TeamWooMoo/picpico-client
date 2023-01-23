@@ -9,7 +9,8 @@ import testResultUrl3 from "../../src/assets/images/testResult3.png"; // nr(80, 
 import {makeResultCanvas, resultCanvas, ResultImage, resultImages, Sticker} from "../modules/resultCanvas.mjs";
 
 export const gifTest = resultList => {
-    /******* 서버에서 해주는 작업 ****** */
+    /******* 서버에서 해주는 작업 For Test ****** */
+    console.log("gifTest >>> ", resultList);
 
     // const stickers0 = [new Sticker(jh, 100, 100), new Sticker(nr, 200, 200)];
     // const stickers1 = [new Sticker(jh, 200, 200), new Sticker(db, 200, 200)];
@@ -21,18 +22,20 @@ export const gifTest = resultList => {
     // const testResult2 = new ResultImage(testResultUrl2, stickers2);
     // const testResult3 = new ResultImage(testResultUrl3, stickers3);
 
-    /****************************** */
-
-    // 서버에서 받으면 할 일
-
-    // 넘어온 result들 resultImages에 push
-    for (let i = 0; i < resultList.length; i++) {
-        resultImages.push(resultList[i]);
-    }
     // resultImages.push(testResult0);
     // resultImages.push(testResult1);
     // resultImages.push(testResult2);
     // resultImages.push(testResult3);
+
+    /*************** For Run *************** */
+
+    // 서버에서 받으면 할 일
+    // 넘어온 result들 resultImages에 push
+    for (let i = 0; i < resultList.length; i++) {
+        resultImages.push(resultList[i]);
+    }
+
+    /*************************************** */
 
     console.log(">>>>>>>init resultImages :", resultImages);
 

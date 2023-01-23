@@ -1,23 +1,23 @@
-import { setDecoListInfo, setDoneDecoInfo, setMyDecoCanvasInfo, setRealResultInfo } from "../slice/decoInfo.js";
-import { setDecoInfo, setGalleryInfo, setPicBoothInfo, setSelectionInfo } from "../slice/picpicoInfo.js";
-import { setImgListInfo } from "../slice/selectionInfo.js";
+import {setDecoListInfo, setDoneDecoInfo, setMyDecoCanvasInfo, setRealResultInfo} from "../slice/decoInfo.js";
+import {setDecoInfo, setGalleryInfo, setPicBoothInfo, setSelectionInfo} from "../slice/picpicoInfo.js";
+import {setImgListInfo} from "../slice/selectionInfo.js";
 import store from "../store.js";
-import { socket } from "./sockets.mjs";
-import { ResultImage, Sticker } from "../modules/resultCanvas.mjs";
-import { gifTest } from "../test/resultTest.mjs";
+import {socket} from "./sockets.mjs";
+import {ResultImage, Sticker} from "../modules/resultCanvas.mjs";
+import {gifTest} from "../test/resultTest.mjs";
 
 export const onDoneTakeEvent = imgArr => {
     console.log("picBooth done~~", imgArr);
-    store.dispatch(setImgListInfo({ value: imgArr }));
-    store.dispatch(setPicBoothInfo({ value: false }));
-    store.dispatch(setSelectionInfo({ value: true }));
+    store.dispatch(setImgListInfo({value: imgArr}));
+    store.dispatch(setPicBoothInfo({value: false}));
+    store.dispatch(setSelectionInfo({value: true}));
 };
 
 export const onDonePickEvent = imgArr => {
-    store.dispatch(setDecoListInfo({ value: imgArr }));
-    store.dispatch(setSelectionInfo({ value: false }));
-    store.dispatch(setDecoInfo({ value: true }));
-    store.dispatch(setMyDecoCanvasInfo({ value: Object.keys(imgArr)[0] }));
+    store.dispatch(setDecoListInfo({value: imgArr}));
+    store.dispatch(setSelectionInfo({value: false}));
+    store.dispatch(setDecoInfo({value: true}));
+    store.dispatch(setMyDecoCanvasInfo({value: Object.keys(imgArr)[0]}));
 };
 
 export const onDoneDecoEvent = () => {
@@ -29,10 +29,10 @@ export const onDoneDecoEvent = () => {
 
 export const onSubmitDecoEvent = async realResult => {
     console.log("on submit deco");
-    store.dispatch(setRealResultInfo({ value: realResult }));
+    store.dispatch(setRealResultInfo({value: realResult}));
 
-    store.dispatch(setDecoInfo({ value: false }));
-    store.dispatch(setGalleryInfo({ value: true }));
+    store.dispatch(setDecoInfo({value: false}));
+    store.dispatch(setGalleryInfo({value: true}));
     console.log("back to the first");
 
     // for (let i = 0; i < realResult.length; i++) {

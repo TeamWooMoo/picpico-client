@@ -1,13 +1,13 @@
 import "./DecoCanvas.css";
-import { useEffect, useRef, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { socket } from "../../modules/sockets.mjs";
-import { addStrokeHistory } from "../../slice/drawingInfo.js";
-import { DecoDragAndDrop } from "../../modules/decoDragAndDrop.mjs";
-import { FlexboxGrid, Button } from "rsuite";
-import { setDecoModeInfo, setResultInfo } from "../../slice/decoInfo";
-import { ResultImage, Sticker } from "../../modules/resultCanvas.mjs";
-import { setDecoInfo } from "../../slice/picpicoInfo";
+import {useEffect, useRef, useState} from "react";
+import {useSelector, useDispatch} from "react-redux";
+import {socket} from "../../modules/sockets.mjs";
+import {addStrokeHistory} from "../../slice/drawingInfo.js";
+import {DecoDragAndDrop} from "../../modules/decoDragAndDrop.mjs";
+import {FlexboxGrid, Button} from "rsuite";
+import {setDecoModeInfo, setResultInfo} from "../../slice/decoInfo";
+import {ResultImage, Sticker} from "../../modules/resultCanvas.mjs";
+import {setDecoInfo} from "../../slice/picpicoInfo";
 
 const DecoCanvas = () => {
     const stickerList = useSelector(state => state.decoInfo.stickerList);
@@ -21,11 +21,13 @@ const DecoCanvas = () => {
     const strokeArr = useSelector(state => state.drawingInfo.strokes);
     const strokeHistory = useSelector(state => state.drawingInfo.strokeHistory);
     const strokeColor = useSelector(state => state.drawingInfo.strokeColor);
+    const stickerPointList = useSelector(state => state.decoInfo.stickerPointList);
 
     // const decos = useSelector(state => state.decoInfo.decoList);
     // const decoKeys = Object.keys(decos);
     const decoColors = useSelector(state => state.decoInfo.colorList);
     const decoMapping = {};
+
     for (let i = 0; i < 4; i++) {
         decoMapping[idxArr[i]] = decoColors[i];
     }
@@ -33,23 +35,22 @@ const DecoCanvas = () => {
     const decoEventCanvas = useRef();
     const roomId = useSelector(state => state.roomInfo.room);
 
-    const onCanvasDown = ({ nativeEvent }) => {
+    const onCanvasDown = ({nativeEvent}) => {
         setDrawing(true);
-        const { offsetX, offsetY } = nativeEvent;
+        const {offsetX, offsetY} = nativeEvent;
         socket.emit("mouse_down", socket.id, offsetX, offsetY, targetImgIdx);
     };
 
-    const onCanvasUp = ({ nativeEvent }) => {
+    const onCanvasUp = ({nativeEvent}) => {
         setDrawing(false);
-        const { offsetX, offsetY } = nativeEvent;
+        const {offsetX, offsetY} = nativeEvent;
         socket.emit("mouse_up", socket.id, offsetX, offsetY, targetImgIdx);
     };
 
-    const onCanvasMove = ({ nativeEvent }) => {
+    const onCanvasMove = ({nativeEvent}) => {
         const decoCanvas = document.getElementById(`my-${targetImgIdx}`);
-        const { offsetX, offsetY } = nativeEvent;
+        const {offsetX, offsetY} = nativeEvent;
         const decoCtx = decoCanvas.getContext("2d");
-
         const myLineWidth = 10;
 
         if (!drawing) {
@@ -68,28 +69,45 @@ const DecoCanvas = () => {
     useEffect(() => {
         if (doneDeco === true) {
             const resultImages = [];
+            // 꾸민 사진 4개에 대해 각각 실행
             idxArr.forEach(idx => {
-                const canvas = document.getElementById(`img-${idx}`);
-                const peer = document.getElementById(`peer-${idx}`);
-                const my = document.getElementById(`my-${idx}`);
-                const ctx = canvas.getContext("2d");
+                const canvas = document.getElementById(`img-${idx}`); // canvas #img : 사진
+                const peer = document.getElementById(`peer-${idx}`); // canvas #peer : peer drawing
+                const my = document.getElementById(`my-${idx}`); // canvas #my : my drawing
 
+                const ctx = canvas.getContext("2d");
                 ctx.drawImage(peer, 0, 0);
                 ctx.drawImage(my, 0, 0);
 
                 const curImage = new ResultImage(canvas.toDataURL(), []);
                 // 스티커 넣어줘야함
+                const curImageStickerField = document.getElementById(`sticker-${idx}`);
+                const stickers = curImageStickerField.children; // div
+
                 // for문 돌면서
-                // const curSticker =  new Sticker('sticker_url', 'axisX', 'axisY');
-                // curImage.stickers.push(curSticker)
+                for (let i = 0; i < stickers.length; i++) {
+                    const url = stickers[i].children[0].src; // div > img
+                    let axisX = parseInt(stickers[i].style.top.split("px")[0]);
+                    let axisY = parseInt(stickers[i].style.left.split("px")[0]);
+
+                    //! axisX, axisY NaN 체크 필요함!!!!!!!
+
+                    axisX = isNaN(axisX) ? 0 : axisX;
+                    axisY = isNaN(axisY) ? 0 : axisY;
+
+                    console.log("axisX >> ", axisX);
+                    console.log("axisY >> ", axisY);
+
+                    const curSticker = new Sticker(url, axisX, axisY);
+                    curImage.stickers.push(curSticker);
+                }
                 resultImages.push(curImage);
             });
 
             console.log("너 여기까지 오긴 하니?");
             //   dispatch(setDecoInfo({ value: true }));
 
-            dispatch(setResultInfo({ value: resultImages }));
-            console.log("resultImages:", resultImages);
+            dispatch(setResultInfo({value: resultImages})); // drawing 결과 decoInfo.resultList 에 dispatch
         }
     }, [doneDeco]);
 
@@ -101,10 +119,13 @@ const DecoCanvas = () => {
         if (strokeArr.length > 0) {
             const [newX, newY, newColor, newSocketId, newIdx, newLindWidth] = strokeArr[strokeArr.length - 1];
             if (strokeHistory.hasOwnProperty(newSocketId)) {
-                let { x: oldX, y: oldY, i: oldIdx, f: oldDown } = strokeHistory[newSocketId];
+                let {x: oldX, y: oldY, i: oldIdx, f: oldDown} = strokeHistory[newSocketId];
+
                 const decoPeerCanvas = document.getElementById(`peer-${oldIdx}`);
                 const decoCtx = decoPeerCanvas.getContext("2d");
+
                 decoCtx.lineWidth = newLindWidth;
+
                 if (oldDown) {
                     //mouse down
                     decoCtx.beginPath();
@@ -115,7 +136,8 @@ const DecoCanvas = () => {
                     decoCtx.lineTo(newX, newY);
                     decoCtx.stroke();
                 }
-                dispatch(addStrokeHistory({ value: [newSocketId, newX, newY, newIdx, oldDown] }));
+
+                dispatch(addStrokeHistory({value: [newSocketId, newX, newY, newIdx, oldDown]}));
             }
         }
     }, [strokeArr]);
@@ -123,12 +145,15 @@ const DecoCanvas = () => {
     /* 여기 해야 합니다 */
     useEffect(() => {
         if (targetImgIdx !== "") {
-            dispatch(setDecoModeInfo({ value: "stroke" }));
+            dispatch(setDecoModeInfo({value: "stroke"}));
+
             const canvasWrapper = document.querySelector(".canvasWrapper");
             const targetDiv = document.getElementById(`set-${targetImgIdx}`);
+
             canvasWrapper.insertAdjacentElement("beforeend", targetDiv);
 
             const ctx = decoEventCanvas.current.getContext("2d");
+
             ctx.clearRect(0, 0, 300, 300);
         }
     }, [targetImgIdx]);
@@ -141,6 +166,7 @@ const DecoCanvas = () => {
             const newImg = new Image();
 
             newImg.src = decoData[idx]["picture"];
+
             newImg.onload = async function () {
                 await imgCtx.drawImage(newImg, 0, 0);
             };
@@ -150,8 +176,10 @@ const DecoCanvas = () => {
     /* 스티커를 스티커 필드 위에 올리기 */
     useEffect(() => {
         if (stickerList.length > 0) {
-            const { idx: idx, url: url } = stickerList[stickerList.length - 1];
+            const {idx: idx, url: url, stickerId: stickerId} = stickerList[stickerList.length - 1];
             const stickerField = document.getElementById(`sticker-${idx}`);
+
+            console.log("stickerField.children >>> ", stickerField.children);
 
             // 스티커의 div태그
             // 스티커를 draggable하게 만들어줌
@@ -160,6 +188,7 @@ const DecoCanvas = () => {
             newStickerDiv.style.position = "absolute";
             newStickerDiv.style.height = "100px";
             newStickerDiv.style.width = "100px";
+            newStickerDiv.id = stickerId;
 
             // 스티커의 img태그
             // 이미지 소스가 담김
@@ -178,12 +207,21 @@ const DecoCanvas = () => {
         }
     }, [stickerList]);
 
+    useEffect(() => {
+        if (stickerPointList.length > 0) {
+            const [left, top, stickerId] = stickerPointList[stickerPointList.length - 1];
+            const targetSticker = document.getElementById(stickerId);
+            targetSticker.style.left = left;
+            targetSticker.style.top = top;
+        }
+    }, [stickerPointList]);
+
     return (
         <>
             <FlexboxGrid className="DecoCanvasBox">
                 <div className="canvasWrapper">
                     {idxArr.map(idx => (
-                        <div data-setid={`set-${idx}`} id={`set-${idx}`} style={{ visibility: idx != targetImgIdx ? "hidden" : "visible" }}>
+                        <div data-setid={`set-${idx}`} id={`set-${idx}`} style={{visibility: idx != targetImgIdx ? "hidden" : "visible"}}>
                             <canvas className="decocanvas" width="350px" height="350px" data-img={idx} id={`img-${idx}`}></canvas>
                             <canvas className="decocanvas" width="350px" height="350px" data-my={idx} id={`my-${idx}`}></canvas>
                             <canvas
@@ -192,9 +230,9 @@ const DecoCanvas = () => {
                                 height="350px"
                                 data-peer={idx}
                                 id={`peer-${idx}`}
-                                style={{ border: `3px solid ${decoMapping[idx]}` }}
+                                style={{border: `3px solid ${decoMapping[idx]}`}}
                             ></canvas>
-                            <div className="decocanvas" id={`sticker-${idx}`} style={{ position: "absolute", width: "350px", height: "350px" }}></div>
+                            <div className="decocanvas" id={`sticker-${idx}`} style={{position: "absolute", width: "350px", height: "350px"}}></div>
                         </div>
                     ))}
                 </div>
@@ -206,7 +244,7 @@ const DecoCanvas = () => {
                     onMouseDown={onCanvasDown}
                     onMouseMove={onCanvasMove}
                     onMouseUp={onCanvasUp}
-                    style={{ border: `3px solid ${decoMapping[targetImgIdx]}`, visibility: mode === "sticker" ? "hidden" : "visible" }}
+                    style={{border: `3px solid ${decoMapping[targetImgIdx]}`, visibility: mode === "sticker" ? "hidden" : "visible"}}
                 ></canvas>
             </FlexboxGrid>
         </>
