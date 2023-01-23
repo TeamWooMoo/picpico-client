@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { useSelector } from "react-redux";
 import { socket } from "../../modules/sockets.mjs";
+import "./MemberList.css";
 
 const MemberList = () => {
     const members = useSelector(state => state.membersInfo.members);
@@ -63,7 +64,7 @@ const MemberList = () => {
                     {availableOptionsArr.map((option, index) => {
                         return (
                             <li
-                                style={{ float: "left" }}
+                                className="memName"
                                 id={index}
                                 onDragStart={e => onDragStart(e, index)}
                                 onDragEnter={e => onAvailableItemDragEnter(e, index)}
@@ -79,13 +80,19 @@ const MemberList = () => {
             ) : null}
             {decoDisplay ? (
                 <ul style={{ color: "black", textAlign: "center", listStyle: "none", paddingLeft: 0 }}>
-                    {decoKeys.map(idx => decoObj[idx]["viewers"].map(obj => <li style={{ float: "left", color: decoMapping[idx] }}>{obj["nickName"]}</li>))}
+                    {decoKeys.map(idx =>
+                        decoObj[idx]["viewers"].map(obj => (
+                            <li className="memName" style={{ color: decoMapping[idx] }}>
+                                {obj["nickName"]}
+                            </li>
+                        ))
+                    )}
                 </ul>
             ) : null}
             {!decoDisplay && !picBoothDisplay ? (
                 <ul style={{ color: "green", textAlign: "center", listStyle: "none", paddingLeft: 0 }}>
                     {memberKeys.map(idx => (
-                        <li style={{ float: "left" }}>{members[idx]["nickName"]}</li>
+                        <li className="memNameinDeco">{members[idx]["nickName"]}</li>
                     ))}
                 </ul>
             ) : null}

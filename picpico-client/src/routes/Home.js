@@ -7,7 +7,7 @@ import "../style/style.css";
 
 const Home = () => {
     return (
-        <Container className="default_container">
+        <Container className="color_container">
             <Title />
             <Logo />
             <Link to={"/login"}>
