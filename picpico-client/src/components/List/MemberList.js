@@ -75,17 +75,19 @@ const MemberList = () => {
                         );
                     })}
                 </ul>
-            ) : decoDisplay ? (
+            ) : null}
+            {decoDisplay ? (
                 <ul style={{ color: "black", textAlign: "center", listStyle: "none", paddingLeft: 0 }}>
                     {decoKeys.map(idx => decoObj[idx]["viewers"].map(obj => <li style={{ float: "left", color: decoMapping[idx] }}>{obj["nickName"]}</li>))}
                 </ul>
-            ) : (
+            ) : null}
+            {!decoDisplay && !picBoothDisplay ? (
                 <ul style={{ color: "green", textAlign: "center", listStyle: "none", paddingLeft: 0 }}>
                     {memberKeys.map(idx => (
                         <li style={{ float: "left" }}>{members[idx]["nickName"]}</li>
                     ))}
                 </ul>
-            )}
+            ) : null}
         </div>
     );
 };
