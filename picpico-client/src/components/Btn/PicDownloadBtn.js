@@ -1,24 +1,15 @@
-import { socket } from "../../modules/sockets.mjs";
-import { useState } from "react";
+import {socket} from "../../modules/sockets.mjs";
+import {useState} from "react";
 import download_btn from "./../../assets/images/icon-download.png";
 import retry_btn from "./../../assets/images/icon-retry.png";
-import { finalURL } from "../../modules/resultGIF.mjs";
+import {finalURL} from "../../modules/resultGIF.mjs";
 
 function PicDownloadBtn() {
     // const [gif, setGIF] = useState(false);
 
     const onCapture = () => {
-        if (finalURL) {
-            onSaveImg(finalURL, "PicPiCo_Result.gif");
-            // console.log(doneflag);
-            // setGIF(doneflag);
-        } else {
-            // const loading = document.createElement("div");
-            // document.body.appendChild(loading);
-            // loading.createTextNode("gif 생성 중");
-            // document.body.removeChild(loading);
-            console.log("gif 생성 중");
-        }
+        if (finalURL) onSaveImg(finalURL, "PicPiCo_Result.gif");
+        else console.log("gif 생성 중");
     };
 
     const onSaveImg = (url, filename) => {
@@ -44,13 +35,13 @@ function PicDownloadBtn() {
             ></div>
 
             {/* 다운로드 버튼과 Home으로 돌아가는 버튼 */}
-            <div style={{ display: "flex", flexDirection: "row", justifyContent: "center", marginTop: "15px" }}>
-                <img id="download" src={download_btn} className="btn-shadow" style={{ width: "40px", height: "40px", margin: "10px" }} onClick={onCapture} />
+            <div style={{display: "flex", flexDirection: "row", justifyContent: "center", marginTop: "15px"}}>
+                <img id="download" src={download_btn} className="btn-shadow" style={{width: "40px", height: "40px", margin: "10px"}} onClick={onCapture} />
                 <img
                     id="retry"
                     src={retry_btn}
                     className="btn-shadow"
-                    style={{ width: "40px", height: "40px", margin: "10px" }}
+                    style={{width: "40px", height: "40px", margin: "10px"}}
                     onClick={onGalleryDoneBtnClick}
                 />
             </div>

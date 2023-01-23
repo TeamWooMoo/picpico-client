@@ -11,6 +11,7 @@ export function captureFrame(canvas) {
     const frameImage = document.createElement("img");
     frameImage.src = frameImageURL;
     // frameImage -> div에 추가
+    console.log(imgRow);
     imgRow.appendChild(frameImage);
     // document.body.appendChild(frameImage);
 }

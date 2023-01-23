@@ -90,6 +90,8 @@ const DecoCanvas = () => {
                     let axisX = parseInt(stickers[i].style.top.split("px")[0]);
                     let axisY = parseInt(stickers[i].style.left.split("px")[0]);
 
+                    //! axisX, axisY NaN 체크 필요함!!!!!!!
+
                     axisX = isNaN(axisX) ? 0 : axisX;
                     axisY = isNaN(axisY) ? 0 : axisY;
 
