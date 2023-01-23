@@ -74,7 +74,6 @@ const Picpico = () => {
                         <MuteBtn />
                         <SelectMessage />
                         <SelectDoneBtn />
-                        {/* <p style={{ visibility: "hidden" }}>hidden</p> */}
                     </Header>
                     <Content>
                         <AudioList />
