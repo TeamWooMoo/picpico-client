@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { socket } from "../../modules/sockets.mjs";
 
@@ -6,24 +6,24 @@ const MemberList = () => {
     const dispatch = useDispatch();
     const members = useSelector(state => state.membersInfo.members);
     const availableOptionsArr = members.map(({ nickName }, index) => nickName); // 닉네임만 있음.
-    const draggingItemIndex = useRef(null);
-    const draggingOverItemIndex = useRef(null);
+    const [draggingItemIndex, setDraggingItemIndex] = useState(0);
+    const [draggingOverItemIndex, setDraggingOverItemIndex] = useState(null);
 
     const onDragStart = (e, index) => {
-        console.log("START e.target", e.target);
-        draggingItemIndex.current = index;
+        console.log("START e.target", e.target.key);
+        setDraggingItemIndex(e.target.key);
         e.target.classList.add("grabbing");
     };
 
     const onAvailableItemDragEnter = (e, index) => {
-        const oldIndex = draggingOverItemIndex.current;
-        draggingOverItemIndex.current = index;
+        const oldIndex = draggingItemIndex;
+        setDraggingOverItemIndex(index);
         const copyListItems = [...availableOptionsArr];
-        const dragItemContent = copyListItems[draggingItemIndex.current];
-        copyListItems.splice(draggingItemIndex.current, 1);
-        copyListItems.splice(draggingOverItemIndex.current, 0, dragItemContent);
-        draggingItemIndex.current = draggingOverItemIndex.current;
-        draggingOverItemIndex.current = null;
+        const dragItemContent = copyListItems[draggingItemIndex];
+        copyListItems.splice(draggingItemIndex, 1);
+        copyListItems.splice(draggingOverItemIndex, 0, dragItemContent);
+        setDraggingItemIndex(draggingOverItemIndex);
+        setDraggingOverItemIndex(null);
         // dispatch(setMembersInfo({value: }));
         // 여기에 새롭게 정의된 멤버 순서에 맞게 정렬된 멤버 닉네임 리스트
         console.log("old index, new index", oldIndex, index);

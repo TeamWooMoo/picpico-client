@@ -7,10 +7,12 @@ export const onResetMemberEvent = nicknameArr => {
         if (nicknameArr[i]["socketId"] === socket.id) {
             const myFace = document.getElementById("myFace");
             myFace.classList.add(`${i}`);
+            myFace.key = `${i}`;
             myFace.style.zIndex = i;
         } else {
             const peerFace = document.getElementsByClassName(`${i}`);
             peerFace.style.zIndex = i;
+            peerFace.key = `${i}`;
         }
     }
 };
