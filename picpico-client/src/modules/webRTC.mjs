@@ -110,8 +110,8 @@ const handleTrack = (data, myPeer) => {
             //     }
             // }
             // canvasRow.appendChild(peerCanvasGL);
-            peerCanvasGL.className = `${peerOrder}`;
-            peerCanvasGL.className = "canvasRow";
+            peerCanvasGL.classList.add(`${peerOrder}`);
+            peerCanvasGL.classList.add("canvasRow");
             peerCanvasGL.style.position = "absolute";
             peerCanvasGL.style.top = "0px";
             peerCanvasGL.style.left = "0px";
