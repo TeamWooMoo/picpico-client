@@ -1,29 +1,29 @@
-import { createSlice } from "@reduxjs/toolkit";
+import {createSlice} from "@reduxjs/toolkit";
 
 // state 수정 방법 아래에 명시
 const drawingInfo = createSlice({
-  name: "drawingInfo",
-  initialState: {
-    strokes: [],
-    strokeColor: "black",
-    strokeHistory: {},
-  },
+    name: "drawingInfo",
+    initialState: {
+        strokes: [],
+        strokeColor: "black",
+        strokeHistory: {},
+    },
 
-  reducers: {
-    setStrokeInfo(state, action) {
-      state.strokes = [...state.strokes, action.payload.value];
+    reducers: {
+        setStrokeInfo(state, action) {
+            state.strokes = [...state.strokes, action.payload.value];
+        },
+        setStrokeColorInfo(state, action) {
+            state.strokeColor = action.payload.value;
+        },
+        addStrokeHistory(state, action) {
+            const [socketId, receivedX, receivedY, receivedIdx, downFlag] = action.payload.value;
+            state.strokeHistory[socketId] = {x: receivedX, y: receivedY, i: receivedIdx, f: downFlag};
+            console.log(state.strokeHistory);
+        },
     },
-    setStrokeColorInfo(state, action) {
-      state.strokeColor = action.payload.value;
-    },
-    addStrokeHistory(state, action) {
-      const [socketId, receivedX, receivedY, receivedIdx, downFlag] = action.payload.value;
-      state.strokeHistory[socketId] = { x: receivedX, y: receivedY, i: receivedIdx, f: downFlag };
-      console.log(state.strokeHistory);
-    },
-  },
 });
 
-export let { setStrokeInfo, addStrokeHistory, setStrokeColorInfo } = drawingInfo.actions;
+export let {setStrokeInfo, addStrokeHistory, setStrokeColorInfo} = drawingInfo.actions;
 
 export default drawingInfo;
