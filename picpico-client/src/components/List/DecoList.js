@@ -16,12 +16,6 @@ const DecoList = () => {
     for (let i = 0; i < 4; i++) {
         decoMapping[idxArr[i]] = decoColors[i];
     }
-    // /*
-    //   사진 인덱스  {
-    //     viewers: [{nickName: 닉네임, socketId: 닉네임}]
-    //     picture:
-    //   }
-    // */
     const onDecoImgClick = event => {
         const deco = event.target;
         const decoIdx = deco.dataset.deco;

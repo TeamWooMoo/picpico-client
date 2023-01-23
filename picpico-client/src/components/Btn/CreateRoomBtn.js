@@ -54,7 +54,15 @@ function CreateRoomBtn() {
             <FlexboxGrid className="room_btn">
                 <Button
                     className="btn-shadow"
-                    style={{ width: "250px", color: "black", borderRadius: "6px", padding: "10px 70px", lineHeight: "15px", margin: "5px 0" }}
+                    style={{
+                        width: "250px",
+                        color: "black",
+                        borderRadius: "6px",
+                        padding: "10px 70px",
+                        lineHeight: "15px",
+                        margin: "5px 0",
+                        fontWeight: "600",
+                    }}
                     onClick={onCreateBtnClick}
                 >
                     새로운 방 생성
