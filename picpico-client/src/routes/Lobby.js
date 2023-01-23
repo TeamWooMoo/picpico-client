@@ -7,13 +7,13 @@ import store from "../store";
 import { setNickNameInfo } from "../slice/membersInfo";
 
 function Lobby() {
-  const {nickname} = useParams();
-  store.dispatch(setNickNameInfo({value:nickname}))
-  return (
-    <Container className="default_container">
-      <CreateRoomBtn />
-      <EnterRoomBtn />
-    </Container>
-  );
+    const { nickname } = useParams();
+    store.dispatch(setNickNameInfo({ value: nickname }));
+    return (
+        <Container className="color_container">
+            <CreateRoomBtn />
+            <EnterRoomBtn />
+        </Container>
+    );
 }
 export default Lobby;

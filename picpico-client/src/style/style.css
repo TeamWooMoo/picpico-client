@@ -1,6 +1,6 @@
 .default_container {
     color: black;
-    /* background-color: #e8eaf6; */
+    /* background-color: #dbbfed; */
     justify-content: center;
     align-items: center;
     vertical-align: middle;
@@ -8,6 +8,16 @@
     margin: 0 auto;
     /* width: 375px;
   height: 667px; */
+}
+
+.color_container {
+    color: black;
+    background-color: #dee2ff;
+    justify-content: center;
+    align-items: center;
+    vertical-align: middle;
+    height: 100vh;
+    margin: 0 auto;
 }
 
 .btn-shadow {
