@@ -5,7 +5,7 @@ export const onResetMemberEvent = nicknameArr => {
     store.dispatch(setMembersInfo({ value: nicknameArr }));
     for (let i = 0; i < nicknameArr.length; i++) {
         if (nicknameArr[i]["socketId"] === socket.id) {
-            const myFace = document.querySelector(".myFace");
+            const myFace = document.getElementById(`${socket.id}`);
             myFace.key = `${i}`;
             myFace.style.zIndex = i;
             console.log("myFace:", myFace, myFace.style.zIndex);
