@@ -46,6 +46,7 @@ const MemberList = () => {
     };
 
     const picBoothDisplay = useSelector(state => state.picpicoInfo.picBoothDisplay);
+    // const selectDisplay = useSelector(state => state.picpicoInfo.sle);
     const decoDisplay = useSelector(state => state.picpicoInfo.decoDisplay);
 
     const decoObj = useSelector(state => state.decoInfo.decoList);
@@ -59,25 +60,6 @@ const MemberList = () => {
 
     return (
         <div>
-            {picBoothDisplay ? (
-                <ul style={{ color: "violet", textAlign: "center", listStyle: "none", paddingLeft: 0 }}>
-                    {availableOptionsArr.map((option, index) => {
-                        return (
-                            <li
-                                className="memName"
-                                id={index}
-                                onDragStart={e => onDragStart(e, index)}
-                                onDragEnter={e => onAvailableItemDragEnter(e, index)}
-                                onDragOver={onDragOver}
-                                onDragEnd={onDragEnd}
-                                draggable
-                            >
-                                {option}
-                            </li>
-                        );
-                    })}
-                </ul>
-            ) : null}
             {decoDisplay ? (
                 <ul style={{ color: "black", textAlign: "center", listStyle: "none", paddingLeft: 0 }}>
                     {decoKeys.map(idx =>
@@ -88,14 +70,23 @@ const MemberList = () => {
                         ))
                     )}
                 </ul>
-            ) : null}
-            {!decoDisplay && !picBoothDisplay ? (
-                <ul style={{ color: "green", textAlign: "center", listStyle: "none", paddingLeft: 0 }}>
-                    {memberKeys.map(idx => (
-                        <li className="memNameinDeco">{members[idx]["nickName"]}</li>
+            ) : (
+                <ul style={{ color: "white", textAlign: "center", listStyle: "none", paddingLeft: 0 }}>
+                    {availableOptionsArr.map((option, index) => (
+                        <li
+                            className="memName"
+                            id={index}
+                            onDragStart={e => onDragStart(e, index)}
+                            onDragEnter={e => onAvailableItemDragEnter(e, index)}
+                            onDragOver={onDragOver}
+                            onDragEnd={onDragEnd}
+                            draggable
+                        >
+                            {option}
+                        </li>
                     ))}
                 </ul>
-            ) : null}
+            )}
         </div>
     );
 };
