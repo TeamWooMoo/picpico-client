@@ -76,9 +76,9 @@ export async function initStream() {
     canvasRow.appendChild(myFace);
 
     myFace.uid = `${socket.id}`;
-    myFace.id = "myFace";
-
+    myFace.classList.add("myFace");
     myFace.classList.add("canvasRow");
+
     myFace.style.position = "absolute";
     myFace.style.top = "0px";
     myFace.style.left = "0px";
