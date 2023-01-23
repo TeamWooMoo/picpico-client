@@ -77,13 +77,10 @@ const handleTrack = (data, myPeer) => {
             canvasRow.appendChild(peerCanvasGL);
             peerCanvasGL.style.zIndex = peerOrder;
             peerCanvasGL.id = myPeer.mySocketId;
-            console.log("my peer id: ", myPeer.mySocketId);
             peerCanvasGL.classList.add("canvasRow");
             peerCanvasGL.style.position = "absolute";
             peerCanvasGL.style.top = "0px";
             peerCanvasGL.style.left = "0px";
-            // peerCanvasGL.style.transform = "translateX(-50%)";
-            peerCanvasGL.setAttribute("uid", `${uuid()}`);
 
             initWebGL(peerVideo, peerCanvasGL);
         };

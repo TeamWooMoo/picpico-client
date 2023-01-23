@@ -24,9 +24,9 @@ const MemberList = () => {
         copyListItems.splice(draggingOverItemIndex.current, 0, dragItemContent);
         draggingItemIndex.current = draggingOverItemIndex.current;
         console.log("old index, new index", oldIndex, index);
-        socket.emit("reset_member", oldIndex, index);
+        socket.emit("change_layer", oldIndex, index);
         draggingOverItemIndex.current = null;
-        console.log("[reset-member] client emit");
+        console.log("[change-layer] client emit");
     };
 
     const onDragEnd = e => {
@@ -51,31 +51,13 @@ const MemberList = () => {
     }
 
     return (
-        /*
-        <div>
-            {decoDisplay ? (
-                <FlexboxGrid justify="center">
-                    <ul style={{ color: "black", textAlign: "center", listStyle: "none", paddingLeft: 0 }}>
-                        {decoKeys.map(idx => decos[idx]["viewers"].map(obj => <li style={{ float: "left", color: decoMapping[idx] }}>{obj["nickName"]}</li>))}
-                    </ul>
-                </FlexboxGrid>
-            ) : (
-                <FlexboxGrid justify="center">
-                    <ul style={{ color: "black", textAlign: "center", listStyle: "none", paddingLeft: 0 }}>
-                        {memberKeys.map(idx => (
-                            <li style={{ float: "left" }}>{members[idx]["nickName"]}</li>
-                        ))}
-                    </ul>
-                </FlexboxGrid>
-            )}
-        </div>*/
         <div>
             {picBoothDisplay ? (
-                <ul style={{ color: "black", textAlign: "center", listStyle: "none", paddingLeft: 0 }}>
+                <ul style={{ color: "violet", textAlign: "center", listStyle: "none", paddingLeft: 0 }}>
                     {availableOptionsArr.map((option, index) => {
                         return (
                             <li
-                                style={{ float: "left", color: decoMapping[index] }}
+                                style={{ float: "left" }}
                                 key={index}
                                 onDragStart={e => onDragStart(e, index)}
                                 onDragEnter={e => onAvailableItemDragEnter(e, index)}
@@ -93,7 +75,7 @@ const MemberList = () => {
                     {decoKeys.map(idx => decoObj[idx]["viewers"].map(obj => <li style={{ float: "left", color: decoMapping[idx] }}>{obj["nickName"]}</li>))}
                 </ul>
             ) : (
-                <ul style={{ color: "black", textAlign: "center", listStyle: "none", paddingLeft: 0 }}>
+                <ul style={{ color: "green", textAlign: "center", listStyle: "none", paddingLeft: 0 }}>
                     {memberKeys.map(idx => (
                         <li style={{ float: "left" }}>{members[idx]["nickName"]}</li>
                     ))}

@@ -8,12 +8,12 @@ export const onResetMemberEvent = nicknameArr => {
             const myFace = document.getElementById(`${socket.id}`);
             myFace.key = `${i}`;
             myFace.style.zIndex = i;
-            console.log("myFace:", myFace, myFace.style.zIndex);
-        } else {
-            // const peerFace = document.getElementById(`${nicknameArr[i]["socketId"]}`);
-            // console.log("reset member peer:", nicknameArr[i]["socketId"], peerFace);
-            // peerFace.style.zIndex = i;
-            // peerFace.key = `${i}`;
+            break;
         }
     }
+};
+
+export const onChangeLayerEvent = nicknameArr => {
+    store.dispatch(setMembersInfo({ value: nicknameArr }));
+    console.log("new member list:", nicknameArr);
 };
