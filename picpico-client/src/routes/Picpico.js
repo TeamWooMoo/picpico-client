@@ -10,23 +10,21 @@ import PicBooth from "./PicBooth";
 import MainController from "../controller/MainController";
 
 // Button
-import MuteBtn from "./../components/Btn/MuteBtn";
+import MuteBtn from "../components/Btn/MuteBtn";
 import PicDoneBtn from "../components/Btn/PicDoneBtn";
-import TakePicBtn from "./../components/Btn/TakePicBtn";
-import CameraTransBtn from "./../components/Btn/CameraTransBtn";
+import TakePicBtn from "../components/Btn/TakePicBtn";
 import SelectDoneBtn from "../components/Btn/SelectDoneBtn";
 import DecoDoneBtn from "../components/Btn/DecoDoneBtn";
-import PicDownloadBtn from "../components/Btn/PicDownloadBtn";
 import GalleryDoneBtn from "../components/Btn/GalleryDoneBtn";
 
 // Message
 import DecoMessage from "../components/Message/DecoMessage";
 import GalleryMessage from "../components/Message/GalleryMessage";
 import SelectMessage from "../components/Message/SelectMessage";
+import TakePicCountMessage from "../components/Message/TakePicCountMessage";
 
 // List
 import MemberList from "../components/List/MemberList";
-import ColorList from "../components/List/ColorList";
 import TabBar from "../components/TabBar/TabBar";
 import DecoList from "../components/List/DecoList";
 
@@ -35,7 +33,6 @@ import "./Picpico.css";
 import store from "../store";
 import { setErrorInfo } from "../slice/errorInfo";
 import AudioList from "../components/List/AudioList";
-import ImgList from "../components/List/ImgList";
 
 const Picpico = () => {
     const { id } = useParams();
@@ -67,7 +64,7 @@ const Picpico = () => {
                     <Footer className="picbooth_footer">
                         <MuteBtn />
                         <TakePicBtn />
-                        <CameraTransBtn />
+                        <TakePicCountMessage />
                     </Footer>
                 </Container>
             ) : selectDisplay ? (
@@ -83,7 +80,7 @@ const Picpico = () => {
                         <MemberList />
                         <Selection />
                     </Content>
-                    <Footer className="selection_footer">일단 푸터임</Footer>
+                    <Footer className="selection_footer"></Footer>
                 </Container>
             ) : decoDisplay ? (
                 <Container className="default_container">
@@ -115,10 +112,8 @@ const Picpico = () => {
                         <GalleryMessage />
                         <GalleryDoneBtn />
                     </Header>
-                    <Content>
+                    <Content style={{ marginTop: "80" }}>
                         <AudioList />
-                        <MemberList />
-                        <ImgList />
                         <Gallery />
                     </Content>
                 </Container>

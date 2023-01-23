@@ -92,6 +92,7 @@ export async function makeResultCanvas() {
     resultCanvas.width = 350;
     // resultCanvas.height = 350 * 4;
     resultCanvas.height = 350;
+    resultCanvas.style.border = "3px solid black";
 
     //! 자료구조 정해야 함
     // resultImages반복문 돌면서 스티커 parsing => 각 사진의 스티커목록 하나마다 frames를 연결해줌

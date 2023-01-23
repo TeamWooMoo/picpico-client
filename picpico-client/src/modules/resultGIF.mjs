@@ -1,9 +1,6 @@
 // captureFrame() 으로 생기는 image array 를 가지고 gif 만든 후 다운로드
 import Animated_GIF from "gif-transparency";
 export let finalURL;
-// import Animated_GIF from "animated_gif";
-
-// import GIF from "gif.js";
 
 export function captureFrame(canvas) {
     //! 결과 frame들 모아두는 안보이는 div 하나 필요함 거기에 img append~
@@ -51,6 +48,7 @@ export function makeGIF() {
         const url = window.URL.createObjectURL(blob);
         finalURL = url;
         console.log("made GIF !");
+
         // animatedImage.src = url;
         // document.body.appendChild(animatedImage);
     });
