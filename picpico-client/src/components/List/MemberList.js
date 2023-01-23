@@ -29,9 +29,9 @@ const MemberList = () => {
 
     // const memberKeys = Object.keys(members);
 
-    const onDragEnd = e => {
-        e.target.classList.remove("grabbing");
-    };
+    // const onDragEnd = e => {
+    //     e.target.classList.remove("grabbing");
+    // };
 
     const onDragOver = e => {
         e.preventDefault();
@@ -75,7 +75,6 @@ const MemberList = () => {
                         onDragStart={e => onDragStart(e, index)}
                         onDragEnter={e => onAvailableItemDragEnter(e, index)}
                         onDragOver={onDragOver}
-                        onDragEnd={onDragEnd}
                         draggable
                     >
                         {option}
