@@ -10,7 +10,7 @@ export const onResetMemberEvent = nicknameArr => {
             myFace.style.zIndex = i;
         } else {
             const peerFace = document.getElementById(`${nicknameArr[i]["socketId"]}`);
-            console.log("reset member peer:", nicknameArr[i]["socketId"]);
+            console.log("reset member peer:", nicknameArr[i]["socketId"], peerFace);
             peerFace.style.zIndex = i;
             peerFace.key = `${i}`;
         }
