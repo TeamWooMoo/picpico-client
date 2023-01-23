@@ -7,9 +7,9 @@ import { setDecoModeInfo, setMyDecoCanvasInfo } from "../../slice/decoInfo.js";
 
 const DecoList = () => {
     const dispatch = useDispatch();
-    const [prevIdx, setPrevIdx] = useState(1);
     const decoData = useSelector(state => state.decoInfo.decoList);
     const idxArr = Object.keys(decoData);
+    const [prevIdx, setPrevIdx] = useState(idxArr[0]);
 
     const decoColors = useSelector(state => state.decoInfo.colorList);
     const decoMapping = {};
