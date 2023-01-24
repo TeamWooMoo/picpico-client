@@ -1,3 +1,7 @@
+body {
+    overscroll-behavior-y: contain;
+}
+
 .default_container {
     color: black;
     /* background-color: #dbbfed; */

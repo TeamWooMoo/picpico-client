@@ -3,19 +3,18 @@ import { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { socket } from "../../modules/sockets.mjs";
 import { addStrokeHistory } from "../../slice/drawingInfo.js";
-import { DecoDragAndDrop } from "../../modules/decoDragAndDrop.mjs";
-import { FlexboxGrid, Button } from "rsuite";
+import { FlexboxGrid } from "rsuite";
 import { setDecoModeInfo, setResultInfo } from "../../slice/decoInfo";
 import { ResultImage, Sticker } from "../../modules/resultCanvas.mjs";
-import { setDecoInfo } from "../../slice/picpicoInfo";
+import { isMobile } from "react-device-detect";
 
 const DecoCanvas = () => {
+    const dispatch = useDispatch();
     const stickerList = useSelector(state => state.decoInfo.stickerList);
     const targetImgIdx = useSelector(state => state.decoInfo.myDecoCanvas);
     const decoData = useSelector(state => state.decoInfo.decoList);
     const doneDeco = useSelector(state => state.decoInfo.doneDeco);
     const idxArr = Object.keys(decoData);
-    const dispatch = useDispatch();
     const mode = useSelector(state => state.decoInfo.decoMode);
     const [drawing, setDrawing] = useState(false);
     const strokeArr = useSelector(state => state.drawingInfo.strokes);
@@ -23,8 +22,6 @@ const DecoCanvas = () => {
     const strokeColor = useSelector(state => state.drawingInfo.strokeColor);
     const stickerPointList = useSelector(state => state.decoInfo.stickerPointList);
 
-    // const decos = useSelector(state => state.decoInfo.decoList);
-    // const decoKeys = Object.keys(decos);
     const decoColors = useSelector(state => state.decoInfo.colorList);
     const decoMapping = {};
 
@@ -48,20 +45,41 @@ const DecoCanvas = () => {
     };
 
     const onCanvasMove = ({ nativeEvent }) => {
-        const decoCanvas = document.getElementById(`my-${targetImgIdx}`);
         const { offsetX, offsetY } = nativeEvent;
-        const decoCtx = decoCanvas.getContext("2d");
-        const myLineWidth = 10;
+        const myLineWidth = 5;
 
-        if (!drawing) {
-            decoCtx.beginPath();
-            decoCtx.moveTo(offsetX, offsetY);
-        } else {
-            decoCtx.lineWidth = myLineWidth;
-            decoCtx.strokeStyle = strokeColor;
-            decoCtx.lineTo(offsetX, offsetY);
-            decoCtx.stroke();
+        if (drawing) {
             socket.emit("stroke_canvas", roomId, offsetX, offsetY, strokeColor, socket.id, targetImgIdx, myLineWidth);
+        }
+    };
+
+    const [isDrag, setIsDrag] = useState(false);
+    const [touchStartPositionX, setTouchStartPositionX] = useState(null);
+    const [touchStartPositionY, setTouchStartPositionY] = useState(null);
+    const [touchEndPositionX, setTouchEndPositionX] = useState(null);
+    const [touchEndPositionY, setTouchEndPositionY] = useState(null);
+
+    const setEventTouch = e => {
+        switch (e.type) {
+            case "touchstart":
+                setIsDrag(true);
+                setTouchStartPositionX(e.touches[0].clientX);
+                setTouchStartPositionY(e.touches[0].clientY - 100);
+                socket.emit("mouse_down", socket.id, touchStartPositionX, touchStartPositionY, targetImgIdx);
+                break;
+            case "touchmove":
+                if (isDrag) {
+                    const myLineWidth = 5;
+                    socket.emit("stroke_canvas", roomId, e.touches[0].clientX, e.touches[0].clientY - 100, strokeColor, socket.id, targetImgIdx, myLineWidth);
+                }
+                break;
+            case "touchend":
+                setIsDrag(false);
+                setTouchEndPositionX(e.touches[e.touches.lenghth - 1].clientX);
+                setTouchEndPositionY(e.touches[0].clientY - 100);
+                socket.emit("mouse_up", socket.id, touchEndPositionX, touchEndPositionY, targetImgIdx);
+                break;
+            default:
         }
     };
 
@@ -90,22 +108,14 @@ const DecoCanvas = () => {
                     let axisX = parseInt(stickers[i].style.top.split("px")[0]);
                     let axisY = parseInt(stickers[i].style.left.split("px")[0]);
 
-                    //! axisX, axisY NaN 체크 필요함!!!!!!!
-
                     axisX = isNaN(axisX) ? 0 : axisX;
                     axisY = isNaN(axisY) ? 0 : axisY;
-
-                    // console.log("axisX >> ", axisX);
-                    // console.log("axisY >> ", axisY);
 
                     const curSticker = new Sticker(url, axisX, axisY);
                     curImage.stickers.push(curSticker);
                 }
                 resultImages.push(curImage);
             });
-
-            console.log("너 여기까지 오긴 하니?");
-            //   dispatch(setDecoInfo({ value: true }));
 
             dispatch(setResultInfo({ value: resultImages })); // drawing 결과 decoInfo.resultList 에 dispatch
             socket.emit("submit_deco");
@@ -114,32 +124,23 @@ const DecoCanvas = () => {
     }, [doneDeco]);
 
     useEffect(() => {
-        console.log("mode change:", mode);
-    }, [mode]);
-
-    useEffect(() => {
         if (strokeArr.length > 0) {
             const [newX, newY, newColor, newSocketId, newIdx, newLindWidth] = strokeArr[strokeArr.length - 1];
             if (strokeHistory.hasOwnProperty(newSocketId)) {
-                let { x: oldX, y: oldY, i: oldIdx, f: oldDown } = strokeHistory[newSocketId];
+                let { x: oldX, y: oldY, i: oldIdx, c: oldColor, f: oldDown } = strokeHistory[newSocketId];
 
                 const decoPeerCanvas = document.getElementById(`peer-${oldIdx}`);
                 const decoCtx = decoPeerCanvas.getContext("2d");
 
                 decoCtx.lineWidth = newLindWidth;
 
-                if (oldDown) {
-                    //mouse down
-                    decoCtx.beginPath();
-                    decoCtx.moveTo(oldX, oldY);
-                    oldDown = !oldDown;
-                } else {
-                    decoCtx.strokeStyle = newColor;
-                    decoCtx.lineTo(newX, newY);
-                    decoCtx.stroke();
-                }
-
-                dispatch(addStrokeHistory({ value: [newSocketId, newX, newY, newIdx, oldDown] }));
+                decoCtx.beginPath();
+                decoCtx.moveTo(oldX, oldY);
+                decoCtx.strokeStyle = newColor;
+                decoCtx.lineJoin = "round";
+                decoCtx.lineTo(newX, newY);
+                decoCtx.stroke();
+                dispatch(addStrokeHistory({ value: [newSocketId, newX, newY, newIdx, newColor, oldDown] }));
             }
         }
     }, [strokeArr]);
@@ -238,16 +239,30 @@ const DecoCanvas = () => {
                         </div>
                     ))}
                 </div>
-                <canvas
-                    className="decocanvas"
-                    width="345px"
-                    height="345px"
-                    ref={decoEventCanvas}
-                    onMouseDown={onCanvasDown}
-                    onMouseMove={onCanvasMove}
-                    onMouseUp={onCanvasUp}
-                    style={{ border: `3px solid ${decoMapping[targetImgIdx]}`, visibility: mode === "sticker" ? "hidden" : "visible" }}
-                ></canvas>
+                {isMobile ? (
+                    <canvas
+                        className="decocanvas"
+                        width="350px"
+                        height="350px"
+                        ref={decoEventCanvas}
+                        onTouchStart={setEventTouch}
+                        onTouchEnd={setEventTouch}
+                        onTouchMove={setEventTouch}
+                        style={{ border: `10px solid ${decoMapping[targetImgIdx]}`, visibility: mode === "sticker" ? "hidden" : "visible" }}
+                    ></canvas>
+                ) : (
+                    <canvas
+                        className="decocanvas"
+                        width="350px"
+                        height="350px"
+                        ref={decoEventCanvas}
+                        onMouseDown={onCanvasDown}
+                        onMouseMove={onCanvasMove}
+                        onMouseUp={onCanvasUp}
+                        style={{ border: `3px solid ${decoMapping[targetImgIdx]}`, visibility: mode === "sticker" ? "hidden" : "visible" }}
+                    ></canvas>
+                )}
+
             </FlexboxGrid>
         </>
     );

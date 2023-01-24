@@ -20,6 +20,7 @@ const ColorList = () => {
     return (
         <>
             <FlexboxGrid justify="center" className="color-options">
+
                 <img src={white} onClick={onColorClick} className="color-option" data-color="white" />
                 <img src={red} onClick={onColorClick} className="color-option" data-color="#ee4035" />
                 <img src={orange} onClick={onColorClick} className="color-option" data-color="#f37736" />
@@ -28,6 +29,7 @@ const ColorList = () => {
                 <img src={blue} onClick={onColorClick} className="color-option" data-color="#0392cf" />
                 <img src={purple} onClick={onColorClick} className="color-option" data-color="#be29ec" />
                 <img src={black} onClick={onColorClick} className="color-option" data-color="black" />
+
             </FlexboxGrid>
         </>
     );
