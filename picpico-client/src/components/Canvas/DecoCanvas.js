@@ -7,6 +7,21 @@ import { FlexboxGrid } from "rsuite";
 import { setDecoModeInfo, setResultInfo } from "../../slice/decoInfo";
 import { ResultImage, Sticker } from "../../modules/resultCanvas.mjs";
 
+function isMobile() {
+    var UserAgent = navigator.userAgent;
+
+    if (
+        UserAgent.match(
+            /iPhone|iPod|Android|Windows CE|BlackBerry|Symbian|Windows Phone|webOS|Opera Mini|Opera Mobi|POLARIS|IEMobile|lgtelecom|nokia|SonyEricsson/i
+        ) != null ||
+        UserAgent.match(/LG|SAMSUNG|Samsung/) != null
+    ) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 const DecoCanvas = () => {
     const dispatch = useDispatch();
     const stickerList = useSelector(state => state.decoInfo.stickerList);
@@ -61,10 +76,10 @@ const DecoCanvas = () => {
     const setEventTouch = e => {
         switch (e.type) {
             case "touchstart":
-                setIsDrag(true);
-                setTouchStartPositionX(e.changedTouches[0].offsetX);
-                setTouchStartPositionY(e.changedTouches[0].offsetY);
-                socket.emit("mouse_up", socket.id, touchStartPositionX, touchStartPositionY, targetImgIdx);
+                setIsDrag(false);
+                setTouchStartPositionX(e.changedTouches[0].clientX);
+                setTouchStartPositionY(e.changedTouches[0].clientY);
+                socket.emit("mouse_down", socket.id, touchStartPositionX, touchStartPositionY, targetImgIdx);
                 break;
             case "touchmove":
                 if (isDrag) {
@@ -72,8 +87,8 @@ const DecoCanvas = () => {
                     socket.emit(
                         "stroke_canvas",
                         roomId,
-                        e.changedTouches[0].offsetX,
-                        e.changedTouches[0].offsetY,
+                        e.changedTouches[0].clientX,
+                        e.changedTouches[0].clientY,
                         strokeColor,
                         socket.id,
                         targetImgIdx,
@@ -82,10 +97,10 @@ const DecoCanvas = () => {
                 }
                 break;
             case "touchend":
-                setIsDrag(false);
-                setTouchEndPositionX(e.changedTouches[0].offsetX);
-                setTouchEndPositionY(e.changedTouches[0].offsetY);
-                socket.emit("mouse_down", socket.id, touchEndPositionX, touchEndPositionY, targetImgIdx);
+                setIsDrag(true);
+                setTouchEndPositionX(e.changedTouches[0].clientX);
+                setTouchEndPositionY(e.changedTouches[0].clientY);
+                socket.emit("mouse_up", socket.id, touchEndPositionX, touchEndPositionY, targetImgIdx);
                 break;
             default:
         }
@@ -132,13 +147,8 @@ const DecoCanvas = () => {
     }, [doneDeco]);
 
     useEffect(() => {
-        console.log("mode change:", mode);
-    }, [mode]);
-
-    useEffect(() => {
         if (strokeArr.length > 0) {
             const [newX, newY, newColor, newSocketId, newIdx, newLindWidth] = strokeArr[strokeArr.length - 1];
-            let beforeDrawer = "";
             if (strokeHistory.hasOwnProperty(newSocketId)) {
                 let { x: oldX, y: oldY, i: oldIdx, c: oldColor, f: oldDown } = strokeHistory[newSocketId];
 
@@ -147,15 +157,12 @@ const DecoCanvas = () => {
 
                 decoCtx.lineWidth = newLindWidth;
 
-                if (!beforeDrawer || beforeDrawer !== newSocketId) {
-                    decoCtx.beginPath();
-                    decoCtx.moveTo(oldX, oldY);
-                }
+                decoCtx.beginPath();
+                decoCtx.moveTo(oldX, oldY);
                 decoCtx.strokeStyle = newColor;
                 decoCtx.lineJoin = "round";
                 decoCtx.lineTo(newX, newY);
                 decoCtx.stroke();
-                beforeDrawer = newSocketId;
                 dispatch(addStrokeHistory({ value: [newSocketId, newX, newY, newIdx, newColor, oldDown] }));
             }
         }
@@ -255,19 +262,29 @@ const DecoCanvas = () => {
                         </div>
                     ))}
                 </div>
-                <canvas
-                    className="decocanvas"
-                    width="350px"
-                    height="350px"
-                    ref={decoEventCanvas}
-                    onTouchStart={setEventTouch}
-                    onTouchEnd={setEventTouch}
-                    onTouchMove={setEventTouch}
-                    // onMouseDown={onCanvasDown}
-                    // onMouseMove={onCanvasMove}
-                    // onMouseUp={onCanvasUp}
-                    style={{ border: `3px solid ${decoMapping[targetImgIdx]}`, visibility: mode === "sticker" ? "hidden" : "visible" }}
-                ></canvas>
+                {isMobile() ? (
+                    <canvas
+                        className="decocanvas"
+                        width="350px"
+                        height="350px"
+                        ref={decoEventCanvas}
+                        onTouchStart={setEventTouch}
+                        onTouchEnd={setEventTouch}
+                        onTouchMove={setEventTouch}
+                        style={{ border: `3px solid ${decoMapping[targetImgIdx]}`, visibility: mode === "sticker" ? "hidden" : "visible" }}
+                    ></canvas>
+                ) : (
+                    <canvas
+                        className="decocanvas"
+                        width="350px"
+                        height="350px"
+                        ref={decoEventCanvas}
+                        onMouseDown={onCanvasDown}
+                        onMouseMove={onCanvasMove}
+                        onMouseUp={onCanvasUp}
+                        style={{ border: `3px solid ${decoMapping[targetImgIdx]}`, visibility: mode === "sticker" ? "hidden" : "visible" }}
+                    ></canvas>
+                )}
             </FlexboxGrid>
         </>
     );
