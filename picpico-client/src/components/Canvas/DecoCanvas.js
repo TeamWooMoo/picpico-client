@@ -53,7 +53,7 @@ const DecoCanvas = () => {
         }
     };
 
-    const [isDrag, setIsDrag] = useState(true);
+    const [isDrag, setIsDrag] = useState(false);
     const [touchStartPositionX, setTouchStartPositionX] = useState(null);
     const [touchStartPositionY, setTouchStartPositionY] = useState(null);
     const [touchEndPositionX, setTouchEndPositionX] = useState(null);
@@ -62,16 +62,31 @@ const DecoCanvas = () => {
     const setEventTouch = e => {
         switch (e.type) {
             case "touchstart":
-                setIsDrag(false);
+                setIsDrag(true);
                 setTouchStartPositionX(e.changedTouches[0].clientX);
                 setTouchStartPositionY(e.changedTouches[0].clientY);
+                socket.emit("mouse_down", socket.id, touchStartPositionX, touchStartPositionY, targetImgIdx);
                 break;
             case "touchmove":
-                setIsDrag(true);
+                if (isDrag) {
+                    const myLineWidth = 5;
+                    socket.emit(
+                        "stroke_canvas",
+                        roomId,
+                        e.changedTouches[0].clientX,
+                        e.changedTouches[0].clientY,
+                        strokeColor,
+                        socket.id,
+                        targetImgIdx,
+                        myLineWidth
+                    );
+                }
                 break;
             case "touchend":
+                setIsDrag(false);
                 setTouchEndPositionX(e.changedTouches[0].clientX);
                 setTouchEndPositionY(e.changedTouches[0].clientY);
+                socket.emit("mouse_up", socket.id, touchEndPositionX, touchEndPositionY, targetImgIdx);
                 break;
             default:
         }
@@ -249,9 +264,9 @@ const DecoCanvas = () => {
                     onTouchStart={setEventTouch}
                     onTouchEnd={setEventTouch}
                     onTouchMove={setEventTouch}
-                    // onMouseDown={onCanvasDown}
-                    // onMouseMove={onCanvasMove}
-                    // onMouseUp={onCanvasUp}
+                    onMouseDown={onCanvasDown}
+                    onMouseMove={onCanvasMove}
+                    onMouseUp={onCanvasUp}
                     style={{ border: `3px solid ${decoMapping[targetImgIdx]}`, visibility: mode === "sticker" ? "hidden" : "visible" }}
                 ></canvas>
             </FlexboxGrid>
