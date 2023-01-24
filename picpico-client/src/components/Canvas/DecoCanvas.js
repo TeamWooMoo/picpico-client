@@ -6,21 +6,7 @@ import { addStrokeHistory } from "../../slice/drawingInfo.js";
 import { FlexboxGrid } from "rsuite";
 import { setDecoModeInfo, setResultInfo } from "../../slice/decoInfo";
 import { ResultImage, Sticker } from "../../modules/resultCanvas.mjs";
-
-function isMobile() {
-    var UserAgent = navigator.userAgent;
-
-    if (
-        UserAgent.match(
-            /iPhone|iPod|Android|Windows CE|BlackBerry|Symbian|Windows Phone|webOS|Opera Mini|Opera Mobi|POLARIS|IEMobile|lgtelecom|nokia|SonyEricsson/i
-        ) != null ||
-        UserAgent.match(/LG|SAMSUNG|Samsung/) != null
-    ) {
-        return true;
-    } else {
-        return false;
-    }
-}
+import { isMobile } from "react-device-detect";
 
 const DecoCanvas = () => {
     const dispatch = useDispatch();
@@ -262,7 +248,7 @@ const DecoCanvas = () => {
                         </div>
                     ))}
                 </div>
-                {isMobile() ? (
+                {isMobile ? (
                     <canvas
                         className="decocanvas"
                         width="350px"
