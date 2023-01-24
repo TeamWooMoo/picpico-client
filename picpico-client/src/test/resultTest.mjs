@@ -6,7 +6,7 @@ import testResultUrl0 from "../../src/assets/images/testResult0.png"; // jh(100,
 import testResultUrl1 from "../../src/assets/images/testResult1.png"; // jh(200, 200), db(200, 200)
 import testResultUrl2 from "../../src/assets/images/testResult2.png"; // nr(0, 0) db(150, 150)
 import testResultUrl3 from "../../src/assets/images/testResult3.png"; // nr(80, 80) nr(120, 0)
-import {makeResultCanvas, resultCanvas, ResultImage, resultImages, Sticker} from "../modules/resultCanvas.mjs";
+import { makeResultCanvas, resultCanvas, ResultImage, resultImages, Sticker } from "../modules/resultCanvas.mjs";
 
 export const gifTest = resultList => {
     /******* 서버에서 해주는 작업 For Test ****** */
