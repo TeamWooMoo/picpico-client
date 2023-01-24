@@ -50,20 +50,21 @@ const DecoCanvas = () => {
     const onCanvasMove = ({ nativeEvent }) => {
         const decoCanvas = document.getElementById(`my-${targetImgIdx}`);
         const { offsetX, offsetY } = nativeEvent;
-        const decoCtx = decoCanvas.getContext("2d");
+        // const decoCtx = decoCanvas.getContext("2d");
         const myLineWidth = 5;
 
-        if (!drawing) {
-            decoCtx.beginPath();
-            decoCtx.moveTo(offsetX, offsetY);
-        } else {
-            decoCtx.lineWidth = myLineWidth;
-            decoCtx.strokeStyle = strokeColor;
-            decoCtx.lineJoin = "round";
-            decoCtx.lineTo(offsetX, offsetY);
-            decoCtx.stroke();
-            socket.emit("stroke_canvas", roomId, offsetX, offsetY, strokeColor, socket.id, targetImgIdx, myLineWidth);
-        }
+        // if (!drawing) {
+        //     decoCtx.beginPath();
+        //     decoCtx.moveTo(offsetX, offsetY);
+        // } else {
+        //     decoCtx.lineWidth = myLineWidth;
+        //     decoCtx.strokeStyle = strokeColor;
+        //     decoCtx.lineJoin = "round";
+        //     decoCtx.lineTo(offsetX, offsetY);
+        //     decoCtx.stroke();
+        //     socket.emit("stroke_canvas", roomId, offsetX, offsetY, strokeColor, socket.id, targetImgIdx, myLineWidth);
+        // }
+        socket.emit("stroke_canvas", roomId, offsetX, offsetY, strokeColor, socket.id, targetImgIdx, myLineWidth);
     };
 
     /* 최종 결과물을 GIF로 만들기 */
@@ -130,18 +131,6 @@ const DecoCanvas = () => {
 
                 decoCtx.lineWidth = newLindWidth;
 
-                // if (oldDown) {
-                //     //mouse down
-                //     decoCtx.beginPath();
-                //     decoCtx.moveTo(oldX, oldY);
-                //     decoCtx.strokeStyle = oldColor;
-                //     oldDown = !oldDown;
-                // } else {
-                //     decoCtx.moveTo(oldX, oldY);
-                //     decoCtx.lineTo(oldX, oldY);
-                //     decoCtx.lineTo(newX, newY);
-                //     decoCtx.stroke();
-                // }
                 if (!beforeDrawer || beforeDrawer !== newSocketId) {
                     decoCtx.beginPath();
                     decoCtx.moveTo(oldX, oldY);
