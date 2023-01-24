@@ -120,6 +120,7 @@ const DecoCanvas = () => {
     useEffect(() => {
         if (strokeArr.length > 0) {
             const [newX, newY, newColor, newSocketId, newIdx, newLindWidth] = strokeArr[strokeArr.length - 1];
+            let beforeDrawer = "";
             if (strokeHistory.hasOwnProperty(newSocketId)) {
                 let { x: oldX, y: oldY, i: oldIdx, c: oldColor, f: oldDown } = strokeHistory[newSocketId];
 
@@ -140,13 +141,14 @@ const DecoCanvas = () => {
                 //     decoCtx.lineTo(newX, newY);
                 //     decoCtx.stroke();
                 // }
-
-                decoCtx.beginPath();
-                decoCtx.moveTo(oldX, oldY);
+                if (!beforeDrawer || beforeDrawer !== newSocketId) {
+                    decoCtx.beginPath();
+                    decoCtx.moveTo(oldX, oldY);
+                }
                 decoCtx.strokeStyle = newColor;
                 decoCtx.lineTo(newX, newY);
                 decoCtx.stroke();
-
+                beforeDrawer = newSocketId;
                 dispatch(addStrokeHistory({ value: [newSocketId, newX, newY, newIdx, newColor, oldDown] }));
             }
         }
