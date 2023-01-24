@@ -135,7 +135,7 @@ const DecoCanvas = () => {
                     oldDown = !oldDown;
                 } else {
                     decoCtx.strokeStyle = newColor;
-                    decoCtx.lineTo(oldX, oldY);
+                    decoCtx.lineTo(newX, newY);
                     decoCtx.stroke();
                 }
 
