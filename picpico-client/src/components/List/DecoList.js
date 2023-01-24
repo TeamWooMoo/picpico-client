@@ -28,7 +28,7 @@ const DecoList = () => {
 
     return (
         <>
-            <ImageList sx={{ width: 350, height: 90, margin: "5px" }} cols={4} rowHeight={90}>
+            <ImageList sx={{ width: 350, height: 90, margin: "10px" }} cols={4} rowHeight={90}>
                 {idxArr.map(idx => (
                     <ImageListItem style={{ flex: 1, flexDirection: "row", height: 90 }}>
                         <img
