@@ -2,7 +2,6 @@ import { useSelector } from "react-redux";
 import { IoRadioButtonOnOutline } from "react-icons/io5";
 import { socket } from "../../modules/sockets.mjs";
 import shutterSound from "./../../assets/sound/shutter.mp3";
-import "./TakePicBtn.css";
 
 function TakePicBtn() {
     const idx = useSelector(state => state.takepicInfo.idx);
@@ -25,6 +24,7 @@ function TakePicBtn() {
                 color="red"
                 size="40px"
                 padding="5px 0"
+                style={{ position: "fixed", left: "50%", transform: "translateX( -50% )" }}
                 onClick={onTakePicBtnClick}
             ></IoRadioButtonOnOutline>
         </>
