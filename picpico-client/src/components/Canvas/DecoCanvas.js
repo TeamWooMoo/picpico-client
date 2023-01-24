@@ -264,9 +264,9 @@ const DecoCanvas = () => {
                     onTouchStart={setEventTouch}
                     onTouchEnd={setEventTouch}
                     onTouchMove={setEventTouch}
-                    onMouseDown={onCanvasDown}
-                    onMouseMove={onCanvasMove}
-                    onMouseUp={onCanvasUp}
+                    // onMouseDown={onCanvasDown}
+                    // onMouseMove={onCanvasMove}
+                    // onMouseUp={onCanvasUp}
                     style={{ border: `3px solid ${decoMapping[targetImgIdx]}`, visibility: mode === "sticker" ? "hidden" : "visible" }}
                 ></canvas>
             </FlexboxGrid>
