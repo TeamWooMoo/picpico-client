@@ -22,7 +22,7 @@ export const onDonePickEvent = imgArr => {
 
 export const onDoneDecoEvent = () => {
     const result = store.getState().decoInfo.resultList;
-    socket.emit("submit_deco");
+    // socket.emit("submit_deco");
     console.log("client emit submit deco");
     // store.dispatch(setDecoInfo({ value: false }));
     // store.dispatch(setGalleryInfo({ value: true }));
