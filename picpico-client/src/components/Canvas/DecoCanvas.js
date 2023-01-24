@@ -228,8 +228,8 @@ const DecoCanvas = () => {
                             <canvas className="decocanvas" width="350px" height="350px" data-my={idx} id={`my-${idx}`}></canvas>
                             <canvas
                                 className="decocanvas"
-                                width="350px"
-                                height="350px"
+                                width="345px"
+                                height="345px"
                                 data-peer={idx}
                                 id={`peer-${idx}`}
                                 style={{ border: `3px solid ${decoMapping[idx]}` }}
@@ -240,8 +240,8 @@ const DecoCanvas = () => {
                 </div>
                 <canvas
                     className="decocanvas"
-                    width="350px"
-                    height="350px"
+                    width="345px"
+                    height="345px"
                     ref={decoEventCanvas}
                     onMouseDown={onCanvasDown}
                     onMouseMove={onCanvasMove}

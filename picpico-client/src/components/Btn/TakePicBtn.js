@@ -24,6 +24,7 @@ function TakePicBtn() {
                 color="red"
                 size="40px"
                 padding="5px 0"
+                style={{ position: "fixed", left: "50%", transform: "translateX( -50% )" }}
                 onClick={onTakePicBtnClick}
             ></IoRadioButtonOnOutline>
         </>
