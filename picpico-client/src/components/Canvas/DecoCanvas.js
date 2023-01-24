@@ -66,50 +66,50 @@ const DecoCanvas = () => {
     };
 
     /* 최종 결과물을 GIF로 만들기 */
-    // useEffect(() => {
-    //     if (doneDeco === true) {
-    //         const resultImages = [];
-    //         // 꾸민 사진 4개에 대해 각각 실행
-    //         idxArr.forEach(idx => {
-    //             const canvas = document.getElementById(`img-${idx}`); // canvas #img : 사진
-    //             const peer = document.getElementById(`peer-${idx}`); // canvas #peer : peer drawing
-    //             const my = document.getElementById(`my-${idx}`); // canvas #my : my drawing
+    useEffect(() => {
+        if (doneDeco === true) {
+            const resultImages = [];
+            // 꾸민 사진 4개에 대해 각각 실행
+            idxArr.forEach(idx => {
+                const canvas = document.getElementById(`img-${idx}`); // canvas #img : 사진
+                const peer = document.getElementById(`peer-${idx}`); // canvas #peer : peer drawing
+                const my = document.getElementById(`my-${idx}`); // canvas #my : my drawing
 
-    //             const ctx = canvas.getContext("2d");
-    //             ctx.drawImage(peer, 0, 0);
-    //             ctx.drawImage(my, 0, 0);
+                const ctx = canvas.getContext("2d");
+                ctx.drawImage(peer, 0, 0);
+                ctx.drawImage(my, 0, 0);
 
-    //             const curImage = new ResultImage(canvas.toDataURL(), []);
-    //             // 스티커 넣어줘야함
-    //             const curImageStickerField = document.getElementById(`sticker-${idx}`);
-    //             const stickers = curImageStickerField.children; // div
+                const curImage = new ResultImage(canvas.toDataURL(), []);
+                // 스티커 넣어줘야함
+                const curImageStickerField = document.getElementById(`sticker-${idx}`);
+                const stickers = curImageStickerField.children; // div
 
-    //             // for문 돌면서
-    //             for (let i = 0; i < stickers.length; i++) {
-    //                 const url = stickers[i].children[0].src; // div > img
-    //                 let axisX = parseInt(stickers[i].style.top.split("px")[0]);
-    //                 let axisY = parseInt(stickers[i].style.left.split("px")[0]);
+                // for문 돌면서
+                for (let i = 0; i < stickers.length; i++) {
+                    const url = stickers[i].children[0].src; // div > img
+                    let axisX = parseInt(stickers[i].style.top.split("px")[0]);
+                    let axisY = parseInt(stickers[i].style.left.split("px")[0]);
 
-    //                 //! axisX, axisY NaN 체크 필요함!!!!!!!
+                    //! axisX, axisY NaN 체크 필요함!!!!!!!
 
-    //                 axisX = isNaN(axisX) ? 0 : axisX;
-    //                 axisY = isNaN(axisY) ? 0 : axisY;
+                    axisX = isNaN(axisX) ? 0 : axisX;
+                    axisY = isNaN(axisY) ? 0 : axisY;
 
-    //                 console.log("axisX >> ", axisX);
-    //                 console.log("axisY >> ", axisY);
+                    console.log("axisX >> ", axisX);
+                    console.log("axisY >> ", axisY);
 
-    //                 const curSticker = new Sticker(url, axisX, axisY);
-    //                 curImage.stickers.push(curSticker);
-    //             }
-    //             resultImages.push(curImage);
-    //         });
+                    const curSticker = new Sticker(url, axisX, axisY);
+                    curImage.stickers.push(curSticker);
+                }
+                resultImages.push(curImage);
+            });
 
-    //         console.log("너 여기까지 오긴 하니?");
-    //         //   dispatch(setDecoInfo({ value: true }));
+            console.log("너 여기까지 오긴 하니?");
+            //   dispatch(setDecoInfo({ value: true }));
 
-    //         dispatch(setResultInfo({ value: resultImages })); // drawing 결과 decoInfo.resultList 에 dispatch
-    //     }
-    // }, [doneDeco]);
+            dispatch(setResultInfo({ value: resultImages })); // drawing 결과 decoInfo.resultList 에 dispatch
+        }
+    }, [doneDeco]);
 
     useEffect(() => {
         console.log("mode change:", mode);
