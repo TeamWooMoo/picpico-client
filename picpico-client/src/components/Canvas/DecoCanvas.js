@@ -59,6 +59,7 @@ const DecoCanvas = () => {
         } else {
             decoCtx.lineWidth = myLineWidth;
             decoCtx.strokeStyle = strokeColor;
+            decoCtx.lineJoin = "round";
             decoCtx.lineTo(offsetX, offsetY);
             decoCtx.stroke();
             socket.emit("stroke_canvas", roomId, offsetX, offsetY, strokeColor, socket.id, targetImgIdx, myLineWidth);
@@ -146,6 +147,7 @@ const DecoCanvas = () => {
                     decoCtx.moveTo(oldX, oldY);
                 }
                 decoCtx.strokeStyle = newColor;
+                decoCtx.lineJoin = "round";
                 decoCtx.lineTo(newX, newY);
                 decoCtx.stroke();
                 beforeDrawer = newSocketId;
