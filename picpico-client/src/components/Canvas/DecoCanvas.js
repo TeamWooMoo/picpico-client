@@ -51,7 +51,7 @@ const DecoCanvas = () => {
         const decoCanvas = document.getElementById(`my-${targetImgIdx}`);
         const { offsetX, offsetY } = nativeEvent;
         const decoCtx = decoCanvas.getContext("2d");
-        const myLineWidth = 10;
+        const myLineWidth = 5;
 
         if (!drawing) {
             decoCtx.beginPath();
