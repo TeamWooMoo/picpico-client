@@ -109,6 +109,7 @@ const DecoCanvas = () => {
 
             dispatch(setResultInfo({ value: resultImages })); // drawing 결과 decoInfo.resultList 에 dispatch
             socket.emit("submit_deco");
+            console.log("client emit submit deco");
         }
     }, [doneDeco]);
 
