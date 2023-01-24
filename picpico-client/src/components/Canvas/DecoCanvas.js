@@ -95,8 +95,8 @@ const DecoCanvas = () => {
                     axisX = isNaN(axisX) ? 0 : axisX;
                     axisY = isNaN(axisY) ? 0 : axisY;
 
-                    console.log("axisX >> ", axisX);
-                    console.log("axisY >> ", axisY);
+                    // console.log("axisX >> ", axisX);
+                    // console.log("axisY >> ", axisY);
 
                     const curSticker = new Sticker(url, axisX, axisY);
                     curImage.stickers.push(curSticker);
@@ -108,6 +108,8 @@ const DecoCanvas = () => {
             //   dispatch(setDecoInfo({ value: true }));
 
             dispatch(setResultInfo({ value: resultImages })); // drawing 결과 decoInfo.resultList 에 dispatch
+            socket.emit("submit_deco");
+            console.log("client emit submit deco");
         }
     }, [doneDeco]);
 
