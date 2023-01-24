@@ -62,30 +62,21 @@ const DecoCanvas = () => {
     const setEventTouch = e => {
         switch (e.type) {
             case "touchstart":
-                setIsDrag(false);
-                setTouchStartPositionX(e.changedTouches[0].clientX);
-                setTouchStartPositionY(e.changedTouches[0].clientY);
+                setIsDrag(true);
+                setTouchStartPositionX(e.nativeEvent.offsetX);
+                setTouchStartPositionY(e.nativeEvent.offsetY);
                 socket.emit("mouse_down", socket.id, touchStartPositionX, touchStartPositionY, targetImgIdx);
                 break;
             case "touchmove":
                 if (isDrag) {
                     const myLineWidth = 5;
-                    socket.emit(
-                        "stroke_canvas",
-                        roomId,
-                        e.changedTouches[0].clientX,
-                        e.changedTouches[0].clientY,
-                        strokeColor,
-                        socket.id,
-                        targetImgIdx,
-                        myLineWidth
-                    );
+                    socket.emit("stroke_canvas", roomId, e.nativeEvent.offsetX, e.nativeEvent.offsetY, strokeColor, socket.id, targetImgIdx, myLineWidth);
                 }
                 break;
             case "touchend":
-                setIsDrag(true);
-                setTouchEndPositionX(e.changedTouches[0].clientX);
-                setTouchEndPositionY(e.changedTouches[0].clientY);
+                setIsDrag(false);
+                setTouchEndPositionX(e.nativeEvent.offsetX);
+                setTouchEndPositionY(e.nativeEvent.offsetY);
                 socket.emit("mouse_up", socket.id, touchEndPositionX, touchEndPositionY, targetImgIdx);
                 break;
             default:
@@ -257,7 +248,7 @@ const DecoCanvas = () => {
                         onTouchStart={setEventTouch}
                         onTouchEnd={setEventTouch}
                         onTouchMove={setEventTouch}
-                        style={{ border: `3px solid ${decoMapping[targetImgIdx]}`, visibility: mode === "sticker" ? "hidden" : "visible" }}
+                        style={{ border: `10px solid ${decoMapping[targetImgIdx]}`, visibility: mode === "sticker" ? "hidden" : "visible" }}
                     ></canvas>
                 ) : (
                     <canvas
