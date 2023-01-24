@@ -121,7 +121,7 @@ const DecoCanvas = () => {
         if (strokeArr.length > 0) {
             const [newX, newY, newColor, newSocketId, newIdx, newLindWidth] = strokeArr[strokeArr.length - 1];
             if (strokeHistory.hasOwnProperty(newSocketId)) {
-                let { x: oldX, y: oldY, i: oldIdx, f: oldDown } = strokeHistory[newSocketId];
+                let { x: oldX, y: oldY, i: oldIdx, c: oldColor, f: oldDown } = strokeHistory[newSocketId];
 
                 const decoPeerCanvas = document.getElementById(`peer-${oldIdx}`);
                 const decoCtx = decoPeerCanvas.getContext("2d");
@@ -134,13 +134,14 @@ const DecoCanvas = () => {
                     decoCtx.moveTo(oldX, oldY);
                     oldDown = !oldDown;
                 } else {
-                    decoCtx.strokeStyle = newColor;
+                    decoCtx.strokeStyle = oldColor;
                     decoCtx.moveTo(oldX, oldY);
+                    decoCtx.lineTo(oldX, oldY);
                     decoCtx.lineTo(newX, newY);
                     decoCtx.stroke();
                 }
 
-                dispatch(addStrokeHistory({ value: [newSocketId, newX, newY, newIdx, oldDown] }));
+                dispatch(addStrokeHistory({ value: [newSocketId, newX, newY, newIdx, newColor, oldDown] }));
             }
         }
     }, [strokeArr]);

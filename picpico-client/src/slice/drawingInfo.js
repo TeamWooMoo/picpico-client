@@ -17,8 +17,8 @@ const drawingInfo = createSlice({
             state.strokeColor = action.payload.value;
         },
         addStrokeHistory(state, action) {
-            const [socketId, receivedX, receivedY, receivedIdx, downFlag] = action.payload.value;
-            state.strokeHistory[socketId] = { x: receivedX, y: receivedY, i: receivedIdx, f: downFlag };
+            const [socketId, receivedX, receivedY, receivedIdx, receivedColor, downFlag] = action.payload.value;
+            state.strokeHistory[socketId] = { x: receivedX, y: receivedY, i: receivedIdx, f: downFlag, c: receivedColor };
         },
     },
 });
