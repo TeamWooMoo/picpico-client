@@ -11,7 +11,7 @@ const DecoDoneBtn = () => {
     function onDecoDoneBtnClick() {
         socket.emit("done_deco", roomId, socket.id);
         console.log("done deco");
-        dispatch(setDoneDecoInfo({ value: true }));
+        // dispatch(setDoneDecoInfo({ value: true }));
     }
     return <img src={next_btn} className={isKing ? "btn-shadow" : "btn-deactivate"} style={{ width: "40px", height: "40px" }} onClick={onDecoDoneBtnClick} />;
 };
