@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { setDecoModeInfo } from "../../slice/decoInfo";
 import ColorList from "../List/ColorList";
 import StickerList from "../List/StickerList";
+import BackgroundList from "../List/BackgroundList";
 import DecoDragAndDrop from "../../modules/decoDragAndDrop.mjs";
 
 // Styled-Component 라이브러리를 활용해 TabMenu 와 Desc 컴포넌트의 CSS를 구현.
@@ -63,6 +64,7 @@ const TabBar = () => {
     const menuArr = [
         { name: "Color", content: <ColorList /> },
         { name: "Sticker", content: <StickerList /> },
+        { name: "Background", content: <BackgroundList /> },
     ];
 
     const dragAndDrop = DecoDragAndDrop();
