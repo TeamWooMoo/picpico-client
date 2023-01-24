@@ -128,18 +128,24 @@ const DecoCanvas = () => {
 
                 decoCtx.lineWidth = newLindWidth;
 
-                if (oldDown) {
-                    //mouse down
-                    decoCtx.beginPath();
-                    decoCtx.moveTo(oldX, oldY);
-                    oldDown = !oldDown;
-                } else {
-                    decoCtx.strokeStyle = oldColor;
-                    decoCtx.moveTo(oldX, oldY);
-                    decoCtx.lineTo(oldX, oldY);
-                    decoCtx.lineTo(newX, newY);
-                    decoCtx.stroke();
-                }
+                // if (oldDown) {
+                //     //mouse down
+                //     decoCtx.beginPath();
+                //     decoCtx.moveTo(oldX, oldY);
+                //     decoCtx.strokeStyle = oldColor;
+                //     oldDown = !oldDown;
+                // } else {
+                //     decoCtx.moveTo(oldX, oldY);
+                //     decoCtx.lineTo(oldX, oldY);
+                //     decoCtx.lineTo(newX, newY);
+                //     decoCtx.stroke();
+                // }
+
+                decoCtx.beginPath();
+                decoCtx.moveTo(oldX, oldY);
+                decoCtx.strokeStyle = newColor;
+                decoCtx.lineTo(newX, newY);
+                decoCtx.stroke();
 
                 dispatch(addStrokeHistory({ value: [newSocketId, newX, newY, newIdx, newColor, oldDown] }));
             }
