@@ -16,7 +16,6 @@ const DecoCanvas = () => {
     const idxArr = Object.keys(decoData);
     const mode = useSelector(state => state.decoInfo.decoMode);
     const [drawing, setDrawing] = useState(false);
-    const [touchPosition, setTouchPosition] = useState({});
     const strokeArr = useSelector(state => state.drawingInfo.strokes);
     const strokeHistory = useSelector(state => state.drawingInfo.strokeHistory);
     const strokeColor = useSelector(state => state.drawingInfo.strokeColor);
@@ -62,10 +61,10 @@ const DecoCanvas = () => {
     const setEventTouch = e => {
         switch (e.type) {
             case "touchstart":
-                setIsDrag(true);
-                setTouchStartPositionX(e.changedTouches[0].clientX);
-                setTouchStartPositionY(e.changedTouches[0].clientY);
-                socket.emit("mouse_down", socket.id, touchStartPositionX, touchStartPositionY, targetImgIdx);
+                setIsDrag(false);
+                setTouchStartPositionX(e.originalEvent.touches[0].pageX);
+                setTouchStartPositionY(e.originalEvent.touches[0].pageY);
+                socket.emit("mouse_up", socket.id, touchStartPositionX, touchStartPositionY, targetImgIdx);
                 break;
             case "touchmove":
                 if (isDrag) {
@@ -73,8 +72,8 @@ const DecoCanvas = () => {
                     socket.emit(
                         "stroke_canvas",
                         roomId,
-                        e.changedTouches[0].clientX,
-                        e.changedTouches[0].clientY,
+                        e.changedTouches[0].pageX,
+                        e.changedTouches[0].pageY,
                         strokeColor,
                         socket.id,
                         targetImgIdx,
@@ -83,10 +82,10 @@ const DecoCanvas = () => {
                 }
                 break;
             case "touchend":
-                setIsDrag(false);
-                setTouchEndPositionX(e.changedTouches[0].clientX);
-                setTouchEndPositionY(e.changedTouches[0].clientY);
-                socket.emit("mouse_up", socket.id, touchEndPositionX, touchEndPositionY, targetImgIdx);
+                setIsDrag(true);
+                setTouchEndPositionX(e.originalEvent.changedTouches[0].pageX);
+                setTouchEndPositionY(e.originalEvent.changedTouches[0].pageY);
+                socket.emit("mouse_down", socket.id, touchEndPositionX, touchEndPositionY, targetImgIdx);
                 break;
             default:
         }
