@@ -63,20 +63,20 @@ const DecoCanvas = () => {
         switch (e.type) {
             case "touchstart":
                 setIsDrag(true);
-                setTouchStartPositionX(e.nativeEvent.offsetX);
-                setTouchStartPositionY(e.nativeEvent.offsetY);
+                setTouchStartPositionX(e.touches[0].clientX);
+                setTouchStartPositionY(e.touches[0].clientY);
                 socket.emit("mouse_down", socket.id, touchStartPositionX, touchStartPositionY, targetImgIdx);
                 break;
             case "touchmove":
                 if (isDrag) {
                     const myLineWidth = 5;
-                    socket.emit("stroke_canvas", roomId, e.nativeEvent.offsetX, e.nativeEvent.offsetY, strokeColor, socket.id, targetImgIdx, myLineWidth);
+                    socket.emit("stroke_canvas", roomId, e.touches[0].clientX, e.touches[0].clientY, strokeColor, socket.id, targetImgIdx, myLineWidth);
                 }
                 break;
             case "touchend":
                 setIsDrag(false);
-                setTouchEndPositionX(e.nativeEvent.offsetX);
-                setTouchEndPositionY(e.nativeEvent.offsetY);
+                setTouchEndPositionX(e.touches[0].clientX);
+                setTouchEndPositionY(e.touches[0].clientY);
                 socket.emit("mouse_up", socket.id, touchEndPositionX, touchEndPositionY, targetImgIdx);
                 break;
             default:
