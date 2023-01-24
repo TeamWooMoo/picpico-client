@@ -64,7 +64,9 @@ const DecoCanvas = () => {
         //     decoCtx.stroke();
         //     socket.emit("stroke_canvas", roomId, offsetX, offsetY, strokeColor, socket.id, targetImgIdx, myLineWidth);
         // }
-        socket.emit("stroke_canvas", roomId, offsetX, offsetY, strokeColor, socket.id, targetImgIdx, myLineWidth);
+        if (drawing) {
+            socket.emit("stroke_canvas", roomId, offsetX, offsetY, strokeColor, socket.id, targetImgIdx, myLineWidth);
+        }
     };
 
     /* 최종 결과물을 GIF로 만들기 */
