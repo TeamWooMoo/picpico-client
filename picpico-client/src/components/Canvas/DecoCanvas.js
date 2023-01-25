@@ -66,9 +66,7 @@ const DecoCanvas = () => {
     const setEventTouch = e => {
         switch (e.type) {
             case "touchstart":
-                e.preventDefault();
                 setIsDrag(true);
-                console.log("start: ", e.changedTouches[0].clientX, e.touches[0].clientX);
                 setTouchStartPositionX(e.changedTouches[0].clientX);
                 setTouchStartPositionY(e.changedTouches[0].clientY - 100);
                 socket.emit("mouse_down", socket.id, touchStartPositionX, touchStartPositionY, targetImgIdx);
@@ -76,7 +74,6 @@ const DecoCanvas = () => {
             case "touchmove":
                 if (isDrag) {
                     const myLineWidth = 5;
-                    console.log("move:", e.changedTouches[0].clientX, e.changedTouches[0].clientY - 100);
                     socket.emit(
                         "stroke_canvas",
                         roomId,
@@ -90,13 +87,19 @@ const DecoCanvas = () => {
                 }
                 break;
             case "touchend":
-                e.preventDefault();
                 setIsDrag(false);
-                console.log("end: ", e.changedTouches[0].clientX);
-
                 setTouchEndPositionX(e.changedTouches[0].clientX);
                 setTouchEndPositionY(e.changedTouches[0].clientY - 100);
                 socket.emit("mouse_up", socket.id, touchEndPositionX, touchEndPositionY, targetImgIdx);
+                break;
+            case "mousedown":
+                e.preventDefault();
+                break;
+            case "mouseup":
+                e.preventDefault();
+                break;
+            case "mousemove":
+                e.preventDefault();
                 break;
             default:
         }
