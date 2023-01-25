@@ -94,11 +94,13 @@ const DecoCanvas = () => {
             const resultImages = [];
             // 꾸민 사진 4개에 대해 각각 실행
             idxArr.forEach(idx => {
+                const bg = document.getElementById(`bg-${idx}`);
                 const canvas = document.getElementById(`img-${idx}`); // canvas #img : 사진
                 const peer = document.getElementById(`peer-${idx}`); // canvas #peer : peer drawing
                 const my = document.getElementById(`my-${idx}`); // canvas #my : my drawing
 
                 const ctx = canvas.getContext("2d");
+                ctx.drawImage(bg, 0, 0);
                 ctx.drawImage(peer, 0, 0);
                 ctx.drawImage(my, 0, 0);
 
