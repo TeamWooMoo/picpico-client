@@ -3,7 +3,6 @@ import { IoRadioButtonOnOutline } from "react-icons/io5";
 import { socket } from "../../modules/sockets.mjs";
 import shutterSound from "./../../assets/sound/shutter.mp3";
 import { isMobile } from "react-device-detect";
-import e from "express";
 
 function TakePicBtn() {
     const idx = useSelector(state => state.takepicInfo.idx);
