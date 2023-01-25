@@ -169,7 +169,7 @@ const DecoCanvas = () => {
     useEffect(() => {
         if (bgList.length === 1) {
             console.log("bgList:", bgList, bgList.length);
-            const [bgIdx, setIdx] = bgList;
+            const [bgIdx, setIdx] = bgList[0];
             console.log(setIdx, document.getElementById(`bg-${setIdx}`));
             const bgCanvas = document.getElementById(`bg-${setIdx}`);
             const bgCtx = bgCanvas.getContext("2d");
