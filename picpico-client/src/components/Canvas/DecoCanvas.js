@@ -276,19 +276,19 @@ const DecoCanvas = () => {
                 {isMobile ? (
                     <canvas
                         className="decocanvas"
-                        width="350px"
-                        height="350px"
+                        width="345px"
+                        height="345px"
                         ref={decoEventCanvas}
                         onTouchStart={setEventTouch}
                         onTouchEnd={setEventTouch}
                         onTouchMove={setEventTouch}
-                        style={{ border: `10px solid ${decoMapping[targetImgIdx]}`, visibility: mode === "sticker" ? "hidden" : "visible" }}
+                        style={{ border: `3px solid ${decoMapping[targetImgIdx]}`, visibility: mode === "sticker" ? "hidden" : "visible" }}
                     ></canvas>
                 ) : (
                     <canvas
                         className="decocanvas"
-                        width="350px"
-                        height="350px"
+                        width="345px"
+                        height="345px"
                         ref={decoEventCanvas}
                         onMouseDown={onCanvasDown}
                         onMouseMove={onCanvasMove}
