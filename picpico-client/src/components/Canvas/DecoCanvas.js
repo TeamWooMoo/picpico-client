@@ -167,7 +167,7 @@ const DecoCanvas = () => {
     }, [targetImgIdx]);
 
     useEffect(() => {
-        if (bgList.length > 0) {
+        if (Array.isArray(bgList) && bgList.length === 2) {
             const [bgIdx, setIdx] = bgList;
             console.log(setIdx, document.getElementById(`bg-${setIdx}`));
             const bgCanvas = document.getElementById(`bg-${setIdx}`);

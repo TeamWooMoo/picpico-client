@@ -41,6 +41,7 @@ const decoInfo = createSlice({
             state.stickerPointList = [...state.stickerPointList, action.payload.value];
         },
         setBgInfo(state, action) {
+            console.log("setBgInfo", action.payload.value);
             state.bgList = [action.payload.value];
         },
     },
