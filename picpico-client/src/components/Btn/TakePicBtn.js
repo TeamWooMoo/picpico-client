@@ -10,7 +10,9 @@ function TakePicBtn() {
 
     const onTakePicBtnTouch = e => {
         e.preventDefault();
+        socket.emit("click_shutter", idx);
     };
+
     const onTakePicBtnClick = e => {
         shuttersound.play().catch(e => {
             console.log(e);

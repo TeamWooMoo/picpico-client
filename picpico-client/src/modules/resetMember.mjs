@@ -6,9 +6,11 @@ export const onResetMemberEvent = nicknameArr => {
     for (let i = 0; i < nicknameArr.length; i++) {
         if (nicknameArr[i]["socketId"] === socket.id) {
             const myFace = document.getElementById(`${socket.id}`);
-            myFace.key = `${i}`;
-            myFace.style.zIndex = i;
-            break;
+            if (myFace) {
+                myFace.key = `${i}`;
+                myFace.style.zIndex = i;
+                break;
+            }
         }
     }
 };
@@ -18,7 +20,9 @@ export const onChangeLayerEvent = nicknameArr => {
     console.log("new member list:", nicknameArr);
     for (let i = 0; i < nicknameArr.length; i++) {
         const face = document.getElementById(nicknameArr[i]["socketId"]);
-        face.key = `${i}`;
-        face.style.zIndex = i;
+        if (face) {
+            face.key = `${i}`;
+            face.style.zIndex = i;
+        }
     }
 };
