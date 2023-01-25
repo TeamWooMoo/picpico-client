@@ -91,13 +91,9 @@ function makeConnection(socketId) {
     const newConnection = new RTCPeerConnection({
         iceServers: [
             {
-                urls: [
-                    "stun:stun.l.google.com:19302",
-                    "stun:stun1.l.google.com:19302",
-                    "stun:stun2.l.google.com:19302",
-                    "stun:stun3.l.google.com:19302",
-                    "stun:stun4.l.google.com:19302",
-                ],
+                credential: "password1",
+                username: "ninefingers",
+                urls: ["turn:43.201.71.144:4378"],
             },
         ],
     });
