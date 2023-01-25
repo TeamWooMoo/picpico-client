@@ -10,14 +10,13 @@ function TakePicBtn() {
     const shuttersound = new Audio(shutterSound);
 
     const onTakePicBtnTouch = e => {
+        e.preventDefault();
         shuttersound.play().catch(e => {
             console.log(e);
         });
     };
     const onTakePicBtnClick = e => {
-        if (isMobile) {
-            e.preventDefault();
-        } else {
+        if (!isMobile) {
             console.log("사진 찍히니 ~");
             shuttersound.play().catch(e => {
                 console.log(e);
