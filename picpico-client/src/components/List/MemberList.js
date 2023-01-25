@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { useSelector } from "react-redux";
 import { socket } from "../../modules/sockets.mjs";
 import "./MemberList.css";
+import { isMobile } from "react-device-detect";
 
 const MemberList = () => {
     const members = useSelector(state => state.membersInfo.members);
@@ -19,6 +20,19 @@ const MemberList = () => {
         console.log("START e.target", e.target.id);
         draggingItemIndex.current = e.target.id;
         e.target.classList.add("grabbing");
+    };
+
+    const onTouchStart = e => {
+        console.log("touch start!!!!", e.changedTouches.item(0));
+        const elem = e.changedTouches.item(0);
+        draggingItemIndex.current = elem.id;
+        elem.classList.add("grabbing");
+    };
+
+    const onTouchEnd = e => {
+        console.log("touch end!!!!", e.changedTouches.item(0));
+        const elem = e.changedTouches.item(0);
+        elem.classList.remove("grabbing");
     };
 
     const onAvailableItemDragEnter = (e, index) => {
@@ -80,6 +94,8 @@ const MemberList = () => {
                             onDragEnter={e => onAvailableItemDragEnter(e, index)}
                             onDragOver={onDragOver}
                             onDragEnd={onDragEnd}
+                            onTouchStart={onTouchStart}
+                            onTouchEnd={onTouchEnd}
                             draggable
                         >
                             {option}
