@@ -15,5 +15,6 @@ export const onStickerMoveEvent = (left, top, stickerId) => {
 };
 
 export const onPickBgEvent = (bgIdx, setIdx) => {
+    console.log("onPickBgEvent:", parseInt(bgIdx), parseInt(setIdx));
     store.dispatch(setBgInfo({ value: [parseInt(bgIdx), parseInt(setIdx)] }));
 };

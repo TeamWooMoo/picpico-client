@@ -11,6 +11,7 @@ const StickerList = () => {
     const onBgClick = event => {
         const bg = event.target;
         const bgIdx = bg.dataset.bg;
+        console.log("emit pick bg:", bgIdx, targetImgIdx);
         socket.emit("pick_bg", bgIdx, targetImgIdx);
     };
 
