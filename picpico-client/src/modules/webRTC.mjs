@@ -61,6 +61,7 @@ const handleTrack = (data, myPeer) => {
         peerVideo.hidden = true;
         peerVideo.width = 350;
         peerVideo.height = 350;
+        peerVideo.id = `video-${myPeer.mySocketId}`;
 
         // pecderVideo.muted = true;
         // peerVideo.autoplay = true;
@@ -196,7 +197,7 @@ function onIceEvent(ice, socketId) {
 /******************************************************************* */
 
 function onGoneEvent(goneSocketId) {
-    store.dispatch(setVideosInfo(goneSocketId));
+    store.dispatch(setVideosInfo({ value: goneSocketId }));
 }
 
 /******************************************************************* */
@@ -207,5 +208,4 @@ export async function initWebRTC() {
     socket.on("offer", onOfferEvent);
     socket.on("answer", onAnswerEvent);
     socket.on("ice", onIceEvent);
-    socket.on("gone", onGoneEvent);
 }

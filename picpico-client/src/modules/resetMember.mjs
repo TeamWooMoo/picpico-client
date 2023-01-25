@@ -1,8 +1,27 @@
 import store from "../store.js";
 import { setMembersInfo } from "../slice/membersInfo.js";
 import { socket } from "./sockets.mjs";
+
+// TEST
+let prevMemberList = [];
 export const onResetMemberEvent = nicknameArr => {
     store.dispatch(setMembersInfo({ value: nicknameArr }));
+    // TEST START
+    if (prevMemberList.length > 0) {
+        const goneMemberList = prevMemberList.filter(member => !nicknameArr.includes(member));
+        goneMemberList.forEach(memberSocketId => {
+            const goneVideo = document.getElementById(`video-${memberSocketId}`);
+            const goneCanvas = document.getElementById(`${memberSocketId}`);
+            if (goneCanvas) {
+                goneCanvas.remove();
+            }
+            if (goneVideo) {
+                goneVideo.remove();
+            }
+        });
+        prevMemberList = [...nicknameArr];
+    }
+    // TEST END
     for (let i = 0; i < nicknameArr.length; i++) {
         if (nicknameArr[i]["socketId"] === socket.id) {
             const myFace = document.getElementById(`${socket.id}`);
