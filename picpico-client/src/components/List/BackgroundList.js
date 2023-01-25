@@ -3,7 +3,7 @@ import star from "./../../assets/images/background-star.png";
 import water from "./../../assets/images/background-water.png";
 import none from "./../../assets/images/background-none.png";
 import { socket } from "../../modules/sockets.mjs";
-import { useState } from "react";
+import { useSelector } from "react-redux";
 
 const StickerList = () => {
     const targetImgIdx = useSelector(state => state.decoInfo.myDecoCanvas);
@@ -15,8 +15,6 @@ const StickerList = () => {
         socket.emit("pick_bg", bgIdx, targetImgIdx);
     };
 
-
-const StickerList = () => {
     return (
         <>
             <FlexboxGrid justify="center" className="color-options">
