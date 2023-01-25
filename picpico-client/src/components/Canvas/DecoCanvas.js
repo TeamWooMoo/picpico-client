@@ -180,11 +180,12 @@ const DecoCanvas = () => {
             } else {
                 const src = bgSrcList[bgIdx];
                 const img = new Image();
-                img.src = src;
+
                 console.log("src: ", src);
-                img.onload(() => {
+                img.onload = function () {
                     bgCtx.drawImage(img, 0, 0);
-                });
+                };
+                img.src = src;
             }
         } else {
             console.log("bg length:", bgList.length);
