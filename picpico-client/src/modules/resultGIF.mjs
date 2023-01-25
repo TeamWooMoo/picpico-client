@@ -51,6 +51,7 @@ export function makeGIF() {
         const url = window.URL.createObjectURL(blob);
         finalURL = url;
         store.dispatch(setGIFInfo({ value: true }));
+        console.log("made GIF");
 
         // animatedImage.src = url;
         // document.body.appendChild(animatedImage);
