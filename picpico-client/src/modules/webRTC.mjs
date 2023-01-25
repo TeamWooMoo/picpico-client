@@ -91,9 +91,9 @@ function makeConnection(socketId) {
     const newConnection = new RTCPeerConnection({
         iceServers: [
             {
-                credential: "password1",
                 username: "ninefingers",
-                urls: ["turn:43.201.71.144:4378"],
+                credential: "password1",
+                urls: ["turn:43.201.71.144:3478?transport=tcp"],
             },
         ],
     });
