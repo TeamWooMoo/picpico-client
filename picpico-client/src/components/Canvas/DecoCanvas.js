@@ -88,6 +88,8 @@ const DecoCanvas = () => {
                 break;
             case "touchend":
                 setIsDrag(false);
+                console.log("end: ", e.changedTouches[0].clientX, e.changedTouches);
+
                 setTouchEndPositionX(e.changedTouches[0].clientX);
                 setTouchEndPositionY(e.changedTouches[0].clientY - 100);
                 socket.emit("mouse_up", socket.id, touchEndPositionX, touchEndPositionY, targetImgIdx);
