@@ -104,7 +104,7 @@ const DecoCanvas = () => {
                 ctx.drawImage(peer, 0, 0);
                 ctx.drawImage(my, 0, 0);
 
-                const curImage = new ResultImage(canvas.toDataURL(), []);
+                const curImage = new ResultImage(bg.toDataURL(), []);
                 // 스티커 넣어줘야함
                 const curImageStickerField = document.getElementById(`sticker-${idx}`);
                 const stickers = curImageStickerField.children; // div
