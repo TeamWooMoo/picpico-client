@@ -5,7 +5,9 @@ import { polyfill } from "mobile-drag-drop";
 import "./MemberList.css";
 
 const MemberList = () => {
-    polyfill();
+    const isPicBooth = useSelector(state => state.picpicoInfo.picBoothDisplay);
+    if (isPicBooth) polyfill();
+
     const members = useSelector(state => state.membersInfo.members);
     const memberKeys = Object.keys(members);
     console.log("members:", members);
