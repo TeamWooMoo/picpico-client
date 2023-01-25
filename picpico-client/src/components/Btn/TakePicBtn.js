@@ -3,6 +3,7 @@ import { IoRadioButtonOnOutline } from "react-icons/io5";
 import { socket } from "../../modules/sockets.mjs";
 import shutterSound from "./../../assets/sound/shutter.mp3";
 import { isMobile } from "react-device-detect";
+import e from "express";
 
 function TakePicBtn() {
     const idx = useSelector(state => state.takepicInfo.idx);
@@ -10,13 +11,19 @@ function TakePicBtn() {
     const shuttersound = new Audio(shutterSound);
 
     const onTakePicBtnTouch = e => {
-        e.preventDefault();
-    };
-    const onTakePicBtnClick = () => {
-        console.log("사진 찍히니 ~");
         shuttersound.play().catch(e => {
             console.log(e);
         });
+    };
+    const onTakePicBtnClick = e => {
+        if (isMobile) {
+            e.preventDefault();
+        } else {
+            console.log("사진 찍히니 ~");
+            shuttersound.play().catch(e => {
+                console.log(e);
+            });
+        }
 
         socket.emit("click_shutter", idx);
     };
@@ -31,7 +38,6 @@ function TakePicBtn() {
                 padding="5px 0"
                 style={{ position: "fixed", left: "50%", transform: "translateX( -50% )" }}
                 onClick={onTakePicBtnClick}
-                onTouchStart={onTakePicBtnTouch}
                 onTouchEnd={onTakePicBtnTouch}
             ></IoRadioButtonOnOutline>
         </>
