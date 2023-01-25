@@ -90,8 +90,8 @@ const DecoCanvas = () => {
                 setIsDrag(false);
                 console.log("end: ", e.changedTouches[0].clientX, e.changedTouches);
 
-                setTouchEndPositionX(e.changedTouches[0].clientX);
-                setTouchEndPositionY(e.changedTouches[0].clientY - 100);
+                setTouchEndPositionX(e.changedTouches[e.changedTouches.length - 1].clientX);
+                setTouchEndPositionY(e.changedTouches[e.changedTouches - 1].clientY - 100);
                 socket.emit("mouse_up", socket.id, touchEndPositionX, touchEndPositionY, targetImgIdx);
                 break;
             default:
@@ -292,7 +292,7 @@ const DecoCanvas = () => {
                         onTouchStart={setEventTouch}
                         onTouchEnd={setEventTouch}
                         onTouchMove={setEventTouch}
-                        style={{ border: `3px solid ${decoMapping[targetImgIdx]}`, visibility: mode === "sticker" ? "hidden" : "visible" }}
+                        style={{ border: `10px solid ${decoMapping[targetImgIdx]}`, visibility: mode === "sticker" ? "hidden" : "visible" }}
                     ></canvas>
                 ) : (
                     <canvas
