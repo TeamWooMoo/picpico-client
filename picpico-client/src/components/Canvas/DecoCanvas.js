@@ -7,7 +7,7 @@ import { FlexboxGrid } from "rsuite";
 import { setDecoModeInfo, setResultInfo } from "../../slice/decoInfo";
 import { ResultImage, Sticker } from "../../modules/resultCanvas.mjs";
 import { isMobile } from "react-device-detect";
-import star from "../../assets/images/background-start.png";
+import star from "../../assets/images/background-star.png";
 import water from "../../assets/images/background-water.png";
 import galaxy from "../../assets/images/galaxy.jpeg";
 
@@ -24,7 +24,7 @@ const DecoCanvas = () => {
     const strokeHistory = useSelector(state => state.drawingInfo.strokeHistory);
     const strokeColor = useSelector(state => state.drawingInfo.strokeColor);
     const stickerPointList = useSelector(state => state.decoInfo.stickerPointList);
-    const bgList = useSelector(state => state.decoInfo.bg);
+    const bgList = useSelector(state => state.decoInfo.bgList);
     const bgSrcList = ["", star, water, galaxy];
 
     const decoColors = useSelector(state => state.decoInfo.colorList);
