@@ -10,23 +10,7 @@ function TakePicBtn() {
     const shuttersound = new Audio(shutterSound);
 
     const onTakePicBtnTouch = e => {
-        switch (e.type) {
-            case "touchstart":
-                break;
-            case "touchend":
-                shuttersound.play().catch(e => {
-                    console.log(e);
-                });
-                break;
-            case "mouseup":
-                e.preventDefault();
-                break;
-            case "mousedown":
-                e.preventDefault();
-                break;
-            default:
-                break;
-        }
+        e.preventDefault();
     };
     const onTakePicBtnClick = () => {
         console.log("사진 찍히니 ~");
@@ -39,28 +23,17 @@ function TakePicBtn() {
 
     return (
         <>
-            {isMobile ? (
-                <IoRadioButtonOnOutline
-                    id="takePicBtn"
-                    className="btn-shadow"
-                    color="red"
-                    size="40px"
-                    padding="5px 0"
-                    style={{ position: "fixed", left: "50%", transform: "translateX( -50% )" }}
-                    onTouchStart={onTakePicBtnTouch}
-                    onTouchEnd={onTakePicBtnTouch}
-                ></IoRadioButtonOnOutline>
-            ) : (
-                <IoRadioButtonOnOutline
-                    id="takePicBtn"
-                    className="btn-shadow"
-                    color="red"
-                    size="40px"
-                    padding="5px 0"
-                    style={{ position: "fixed", left: "50%", transform: "translateX( -50% )" }}
-                    onClick={onTakePicBtnClick}
-                ></IoRadioButtonOnOutline>
-            )}
+            <IoRadioButtonOnOutline
+                id="takePicBtn"
+                className="btn-shadow"
+                color="red"
+                size="40px"
+                padding="5px 0"
+                style={{ position: "fixed", left: "50%", transform: "translateX( -50% )" }}
+                onClick={onTakePicBtnClick}
+                onTouchStart={onTakePicBtnTouch}
+                onTouchEnd={onTakePicBtnTouch}
+            ></IoRadioButtonOnOutline>
         </>
     );
 }
