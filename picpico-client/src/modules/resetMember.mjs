@@ -11,16 +11,16 @@ export const onResetMemberEvent = nicknameArr => {
     }
 
     // TEST START
-    allCanvases.forEach(canvas => {
-        if (!memberSid.includes(canvas.id)) {
-            const peerCanvas = document.getElementById(`${canvas.id}`);
-            const peerVideo = document.getElementById(`video-${canvas.id}`);
+    for (let i = 0; i < allCanvases.length; i++) {
+        if (!memberSid.includes(allCanvases[i].id)) {
+            const peerCanvas = document.getElementById(`${allCanvases[i].id}`);
+            const peerVideo = document.getElementById(`video-${allCanvases[i].id}`);
             if (peerVideo) {
                 peerVideo.remove();
                 if (peerCanvas) peerCanvas.remove();
             }
         }
-    });
+    }
 
     // TEST END
     for (let i = 0; i < nicknameArr.length; i++) {
