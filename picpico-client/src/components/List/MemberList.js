@@ -1,10 +1,11 @@
 import { useRef } from "react";
 import { useSelector } from "react-redux";
 import { socket } from "../../modules/sockets.mjs";
+import { polyfill } from "mobile-drag-drop";
 import "./MemberList.css";
-import { isMobile } from "react-device-detect";
 
 const MemberList = () => {
+    polyfill();
     const members = useSelector(state => state.membersInfo.members);
     const memberKeys = Object.keys(members);
     console.log("members:", members);
@@ -22,18 +23,18 @@ const MemberList = () => {
         e.target.classList.add("grabbing");
     };
 
-    const onTouchStart = e => {
-        console.log("touch start!!!!", e.changedTouches.item(0));
-        const elem = e.changedTouches.item(0);
-        draggingItemIndex.current = elem.id;
-        elem.classList.add("grabbing");
-    };
+    // const onTouchStart = e => {
+    //     console.log("touch start!!!!", e.changedTouches.item(0));
+    //     const elem = e.changedTouches.item(0);
+    //     draggingItemIndex.current = elem.id;
+    //     elem.classList.add("grabbing");
+    // };
 
-    const onTouchEnd = e => {
-        console.log("touch end!!!!", e.changedTouches.item(0));
-        const elem = e.changedTouches.item(0);
-        elem.classList.remove("grabbing");
-    };
+    // const onTouchEnd = e => {
+    //     console.log("touch end!!!!", e.changedTouches.item(0));
+    //     const elem = e.changedTouches.item(0);
+    //     elem.classList.remove("grabbing");
+    // };
 
     const onAvailableItemDragEnter = (e, index) => {
         const oldIndex = draggingItemIndex.current;
@@ -94,8 +95,6 @@ const MemberList = () => {
                             onDragEnter={e => onAvailableItemDragEnter(e, index)}
                             onDragOver={onDragOver}
                             onDragEnd={onDragEnd}
-                            onTouchStart={onTouchStart}
-                            onTouchEnd={onTouchEnd}
                             draggable
                         >
                             {option}
