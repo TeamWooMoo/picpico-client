@@ -7,6 +7,9 @@ import { FlexboxGrid } from "rsuite";
 import { setDecoModeInfo, setResultInfo } from "../../slice/decoInfo";
 import { ResultImage, Sticker } from "../../modules/resultCanvas.mjs";
 import { isMobile } from "react-device-detect";
+import star from "../../assets/images/background-star.png";
+import water from "../../assets/images/background-water.png";
+import galaxy from "../../assets/images/galaxy.jpeg";
 
 const DecoCanvas = () => {
     const dispatch = useDispatch();
@@ -21,6 +24,8 @@ const DecoCanvas = () => {
     const strokeHistory = useSelector(state => state.drawingInfo.strokeHistory);
     const strokeColor = useSelector(state => state.drawingInfo.strokeColor);
     const stickerPointList = useSelector(state => state.decoInfo.stickerPointList);
+    const bgList = useSelector(state => state.decoInfo.bgList);
+    const bgSrcList = ["", star, water, galaxy];
 
     const decoColors = useSelector(state => state.decoInfo.colorList);
     const decoMapping = {};
@@ -89,15 +94,17 @@ const DecoCanvas = () => {
             const resultImages = [];
             // 꾸민 사진 4개에 대해 각각 실행
             idxArr.forEach(idx => {
+                const bg = document.getElementById(`bg-${idx}`);
                 const canvas = document.getElementById(`img-${idx}`); // canvas #img : 사진
                 const peer = document.getElementById(`peer-${idx}`); // canvas #peer : peer drawing
                 const my = document.getElementById(`my-${idx}`); // canvas #my : my drawing
 
-                const ctx = canvas.getContext("2d");
+                const ctx = bg.getContext("2d");
+                ctx.drawImage(canvas, 0, 0);
                 ctx.drawImage(peer, 0, 0);
                 ctx.drawImage(my, 0, 0);
 
-                const curImage = new ResultImage(canvas.toDataURL(), []);
+                const curImage = new ResultImage(bg.toDataURL(), []);
                 // 스티커 넣어줘야함
                 const curImageStickerField = document.getElementById(`sticker-${idx}`);
                 const stickers = curImageStickerField.children; // div
@@ -160,6 +167,32 @@ const DecoCanvas = () => {
             ctx.clearRect(0, 0, 300, 300);
         }
     }, [targetImgIdx]);
+
+    useEffect(() => {
+        if (bgList.length === 1) {
+            console.log("bgList:", bgList, bgList.length);
+            const [bgIdx, setIdx] = bgList[0];
+            console.log(setIdx, document.getElementById(`bg-${setIdx}`));
+            const bgCanvas = document.getElementById(`bg-${setIdx}`);
+            const bgCtx = bgCanvas.getContext("2d");
+
+            console.log("bgIdx:", bgIdx, ", setIdx: ", setIdx);
+            if (bgIdx === 0) {
+                bgCtx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
+            } else {
+                const src = bgSrcList[bgIdx];
+                const img = new Image();
+
+                console.log("src: ", src);
+                img.onload = function () {
+                    bgCtx.drawImage(img, 0, 0);
+                };
+                img.src = src;
+            }
+        } else {
+            console.log("bg length:", bgList.length);
+        }
+    }, [bgList]);
 
     useEffect(() => {
         idxArr.forEach(idx => {
@@ -225,6 +258,7 @@ const DecoCanvas = () => {
                 <div className="canvasWrapper">
                     {idxArr.map(idx => (
                         <div data-setid={`set-${idx}`} id={`set-${idx}`} style={{ visibility: idx != targetImgIdx ? "hidden" : "visible" }}>
+                            <canvas className="decocanvas" width="350px" height="350px" id={`bg-${idx}`}></canvas>
                             <canvas className="decocanvas" width="350px" height="350px" data-img={idx} id={`img-${idx}`}></canvas>
                             <canvas className="decocanvas" width="350px" height="350px" data-my={idx} id={`my-${idx}`}></canvas>
                             <canvas

@@ -19,7 +19,6 @@ const DecoList = () => {
     const onDecoImgClick = event => {
         const deco = event.target;
         const decoIdx = deco.dataset.deco;
-        console.log("now:", decoIdx, "prev:", prevIdx);
         socket.emit("pick_deco", socket.id, decoIdx, prevIdx);
         dispatch(setDecoModeInfo({ value: "stroke" }));
         dispatch(setMyDecoCanvasInfo({ value: decoIdx }));
