@@ -6,11 +6,12 @@ import { addStrokeHistory } from "../../slice/drawingInfo.js";
 import { FlexboxGrid } from "rsuite";
 import { setDecoModeInfo, setResultInfo } from "../../slice/decoInfo";
 import { ResultImage, Sticker } from "../../modules/resultCanvas.mjs";
-import { isMobile } from "react-device-detect";
+import { polyfill } from "mobile-drag-drop";
 import star from "../../assets/images/background-star.png";
 import water from "../../assets/images/background-water.png";
 
 const DecoCanvas = () => {
+    polyfill();
     const dispatch = useDispatch();
     const stickerList = useSelector(state => state.decoInfo.stickerList);
     const targetImgIdx = useSelector(state => state.decoInfo.myDecoCanvas);
