@@ -99,8 +99,8 @@ const DecoCanvas = () => {
                 const peer = document.getElementById(`peer-${idx}`); // canvas #peer : peer drawing
                 const my = document.getElementById(`my-${idx}`); // canvas #my : my drawing
 
-                const ctx = canvas.getContext("2d");
-                ctx.drawImage(bg, 0, 0);
+                const ctx = bg.getContext("2d");
+                ctx.drawImage(canvas, 0, 0);
                 ctx.drawImage(peer, 0, 0);
                 ctx.drawImage(my, 0, 0);
 
