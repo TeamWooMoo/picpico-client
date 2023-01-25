@@ -1,5 +1,7 @@
 // captureFrame() 으로 생기는 image array 를 가지고 gif 만든 후 다운로드
 import Animated_GIF from "gif-transparency";
+import { setGIFInfo } from "../slice/picpicoInfo";
+import store from "../store";
 export let finalURL;
 
 export function captureFrame(canvas) {
@@ -48,7 +50,7 @@ export function makeGIF() {
     ag.getBlobGIF(blob => {
         const url = window.URL.createObjectURL(blob);
         finalURL = url;
-        console.log("made GIF !");
+        store.dispatch(setGIFInfo({ value: true }));
 
         // animatedImage.src = url;
         // document.body.appendChild(animatedImage);
