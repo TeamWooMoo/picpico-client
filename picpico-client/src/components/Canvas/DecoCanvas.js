@@ -290,7 +290,7 @@ const DecoCanvas = () => {
                         </div>
                     ))}
                 </div>
-                {isMobile ? (
+                {/* {isMobile ? (
                     <canvas
                         className="decocanvas"
                         width="345px"
@@ -312,7 +312,17 @@ const DecoCanvas = () => {
                         onMouseUp={onCanvasUp}
                         style={{ border: `3px solid ${decoMapping[targetImgIdx]}`, visibility: mode === "sticker" ? "hidden" : "visible" }}
                     ></canvas>
-                )}
+                )} */}
+                <canvas
+                    className="decocanvas"
+                    width="345px"
+                    height="345px"
+                    ref={decoEventCanvas}
+                    onMouseDown={onCanvasDown}
+                    onMouseMove={onCanvasMove}
+                    onMouseUp={onCanvasUp}
+                    style={{ border: `3px solid ${decoMapping[targetImgIdx]}`, visibility: mode === "sticker" ? "hidden" : "visible" }}
+                ></canvas>
             </FlexboxGrid>
         </>
     );

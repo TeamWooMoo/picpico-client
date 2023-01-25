@@ -7,12 +7,14 @@ import sticker3 from "../../assets/gif/sticker3.gif";
 import coding from "../../assets/gif/coding.gif";
 import happy from "../../assets/gif/happy.gif";
 import heart from "../../assets/gif/heart.gif";
+import { polyfill } from "mobile-drag-drop";
 
 import { socket } from "../../modules/sockets.mjs";
 import { setDecoModeInfo } from "../../slice/decoInfo";
 import { v1 as uuid } from "uuid";
 
 const StickerList = () => {
+    polyfill();
     const dispatch = useDispatch();
     const targetImgIdx = useSelector(state => state.decoInfo.myDecoCanvas);
     const onStickerClick = url => {
