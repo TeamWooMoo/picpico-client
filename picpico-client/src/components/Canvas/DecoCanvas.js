@@ -179,8 +179,10 @@ const DecoCanvas = () => {
                 bgCtx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
             } else {
                 const src = bgSrcList[bgIdx];
+                const img = new Image();
+                img.src = src;
                 console.log("src: ", src);
-                bgCtx.drawImage(src, 0, 0);
+                bgCtx.drawImage(img, 0, 0);
             }
         } else {
             console.log("bg length:", bgList.length);
