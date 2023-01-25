@@ -1,9 +1,11 @@
 // import cancelBtn from "../../assets/images/cancelBtn.svg";
 // import cancelBtn from "../assets/images/cancelBtn.svg";
 
-import {socket} from "./sockets.mjs";
+import { socket } from "./sockets.mjs";
+import { polyfill } from "mobile-drag-drop";
 
 export const DecoDragAndDrop = () => {
+    polyfill();
     let isDragging;
     let field;
     let dragElement;

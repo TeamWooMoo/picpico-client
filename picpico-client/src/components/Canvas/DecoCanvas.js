@@ -6,12 +6,11 @@ import { addStrokeHistory } from "../../slice/drawingInfo.js";
 import { FlexboxGrid } from "rsuite";
 import { setDecoModeInfo, setResultInfo } from "../../slice/decoInfo";
 import { ResultImage, Sticker } from "../../modules/resultCanvas.mjs";
-import { polyfill } from "mobile-drag-drop";
+import { isMobile } from "react-device-detect";
 import star from "../../assets/images/background-star.png";
 import water from "../../assets/images/background-water.png";
 
 const DecoCanvas = () => {
-    polyfill();
     const dispatch = useDispatch();
     const stickerList = useSelector(state => state.decoInfo.stickerList);
     const targetImgIdx = useSelector(state => state.decoInfo.myDecoCanvas);
@@ -291,7 +290,7 @@ const DecoCanvas = () => {
                         </div>
                     ))}
                 </div>
-                {/* {isMobile ? (
+                {isMobile ? (
                     <canvas
                         className="decocanvas"
                         width="345px"
@@ -313,17 +312,7 @@ const DecoCanvas = () => {
                         onMouseUp={onCanvasUp}
                         style={{ border: `3px solid ${decoMapping[targetImgIdx]}`, visibility: mode === "sticker" ? "hidden" : "visible" }}
                     ></canvas>
-                )} */}
-                <canvas
-                    className="decocanvas"
-                    width="345px"
-                    height="345px"
-                    ref={decoEventCanvas}
-                    onMouseDown={onCanvasDown}
-                    onMouseMove={onCanvasMove}
-                    onMouseUp={onCanvasUp}
-                    style={{ border: `3px solid ${decoMapping[targetImgIdx]}`, visibility: mode === "sticker" ? "hidden" : "visible" }}
-                ></canvas>
+                )}
             </FlexboxGrid>
         </>
     );
