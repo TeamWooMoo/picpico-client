@@ -7,6 +7,9 @@ import { FlexboxGrid } from "rsuite";
 import { setDecoModeInfo, setResultInfo } from "../../slice/decoInfo";
 import { ResultImage, Sticker } from "../../modules/resultCanvas.mjs";
 import { isMobile } from "react-device-detect";
+import star from "../../assets/images/background-start.png";
+import water from "../../assets/images/background-water.png";
+import galaxy from "../../assets/images/galaxy.jpeg";
 
 const DecoCanvas = () => {
     const dispatch = useDispatch();
@@ -21,6 +24,8 @@ const DecoCanvas = () => {
     const strokeHistory = useSelector(state => state.drawingInfo.strokeHistory);
     const strokeColor = useSelector(state => state.drawingInfo.strokeColor);
     const stickerPointList = useSelector(state => state.decoInfo.stickerPointList);
+    const bgList = useSelector(state => state.decoInfo.bg);
+    const bgSrcList = ["", star, water, galaxy];
 
     const decoColors = useSelector(state => state.decoInfo.colorList);
     const decoMapping = {};
@@ -162,6 +167,21 @@ const DecoCanvas = () => {
     }, [targetImgIdx]);
 
     useEffect(() => {
+        if (bgList.length > 0) {
+            const bgCanvas = document.getElementById(`.bg-${setIdx}`);
+            const bgCtx = bgCanvas.getContext("2d");
+            const [bgIdx, setIdx] = bgList;
+            console.log("bgIdx:", bgIdx, ", setIdx: ", setIdx);
+            if (bgIdx === 0) {
+                bgCtx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
+            } else {
+                const src = bgSrcList[bgIdx];
+                bgCtx.drawImage(src, 0, 0);
+            }
+        }
+    }, [bgList]);
+
+    useEffect(() => {
         idxArr.forEach(idx => {
             const imgCanvas = document.getElementById(`img-${idx}`);
             const imgCtx = imgCanvas.getContext("2d");
@@ -225,6 +245,7 @@ const DecoCanvas = () => {
                 <div className="canvasWrapper">
                     {idxArr.map(idx => (
                         <div data-setid={`set-${idx}`} id={`set-${idx}`} style={{ visibility: idx != targetImgIdx ? "hidden" : "visible" }}>
+                            <canvas className="decocanvas" width="350px" height="350px" id={`bg-${idx}`}></canvas>
                             <canvas className="decocanvas" width="350px" height="350px" data-img={idx} id={`img-${idx}`}></canvas>
                             <canvas className="decocanvas" width="350px" height="350px" data-my={idx} id={`my-${idx}`}></canvas>
                             <canvas
@@ -262,7 +283,6 @@ const DecoCanvas = () => {
                         style={{ border: `3px solid ${decoMapping[targetImgIdx]}`, visibility: mode === "sticker" ? "hidden" : "visible" }}
                     ></canvas>
                 )}
-
             </FlexboxGrid>
         </>
     );
