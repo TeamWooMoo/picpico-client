@@ -12,10 +12,6 @@ const videosInfo = createSlice({
             console.log("setVideosInfo");
             state.videos = state.videos.filter(video => video !== action.payload.value);
         },
-        // setOnOffVideosInfo(state, action) {
-        //     console.log("되니 ...");
-        //     state.isOnOffCam = action.payload.value;
-        // },
     },
 });
 

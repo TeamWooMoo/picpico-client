@@ -7,8 +7,13 @@ function TakePicBtn() {
     const idx = useSelector(state => state.takepicInfo.idx);
 
     const shuttersound = new Audio(shutterSound);
-    const onTakePicBtnClick = () => {
-        console.log("사진 찍히니 ~");
+
+    const onTakePicBtnTouch = e => {
+        e.preventDefault();
+        socket.emit("click_shutter", idx);
+    };
+
+    const onTakePicBtnClick = e => {
         shuttersound.play().catch(e => {
             console.log(e);
         });
@@ -26,6 +31,7 @@ function TakePicBtn() {
                 padding="5px 0"
                 style={{ position: "fixed", left: "50%", transform: "translateX( -50% )" }}
                 onClick={onTakePicBtnClick}
+                onTouchEnd={onTakePicBtnTouch}
             ></IoRadioButtonOnOutline>
         </>
     );

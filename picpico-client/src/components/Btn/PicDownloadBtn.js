@@ -3,9 +3,12 @@ import { useState } from "react";
 import download_btn from "./../../assets/images/icon-download.png";
 import retry_btn from "./../../assets/images/icon-retry.png";
 import { finalURL } from "../../modules/resultGIF.mjs";
+import { useSelector } from "react-redux";
+import Typewriter from "typewriter-effect";
 
 function PicDownloadBtn() {
     // const [gif, setGIF] = useState(false);
+    const gif = useSelector(state => state.picpicoInfo.gifMade);
 
     const onCapture = () => {
         if (finalURL) onSaveImg(finalURL, "PicPiCo_Result.gif");
@@ -42,16 +45,30 @@ function PicDownloadBtn() {
             ></div>
 
             {/* 다운로드 버튼과 Home으로 돌아가는 버튼 */}
-            <div style={{ display: "flex", flexDirection: "row", justifyContent: "center", marginTop: "15px" }}>
-                <img id="download" src={download_btn} className="btn-shadow" style={{ width: "40px", height: "40px", margin: "10px" }} onClick={onCapture} />
-                <img
-                    id="retry"
-                    src={retry_btn}
-                    className="btn-shadow"
-                    style={{ width: "40px", height: "40px", margin: "10px" }}
-                    onClick={onGalleryDoneBtnClick}
-                />
-            </div>
+            {gif ? (
+                <div style={{ display: "flex", flexDirection: "row", justifyContent: "center", marginTop: "15px" }}>
+                    <img
+                        id="download"
+                        src={download_btn}
+                        className="btn-shadow"
+                        style={{ width: "40px", height: "40px", margin: "10px" }}
+                        onClick={onCapture}
+                        alt="download"
+                    />
+                    <img
+                        id="retry"
+                        src={retry_btn}
+                        className="btn-shadow"
+                        style={{ width: "40px", height: "40px", margin: "10px" }}
+                        onClick={onGalleryDoneBtnClick}
+                        alt="home"
+                    />
+                </div>
+            ) : (
+                <div style={{ display: "flex", flexDirection: "row", justifyContent: "center", marginTop: "15px" }}>
+                    <Typewriter options={{ autoStart: true, loop: true, delay: 50, strings: ["결과물을 생성 중 입니다."] }} />
+                </div>
+            )}
         </>
     );
 }
