@@ -14,7 +14,7 @@ const Home = () => {
             <Link to={"/login"}>
                 <LoginBtn />
             </Link>
-            <Link to={"/lobby/user"}>
+            <Link to={"/lobby/이원희"}>
                 <button>room</button>
             </Link>
             {isMobile ? <div>당신은 모바일 환경에서 접속했습니다.</div> : null}
