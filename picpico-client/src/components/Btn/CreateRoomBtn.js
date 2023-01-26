@@ -38,6 +38,7 @@ function CreateRoomBtn() {
 
     function onCreateBtnClick() {
         setClicked(true);
+        console.log("clicked!");
         const roomId = uuid();
         dispatch(setKingInfo({ value: true }));
         dispatch(setRoomInfo({ value: roomId }));
@@ -48,7 +49,6 @@ function CreateRoomBtn() {
                 //    서버가 어떻게 주는지에 따라서 아래는 바뀔 것
                 console.log(res);
                 navigate(`/room/${res.data.roomId}`);
-                // navigate(`/room/100`);
             })
             .catch(err => {
                 setClicked(false);
