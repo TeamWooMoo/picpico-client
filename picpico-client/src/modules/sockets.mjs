@@ -18,21 +18,23 @@ export const addMemberEvent = async (roomId, nickname) => {
     socket.emit("add_member", roomId, nickname);
 };
 
-export async function joinRoom(roomId) {
+export async function joinRoom(roomId, nickName) {
     socket.emit("join_room", roomId, socket.id);
-    socket.on("reset_member", onResetMemberEvent);
-    socket.on("click_shutter", onClickShutterEvent);
-    socket.on("pick_pic", onPickPicEvent);
+    if (nickName !== "user") {
+        socket.on("reset_member", onResetMemberEvent);
+        socket.on("click_shutter", onClickShutterEvent);
+        socket.on("pick_pic", onPickPicEvent);
+        socket.on("stroke_canvas", onStrokeCanvasEvent);
+        socket.on("mouse_down", onMouseDownEvent);
+        socket.on("pick_deco", onPickDecoEvent);
+        socket.on("pick_sticker", onPickStickerEvent);
+        socket.on("change_layer", onChangeLayerEvent);
+        socket.on("sticker_move", onStickerMoveEvent);
+        socket.on("pick_bg", onPickBgEvent);
+    }
     socket.on("done_take", onDoneTakeEvent);
     socket.on("done_pick", onDonePickEvent);
     socket.on("done_deco", onDoneDecoEvent);
-    socket.on("stroke_canvas", onStrokeCanvasEvent);
-    socket.on("mouse_down", onMouseDownEvent);
-    socket.on("permission_denied", onPermissionDeniedEvent);
-    socket.on("pick_deco", onPickDecoEvent);
     socket.on("submit_deco", onSubmitDecoEvent);
-    socket.on("pick_sticker", onPickStickerEvent);
-    socket.on("change_layer", onChangeLayerEvent);
-    socket.on("sticker_move", onStickerMoveEvent);
-    socket.on("pick_bg", onPickBgEvent);
+    socket.on("permission_denied", onPermissionDeniedEvent);
 }

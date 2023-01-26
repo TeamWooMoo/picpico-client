@@ -89,6 +89,7 @@ const handleTrack = (data, myPeer) => {
         const observerAudio = document.getElementById("observerAudio");
         observerAudio.srcObject = data.streams[0];
         observerAudio.play();
+        myPeer.mediaStream = data.streams[0];
     }
 };
 

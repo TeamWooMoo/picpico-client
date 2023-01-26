@@ -5,7 +5,7 @@ let obMediaStream;
 
 export async function initObserver(roomId) {
     await obInitStream();
-    await joinRoom(roomId);
+    await joinRoom(roomId, "user");
     await obInitWebRTC();
 }
 

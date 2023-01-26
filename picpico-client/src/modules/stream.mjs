@@ -118,6 +118,8 @@ export const handleMuteClick = muted => {
 };
 
 export const offVideoTrack = () => {
-    myStream.getVideoTracks().forEach(track => (track.enabled = false));
-    console.log("stopped sending video");
+    if (myStream) {
+        myStream.getVideoTracks().forEach(track => (track.enabled = false));
+        console.log("stopped sending video");
+    }
 };
