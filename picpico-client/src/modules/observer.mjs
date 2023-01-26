@@ -1,4 +1,4 @@
-import { myPeer, myPeers } from "../controller/MainController";
+import { myPeer, myPeers } from "../controller/MainController.js";
 import { joinRoom, socket } from "./sockets.mjs";
 
 let obMediaStream;
