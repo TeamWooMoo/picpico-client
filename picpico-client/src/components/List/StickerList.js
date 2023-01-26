@@ -4,6 +4,8 @@ import { FlexboxGrid } from "rsuite";
 import sticker1 from "../../assets/gif/sticker1.gif";
 import sticker2 from "../../assets/gif/sticker2.gif";
 import sticker3 from "../../assets/gif/sticker3.gif";
+import sticker4 from "../../assets/gif/sticker4.gif";
+import sticker5 from "../../assets/gif/sticker5.gif";
 
 import { socket } from "../../modules/sockets.mjs";
 import { setDecoModeInfo } from "../../slice/decoInfo";
@@ -28,6 +30,8 @@ const StickerList = () => {
                     <img style={{ height: "40px" }} onClick={() => onStickerClick(sticker1)} src={sticker1} draggable="true" alt="sticker1" />
                     <img style={{ height: "40px" }} onClick={() => onStickerClick(sticker2)} src={sticker2} draggable="true" alt="sticker2" />
                     <img style={{ height: "40px" }} onClick={() => onStickerClick(sticker3)} src={sticker3} draggable="true" alt="sticker3" />
+                    <img style={{ height: "40px" }} onClick={() => onStickerClick(sticker4)} src={sticker4} draggable="true" alt="sticker4" />
+                    <img style={{ height: "40px" }} onClick={() => onStickerClick(sticker5)} src={sticker5} draggable="true" alt="sticker5" />
                 </div>
             </FlexboxGrid>
         </>
