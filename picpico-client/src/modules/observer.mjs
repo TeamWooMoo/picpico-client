@@ -89,13 +89,16 @@ const obHandleTrack = (data, myPeer) => {
     if (data.track.kind === "video") {
         console.log(">>>handling track : video !");
 
-        console.log("observer data", data);
-        //! data 전달받은거에서 audio track 뽑고
-        //! audio element 만들어서
-        //! source로 꽂아줌
+        console.log("observer data", data.streams[0]);
 
-        //! component 변경 시 audio stream 전달 구현 위해 추가
-        // myPeer.mediaStream = data.streams[0];
+        const peerAudio = myPeer.obAudioElement;
+        const obPeerAudioRow = document.getElementById("obPeerAudioRow");
+        obPeerAudioRow.appendChild(peerAudio);
+
+        peerAudio.srcObject = data.streams[0];
+        peerAudio.play();
+
+        myPeer.mediaStream = data.streams[0];
     }
 };
 

@@ -34,6 +34,7 @@ import store from "../store";
 import { setErrorInfo } from "../slice/errorInfo";
 import AudioList from "../components/List/AudioList";
 import ImgList from "../components/List/ImgList";
+import ObserverList from "../components/List/ObserverList";
 
 const Picpico = () => {
     const { id } = useParams();
@@ -59,6 +60,7 @@ const Picpico = () => {
                         <PicDoneBtn />
                     </Header>
                     <Content>
+                        <ObserverList />
                         <MemberList />
                         <PicBooth />
                     </Content>

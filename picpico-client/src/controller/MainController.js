@@ -28,6 +28,7 @@ export class myPeer {
     // alphaChannel;
     // alphaReceived;
     mySocketId;
+    obAudioElement;
 
     constructor(newConnection) {
         this.connection = newConnection;
@@ -35,6 +36,7 @@ export class myPeer {
         // this.videoElement.hidden = true;
         this.canvasElement = document.createElement("canvas");
         this.mediaStream = null;
+        this.obAudioElement = document.createElement("audio");
         // this.alphaChannel = null;
         // this.alphaReceived = null;
     }
