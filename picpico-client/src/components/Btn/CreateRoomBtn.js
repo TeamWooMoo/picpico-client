@@ -13,6 +13,24 @@ function CreateRoomBtn() {
     const dispatch = useDispatch();
     const nickName = useSelector(state => state.membersInfo.nickname);
 
+    const onCreateBtnTouch = e => {
+        e.preventDefault();
+        const roomId = uuid();
+        dispatch(setKingInfo({ value: true }));
+        dispatch(setRoomInfo({ value: roomId }));
+        axios
+            .post(API.ROOM, { roomId: roomId, nickname: nickName, socketId: socket.id })
+            .then(res => {
+                //    서버가 어떻게 주는지에 따라서 아래는 바뀔 것
+                console.log(res);
+                navigate(`/room/${res.data.roomId}`);
+                // navigate(`/room/100`);
+            })
+            .catch(err => {
+                alert("방 생성에 실패하였습니다.", err);
+            });
+    };
+
     function onCreateBtnClick() {
         const roomId = uuid();
         dispatch(setKingInfo({ value: true }));
@@ -64,6 +82,7 @@ function CreateRoomBtn() {
                         fontWeight: "600",
                     }}
                     onClick={onCreateBtnClick}
+                    onTouchEnd={onCreateBtnTouch}
                 >
                     새로운 방 생성
                 </Button>
