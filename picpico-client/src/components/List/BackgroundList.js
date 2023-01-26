@@ -24,7 +24,7 @@ const StickerList = () => {
                     <img style={{ height: "40px", margin: "0 5px" }} src={none} onClick={onBgClick} data-bg="0" alt="bg-0" />
                     <img style={{ height: "40px", margin: "0 5px" }} src={star} onClick={onBgClick} data-bg="1" alt="bg-1" />
                     <img style={{ height: "40px", margin: "0 5px" }} src={water} onClick={onBgClick} data-bg="2" alt="bg-2" />
-                    <img style={{ height: "40px", margin: "0 5px" }} src={matrix} onClick={onBgClick} data-bg="2" alt="bg-3" />
+                    <img style={{ height: "40px", margin: "0 5px" }} src={matrix} onClick={onBgClick} data-bg="3" alt="bg-3" />
                 </div>
             </FlexboxGrid>
         </>
