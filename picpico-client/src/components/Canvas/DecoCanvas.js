@@ -300,7 +300,7 @@ const DecoCanvas = () => {
                         onTouchStart={setEventTouch}
                         onTouchEnd={setEventTouch}
                         onTouchMove={setEventTouch}
-                        style={{ border: `10px solid ${decoMapping[targetImgIdx]}`, visibility: mode === "sticker" ? "hidden" : "visible" }}
+                        style={{ border: `3px solid ${decoMapping[targetImgIdx]}`, visibility: mode === "sticker" ? "hidden" : "visible" }}
                     ></canvas>
                 ) : (
                     <canvas
