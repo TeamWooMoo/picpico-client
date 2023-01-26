@@ -211,7 +211,7 @@ function putFrame(currentResult, resultCtx, frameIndex, imageIndex) {
 
         resultCtx.globalCompositeOperation = "destination-over";
         // resultCtx.putImageData(stickerImageData, stickerX, 350 * imageIndex + stickerY);
-        resultCtx.putImageData(stickerImageData, stickerX, stickerY, 0, 0, 100, 100); // size option주면 resolution overload fail
+        resultCtx.putImageData(stickerImageData, stickerX, stickerY); // size option주면 resolution overload fail
     }
 
     return resultCtx;
