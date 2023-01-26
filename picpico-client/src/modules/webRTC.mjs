@@ -3,7 +3,6 @@ import { setVideosInfo } from "../slice/videosInfo.js";
 import { myPeer, myPeers, myStream } from "../controller/MainController.js";
 import { socket } from "./sockets.mjs";
 import { initWebGL } from "./webgl-transparency.mjs";
-import uuid from "react-uuid";
 
 /* myPeers
  *    key    :    value
@@ -61,6 +60,7 @@ const handleTrack = (data, myPeer) => {
         peerVideo.hidden = true;
         peerVideo.width = 350;
         peerVideo.height = 350;
+        peerVideo.id = `video-${myPeer.mySocketId}`;
 
         // pecderVideo.muted = true;
         // peerVideo.autoplay = true;
@@ -91,13 +91,9 @@ function makeConnection(socketId) {
     const newConnection = new RTCPeerConnection({
         iceServers: [
             {
-                urls: [
-                    "stun:stun.l.google.com:19302",
-                    "stun:stun1.l.google.com:19302",
-                    "stun:stun2.l.google.com:19302",
-                    "stun:stun3.l.google.com:19302",
-                    "stun:stun4.l.google.com:19302",
-                ],
+                username: "ninefingers",
+                credential: "password1",
+                urls: ["turn:43.201.71.144:3478?transport=tcp"],
             },
         ],
     });
@@ -200,7 +196,7 @@ function onIceEvent(ice, socketId) {
 /******************************************************************* */
 
 function onGoneEvent(goneSocketId) {
-    store.dispatch(setVideosInfo(goneSocketId));
+    store.dispatch(setVideosInfo({ value: goneSocketId }));
 }
 
 /******************************************************************* */
@@ -211,5 +207,4 @@ export async function initWebRTC() {
     socket.on("offer", onOfferEvent);
     socket.on("answer", onAnswerEvent);
     socket.on("ice", onIceEvent);
-    socket.on("gone", onGoneEvent);
 }

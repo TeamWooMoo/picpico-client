@@ -1,9 +1,12 @@
 // import cancelBtn from "../../assets/images/cancelBtn.svg";
 // import cancelBtn from "../assets/images/cancelBtn.svg";
 
-import {socket} from "./sockets.mjs";
+import { socket } from "./sockets.mjs";
+import { polyfill } from "mobile-drag-drop";
+import { isMobile } from "react-device-detect";
 
 export const DecoDragAndDrop = () => {
+    polyfill();
     let isDragging;
     let field;
     let dragElement;
@@ -12,6 +15,10 @@ export const DecoDragAndDrop = () => {
     const onMouseMove = event => {
         moveAt(event.clientX, event.clientY);
     };
+
+    // const onTouchMove = event => {
+    //     moveAt(event.clientX, event.clientY);
+    // };
 
     const onMouseUp = event => {
         finishDrag();
@@ -35,8 +42,13 @@ export const DecoDragAndDrop = () => {
         if (isDragging) return;
         isDragging = true;
 
-        field.addEventListener("mousemove", onMouseMove);
-        element.addEventListener("mouseup", onMouseUp);
+        if (isMobile) {
+            field.addEventListener("touchmove", onMouseMove);
+            element.addEventListener("touchend", onMouseUp);
+        } else {
+            field.addEventListener("mousemove", onMouseMove);
+            element.addEventListener("mouseup", onMouseUp);
+        }
 
         shiftX = clientX - element.getBoundingClientRect().left;
         shiftY = clientY - element.getBoundingClientRect().top;
@@ -90,8 +102,13 @@ export const DecoDragAndDrop = () => {
 
         dragElement.style.position = "absolute";
 
-        field.removeEventListener("mousemove", onMouseMove);
-        dragElement.removeEventListener("mouseup", onMouseUp);
+        if (isMobile) {
+            field.removeEventListener("mousemove", onMouseMove);
+            dragElement.removeEventListener("mouseup", onMouseUp);
+        } else {
+            field.removeEventListener("mousemove", onMouseMove);
+            dragElement.removeEventListener("mouseup", onMouseUp);
+        }
     };
 
     const showFrame = event => {
@@ -121,7 +138,11 @@ export const DecoDragAndDrop = () => {
         isDragging = false;
         // field = document.getElementById("sticker_field");
         field = document.getElementById(`sticker-${idx}`);
-        field.addEventListener("mousedown", fieldMouseDown);
+        if (isMobile) {
+            field.addEventListener("touchstart", fieldMouseDown);
+        } else {
+            field.addEventListener("mousedown", fieldMouseDown);
+        }
     };
 
     const reset = () => {

@@ -8,6 +8,7 @@ const picpicoInfo = createSlice({
         decoDisplay: false,
         galleryDisplay: false,
         isMuted: true,
+        gifMade: false,
     },
 
     reducers: {
@@ -26,9 +27,12 @@ const picpicoInfo = createSlice({
         setMutedInfo(state, action) {
             state.isMuted = action.payload.value;
         },
+        setGIFInfo(state, action) {
+            state.gifMade = action.payload.value;
+        },
     },
 });
 
-export let { setPicBoothInfo, setSelectionInfo, setDecoInfo, setGalleryInfo, setMutedInfo } = picpicoInfo.actions;
+export let { setPicBoothInfo, setSelectionInfo, setDecoInfo, setGalleryInfo, setMutedInfo, setGIFInfo } = picpicoInfo.actions;
 
 export default picpicoInfo;

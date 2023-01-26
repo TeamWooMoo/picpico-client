@@ -1,9 +1,13 @@
 import { useRef } from "react";
 import { useSelector } from "react-redux";
 import { socket } from "../../modules/sockets.mjs";
+import { polyfill } from "mobile-drag-drop";
 import "./MemberList.css";
 
 const MemberList = () => {
+    const isPicBooth = useSelector(state => state.picpicoInfo.picBoothDisplay);
+    if (isPicBooth) polyfill();
+
     const members = useSelector(state => state.membersInfo.members);
     const memberKeys = Object.keys(members);
     console.log("members:", members);
@@ -20,6 +24,19 @@ const MemberList = () => {
         draggingItemIndex.current = e.target.id;
         e.target.classList.add("grabbing");
     };
+
+    // const onTouchStart = e => {
+    //     console.log("touch start!!!!", e.changedTouches.item(0));
+    //     const elem = e.changedTouches.item(0);
+    //     draggingItemIndex.current = elem.id;
+    //     elem.classList.add("grabbing");
+    // };
+
+    // const onTouchEnd = e => {
+    //     console.log("touch end!!!!", e.changedTouches.item(0));
+    //     const elem = e.changedTouches.item(0);
+    //     elem.classList.remove("grabbing");
+    // };
 
     const onAvailableItemDragEnter = (e, index) => {
         const oldIndex = draggingItemIndex.current;

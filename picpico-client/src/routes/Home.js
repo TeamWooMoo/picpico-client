@@ -4,6 +4,7 @@ import LoginBtn from "../components/Btn/LoginBtn";
 import { Link } from "react-router-dom";
 import { Container } from "rsuite";
 import "../style/style.css";
+import { isMobile } from "react-device-detect";
 
 const Home = () => {
     return (
@@ -16,6 +17,7 @@ const Home = () => {
             <Link to={"/lobby/user"}>
                 <button>room</button>
             </Link>
+            {isMobile ? <div>당신은 모바일 환경에서 접속했습니다.</div> : null}
         </Container>
     );
 };
