@@ -9,6 +9,7 @@ import { ResultImage, Sticker } from "../../modules/resultCanvas.mjs";
 import { isMobile } from "react-device-detect";
 import star from "../../assets/images/background-star.png";
 import water from "../../assets/images/background-water.png";
+import matrix from "./../../assets/images/background-matrix.png";
 
 const DecoCanvas = () => {
     const dispatch = useDispatch();
@@ -24,7 +25,7 @@ const DecoCanvas = () => {
     const strokeColor = useSelector(state => state.drawingInfo.strokeColor);
     const stickerPointList = useSelector(state => state.decoInfo.stickerPointList);
     const bgList = useSelector(state => state.decoInfo.bgList);
-    const bgSrcList = ["", star, water];
+    const bgSrcList = ["", star, water, matrix];
 
     const decoColors = useSelector(state => state.decoInfo.colorList);
     const decoMapping = {};
