@@ -4,13 +4,17 @@ import EnterRoomForm from "../Form/EnterRoomForm";
 
 function EnterRoomBtn() {
     const [formDisplay, setFormDisplay] = useState(false);
+    const [clicked, setClicked] = useState(false);
+    const [touched, setTouched] = useState(false);
     function onEnterRoomBtnClick() {
+        setClicked(true);
         console.log("enterRoom click");
         setFormDisplay(prev => !prev);
     }
 
     const onEnterRoomBtnTouch = e => {
         e.preventDefault();
+        setTouched(true);
         console.log("enterRoom touch");
         setFormDisplay(prev => !prev);
     };
@@ -31,8 +35,8 @@ function EnterRoomBtn() {
                             margin: "7px 0",
                             fontWeight: "600",
                         }}
-                        onClick={onEnterRoomBtnClick}
-                        onTouchEnd={onEnterRoomBtnTouch}
+                        onClick={clicked ? null : onEnterRoomBtnClick}
+                        onTouchEnd={touched ? null : onEnterRoomBtnTouch}
                     >
                         방 코드 입력 후 입장
                     </Button>
