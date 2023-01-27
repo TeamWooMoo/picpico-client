@@ -5,7 +5,6 @@
 
 import {decompressFrames, parseGIF} from "gifuct-js";
 import {captureFrame, makeGIF} from "./resultGIF.mjs";
-import {async} from "rxjs";
 
 export let resultCanvas = document.createElement("canvas"); // ! 나중에 import 실제 element from component 가져와야함
 export let resultImages = []; // {사진 + (각 사진 위의 스티커url, 좌표, frames) 여러개 } x 4 일 것임
@@ -135,7 +134,7 @@ export async function makeResultCanvas() {
     }
 
     // 스티커 on
-    const drawResult = async () => {
+    const drawResult = () => {
         const dx = [0, totalCanvasSize / onePictureRatio, 0, totalCanvasSize / onePictureRatio];
         const dy = [0, 0, totalCanvasSize / onePictureRatio, totalCanvasSize / onePictureRatio];
         resultCtx.save();
@@ -146,7 +145,7 @@ export async function makeResultCanvas() {
         for (let imageIndex = 0; imageIndex < resultImages.length; imageIndex++) {
             const currentResult = resultImages[imageIndex];
 
-            resultCtx = await putFrame(currentResult, resultCtx, frameIndex, imageIndex);
+            resultCtx = putFrame(currentResult, resultCtx, frameIndex, imageIndex);
             resultCtx.globalCompositeOperation = "destination-over";
             // resultCtx.drawImage(resultImgArr[imageIndex], 0, 350 * imageIndex);
 
@@ -178,14 +177,14 @@ export async function makeResultCanvas() {
         requestAnimationFrame(drawResult);
     };
 
-    // setTimeout(() => drawResult(), 1000);
-    await drawResult();
+    setTimeout(() => drawResult(), 1000);
+    // drawResult();
 }
 
 /***************************************************************** */
 
 // 한 사진을 올리고 그 사진에 대한 스티커들 그리기
-async function putFrame(currentResult, resultCtx, frameIndex, imageIndex) {
+function putFrame(currentResult, resultCtx, frameIndex, imageIndex) {
     //
     // const resultImg = new Image();
     // resultImg.src = currentResult.resultUrl;
@@ -206,32 +205,15 @@ async function putFrame(currentResult, resultCtx, frameIndex, imageIndex) {
         // console.log(">>>>>>currentSticker.frames", frames);
         // console.log(">>>>>>frames[frameIndex]", frames[frameIndex]);
         const stickerImageData = new ImageData(frames[frameIndex].patch, frames[frameIndex].dims.width, frames[frameIndex].dims.height);
-        const resizingstickerImageData = await resizeImageData(stickerImageData, frames[frameIndex].dims.width, frames[frameIndex].dims.height);
 
         const stickerWidth = frames[frameIndex].dims.width / onePictureRatio;
         const stickerHeight = frames[frameIndex].dims.height / onePictureRatio;
 
         resultCtx.globalCompositeOperation = "destination-over";
         // resultCtx.putImageData(stickerImageData, stickerX, 350 * imageIndex + stickerY);
-        // resultCtx.putImageData(stickerImageData, stickerX, stickerY); // size option주면 resolution overload fail
-        resultCtx.putImageData(resizingstickerImageData, stickerX, stickerY); // size option주면 resolution overload fail
+        resultCtx.putImageData(stickerImageData, stickerX, stickerY); // size option주면 resolution overload fail
+        // resultCtx.putImageData(stickerImageData, stickerY, stickerX); // size option주면 resolution overload fail
     }
 
     return resultCtx;
-}
-
-export async function resizeImageData(imageData, width, height) {
-    const resizeWidth = width >> 1;
-    const resizeHeight = height >> 1;
-    const ibm = await window.createImageBitmap(imageData, 0, 0, imageData.width, imageData.height, {
-        resizeWidth,
-        resizeHeight,
-    });
-    const canvas = document.createElement("canvas");
-    canvas.width = resizeWidth;
-    canvas.height = resizeHeight;
-    const ctx = canvas.getContext("2d");
-    ctx.scale(resizeWidth / imageData.width, resizeHeight / imageData.height);
-    ctx.drawImage(ibm, 0, 0);
-    return ctx.getImageData(0, 0, resizeWidth, resizeHeight);
 }
