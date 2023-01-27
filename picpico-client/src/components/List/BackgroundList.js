@@ -2,7 +2,7 @@ import { FlexboxGrid } from "rsuite";
 import none from "./../../assets/images/background-none.png";
 import boom from "./../../assets/images/background-boom.png";
 import party from "./../../assets/images/background-party.png";
-import bang from "./../../assets/images/background-bang.jpeg";
+import bang from "./../../assets/images/background-bang.png";
 import sky from "./../../assets/images/background-sky.png";
 import { socket } from "../../modules/sockets.mjs";
 import { useSelector } from "react-redux";
