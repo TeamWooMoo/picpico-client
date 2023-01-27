@@ -7,7 +7,7 @@ import { FlexboxGrid } from "rsuite";
 import { setDecoModeInfo, setResultInfo } from "../../slice/decoInfo";
 import { ResultImage, Sticker } from "../../modules/resultCanvas.mjs";
 import { isMobile } from "react-device-detect";
-import bang from "./../../assets/images/background-bang.jpeg";
+import bang from "./../../assets/images/background-bang.png";
 import boom from "./../../assets/images/background-boom.png";
 import party from "./../../assets/images/background-party.png";
 import sky from "./../../assets/images/background-sky.png";
