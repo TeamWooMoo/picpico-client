@@ -9,7 +9,7 @@ import { ResultImage, Sticker } from "../../modules/resultCanvas.mjs";
 import { isMobile } from "react-device-detect";
 import bang from "./../../assets/images/background-bang.png";
 import boom from "./../../assets/images/background-boom.png";
-import party from "./../../assets/images/background-party.png";
+import water from "./../../assets/images/background-water.png";
 import sky from "./../../assets/images/background-sky.png";
 const DecoCanvas = () => {
     const dispatch = useDispatch();
@@ -25,7 +25,7 @@ const DecoCanvas = () => {
     const strokeColor = useSelector(state => state.drawingInfo.strokeColor);
     const stickerPointList = useSelector(state => state.decoInfo.stickerPointList);
     const bgList = useSelector(state => state.decoInfo.bgList);
-    const bgSrcList = ["", sky, party, boom, bang];
+    const bgSrcList = ["", sky, water, boom, bang];
 
     const decoColors = useSelector(state => state.decoInfo.colorList);
     const decoMapping = {};
