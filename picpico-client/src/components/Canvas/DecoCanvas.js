@@ -7,10 +7,10 @@ import { FlexboxGrid } from "rsuite";
 import { setDecoModeInfo, setResultInfo } from "../../slice/decoInfo";
 import { ResultImage, Sticker } from "../../modules/resultCanvas.mjs";
 import { isMobile } from "react-device-detect";
-import star from "../../assets/images/background-star.png";
-import water from "../../assets/images/background-water.png";
-import matrix from "./../../assets/images/background-matrix.png";
-
+import bang from "./../../assets/images/background-bang.jpeg";
+import boom from "./../../assets/images/background-boom.png";
+import party from "./../../assets/images/background-party.png";
+import sky from "./../../assets/images/background-sky.png";
 const DecoCanvas = () => {
     const dispatch = useDispatch();
     const stickerList = useSelector(state => state.decoInfo.stickerList);
@@ -25,7 +25,7 @@ const DecoCanvas = () => {
     const strokeColor = useSelector(state => state.drawingInfo.strokeColor);
     const stickerPointList = useSelector(state => state.decoInfo.stickerPointList);
     const bgList = useSelector(state => state.decoInfo.bgList);
-    const bgSrcList = ["", star, water, matrix];
+    const bgSrcList = ["", sky, party, boom, bang];
 
     const decoColors = useSelector(state => state.decoInfo.colorList);
     const decoMapping = {};

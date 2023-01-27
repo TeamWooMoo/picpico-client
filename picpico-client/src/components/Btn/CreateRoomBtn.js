@@ -7,13 +7,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { setRoomInfo } from "../../slice/roomInfo";
 import { socket } from "../../modules/sockets.mjs";
 import { setKingInfo } from "../../slice/membersInfo";
+import { useState } from "react";
 
 function CreateRoomBtn() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const nickName = useSelector(state => state.membersInfo.nickname);
+    const [clicked, setClicked] = useState(false);
+    const [touched, setTouched] = useState(false);
 
-    function onCreateBtnClick() {
+    const onCreateBtnTouch = e => {
+        e.preventDefault();
+        setTouched(true);
         const roomId = uuid();
         dispatch(setKingInfo({ value: true }));
         dispatch(setRoomInfo({ value: roomId }));
@@ -26,6 +31,27 @@ function CreateRoomBtn() {
                 // navigate(`/room/100`);
             })
             .catch(err => {
+                setTouched(false);
+                alert("방 생성에 실패하였습니다.", err);
+            });
+    };
+
+    function onCreateBtnClick() {
+        setClicked(true);
+        console.log("clicked!");
+        const roomId = uuid();
+        dispatch(setKingInfo({ value: true }));
+        dispatch(setRoomInfo({ value: roomId }));
+        // response가 오기 전에 방 생성 버튼이 다시 눌리는 경우 // 클릭 이벤트 -> 버튼 disabled 시키기
+        axios
+            .post(API.ROOM, { roomId: roomId, nickname: nickName, socketId: socket.id })
+            .then(res => {
+                //    서버가 어떻게 주는지에 따라서 아래는 바뀔 것
+                console.log(res);
+                navigate(`/room/${res.data.roomId}`);
+            })
+            .catch(err => {
+                setClicked(false);
                 alert("방 생성에 실패하였습니다.", err);
             });
     }
@@ -63,7 +89,8 @@ function CreateRoomBtn() {
                         margin: "5px 0",
                         fontWeight: "600",
                     }}
-                    onClick={onCreateBtnClick}
+                    onClick={clicked ? null : onCreateBtnClick}
+                    onTouchEnd={touched ? null : onCreateBtnTouch}
                 >
                     새로운 방 생성
                 </Button>
