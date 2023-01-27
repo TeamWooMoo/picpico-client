@@ -220,8 +220,8 @@ async function putFrame(currentResult, resultCtx, frameIndex, imageIndex) {
 }
 
 export async function resizeImageData(imageData, width, height) {
-    const resizeWidth = width >> 0;
-    const resizeHeight = height >> 0;
+    const resizeWidth = width >> 1;
+    const resizeHeight = height >> 1;
     const ibm = await window.createImageBitmap(imageData, 0, 0, imageData.width, imageData.height, {
         resizeWidth,
         resizeHeight,
