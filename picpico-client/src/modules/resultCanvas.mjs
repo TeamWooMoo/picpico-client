@@ -5,6 +5,7 @@
 
 import {decompressFrames, parseGIF} from "gifuct-js";
 import {captureFrame, makeGIF} from "./resultGIF.mjs";
+import {async} from "rxjs";
 
 export let resultCanvas = document.createElement("canvas"); // ! 나중에 import 실제 element from component 가져와야함
 export let resultImages = []; // {사진 + (각 사진 위의 스티커url, 좌표, frames) 여러개 } x 4 일 것임
@@ -134,7 +135,7 @@ export async function makeResultCanvas() {
     }
 
     // 스티커 on
-    const drawResult = () => {
+    const drawResult = async () => {
         const dx = [0, totalCanvasSize / onePictureRatio, 0, totalCanvasSize / onePictureRatio];
         const dy = [0, 0, totalCanvasSize / onePictureRatio, totalCanvasSize / onePictureRatio];
         resultCtx.save();
@@ -145,7 +146,7 @@ export async function makeResultCanvas() {
         for (let imageIndex = 0; imageIndex < resultImages.length; imageIndex++) {
             const currentResult = resultImages[imageIndex];
 
-            resultCtx = putFrame(currentResult, resultCtx, frameIndex, imageIndex);
+            resultCtx = await putFrame(currentResult, resultCtx, frameIndex, imageIndex);
             resultCtx.globalCompositeOperation = "destination-over";
             // resultCtx.drawImage(resultImgArr[imageIndex], 0, 350 * imageIndex);
 
@@ -177,8 +178,8 @@ export async function makeResultCanvas() {
         requestAnimationFrame(drawResult);
     };
 
-    setTimeout(() => drawResult(), 1000);
-    // drawResult();
+    // setTimeout(() => drawResult(), 1000);
+    await drawResult();
 }
 
 /***************************************************************** */
