@@ -184,7 +184,7 @@ export async function makeResultCanvas() {
 /***************************************************************** */
 
 // 한 사진을 올리고 그 사진에 대한 스티커들 그리기
-function putFrame(currentResult, resultCtx, frameIndex, imageIndex) {
+async function putFrame(currentResult, resultCtx, frameIndex, imageIndex) {
     //
     // const resultImg = new Image();
     // resultImg.src = currentResult.resultUrl;
@@ -205,15 +205,32 @@ function putFrame(currentResult, resultCtx, frameIndex, imageIndex) {
         // console.log(">>>>>>currentSticker.frames", frames);
         // console.log(">>>>>>frames[frameIndex]", frames[frameIndex]);
         const stickerImageData = new ImageData(frames[frameIndex].patch, frames[frameIndex].dims.width, frames[frameIndex].dims.height);
+        const resizingstickerImageData = await resizeImageData(stickerImageData, frames[frameIndex].dims.width, frames[frameIndex].dims.height);
 
         const stickerWidth = frames[frameIndex].dims.width / onePictureRatio;
         const stickerHeight = frames[frameIndex].dims.height / onePictureRatio;
 
         resultCtx.globalCompositeOperation = "destination-over";
         // resultCtx.putImageData(stickerImageData, stickerX, 350 * imageIndex + stickerY);
-        resultCtx.putImageData(stickerImageData, stickerX, stickerY); // size option주면 resolution overload fail
-        // resultCtx.putImageData(stickerImageData, stickerY, stickerX); // size option주면 resolution overload fail
+        // resultCtx.putImageData(stickerImageData, stickerX, stickerY); // size option주면 resolution overload fail
+        resultCtx.putImageData(resizingstickerImageData, stickerX, stickerY); // size option주면 resolution overload fail
     }
 
     return resultCtx;
+}
+
+export async function resizeImageData(imageData, width, height) {
+    const resizeWidth = width >> 0;
+    const resizeHeight = height >> 0;
+    const ibm = await window.createImageBitmap(imageData, 0, 0, imageData.width, imageData.height, {
+        resizeWidth,
+        resizeHeight,
+    });
+    const canvas = document.createElement("canvas");
+    canvas.width = resizeWidth;
+    canvas.height = resizeHeight;
+    const ctx = canvas.getContext("2d");
+    ctx.scale(resizeWidth / imageData.width, resizeHeight / imageData.height);
+    ctx.drawImage(ibm, 0, 0);
+    return ctx.getImageData(0, 0, resizeWidth, resizeHeight);
 }
