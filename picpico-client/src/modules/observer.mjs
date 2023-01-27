@@ -1,5 +1,6 @@
 import {myPeer, myPeers} from "../controller/MainController.js";
 import {joinRoom, socket} from "./sockets.mjs";
+import shutter from "../assets/sound/shutter.mp3";
 
 let obMediaStream;
 
