@@ -1,5 +1,5 @@
-import { myPeer, myPeers } from "../controller/MainController.js";
-import { joinRoom, socket } from "./sockets.mjs";
+import {myPeer, myPeers} from "../controller/MainController.js";
+import {joinRoom, socket} from "./sockets.mjs";
 
 let obMediaStream;
 
@@ -130,4 +130,12 @@ function obOnIceEvent(ice, socketId) {
             socket.emit("test_ice");
         }
     }
+}
+
+export function obOnClickShutterEvent(idx) {
+    // console.log("애들아 찍어!");
+    const shutterSound = new Audio(shutter);
+    shutterSound.play().catch(e => {
+        console.log(e);
+    });
 }
