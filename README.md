@@ -57,7 +57,9 @@
 **Frontend**
 
 - React 9.3.1
+- ![React](https://img.shields.io/badge/react-#61DAFB?style=for-the-badge&logo=react&logoColor=white)
 - Redux-toolkit 1.9.1
+- ![Redux](https://img.shields.io/badge/redux-#764ABC?style=for-the-badge&logo=redux&logoColor=white)
 
 **Web RTC**
 
@@ -66,10 +68,14 @@
 **CI/CD**
 
 - Visual Studio Code
+- ![Visual Studio Code](https://img.shields.io/badge/visualstudiocode-#007ACC?style=for-the-badge&logo=visual studio code&logoColor=white)
 - AWS EC2
+- - ![NginX](https://img.shields.io/badge/nginx-green?style=for-the-badge&logo=nginx&logoColor=white)
 - Redis-server v7.0.7
 - nginx
+- ![NginX](https://img.shields.io/badge/nginx-green?style=for-the-badge&logo=nginx&logoColor=white)
 - COTURN : 자체 TURN 서버 구축
+- ![NginX](https://img.shields.io/badge/nginx-green?style=for-the-badge&logo=nginx&logoColor=white)
 
 **주요 라이브러리** 
 라이브러리 | 설명
