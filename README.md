@@ -41,7 +41,7 @@
 
 ## 3. 기술 스택과 라이브러리
 
-**기술 스택**
+### 1. **기술 스택**
 
 기술스택 | 설명
 ---|:---:
@@ -53,7 +53,7 @@
 ![NginX](https://img.shields.io/badge/nginx-green?style=for-the-badge&logo=nginx&logoColor=white) | Proxy 서버 
 ![COTURN](https://img.shields.io/badge/coturn-333333?style=for-the-badge) | 자체 TURN 서버 구축
 
-**주요 라이브러리** 
+### 2. **주요 라이브러리** 
 라이브러리 | 설명
 ---|:---:
 <img src='https://img.shields.io/badge/react-9.3.1-lightgrey'> | javascript 라이브러리
