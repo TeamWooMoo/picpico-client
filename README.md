@@ -75,7 +75,7 @@
 - nginx
 - ![NginX](https://img.shields.io/badge/nginx-green?style=for-the-badge&logo=nginx&logoColor=white)
 - COTURN : 자체 TURN 서버 구축
-- ![NginX](https://img.shields.io/badge/nginx-green?style=for-the-badge&logo=nginx&logoColor=white)
+- ![COTURN](https://img.shields.io/badge/coturn-333333?style=for-the-badge)
 
 **주요 라이브러리** 
 라이브러리 | 설명
