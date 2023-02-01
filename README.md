@@ -70,4 +70,4 @@
 
 ## 4. 포스터
 
-<p align=”center”><img src="https://user-images.githubusercontent.com/48302257/215937435-522d319a-b9ce-492a-a2d3-5f0da0b7a9ab.png" width="65%"></p>
+<p align=”center”><img src="https://user-images.githubusercontent.com/48302257/215937435-522d319a-b9ce-492a-a2d3-5f0da0b7a9ab.png" width="100%"></p>
