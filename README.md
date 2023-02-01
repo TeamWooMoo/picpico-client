@@ -72,7 +72,7 @@
 <img src='https://img.shields.io/badge/mediapipe/selfie_segmentation-0.1.16-lightgrey'> | 배경 제거를 위한 인물 segmentation
 <img src='https://img.shields.io/badge/gif-transparency-2.0.0-lightgrey'> | 유저 비밀번호 암호화
 <img src='https://img.shields.io/badge/gifuct-js-2.1.2-lightgrey'> | 리소스 공유 CORS 정책 설정
-<img src='https://img.shields.io/badge/dotenv-16.0.1-lightgrey'>  | 환경변수 관리
+<img src='https://img.shields.io/badge/uuid-2.0.0-lightgrey'>  | 환경변수 관리
 <img src='https://img.shields.io/badge/cross--env-7.0.3-lightgrey'>  | 스크립트 실행 환경변수 설정
 <img src='https://img.shields.io/badge/express-4.18.1-lightgrey'> | 서버 프레임워크
 <img src='https://img.shields.io/badge/helmet-5.1.0-lightgrey'>  | 서버 보안 취약점 방어
