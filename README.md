@@ -70,38 +70,15 @@
 라이브러리 | 설명
 ---|:---:
 <img src='https://img.shields.io/badge/mediapipe/selfie_segmentation-0.1.16-lightgrey'> | 배경 제거를 위한 인물 segmentation
-<img src='https://img.shields.io/badge/gif/transparency-2.0.0-lightgrey'> | 유저 비밀번호 암호화
-<img src='https://img.shields.io/badge/gifuct/js-2.1.2-lightgrey'> | 리소스 공유 CORS 정책 설정
-<img src='https://img.shields.io/badge/uuid-2.0.0-lightgrey'>  | 환경변수 관리
-<img src='https://img.shields.io/badge/cross--env-7.0.3-lightgrey'>  | 스크립트 실행 환경변수 설정
-<img src='https://img.shields.io/badge/express-4.18.1-lightgrey'> | 서버 프레임워크
-<img src='https://img.shields.io/badge/helmet-5.1.0-lightgrey'>  | 서버 보안 취약점 방어
-<img src='https://img.shields.io/badge/redis-3.1.2-lightgrey'>  | Redis Cli
-<img src='https://img.shields.io/badge/redis--delete--pattern-0.1.0-lightgrey'>  | Redis 키 패턴 삭제
-<img src='https://img.shields.io/badge/nodemailer-6.7.7-lightgrey'>  | 유저에게 메일 전송
-<img src='https://img.shields.io/badge/multer--s3-2.10.0-lightgrey'>  | S3 버킷 이미지 업로드
-<img src='https://img.shields.io/badge/joi-17.4.1-lightgrey'>  | 유효성 검사
-<img src='https://img.shields.io/badge/jest-28.1.3-lightgrey'>  | 테스트 코드
-<img src='https://img.shields.io/badge/jsonwebtoken-8.5.1-lightgrey'>  | 토큰 암호화
-<img src='https://img.shields.io/badge/cookie--parser-1.4.6-lightgrey'>  | 서버 - 클라이언트 간 쿠키 파싱
-<img src='https://img.shields.io/badge/moment-2.29.1-lightgrey'> | Datetime 자료형 관리
-<img src='https://img.shields.io/badge/morgan-1.10.0-lightgrey'> | HTTP 로그 기록
-<img src='https://img.shields.io/badge/uuid-8.3.2-lightgrey'> | UUID 생성
-<img src='https://img.shields.io/badge/winston-3.8.1-lightgrey'> | 로그 파일 생성
-<img src='https://img.shields.io/badge/winston--daily--rotate--file-4.7.1-lightgrey'> | 로그 파일 관리
-<img src='https://img.shields.io/badge/mysql-2.18.1-lightgrey'> | MySQL 연동
-<img src='https://img.shields.io/badge/sequelize-6.21.2-lightgrey'>  | MySQL ORM
-<img src='https://img.shields.io/badge/sequelize--cli-6.4.1-lightgrey'> | MySQL ORM 콘솔
-- mediapipe/selfie_segmentation 0.1.16 : 배경 제거를 위한 인물 segmentation
-- gif-transparency 2.0.0 : gif 생성
-- gifuct-js 2.1.2 : 꾸미기에 사용된 gif의 frame 정보 parsing
-- uuid 2.0.0
-- image-to-base64 1.0.2
-- sharp 0.31.3
-- react-redux 8.0.5
-- reduxjs/toolkit 1.9.1
-- socket.io-client 4.5.4
-- webgl-utils 1.0.1
+<img src='https://img.shields.io/badge/gif_transparency-2.0.0-lightgrey'> | 유저 비밀번호 암호화
+<img src='https://img.shields.io/badge/uuid-2.0.0-lightgrey'> | UUID 생성
+<img src='https://img.shields.io/badge/image_to_base64-1.0.2-lightgrey'> | 이미지를 base64로 변환
+<img src='https://img.shields.io/badge/sharp-0.31.3-lightgrey'> | 이미지 크기 변경 
+<img src='https://img.shields.io/badge/redux-8.0.5-lightgrey'> | 컴포턴트 밖에서 상태 관리 
+<img src='https://img.shields.io/badge/redux/toolkit-1.9.1-lightgrey'>  | Redux 개발 도구
+<img src='https://img.shields.io/badge/socket.io-4.5.4-lightgrey'>  | 웹소켓 기술을 활용
+<img src='https://img.shields.io/badge/webgl_utils-1.0.1-lightgrey'> | webgl 관련 라이브러리
+
 
 ## 4. 포스터
 
