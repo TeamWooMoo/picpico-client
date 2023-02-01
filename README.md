@@ -43,12 +43,16 @@
 
 **Backend**
 
-- Node.js 18.13.0 : 자바스크립트 런타임
+- Node.js: 자바스크립트 런타임
 - ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
 - Nest.js : 웹 프레임워크
+- ![Nest.js](https://img.shields.io/badge/nest.js-E0234E?style=for-the-badge&logo=nest.js&logoColor=white)
 - REDIS : 인메모리 저장소 (캐시)
+- ![Redis](https://img.shields.io/badge/redis-%23DD0031.svg?style=for-the-badge&logo=redis&logoColor=white)
 - Web RTC :  **화상 공유 및 음성 채팅** (N:N Mesh)
+- ![WebRTC](https://img.shields.io/badge/webrtc-333333?style=for-the-badge&logo=webrtc&logoColor=white)
 - SOCKET.IO : 시그널링, 룸 입장, 사진 촬영 및 꾸미기 이벤트 처리
+- ![Socket.io](https://img.shields.io/badge/Socket.io-010101?style=for-the-badge&logo=Socket.io&logoColor=white)
 
 **Frontend**
 
