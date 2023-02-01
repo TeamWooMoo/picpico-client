@@ -68,6 +68,44 @@
 <img src='https://img.shields.io/badge/webgl_utils-1.0.1-lightgrey'> | webgl 관련 라이브러리
 
 
-## 4. 포스터
+## 4. 시작하기
+### BE
+
+[Nginx 설치와 설정, 실행](https://www.notion.so/Nginx-25887e5fc64d4e74b6051cc0cd3ac3df)
+
+[Redis 설치와 실행](https://www.notion.so/Redis-cb46d7742ab443c69ec69db756300844)
+
+```bash
+$ git clone https://github.com/TeamWooMoo/picpico-server.git
+
+$ cd picpico-server
+
+$ npm i
+
+$ npm run start
+```
+
+### FE
+
+[Nginx 설치와 설정, 실행](https://www.notion.so/Nginx-25887e5fc64d4e74b6051cc0cd3ac3df)
+
+```bash
+$ git clone https://github.com/TeamWooMoo/picpico-client.git
+
+$ cd picpico-client/front-src
+
+$ npm i
+
+$ npm run build
+
+$ cd ..
+
+$ npm i
+
+$ npm run start
+```
+
+
+## 5. 포스터
 
 <p align=”center”><img src="https://user-images.githubusercontent.com/48302257/215937435-522d319a-b9ce-492a-a2d3-5f0da0b7a9ab.png" width="100%"></p>
