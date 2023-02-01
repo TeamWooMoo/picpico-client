@@ -47,6 +47,7 @@
 ---|:---:
 ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white) | 자바스크립트 런타임
 ![Nest.js](https://img.shields.io/badge/nest.js-E0234E?style=for-the-badge&logo=nestjs&logoColor=white) | 웹프레임워크
+![React.js](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=white) | 웹 프론트엔드 프레임워크
 ![Redis](https://img.shields.io/badge/redis-%23DD0031.svg?style=for-the-badge&logo=redis&logoColor=white) | 인메모리 저장소 (캐시)
 ![WebRTC](https://img.shields.io/badge/webrtc-333333?style=for-the-badge&logo=webrtc&logoColor=white) | 화상 공유 및 음성 채팅(N:N Mesh)
 ![Socket.io](https://img.shields.io/badge/Socket.io-010101?style=for-the-badge&logo=Socket.io&logoColor=white) | 시그널링, 룸 입장, 사진 촬영 및 꾸미기 이벤트 처리
