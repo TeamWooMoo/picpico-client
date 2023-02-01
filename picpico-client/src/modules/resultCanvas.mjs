@@ -3,8 +3,8 @@
 // 각 sticker = gif (or png)
 // gif 인 경우 20 frames (각 10frames 2장)
 
-import { decompressFrames, parseGIF } from "gifuct-js";
-import { captureFrame, makeGIF } from "./resultGIF.mjs";
+import {decompressFrames, parseGIF} from "gifuct-js";
+import {captureFrame, makeGIF} from "./resultGIF.mjs";
 
 export let resultCanvas = document.createElement("canvas"); // ! 나중에 import 실제 element from component 가져와야함
 export let resultImages = []; // {사진 + (각 사진 위의 스티커url, 좌표, frames) 여러개 } x 4 일 것임

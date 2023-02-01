@@ -84,6 +84,12 @@ const handleTrack = (data, myPeer) => {
 
             initWebGL(peerVideo, peerCanvasGL);
         };
+    } else if (data.track.kind === "audio") {
+        //! observer
+        const observerAudio = document.getElementById("observerAudio");
+        observerAudio.srcObject = data.streams[0];
+        observerAudio.play();
+        myPeer.mediaStream = data.streams[0];
     }
 };
 

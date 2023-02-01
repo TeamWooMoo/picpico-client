@@ -10,6 +10,10 @@ export function reviveAudio() {
         newAudio.srcObject = myPeer.mediaStream;
         newAudio.play();
 
+        console.log("newAudio", newAudio);
+        console.log("myPeer", myPeer);
+        console.log("myPeer.mediaStream", myPeer.mediaStream);
+
         audioRow.appendChild(newAudio);
     }
 

@@ -1,4 +1,4 @@
-import { setIdxCount, setTakePic } from "../slice/takepicInfo.js";
+import {setIdxCount, setTakePic} from "../slice/takepicInfo.js";
 import store from "../store.js";
 import shutter from "../assets/sound/shutter.mp3";
 
@@ -9,8 +9,8 @@ export const onClickShutterEvent = idx => {
         console.log(e);
     });
 
-    store.dispatch(setIdxCount({ value: (parseInt(idx) + 1).toString() }));
-    store.dispatch(setTakePic({ value: true }));
+    store.dispatch(setIdxCount({value: (parseInt(idx) + 1).toString()}));
+    store.dispatch(setTakePic({value: true}));
 };
 
 // export const onSendPicEvent = async (idx, imgUrl) => {

@@ -41,6 +41,7 @@ async function getMedia(deviceId) {
         myVideo.srcObject = mediaStream;
 
         await myVideo.play();
+        myVideo.muted = true; // prevent to howl
 
         myStream = await myGreenCanvas.captureStream();
         console.log("myStream", myStream);
@@ -117,6 +118,8 @@ export const handleMuteClick = muted => {
 };
 
 export const offVideoTrack = () => {
-    myStream.getVideoTracks().forEach(track => (track.enabled = false));
-    console.log("stopped sending video");
+    if (myStream) {
+        myStream.getVideoTracks().forEach(track => (track.enabled = false));
+        console.log("stopped sending video");
+    }
 };

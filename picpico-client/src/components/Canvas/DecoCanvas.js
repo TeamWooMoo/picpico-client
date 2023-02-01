@@ -1,15 +1,15 @@
 import "./DecoCanvas.css";
-import { useEffect, useRef, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { socket } from "../../modules/sockets.mjs";
-import { addStrokeHistory } from "../../slice/drawingInfo.js";
-import { FlexboxGrid } from "rsuite";
-import { setDecoModeInfo, setResultInfo } from "../../slice/decoInfo";
-import { ResultImage, Sticker } from "../../modules/resultCanvas.mjs";
-import { isMobile } from "react-device-detect";
-import bang from "./../../assets/images/background-bang.jpeg";
+import {useEffect, useRef, useState} from "react";
+import {useSelector, useDispatch} from "react-redux";
+import {socket} from "../../modules/sockets.mjs";
+import {addStrokeHistory} from "../../slice/drawingInfo.js";
+import {FlexboxGrid} from "rsuite";
+import {setDecoModeInfo, setResultInfo} from "../../slice/decoInfo";
+import {ResultImage, Sticker} from "../../modules/resultCanvas.mjs";
+import {isMobile} from "react-device-detect";
+import bang from "./../../assets/images/background-bang.png";
 import boom from "./../../assets/images/background-boom.png";
-import party from "./../../assets/images/background-party.png";
+import water from "./../../assets/images/background-water.png";
 import sky from "./../../assets/images/background-sky.png";
 const DecoCanvas = () => {
     const dispatch = useDispatch();
@@ -25,7 +25,7 @@ const DecoCanvas = () => {
     const strokeColor = useSelector(state => state.drawingInfo.strokeColor);
     const stickerPointList = useSelector(state => state.decoInfo.stickerPointList);
     const bgList = useSelector(state => state.decoInfo.bgList);
-    const bgSrcList = ["", sky, party, boom, bang];
+    const bgSrcList = ["", sky, water, boom, bang];
 
     const decoColors = useSelector(state => state.decoInfo.colorList);
     const decoMapping = {};
@@ -37,20 +37,20 @@ const DecoCanvas = () => {
     const decoEventCanvas = useRef();
     const roomId = useSelector(state => state.roomInfo.room);
 
-    const onCanvasDown = ({ nativeEvent }) => {
+    const onCanvasDown = ({nativeEvent}) => {
         setDrawing(true);
-        const { offsetX, offsetY } = nativeEvent;
+        const {offsetX, offsetY} = nativeEvent;
         socket.emit("mouse_down", socket.id, offsetX, offsetY, targetImgIdx);
     };
 
-    const onCanvasUp = ({ nativeEvent }) => {
+    const onCanvasUp = ({nativeEvent}) => {
         setDrawing(false);
-        const { offsetX, offsetY } = nativeEvent;
+        const {offsetX, offsetY} = nativeEvent;
         socket.emit("mouse_up", socket.id, offsetX, offsetY, targetImgIdx);
     };
 
-    const onCanvasMove = ({ nativeEvent }) => {
-        const { offsetX, offsetY } = nativeEvent;
+    const onCanvasMove = ({nativeEvent}) => {
+        const {offsetX, offsetY} = nativeEvent;
         const myLineWidth = 5;
 
         if (drawing) {
@@ -130,8 +130,8 @@ const DecoCanvas = () => {
                 // for문 돌면서
                 for (let i = 0; i < stickers.length; i++) {
                     const url = stickers[i].children[0].src; // div > img
-                    let axisX = parseInt(stickers[i].style.top.split("px")[0]);
-                    let axisY = parseInt(stickers[i].style.left.split("px")[0]);
+                    let axisX = parseInt(stickers[i].style.left.split("px")[0]);
+                    let axisY = parseInt(stickers[i].style.top.split("px")[0]);
 
                     axisX = isNaN(axisX) ? 0 : axisX;
                     axisY = isNaN(axisY) ? 0 : axisY;
@@ -142,7 +142,7 @@ const DecoCanvas = () => {
                 resultImages.push(curImage);
             });
 
-            dispatch(setResultInfo({ value: resultImages })); // drawing 결과 decoInfo.resultList 에 dispatch
+            dispatch(setResultInfo({value: resultImages})); // drawing 결과 decoInfo.resultList 에 dispatch
             socket.emit("submit_deco");
             console.log("client emit submit deco");
         }
@@ -152,7 +152,7 @@ const DecoCanvas = () => {
         if (strokeArr.length > 0) {
             const [newX, newY, newColor, newSocketId, newIdx, newLindWidth] = strokeArr[strokeArr.length - 1];
             if (strokeHistory.hasOwnProperty(newSocketId)) {
-                let { x: oldX, y: oldY, i: oldIdx, c: oldColor, f: oldDown } = strokeHistory[newSocketId];
+                let {x: oldX, y: oldY, i: oldIdx, c: oldColor, f: oldDown} = strokeHistory[newSocketId];
 
                 const decoPeerCanvas = document.getElementById(`peer-${oldIdx}`);
                 const decoCtx = decoPeerCanvas.getContext("2d");
@@ -165,7 +165,7 @@ const DecoCanvas = () => {
                 decoCtx.lineJoin = "round";
                 decoCtx.lineTo(newX, newY);
                 decoCtx.stroke();
-                dispatch(addStrokeHistory({ value: [newSocketId, newX, newY, newIdx, newColor, oldDown] }));
+                dispatch(addStrokeHistory({value: [newSocketId, newX, newY, newIdx, newColor, oldDown]}));
             }
         }
     }, [strokeArr]);
@@ -173,7 +173,7 @@ const DecoCanvas = () => {
     /* 여기 해야 합니다 */
     useEffect(() => {
         if (targetImgIdx !== "") {
-            dispatch(setDecoModeInfo({ value: "stroke" }));
+            dispatch(setDecoModeInfo({value: "stroke"}));
 
             const canvasWrapper = document.querySelector(".canvasWrapper");
             const targetDiv = document.getElementById(`set-${targetImgIdx}`);
@@ -230,7 +230,7 @@ const DecoCanvas = () => {
     /* 스티커를 스티커 필드 위에 올리기 */
     useEffect(() => {
         if (stickerList.length > 0) {
-            const { idx: idx, url: url, stickerId: stickerId } = stickerList[stickerList.length - 1];
+            const {idx: idx, url: url, stickerId: stickerId} = stickerList[stickerList.length - 1];
             const stickerField = document.getElementById(`sticker-${idx}`);
 
             console.log("stickerField.children >>> ", stickerField.children);
@@ -275,7 +275,7 @@ const DecoCanvas = () => {
             <FlexboxGrid className="DecoCanvasBox">
                 <div className="canvasWrapper">
                     {idxArr.map(idx => (
-                        <div data-setid={`set-${idx}`} id={`set-${idx}`} style={{ visibility: idx != targetImgIdx ? "hidden" : "visible" }}>
+                        <div data-setid={`set-${idx}`} id={`set-${idx}`} style={{visibility: idx != targetImgIdx ? "hidden" : "visible"}}>
                             <canvas className="decocanvas" width="350px" height="350px" id={`bg-${idx}`}></canvas>
                             <canvas className="decocanvas" width="350px" height="350px" data-img={idx} id={`img-${idx}`}></canvas>
                             <canvas className="decocanvas" width="350px" height="350px" data-my={idx} id={`my-${idx}`}></canvas>
@@ -285,9 +285,9 @@ const DecoCanvas = () => {
                                 height="345px"
                                 data-peer={idx}
                                 id={`peer-${idx}`}
-                                style={{ border: `3px solid ${decoMapping[idx]}` }}
+                                style={{border: `3px solid ${decoMapping[idx]}`}}
                             ></canvas>
-                            <div className="decocanvas" id={`sticker-${idx}`} style={{ position: "absolute", width: "350px", height: "350px" }}></div>
+                            <div className="decocanvas" id={`sticker-${idx}`} style={{position: "absolute", width: "350px", height: "350px"}}></div>
                         </div>
                     ))}
                 </div>
@@ -300,7 +300,7 @@ const DecoCanvas = () => {
                         onTouchStart={setEventTouch}
                         onTouchEnd={setEventTouch}
                         onTouchMove={setEventTouch}
-                        style={{ border: `3px solid ${decoMapping[targetImgIdx]}`, visibility: mode === "sticker" ? "hidden" : "visible" }}
+                        style={{border: `3px solid ${decoMapping[targetImgIdx]}`, visibility: mode === "sticker" ? "hidden" : "visible"}}
                     ></canvas>
                 ) : (
                     <canvas
@@ -311,7 +311,7 @@ const DecoCanvas = () => {
                         onMouseDown={onCanvasDown}
                         onMouseMove={onCanvasMove}
                         onMouseUp={onCanvasUp}
-                        style={{ border: `3px solid ${decoMapping[targetImgIdx]}`, visibility: mode === "sticker" ? "hidden" : "visible" }}
+                        style={{border: `3px solid ${decoMapping[targetImgIdx]}`, visibility: mode === "sticker" ? "hidden" : "visible"}}
                     ></canvas>
                 )}
             </FlexboxGrid>

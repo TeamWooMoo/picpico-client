@@ -7,7 +7,6 @@ import { useSelector } from "react-redux";
 import Typewriter from "typewriter-effect";
 
 function PicDownloadBtn() {
-    // const [gif, setGIF] = useState(false);
     const gif = useSelector(state => state.picpicoInfo.gifMade);
 
     const onCapture = () => {
