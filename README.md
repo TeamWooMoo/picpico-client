@@ -57,7 +57,8 @@
 **Frontend**
 
 - React 9.3.1
-- ![React](https://img.shields.io/badge/react-#61DAFB?style=for-the-badge&logo=react&logoColor=white)
+- ![React](https://img.shields.io/badge/React-#61DAFB?style=for-the-badge&logo=React&logoColor=white)
+- https://img.shields.io/badge/React-61DAFB?style=flat&logo=React&logoColor=white
 - Redux-toolkit 1.9.1
 - ![Redux](https://img.shields.io/badge/redux-#764ABC?style=for-the-badge&logo=redux&logoColor=white)
 
