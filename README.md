@@ -8,12 +8,14 @@
 
 ## 1. 소개
 
-*PicPiCo : take Pictures with Peer Connection*
+*PicPiCo : take Pictures with Peer Connection* 
 
 **‘친구들과 실제로 만나서 즉석 사진 찍고 꾸미기’를 모바일 App으로 !**
 <p align=”center”><img width="80%" src="https://user-images.githubusercontent.com/48302257/215937547-400e3b3f-bc72-4b80-a1d1-b6eed4a13c74.png"/></p>
 
-**시연 및 발표 영상** : <a href="https://www.youtube.com/watch?v=elkzrjeqRK0&t=259s" target="_blank">YouTube Link</a>
+**시연 및 발표 영상** : <a href="https://www.youtube.com/watch?v=elkzrjeqRK0&t=259s" target="_blank">YouTube Link</a> <br>
+**팀스페이스** : <a href="https://ambiguous-raver-03c.notion.site/PicPiCo-86bff05bebc540bf866a71ae0291e7cc" target="_blank">Notion Link</a> <br>
+**PC 크롬환경에서 가장 잘 동작합니다** : <a href="https://picpico.site">PicPiCo 해보기</a> 
 
 ## 2. 주요 기능
 
