@@ -56,7 +56,7 @@
 **주요 라이브러리** 
 라이브러리 | 설명
 ---|:---:
-<img src='https://img.shields.io/badge/mediapipe/React-9.3.1-lightgrey'> | javascript 라이브러리
+<img src='https://img.shields.io/badge/react-9.3.1-lightgrey'> | javascript 라이브러리
 <img src='https://img.shields.io/badge/mediapipe/selfie_segmentation-0.1.16-lightgrey'> | 배경 제거를 위한 인물 segmentation
 <img src='https://img.shields.io/badge/gif_transparency-2.0.0-lightgrey'> | 유저 비밀번호 암호화
 <img src='https://img.shields.io/badge/uuid-2.0.0-lightgrey'> | UUID 생성
