@@ -7,8 +7,8 @@ async function bootstrap() {
     const app = await NestFactory.create<NestExpressApplication>(AppModule);
     app.enableCors();
 
-    app.useStaticAssets(join(__dirname, "..", "picpico-client/build"));
-    app.setBaseViewsDir(join(__dirname, "..", "picpico-client/build"));
+    app.useStaticAssets(join(__dirname, "..", "front-src/build"));
+    app.setBaseViewsDir(join(__dirname, "..", "front-src/build"));
 
     app.engine("html", require("ejs").renderFile);
     app.setViewEngine("html");
