@@ -1,12 +1,12 @@
 import "./DecoCanvas.css";
-import {useEffect, useRef, useState} from "react";
-import {useSelector, useDispatch} from "react-redux";
-import {socket} from "../../modules/sockets.mjs";
-import {addStrokeHistory} from "../../slice/drawingInfo.js";
-import {FlexboxGrid} from "rsuite";
-import {setDecoModeInfo, setResultInfo} from "../../slice/decoInfo";
-import {ResultImage, Sticker} from "../../modules/resultCanvas.mjs";
-import {isMobile} from "react-device-detect";
+import { useEffect, useRef, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { socket } from "../../modules/sockets.mjs";
+import { addStrokeHistory } from "../../slice/drawingInfo.js";
+import { FlexboxGrid } from "rsuite";
+import { setDecoModeInfo, setResultInfo } from "../../slice/decoInfo";
+import { ResultImage, Sticker } from "../../modules/resultCanvas.mjs";
+import { isMobile } from "react-device-detect";
 import bang from "./../../assets/images/background-bang.png";
 import boom from "./../../assets/images/background-boom.png";
 import water from "./../../assets/images/background-water.png";
@@ -37,20 +37,20 @@ const DecoCanvas = () => {
     const decoEventCanvas = useRef();
     const roomId = useSelector(state => state.roomInfo.room);
 
-    const onCanvasDown = ({nativeEvent}) => {
+    const onCanvasDown = ({ nativeEvent }) => {
         setDrawing(true);
-        const {offsetX, offsetY} = nativeEvent;
+        const { offsetX, offsetY } = nativeEvent;
         socket.emit("mouse_down", socket.id, offsetX, offsetY, targetImgIdx);
     };
 
-    const onCanvasUp = ({nativeEvent}) => {
+    const onCanvasUp = ({ nativeEvent }) => {
         setDrawing(false);
-        const {offsetX, offsetY} = nativeEvent;
+        const { offsetX, offsetY } = nativeEvent;
         socket.emit("mouse_up", socket.id, offsetX, offsetY, targetImgIdx);
     };
 
-    const onCanvasMove = ({nativeEvent}) => {
-        const {offsetX, offsetY} = nativeEvent;
+    const onCanvasMove = ({ nativeEvent }) => {
+        const { offsetX, offsetY } = nativeEvent;
         const myLineWidth = 5;
 
         if (drawing) {
@@ -113,14 +113,12 @@ const DecoCanvas = () => {
             // 꾸민 사진 4개에 대해 각각 실행
             idxArr.forEach(idx => {
                 const bg = document.getElementById(`bg-${idx}`);
-                const canvas = document.getElementById(`img-${idx}`); // canvas #img : 사진
+                const img = document.getElementById(`img-${idx}`); // canvas #img : 사진
                 const peer = document.getElementById(`peer-${idx}`); // canvas #peer : peer drawing
-                const my = document.getElementById(`my-${idx}`); // canvas #my : my drawing
 
                 const ctx = bg.getContext("2d");
-                ctx.drawImage(canvas, 0, 0);
+                ctx.drawImage(img, 0, 0);
                 ctx.drawImage(peer, 0, 0);
-                ctx.drawImage(my, 0, 0);
 
                 const curImage = new ResultImage(bg.toDataURL(), []);
                 // 스티커 넣어줘야함
@@ -142,7 +140,7 @@ const DecoCanvas = () => {
                 resultImages.push(curImage);
             });
 
-            dispatch(setResultInfo({value: resultImages})); // drawing 결과 decoInfo.resultList 에 dispatch
+            dispatch(setResultInfo({ value: resultImages })); // drawing 결과 decoInfo.resultList 에 dispatch
             socket.emit("submit_deco");
             console.log("client emit submit deco");
         }
@@ -152,7 +150,7 @@ const DecoCanvas = () => {
         if (strokeArr.length > 0) {
             const [newX, newY, newColor, newSocketId, newIdx, newLindWidth] = strokeArr[strokeArr.length - 1];
             if (strokeHistory.hasOwnProperty(newSocketId)) {
-                let {x: oldX, y: oldY, i: oldIdx, c: oldColor, f: oldDown} = strokeHistory[newSocketId];
+                let { x: oldX, y: oldY, i: oldIdx, c: oldColor, f: oldDown } = strokeHistory[newSocketId];
 
                 const decoPeerCanvas = document.getElementById(`peer-${oldIdx}`);
                 const decoCtx = decoPeerCanvas.getContext("2d");
@@ -165,7 +163,7 @@ const DecoCanvas = () => {
                 decoCtx.lineJoin = "round";
                 decoCtx.lineTo(newX, newY);
                 decoCtx.stroke();
-                dispatch(addStrokeHistory({value: [newSocketId, newX, newY, newIdx, newColor, oldDown]}));
+                dispatch(addStrokeHistory({ value: [newSocketId, newX, newY, newIdx, newColor, oldDown] }));
             }
         }
     }, [strokeArr]);
@@ -173,7 +171,7 @@ const DecoCanvas = () => {
     /* 여기 해야 합니다 */
     useEffect(() => {
         if (targetImgIdx !== "") {
-            dispatch(setDecoModeInfo({value: "stroke"}));
+            dispatch(setDecoModeInfo({ value: "stroke" }));
 
             const canvasWrapper = document.querySelector(".canvasWrapper");
             const targetDiv = document.getElementById(`set-${targetImgIdx}`);
@@ -230,7 +228,7 @@ const DecoCanvas = () => {
     /* 스티커를 스티커 필드 위에 올리기 */
     useEffect(() => {
         if (stickerList.length > 0) {
-            const {idx: idx, url: url, stickerId: stickerId} = stickerList[stickerList.length - 1];
+            const { idx: idx, url: url, stickerId: stickerId } = stickerList[stickerList.length - 1];
             const stickerField = document.getElementById(`sticker-${idx}`);
 
             console.log("stickerField.children >>> ", stickerField.children);
@@ -275,19 +273,18 @@ const DecoCanvas = () => {
             <FlexboxGrid className="DecoCanvasBox">
                 <div className="canvasWrapper">
                     {idxArr.map(idx => (
-                        <div data-setid={`set-${idx}`} id={`set-${idx}`} style={{visibility: idx != targetImgIdx ? "hidden" : "visible"}}>
+                        <div data-setid={`set-${idx}`} id={`set-${idx}`} style={{ visibility: idx != targetImgIdx ? "hidden" : "visible" }}>
                             <canvas className="decocanvas" width="350px" height="350px" id={`bg-${idx}`}></canvas>
                             <canvas className="decocanvas" width="350px" height="350px" data-img={idx} id={`img-${idx}`}></canvas>
-                            <canvas className="decocanvas" width="350px" height="350px" data-my={idx} id={`my-${idx}`}></canvas>
                             <canvas
                                 className="decocanvas"
                                 width="345px"
                                 height="345px"
                                 data-peer={idx}
                                 id={`peer-${idx}`}
-                                style={{border: `3px solid ${decoMapping[idx]}`}}
+                                style={{ border: `3px solid ${decoMapping[idx]}` }}
                             ></canvas>
-                            <div className="decocanvas" id={`sticker-${idx}`} style={{position: "absolute", width: "350px", height: "350px"}}></div>
+                            <div className="decocanvas" id={`sticker-${idx}`} style={{ position: "absolute", width: "350px", height: "350px" }}></div>
                         </div>
                     ))}
                 </div>
@@ -300,7 +297,7 @@ const DecoCanvas = () => {
                         onTouchStart={setEventTouch}
                         onTouchEnd={setEventTouch}
                         onTouchMove={setEventTouch}
-                        style={{border: `3px solid ${decoMapping[targetImgIdx]}`, visibility: mode === "sticker" ? "hidden" : "visible"}}
+                        style={{ border: `3px solid ${decoMapping[targetImgIdx]}`, visibility: mode === "sticker" ? "hidden" : "visible" }}
                     ></canvas>
                 ) : (
                     <canvas
@@ -311,7 +308,7 @@ const DecoCanvas = () => {
                         onMouseDown={onCanvasDown}
                         onMouseMove={onCanvasMove}
                         onMouseUp={onCanvasUp}
-                        style={{border: `3px solid ${decoMapping[targetImgIdx]}`, visibility: mode === "sticker" ? "hidden" : "visible"}}
+                        style={{ border: `3px solid ${decoMapping[targetImgIdx]}`, visibility: mode === "sticker" ? "hidden" : "visible" }}
                     ></canvas>
                 )}
             </FlexboxGrid>

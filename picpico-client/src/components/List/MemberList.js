@@ -9,61 +9,39 @@ const MemberList = () => {
     if (isPicBooth) polyfill();
 
     const members = useSelector(state => state.membersInfo.members);
-    const memberKeys = Object.keys(members);
-    console.log("members:", members);
-    const availableOptionsArr = members.map(member => {
+    const memberNameArr = members.map(member => {
         return member["nickName"];
     });
-    console.log("availableOptionsArr", availableOptionsArr);
-    const draggingItemIndex = useRef(0);
-    const draggingOverItemIndex = useRef(null);
 
-    const onDragStart = (e, index) => {
-        console.log("target:", e.target);
-        console.log("START e.target", e.target.id);
-        draggingItemIndex.current = e.target.id;
+    const draggingNameIndex = useRef(0);
+    const draggingOverNameIndex = useRef(null);
+
+    const onMemberListDragStart = e => {
+        draggingNameIndex.current = e.target.id;
         e.target.classList.add("grabbing");
     };
 
-    // const onTouchStart = e => {
-    //     console.log("touch start!!!!", e.changedTouches.item(0));
-    //     const elem = e.changedTouches.item(0);
-    //     draggingItemIndex.current = elem.id;
-    //     elem.classList.add("grabbing");
-    // };
-
-    // const onTouchEnd = e => {
-    //     console.log("touch end!!!!", e.changedTouches.item(0));
-    //     const elem = e.changedTouches.item(0);
-    //     elem.classList.remove("grabbing");
-    // };
-
-    const onAvailableItemDragEnter = (e, index) => {
-        const oldIndex = draggingItemIndex.current;
-        // setDraggingOverItemIndex(index);
-        draggingOverItemIndex.current = index;
-        const copyListItems = [...availableOptionsArr];
-        const dragItemContent = copyListItems[draggingItemIndex.current];
-        copyListItems.splice(draggingItemIndex.current, 1);
-        copyListItems.splice(draggingOverItemIndex.current, 0, dragItemContent);
-        draggingItemIndex.current = draggingOverItemIndex.current;
-        console.log("old index, new index", oldIndex, index);
+    const onMemberListDragEnter = index => {
+        const oldIndex = draggingNameIndex.current;
+        draggingOverNameIndex.current = index;
+        const copyNameArr = [...memberNameArr];
+        const dragItemContent = copyNameArr[draggingNameIndex.current];
+        copyNameArr.splice(draggingNameIndex.current, 1);
+        copyNameArr.splice(draggingOverNameIndex.current, 0, dragItemContent);
+        draggingNameIndex.current = draggingOverNameIndex.current;
         socket.emit("change_layer", oldIndex, index);
-        draggingOverItemIndex.current = null;
-        console.log("[change-layer] client emit");
+        draggingOverNameIndex.current = null;
     };
 
-    const onDragEnd = e => {
-        console.log("END e.target", e.target);
+    const onMemberListDragEnd = e => {
         e.target.classList.remove("grabbing");
     };
 
-    const onDragOver = e => {
+    const onMemberListDragOver = e => {
         e.preventDefault();
     };
 
     const picBoothDisplay = useSelector(state => state.picpicoInfo.picBoothDisplay);
-    // const selectDisplay = useSelector(state => state.picpicoInfo.sle);
     const decoDisplay = useSelector(state => state.picpicoInfo.decoDisplay);
 
     const decoObj = useSelector(state => state.decoInfo.decoList);
@@ -73,8 +51,6 @@ const MemberList = () => {
     for (let i = 0; i < 4; i++) {
         decoMapping[decoKeys[i]] = decoColors[i];
     }
-    console.log("picBooth : deco", picBoothDisplay, decoDisplay);
-
     return (
         <div>
             {decoDisplay ? (
@@ -89,14 +65,14 @@ const MemberList = () => {
                 </ul>
             ) : (
                 <ul style={{ color: "white", textAlign: "center", listStyle: "none", paddingLeft: 0 }}>
-                    {availableOptionsArr.map((option, index) => (
+                    {memberNameArr.map((option, index) => (
                         <li
                             className="memName"
                             id={index}
-                            onDragStart={e => onDragStart(e, index)}
-                            onDragEnter={e => onAvailableItemDragEnter(e, index)}
-                            onDragOver={onDragOver}
-                            onDragEnd={onDragEnd}
+                            onDragStart={e => onMemberListDragStart(e)}
+                            onDragEnter={e => onMemberListDragEnter(index)}
+                            onDragOver={onMemberListDragOver}
+                            onDragEnd={onMemberListDragEnd}
                             draggable
                         >
                             {option}
