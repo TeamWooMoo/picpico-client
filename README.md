@@ -13,6 +13,7 @@
 **‘친구들과 실제로 만나서 즉석 사진 찍고 꾸미기’를 모바일 App으로 !**
 <p align=”center”><img width="80%" src="https://user-images.githubusercontent.com/48302257/215937547-400e3b3f-bc72-4b80-a1d1-b6eed4a13c74.png"/></p>
 
+**시연 및 발표 영상** : <a href="https://www.youtube.com/watch?v=elkzrjeqRK0&t=259s" target="_blank">YouTube Link</a>
 
 ## 2. 주요 기능
 
