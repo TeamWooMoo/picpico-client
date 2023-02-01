@@ -30,7 +30,7 @@
     
 ### 3. **사진 고르는 Select Pic**
 
-📍 참여자(방장)가 촬영한 사진 중 Best 4컷 선택
+📍 촬영한 사진 중 Best 4컷 선택
 
 ### 4.  **사진 꾸미는 Decoration**
 |Drawing 시연|Sticker 시연|Decoration 주요 기능|
