@@ -44,6 +44,7 @@
 **Backend**
 
 - Node.js 18.13.0 : 자바스크립트 런타임
+- ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
 - Nest.js : 웹 프레임워크
 - REDIS : 인메모리 저장소 (캐시)
 - Web RTC :  **화상 공유 및 음성 채팅** (N:N Mesh)
@@ -52,8 +53,6 @@
 **Frontend**
 
 - React 9.3.1
-<img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black">![image](https://user-images.githubusercontent.com/106954289/216038694-de8c3433-4101-4f95-95ed-900da954b38d.png)
-
 - Redux-toolkit 1.9.1
 
 **Web RTC**
