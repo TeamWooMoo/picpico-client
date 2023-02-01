@@ -57,7 +57,6 @@
 ### 2. **주요 라이브러리** 
 라이브러리 | 설명
 ---|:---:
-<img src='https://img.shields.io/badge/react-9.3.1-lightgrey'> | 웹 프론트엔드 프레임워크
 <img src='https://img.shields.io/badge/mediapipe/selfie_segmentation-0.1.16-lightgrey'> | 배경 제거를 위한 인물 segmentation
 <img src='https://img.shields.io/badge/gif_transparency-2.0.0-lightgrey'> | gif 생성
 <img src='https://img.shields.io/badge/uuid-2.0.0-lightgrey'> | 방 번호 랜덤 생성
