@@ -56,16 +56,16 @@
 ### 2. **주요 라이브러리** 
 라이브러리 | 설명
 ---|:---:
-<img src='https://img.shields.io/badge/react-9.3.1-lightgrey'> | javascript 라이브러리
+<img src='https://img.shields.io/badge/react-9.3.1-lightgrey'> | 웹 프론트엔드 프레임워크
 <img src='https://img.shields.io/badge/mediapipe/selfie_segmentation-0.1.16-lightgrey'> | 배경 제거를 위한 인물 segmentation
-<img src='https://img.shields.io/badge/gif_transparency-2.0.0-lightgrey'> | 유저 비밀번호 암호화
-<img src='https://img.shields.io/badge/uuid-2.0.0-lightgrey'> | UUID 생성
-<img src='https://img.shields.io/badge/image_to_base64-1.0.2-lightgrey'> | 이미지를 base64로 변환
-<img src='https://img.shields.io/badge/sharp-0.31.3-lightgrey'> | 이미지 크기 변경 
+<img src='https://img.shields.io/badge/gif_transparency-2.0.0-lightgrey'> | gif 생성
+<img src='https://img.shields.io/badge/uuid-2.0.0-lightgrey'> | 방 번호 랜덤 생성
+<img src='https://img.shields.io/badge/image_to_base64-1.0.2-lightgrey'> | 클라이언트-서버 간 이미지 데이터 parsing
+<img src='https://img.shields.io/badge/sharp-0.31.3-lightgrey'> | 촬영된 개별 이미지 합성 처리
 <img src='https://img.shields.io/badge/redux-8.0.5-lightgrey'> | 컴포넌트간 상태 관리
 <img src='https://img.shields.io/badge/redux/toolkit-1.9.1-lightgrey'>  | 컴포넌트간 상태 관리
-<img src='https://img.shields.io/badge/socket.io-4.5.4-lightgrey'>  | 웹소켓 기술을 활용
-<img src='https://img.shields.io/badge/webgl_utils-1.0.1-lightgrey'> | webgl 관련 라이브러리
+<img src='https://img.shields.io/badge/socket.io-4.5.4-lightgrey'>  | 클라이언트-서버간 실시간 통신
+<img src='https://img.shields.io/badge/webgl_utils-1.0.1-lightgrey'> | chroma-key 처리를 위한 webgl 사용
 
 
 ## 4. 시작하기
