@@ -7,9 +7,9 @@ import { FlexboxGrid } from "rsuite";
 import { setDecoModeInfo, setResultInfo } from "../../slice/decoInfo";
 import { ResultImage, Sticker } from "../../modules/resultCanvas.mjs";
 import { isMobile } from "react-device-detect";
-import bang from "./../../assets/images/background-bang.jpeg";
+import bang from "./../../assets/images/background-bang.png";
 import boom from "./../../assets/images/background-boom.png";
-import party from "./../../assets/images/background-party.png";
+import water from "./../../assets/images/background-water.png";
 import sky from "./../../assets/images/background-sky.png";
 const DecoCanvas = () => {
     const dispatch = useDispatch();
@@ -25,7 +25,7 @@ const DecoCanvas = () => {
     const strokeColor = useSelector(state => state.drawingInfo.strokeColor);
     const stickerPointList = useSelector(state => state.decoInfo.stickerPointList);
     const bgList = useSelector(state => state.decoInfo.bgList);
-    const bgSrcList = ["", sky, party, boom, bang];
+    const bgSrcList = ["", sky, water, boom, bang];
 
     const decoColors = useSelector(state => state.decoInfo.colorList);
     const decoMapping = {};
@@ -113,14 +113,12 @@ const DecoCanvas = () => {
             // 꾸민 사진 4개에 대해 각각 실행
             idxArr.forEach(idx => {
                 const bg = document.getElementById(`bg-${idx}`);
-                const canvas = document.getElementById(`img-${idx}`); // canvas #img : 사진
+                const img = document.getElementById(`img-${idx}`); // canvas #img : 사진
                 const peer = document.getElementById(`peer-${idx}`); // canvas #peer : peer drawing
-                const my = document.getElementById(`my-${idx}`); // canvas #my : my drawing
 
                 const ctx = bg.getContext("2d");
-                ctx.drawImage(canvas, 0, 0);
+                ctx.drawImage(img, 0, 0);
                 ctx.drawImage(peer, 0, 0);
-                ctx.drawImage(my, 0, 0);
 
                 const curImage = new ResultImage(bg.toDataURL(), []);
                 // 스티커 넣어줘야함
@@ -130,8 +128,8 @@ const DecoCanvas = () => {
                 // for문 돌면서
                 for (let i = 0; i < stickers.length; i++) {
                     const url = stickers[i].children[0].src; // div > img
-                    let axisX = parseInt(stickers[i].style.top.split("px")[0]);
-                    let axisY = parseInt(stickers[i].style.left.split("px")[0]);
+                    let axisX = parseInt(stickers[i].style.left.split("px")[0]);
+                    let axisY = parseInt(stickers[i].style.top.split("px")[0]);
 
                     axisX = isNaN(axisX) ? 0 : axisX;
                     axisY = isNaN(axisY) ? 0 : axisY;
@@ -278,7 +276,6 @@ const DecoCanvas = () => {
                         <div data-setid={`set-${idx}`} id={`set-${idx}`} style={{ visibility: idx != targetImgIdx ? "hidden" : "visible" }}>
                             <canvas className="decocanvas" width="350px" height="350px" id={`bg-${idx}`}></canvas>
                             <canvas className="decocanvas" width="350px" height="350px" data-img={idx} id={`img-${idx}`}></canvas>
-                            <canvas className="decocanvas" width="350px" height="350px" data-my={idx} id={`my-${idx}`}></canvas>
                             <canvas
                                 className="decocanvas"
                                 width="345px"

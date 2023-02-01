@@ -1,4 +1,4 @@
-import {createSlice} from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 // state 수정 방법 아래에 명시
 const selectionInfo = createSlice({
     name: "selectionInfo",
@@ -9,7 +9,6 @@ const selectionInfo = createSlice({
 
     reducers: {
         setImgListInfo(state, action) {
-            console.log(">>", action.payload.value);
             state.imgList = action.payload.value;
         },
         setSelectedInfo(state, action) {
@@ -18,6 +17,6 @@ const selectionInfo = createSlice({
     },
 });
 
-export let {setImgListInfo, setSelectedInfo} = selectionInfo.actions;
+export let { setImgListInfo, setSelectedInfo } = selectionInfo.actions;
 
 export default selectionInfo;
