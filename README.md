@@ -46,7 +46,7 @@
 - Node.js: 자바스크립트 런타임
 - ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
 - Nest.js : 웹 프레임워크
-- ![Nest.js](https://img.shields.io/badge/nest.js-E0234E?style=for-the-badge&logo=nest&logoColor=white)
+- ![Nest.js](https://img.shields.io/badge/nest.js-E0234E?style=for-the-badge&logo=nestjs&logoColor=white)
 - REDIS : 인메모리 저장소 (캐시)
 - ![Redis](https://img.shields.io/badge/redis-%23DD0031.svg?style=for-the-badge&logo=redis&logoColor=white)
 - Web RTC :  **화상 공유 및 음성 채팅** (N:N Mesh)
