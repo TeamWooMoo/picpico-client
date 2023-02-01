@@ -52,6 +52,8 @@
 **Frontend**
 
 - React 9.3.1
+<img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black">![image](https://user-images.githubusercontent.com/106954289/216038694-de8c3433-4101-4f95-95ed-900da954b38d.png)
+
 - Redux-toolkit 1.9.1
 
 **Web RTC**
