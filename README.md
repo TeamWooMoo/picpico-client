@@ -39,47 +39,24 @@
 |:---:|:---|
 |<p align="center"><img width="65%" src="https://user-images.githubusercontent.com/48302257/215992957-8d00d3ee-07d0-4263-88f3-c0bc7aced86a.gif"></p>|📍 GIF 생성 후, 생성된 GIF를 각자의 로컬에 저장할 수 있습니다. 모바일 환경은 기기의 사양에 따라 GIF 생성에 20~30초 정도의 시간이 걸립니다. <br><br> 1. 기기에 GIF 다운로드 가능 <br><br> 2.  새로고침 버튼으로 홈 화면 이동|
 
-## 3. 개발 환경
+## 3. 기술 스택과 라이브러리
 
-**Backend**
+**기술 스택**
 
-- Node.js: 자바스크립트 런타임
-- ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
-- Nest.js : 웹 프레임워크
-- ![Nest.js](https://img.shields.io/badge/nest.js-E0234E?style=for-the-badge&logo=nestjs&logoColor=white)
-- REDIS : 인메모리 저장소 (캐시)
-- ![Redis](https://img.shields.io/badge/redis-%23DD0031.svg?style=for-the-badge&logo=redis&logoColor=white)
-- Web RTC :  **화상 공유 및 음성 채팅** (N:N Mesh)
-- ![WebRTC](https://img.shields.io/badge/webrtc-333333?style=for-the-badge&logo=webrtc&logoColor=white)
-- SOCKET.IO : 시그널링, 룸 입장, 사진 촬영 및 꾸미기 이벤트 처리
-- ![Socket.io](https://img.shields.io/badge/Socket.io-010101?style=for-the-badge&logo=Socket.io&logoColor=white)
-
-**Frontend**
-
-- React 9.3.1
-- ![React](https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=white)
-- Redux-toolkit 1.9.1
-- ![Redux](https://img.shields.io/badge/redux-764ABC?style=for-the-badge&logo=redux&logoColor=white)
-
-**Web RTC**
-
-- N:N Mesh
-
-**CI/CD**
-
-- Visual Studio Code
-- ![Visual Studio Code](https://img.shields.io/badge/visual_studio_code-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white)
-- Amazon EC2
-- - ![이게뭐야](https://img.shields.io/badge/aws_ec2-FF9900?style=for-the-badge&logo=amazonec2&logoColor=white)
-- Redis-server v7.0.7
-- nginx
-- ![NginX](https://img.shields.io/badge/nginx-green?style=for-the-badge&logo=nginx&logoColor=white)
-- COTURN : 자체 TURN 서버 구축
-- ![COTURN](https://img.shields.io/badge/coturn-333333?style=for-the-badge)
+기술스택 | 설명
+---|:---:
+![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white) | 자바스크립트 런타임
+![Nest.js](https://img.shields.io/badge/nest.js-E0234E?style=for-the-badge&logo=nestjs&logoColor=white) | 웹프레임워크
+![Redis](https://img.shields.io/badge/redis-%23DD0031.svg?style=for-the-badge&logo=redis&logoColor=white) | 인메모리 저장소 (캐시)
+![WebRTC](https://img.shields.io/badge/webrtc-333333?style=for-the-badge&logo=webrtc&logoColor=white) | 화상 공유 및 음성 채팅(N:N Mesh)
+![Socket.io](https://img.shields.io/badge/Socket.io-010101?style=for-the-badge&logo=Socket.io&logoColor=white) | 시그널링, 룸 입장, 사진 촬영 및 꾸미기 이벤트 처리
+![NginX](https://img.shields.io/badge/nginx-green?style=for-the-badge&logo=nginx&logoColor=white) | Proxy 서버 
+![COTURN](https://img.shields.io/badge/coturn-333333?style=for-the-badge) | 자체 TURN 서버 구축
 
 **주요 라이브러리** 
 라이브러리 | 설명
 ---|:---:
+<img src='https://img.shields.io/badge/mediapipe/React-9.3.1-lightgrey'> | javascript 라이브러리
 <img src='https://img.shields.io/badge/mediapipe/selfie_segmentation-0.1.16-lightgrey'> | 배경 제거를 위한 인물 segmentation
 <img src='https://img.shields.io/badge/gif_transparency-2.0.0-lightgrey'> | 유저 비밀번호 암호화
 <img src='https://img.shields.io/badge/uuid-2.0.0-lightgrey'> | UUID 생성
