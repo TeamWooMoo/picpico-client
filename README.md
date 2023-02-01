@@ -68,9 +68,9 @@
 **CI/CD**
 
 - Visual Studio Code
-- ![Visual Studio Code](https://img.shields.io/badge/visualstudiocode-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white)
-- AWS EC2
-- - ![NginX](https://img.shields.io/badge/nginx-green?style=for-the-badge&logo=nginx&logoColor=white)
+- ![Visual Studio Code](https://img.shields.io/badge/visual_studio_code-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white)
+- Amazon EC2
+- - ![이게뭐야](https://img.shields.io/badge/aws_ec2-FF9900?style=for-the-badge&logo=amazonec2&logoColor=white)
 - Redis-server v7.0.7
 - nginx
 - ![NginX](https://img.shields.io/badge/nginx-green?style=for-the-badge&logo=nginx&logoColor=white)
